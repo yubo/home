@@ -127,7 +127,7 @@ endif
 let g:fencview_autodetect=1
 
 "支持单行和多行的选择，//格式
-source ~/.vim/bundle/powerline/powerline/bindings/vim/source_plugin.vim
+source ~/.vim/bundle/powerline/powerline/bindings/vim/plugin/source_plugin.vim
 let g:Powerline_symbols = 'unicode'
 "let g:Powerline_symbols = 'fancy'
 let g:Powerline_cache_enabled = 1
