@@ -1,0 +1,5 @@
+#!/bin/sh
+
+make -j4  && make modules_install && make install && echo $?
+
+

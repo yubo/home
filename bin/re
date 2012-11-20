@@ -1,0 +1,13 @@
+#!/bin/sh
+ipvsadm -C
+rmmod ip_vs_rr
+rmmod ip_vs
+
+ipvsadm -A -t 0.0.0.0:0 -s rr
+ipvsadm -P -t 0.0.0.0:0 -z 1.2.100.1
+ipvsadm -P -t 0.0.0.0:0 -z 1.2.100.2
+
+echo 13 > /proc/sys/net/ipv4/vs/debug_level
+
+
+

@@ -1,0 +1,7 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =5
+let g:netrw_dirhist_1='/root/program/nsdat'
+let g:netrw_dirhist_2='/root'
+let g:netrw_dirhist_3='/root/src/lvs-fullnat-synproxy/tools/.git'
+let g:netrw_dirhist_4='/root/.neocon'
+let g:netrw_dirhist_5='/root/.config'
