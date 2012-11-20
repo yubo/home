@@ -17,8 +17,8 @@
 $
 
 # Command Line History (newest to oldest):
-:q
 :wq
+:q
 :q!
 :w
 :1,$s/-/ /g
@@ -127,7 +127,7 @@ $
 # Input Line History (newest to oldest):
 
 # 寄存器:
-""0	LINE	0
+"0	LINE	0
 	nohup.out
 "1	LINE	0
 	
@@ -147,22 +147,24 @@ $
 	*.pyc
 "9	LINE	0
 	*.swo
-"-	CHAR	0
-	 
+""-	CHAR	0
+	己
 
 # 文件标记:
-'0  8  0  ~/.config
-'1  1  0  ~/.gitignore
-'2  66  7  ~/.dircolors
-'3  59  56  ~/.dircolors
-'4  175  5  ~/.dircolors
-'5  38  5  /etc/DIR_COLORS
-'6  29  5  /etc/DIR_COLORS.256color
-'7  1  0  /etc/profile.d/colorls.sh
-'8  1  0  /etc/bashrc
-'9  16  0  ~/.coloursrc
+'0  2  22  ~/README.md
+'1  1  18  ~/README.md
+'2  8  0  ~/.config
+'3  1  0  ~/.gitignore
+'4  66  7  ~/.dircolors
+'5  59  56  ~/.dircolors
+'6  175  5  ~/.dircolors
+'7  38  5  /etc/DIR_COLORS
+'8  29  5  /etc/DIR_COLORS.256color
+'9  1  0  /etc/profile.d/colorls.sh
 
 # 跳转列表 (从新到旧):
+-'  2  22  ~/README.md
+-'  1  18  ~/README.md
 -'  8  0  ~/.config
 -'  1  0  ~/.config
 -'  1  0  ~/.gitignore
@@ -260,10 +262,15 @@ $
 -'  86  0  ~/src/lvs-fullnat-synproxy/tools/rpm/lvs-tools.spec
 -'  62  11  ~/src/lvs-fullnat-synproxy/tools/rpm/lvs-tools.spec
 -'  66  7  ~/.dircolors
--'  65  8  ~/.dircolors
--'  59  56  ~/.dircolors
 
 # 文件内的标记历史记录 (从新到旧):
+
+> ~/README.md
+	"	2	22
+	^	2	25
+	.	2	22
+	+	1	3
+	+	2	22
 
 > ~/.gitignore
 	"	1	0
@@ -1111,6 +1118,3 @@ $
 
 > ~/.bashrc
 	"	1	0
-
-> ~/rpms/BUILD/kernel-2.6.32-220.23.1.el6/vanilla-2.6.32-220.23.1.el6/net/netfilter/ipvs/ip_vs_core.c
-	"	1030	1
