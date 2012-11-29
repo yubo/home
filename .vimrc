@@ -1,7 +1,17 @@
 " options {{{
 " If `$VIM/vimrc` didn't `set cp`, we don't need to `set nocp` here.
 " Please read the manual!
+" 不显示标签页
+"set showtabline=0
+" tab替换为4空格 %retab! 
+set ts=4
+set expandtab
+set tabstop=4
+set shiftwidth=4
+set softtabstop=4
 set guifont=Inconsolata\ XL:h17,Inconsolata:h20,Monaco:h17
+"GUI界面里的字体，默认有抗锯齿
+""set guifont=Inconsolata:h12
 set nocompatible
 set nolinebreak nowrap nocursorline
 set autoindent smartindent
@@ -13,7 +23,14 @@ set clipboard=unnamedplus
 set completefunc=
 "set cryptmethod=blowfish
 set dictionary=/usr/lib/firefox/dictionaries/en_US.dic
-"set fencs=utf-8,chinese,latin1 fenc=utf-8 enc=utf-8
+" 中文支持
+set fencs=utf-8,chinese,latin1 fenc=utf-8 enc=utf-8
+set fileencodings=utf-8,gb2312,gbk,gb18030
+set termencoding=utf-8
+set fileformats=unix
+set encoding=utf-8
+set scrolloff=3
+set fenc=utf-8
 set foldnestmax=2
 " don't auto wrap long text
 "set formatoptions=mnoq
@@ -30,15 +47,10 @@ set hlsearch incsearch
 set ignorecase smartcase
 set isfname-== isfname-=,
 set laststatus=2
-"set statusline=%F%m%r%h%w\[POS=%l,%v][%p%%]\%{strftime(\"%d/%m/%y\ -\ %H:%M\")} 
-"highlight StatusLine guifg=SlateBlue guibg=Yellow 
-"highlight StatusLineNC guifg=Gray guibg=White 
-
 set listchars=precedes:«,extends:»,tab:▸―,trail:∙,eol:¶
+set number numberwidth=4 showbreak=\ \ \ ↳ cpo+=n
 set modeline
 set mouse=a
-set number numberwidth=4 showbreak=\ \ \ ↳ cpo+=n
-"set pastetoggle=<F7>
 set path=.,/usr/local/include/*,/usr/include/**1
 set ruler
 set selectmode=key keymodel=startsel
@@ -60,25 +72,6 @@ set wildignore=*.swp,*.bak,*.pyc,*~
 "set wildignorecase
 set wildmenu
 set foldmethod=syntax
-
-" 不显示标签页
-"set showtabline=0
-
-" tab替换为4空格 %retab! 
-set ts=4
-set expandtab
-set tabstop=4
-set shiftwidth=4
-set softtabstop=4
-
-" 中文支持
-set fileencodings=utf-8,gb2312,gbk,gb18030
-set termencoding=utf-8
-set fileformats=unix
-set encoding=utf-8
-set scrolloff=3
-set fenc=utf-8
-
 "必须的设置：
 filetype off
 filetype plugin indent on
@@ -86,7 +79,6 @@ filetype plugin indent on
 syntax enable
 "不要兼容vi
 set nocompatible
-
 "使用color solarized
 if has('gui_running')
     set background=light
@@ -100,8 +92,6 @@ let g:solarized_termcolors=256
 let g:solarized_contrast="high"
 let g:solarized_visibility="high"
 set modelines=0
-
-
 "一些其他的设定
 set autoindent
 set hidden
@@ -121,14 +111,10 @@ set backspace=indent,eol,start
 set wrap
 "禁止自动换行
 "set nowrap
-"GUI界面里的字体，默认有抗锯齿
-set guifont=Inconsolata:h12
 "自动载入配置文件不需要重启
 "autocmd! bufwritepost _vimrc source %
 "将-连接符也设置为单词
 set isk+=-
-
-
 "设置大小写敏感和聪明感知(小写全搜，大写完全匹配)
 set ignorecase
 set smartcase
@@ -136,9 +122,6 @@ set smartcase
 set incsearch
 set showmatch
 set hlsearch
-
-
-
 "加入html标签配对
 "runtime macros/matchit.vim 
 "以下设置用来是vim正确显示过长的行
@@ -148,8 +131,6 @@ set hlsearch
 "set colorcolumn=85
 "设置256色显示
 set t_Co=256
-
-
 "行号栏的宽度
 set numberwidth=4
 "初始窗口的宽度
@@ -157,9 +138,21 @@ set numberwidth=4
 "初始窗口的高度
 "set lines=50
 "初始窗口的位置
-"winpos 620 45 
+"设置隐藏gvim的菜单和工具栏 F2切换
+set guioptions-=m
+set guioptions-=T
+"去除左右两边的滚动条
+set go-=r
+set go-=L
+map <silent> <F2> :if &guioptions =~# 'T' <Bar>
+        \set guioptions-=T <Bar>
+        \set guioptions-=m <bar>
+    \else <Bar>
+        \set guioptions+=T <Bar>
+        \set guioptions+=m <Bar>
+    \endif<CR>
 
-
+winpos 620 45 
 "}}}
 
 
@@ -251,6 +244,7 @@ let g:vimwiki_html_header_numbering = 1
 let g:vimwiki_html_header_numbering_sym = '.'
 "let g:vimwiki_listsyms = ' ¼½¾✓'
 
+let g:SuperTabMappingBackward = '<C-p'
 let g:SuperTabMappingForward = '<C-n>'
 let g:SuperTabDefaultCompletionType = '<C-n>'
 let g:SuperTabContextDefaultCompletionType = '<C-n>'
@@ -419,27 +413,7 @@ inoremap <c-h> <left>
 
 
 
-"设置隐藏gvim的菜单和工具栏 F2切换
-set guioptions-=m
-set guioptions-=T
-"去除左右两边的滚动条
-set go-=r
-set go-=L
-map <silent> <F2> :if &guioptions =~# 'T' <Bar>
-        \set guioptions-=T <Bar>
-        \set guioptions-=m <bar>
-    \else <Bar>
-        \set guioptions+=T <Bar>
-        \set guioptions+=m <Bar>
-    \endif<CR>
-
-
 "===================================================
-"插件的设置
-
-
-
-
 " vim 插件管理 
 " git clone http://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
 set nocompatible    " be iMproved
