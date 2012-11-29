@@ -222,3 +222,37 @@ set showtabline=0
 " tab替换为4空格 %retab! 
 set ts=4
 set expandtab
+
+" 中文支持
+set fileencodings=utf-8,gb2312,gbk,gb18030
+set termencoding=utf-8
+set fileformats=unix
+set encoding=prc
+
+" vim 插件管理 
+" git clone http://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
+set nocompatible    " be iMproved
+filetype off        " required!
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+" let Vundle manage Vundle
+" required!
+Bundle 'gmarik/vundle'
+" vim-scripts repos
+"Bundle 'vim-plugin-foo'
+"Bundle 'vim-plugin-bar'
+Bundle 'ctrlp.vim'
+Bundle 'AutoClose'
+Bundle 'ZenCoding.vim'
+Bundle 'matchit.zip'
+Bundle 'ShowTrailingWhitespace'
+Bundle '_jsbeautify'
+Bundle 'EasyMotion'
+Bundle 'FencView.vim'
+Bundle 'The-NERD-tree'
+Bundle 'The-NERD-Commenter'
+Bundle 'snipMate'
+
+filetype plugin indent on    " required!
+
+
