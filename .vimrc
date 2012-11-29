@@ -241,7 +241,6 @@ Bundle 'FencView.vim'
 Bundle 'The-NERD-tree'
 Bundle 'The-NERD-Commenter'
 Bundle 'snipMate'
-Bundle 'vim-colors-solarized'
 
 filetype plugin indent on    " required!
 
