@@ -1,3 +1,4 @@
+
 " 不显示标签页
 set showtabline=0
 
@@ -55,7 +56,7 @@ set ruler
 set backspace=indent,eol,start
 "set laststatus=2
 "相对行号 要想相对行号起作用要放在显示行号后面
-set relativenumber
+""set relativenumber
 "显示行号
 "set number
 "无限undo
@@ -88,7 +89,7 @@ set hlsearch
 "set textwidth=80
 "set formatoptions=qrnl
 "彩色显示第85行
-set colorcolumn=85
+"set colorcolumn=85
 "设置256色显示
 set t_Co=256
 
@@ -216,8 +217,6 @@ Bundle 'The-NERD-Commenter'
 let NERDShutUp=1
 "支持单行和多行的选择，//格式
 map <c-h> ,c<space>
-
-
 
 " vim 插件管理 
 " git clone http://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
