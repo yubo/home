@@ -1,3 +1,17 @@
+""""""""""""""""""""""""""""""
+" => Statusline
+""""""""""""""""""""""""""""""
+"Format the statusline
+" Nice statusbar
+"set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\[HEX=\%02.2B]\ [POS=%04l,%04v][%p%%]\ [LEN=%L]
+"set laststatus=2
+
+
+
+
+
+
+
 " options {{{
 " If `$VIM/vimrc` didn't `set cp`, we don't need to `set nocp` here.
 " Please read the manual!
@@ -12,7 +26,7 @@ set colorcolumn=100
 set completefunc=
 set cryptmethod=blowfish
 set dictionary=/usr/lib/firefox/dictionaries/en_US.dic
-set fencs=utf-8,chinese,latin1 fenc=utf-8 enc=utf-8
+"set fencs=utf-8,chinese,latin1 fenc=utf-8 enc=utf-8
 set foldnestmax=2
 " don't auto wrap long text
 "set formatoptions=mnoq
@@ -28,7 +42,11 @@ set history=50
 set hlsearch incsearch
 set ignorecase smartcase
 set isfname-== isfname-=,
-set laststatus=2
+"set laststatus=2
+"set statusline=%F%m%r%h%w\[POS=%l,%v][%p%%]\%{strftime(\"%d/%m/%y\ -\ %H:%M\")} 
+"highlight StatusLine guifg=SlateBlue guibg=Yellow 
+"highlight StatusLineNC guifg=Gray guibg=White 
+
 set listchars=precedes:«,extends:»,tab:▸―,trail:∙,eol:¶
 set modeline
 set mouse=a
@@ -57,7 +75,7 @@ set wildmenu
 set foldmethod=syntax
 
 " 不显示标签页
-""set showtabline=0
+"set showtabline=0
 
 " tab替换为4空格 %retab! 
 set ts=4
@@ -70,8 +88,9 @@ set softtabstop=4
 set fileencodings=utf-8,gb2312,gbk,gb18030
 set termencoding=utf-8
 set fileformats=unix
-set encoding=prc
-
+set encoding=utf-8
+set scrolloff=3
+set fenc=utf-8
 
 "必须的设置：
 filetype off
@@ -96,25 +115,15 @@ let g:solarized_visibility="high"
 set modelines=0
 
 
-
-
-
 "一些其他的设定
-"字符设置
-set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5
-"set encoding=utf-8
-set scrolloff=3
-"新建文件编码
-set fenc=utf-8
 set autoindent
 set hidden
 "设置光标高亮显示
-""set cursorline
-""set cursorcolumn
+"set cursorline
+"set cursorcolumn
 set ttyfast
 set ruler
 set backspace=indent,eol,start
-"set laststatus=2
 "相对行号 要想相对行号起作用要放在显示行号后面
 ""set relativenumber
 "显示行号
