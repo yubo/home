@@ -1,17 +1,3 @@
-""""""""""""""""""""""""""""""
-" => Statusline
-""""""""""""""""""""""""""""""
-"Format the statusline
-" Nice statusbar
-"set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\[HEX=\%02.2B]\ [POS=%04l,%04v][%p%%]\ [LEN=%L]
-"set laststatus=2
-
-
-
-
-
-
-
 " options {{{
 " If `$VIM/vimrc` didn't `set cp`, we don't need to `set nocp` here.
 " Please read the manual!
@@ -285,6 +271,27 @@ fun! BindSuperTab()
     endif
     call SuperTabSetDefaultCompletionType(tab)
 endfun
+
+
+
+let g:neocomplcache_enable_at_startup = 1
+"set cscopequickfix=s-,c-,d-,i-,t-,e-
+if has("cscope")
+    set csprg=/usr/bin/cscope
+    set csto=0
+    set cst
+    set nocsverb
+    " add any database in current directory
+     if filereadable("cscope.out")
+     cs add cscope.out
+    " else add database pointed to by environment
+     elseif $CSCOPE_DB != ""
+     cs add $CSCOPE_DB
+     endif
+     set csverb
+     set cscopetag
+    " set cscopequickfix=s-,g-,c-,d-,t-,e-,f-,i-
+endif
 
 "}}}
 
