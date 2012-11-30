@@ -8,9 +8,9 @@ set autoread
 set backspace=indent,eol,start
 set cedit=<C-x>
 set clipboard=unnamedplus
-set colorcolumn=100
+"set colorcolumn=100
 set completefunc=
-set cryptmethod=blowfish
+"set cryptmethod=blowfish
 set dictionary=/usr/lib/firefox/dictionaries/en_US.dic
 "set fencs=utf-8,chinese,latin1 fenc=utf-8 enc=utf-8
 set foldnestmax=2
@@ -52,7 +52,7 @@ set tags=./tags;/,~/.vim/tags
 set thesaurus=~/.vim/tsr.txt
 set timeoutlen=500 ttimeoutlen=0
 set titlestring=%F\ %M
-set undofile
+""set undofile
 set virtualedit=block
 set wrapscan
 set wildignore=*.swp,*.bak,*.pyc,*~
@@ -170,14 +170,14 @@ set numberwidth=4
 "nnoremap <leader>_ff :call g:Jsbeautify()<CR> 
 let g:EasyMotion_leader_key = '<Leader><Leader>' 
 let g:fencview_autodetect=1
-nmap <leader>nt :NERDTree<cr>:set rnu<cr>
-let NERDTreeShowBookmarks=1
-let NERDTreeShowFiles=1
-let NERDTreeShowHidden=1
-let NERDTreeIgnore=['\.$','\~$']
-let NERDTreeShowLineNumbers=1
-let NERDTreeWinPos=1
-let NERDShutUp=1
+""nmap <leader>nt :NERDTree<cr>:set rnu<cr>
+""let NERDTreeShowBookmarks=1
+""let NERDTreeShowFiles=1
+""let NERDTreeShowHidden=1
+""let NERDTreeIgnore=['\.$','\~$']
+""let NERDTreeShowLineNumbers=1
+""let NERDTreeWinPos=1
+""let NERDShutUp=1
 "支持单行和多行的选择，//格式
 "map <c-h> ,c<space>
 
@@ -269,9 +269,8 @@ fun! BindSuperTab()
     else
         let tab = '<C-n>'
     endif
-    call SuperTabSetDefaultCompletionType(tab)
+    let g:SuperTabDefaultCompletionType = tab
 endfun
-
 
 
 let g:neocomplcache_enable_at_startup = 1
@@ -365,8 +364,8 @@ inoremap <F1> <ESC>
 nnoremap <F1> <ESC>
 vnoremap <F1> <ESC>
 "修改vim的正则表达
-nnoremap / /\v
-vnoremap / /\v
+""nnoremap / /\v
+""vnoremap / /\v
 "使用tab键来代替%进行匹配跳转
 nnoremap <tab> %
 vnoremap <tab> %
@@ -379,10 +378,10 @@ nnoremap <leader>v v`]
 "nnoremap <leader>wc <c-w>c
 "nnoremap <leader>ww <c-w>w
 "使用<leader>t来控制Tab的切换
-nnoremap <leader>t gt
-nnoremap <leader>r gT
+""nnoremap <leader>t gt
+""nnoremap <leader>r gT
 "使用<leader>空格来取消搜索高亮
-nnoremap <leader><space> :noh<cr>
+""nnoremap <leader><space> :noh<cr>
 "html中的js加注释 取消注释
 "nmap <leader>h I//jj
 "nmap <leader>ch ^xx
@@ -463,7 +462,6 @@ Bundle 'FencView.vim'
 Bundle 'The-NERD-tree'
 Bundle 'The-NERD-Commenter'
 Bundle 'snipMate'
-Bundle 'vimwiki'
 
 filetype plugin indent on    " required!
 

@@ -1,0 +1,19 @@
+#!/bin/sh
+
+src=$1
+des=$2
+if [ ! $# == 2 ]
+    then
+        echo "Usage: $0 SOURCE DEST"
+            exit
+            fi
+
+#if [ -f $des -o -d $des ]
+#then 
+#    echo "$des already exists"
+#    exit
+#fi
+
+
+find $src -type d | sed -e "s|^$src|$des/|g" | xargs mkdir -p
+find $src -type f | sed -e 's/ /\ /g' | sed -e 's/(/\\(/g' | sed -e 's/')/\\)/g'| sed -e 's/\[/\\[/g' | sed -e 's/\']/\\]/g'|  awk '{print "ln "$0"  "$0}' | sed -e "s|  $src| $des/|g" | bash
