@@ -1,6 +1,7 @@
 " options {{{
 " If `$VIM/vimrc` didn't `set cp`, we don't need to `set nocp` here.
 " Please read the manual!
+set guifont=Inconsolata\ XL:h17,Inconsolata:h20,Monaco:h17
 set nocompatible
 set nolinebreak nowrap nocursorline
 set autoindent smartindent
@@ -28,7 +29,7 @@ set history=50
 set hlsearch incsearch
 set ignorecase smartcase
 set isfname-== isfname-=,
-"set laststatus=2
+set laststatus=2
 "set statusline=%F%m%r%h%w\[POS=%l,%v][%p%%]\%{strftime(\"%d/%m/%y\ -\ %H:%M\")} 
 "highlight StatusLine guifg=SlateBlue guibg=Yellow 
 "highlight StatusLineNC guifg=Gray guibg=White 
@@ -182,7 +183,7 @@ let g:fencview_autodetect=1
 "map <c-h> ,c<space>
 
 
-
+let g:Powerline_symbols = 'unicode'
 let g:showmarks_enable = 0
 let g:showmarks_include = "abcdefghijklmnopqrstuvwxyz".
                         \ "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
@@ -462,6 +463,12 @@ Bundle 'FencView.vim'
 Bundle 'The-NERD-tree'
 Bundle 'The-NERD-Commenter'
 Bundle 'snipMate'
+Bundle 'bufexplorer.zip'
+Bundle 'minibufexpl.vim'
+Bundle 'taglist.vim'
+Bundle 'OmniCppComplete'
+Bundle 'https://github.com/Lokaltog/vim-powerline.git'
+
 
 filetype plugin indent on    " required!
 
