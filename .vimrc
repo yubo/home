@@ -24,7 +24,6 @@ set completefunc=
 "set cryptmethod=blowfish
 "set dictionary=/usr/lib/firefox/dictionaries/en_US.dic
 " 中文支持
-"
 set fencs=utf-8,chinese,latin1 fenc=utf-8 enc=utf-8
 set fileencodings=utf-8,gb2312,gbk,gb18030
 set termencoding=utf-8
@@ -77,7 +76,6 @@ set wildignore=*.swp,*.bak,*.pyc,*~
 "set wildignorecase
 set wildmenu
 set foldmethod=syntax
-"必须的设置：
 filetype off
 filetype plugin indent on
 "打开高亮
@@ -166,13 +164,8 @@ winpos 620 45
 " plugins {{{
 "call pathogen#infect()
 
-"nnoremap <leader>_ff :call g:Jsbeautify()<CR> 
-let g:EasyMotion_leader_key = '<Leader><Leader>' 
 let g:fencview_autodetect=1
 "支持单行和多行的选择，//格式
-"map <c-h> ,c<space>
-
-
 let g:Powerline_symbols = 'unicode'
 let g:showmarks_enable = 0
 let g:showmarks_include = "abcdefghijklmnopqrstuvwxyz".
@@ -198,20 +191,14 @@ let g:ctrlp_custom_ignore = {
                                     \ '\.zip$\|\.bz2$\|\.gz$\|\.tar$\|\.7z$\|\.rar$',
                             \ 'link': 'SOME_BAD_SYMBOLIC_LINKS',
                             \}
-cnoremap <C-space> :CtrlPMRUFiles<CR>
+cnoremap <C-o> :CtrlPMRUFiles<CR>
 cnoremap <C-@>     :CtrlPMRUFiles<CR>
-
-let g:CommandTCancelMap = '<esc>'
-cnoremap <C-t>     :CommandT<CR>
 
 let g:Powerline_symbols = 'fancy'
 
 let g:solarized_menu = 0
 
 let g:yankring_default_menu_mode = 0
-nnoremap <leader>y :YRShow<CR>
-
-nnoremap <leader>u :GundoToggle \| wincmd l<CR>
 
 let g:alternateExtensions_html = 'md,markdown'
 let g:alternateExtensions_md = 'html'
@@ -220,7 +207,7 @@ let g:alternateExtensions_coffee = 'js'
 let g:alternateExtensions_js = 'coffee'
 
 
-let g:SuperTabMappingBackward = '<C-p'
+let g:SuperTabMappingBackward = '<C-p>'
 let g:SuperTabMappingForward = '<C-n>'
 let g:SuperTabDefaultCompletionType = '<C-n>'
 let g:SuperTabContextDefaultCompletionType = '<C-n>'
@@ -280,7 +267,9 @@ nnoremap <C-l>           gt
 nnoremap <C-h>           gT
 nnoremap <C-j>           <C-e>
 nnoremap <C-k>           <C-y>
-nnoremap <leader>w       <C-w>
+nnoremap <leader>y       : YRShow<CR>
+nnoremap <leader>u       : GundoToggle \| wincmd l<CR>
+nnoremap <leader>w         <C-w>
 nnoremap <leader>h       : wincmd h<CR>
 nnoremap <leader>j       : wincmd j<CR>
 nnoremap <leader>k       : wincmd k<CR>
@@ -297,7 +286,7 @@ nnoremap <leader>;       : noh<CR>
 nnoremap <leader><space> : NERDTreeToggle<CR>
 nnoremap <leader><enter> : NERDTreeToggle<CR>
 " insert mode
-inoremap <leader>co      © Kev++ <http://hjkl.me>
+inoremap <leader>co      © YUBO <http://www.yubo.org>
 inoremap <expr> <leader>fn     expand('%:p')
 inoremap <leader>dt      <C-r>=strftime('%Y-%m-%d')<CR>
 inoremap <leader>tm      <C-r>=strftime('%H:%M:%S')<CR>
@@ -344,22 +333,6 @@ nnoremap <tab> %
 vnoremap <tab> %
 "折叠html标签 ,fold tag
 nnoremap <leader>ft vatzf
-"使用,v来选择刚刚复制的段落，这样可以用来缩进
-nnoremap <leader>v v`]
-"使用,w来垂直分割窗口，这样可以同时查看多个文件,如果想水平分割则<c-w>s
-"nnoremap <leader>w <c-w>v<c-w>l
-"nnoremap <leader>wc <c-w>c
-"nnoremap <leader>ww <c-w>w
-"使用<leader>t来控制Tab的切换
-""nnoremap <leader>t gt
-""nnoremap <leader>r gT
-"使用<leader>空格来取消搜索高亮
-""nnoremap <leader><space> :noh<cr>
-"html中的js加注释 取消注释
-"nmap <leader>h I//jj
-"nmap <leader>ch ^xx
-"切换到当前目录
-"nmap <leader>q :execute "cd" expand("%:h")<CR>
 ""搜索替换
 "nmap <leader>s :,s///c
 
@@ -419,6 +392,7 @@ Bundle 'bufexplorer.zip'
 ""Bundle 'minibufexpl.vim'
 Bundle 'taglist.vim'
 Bundle 'OmniCppComplete'
+Bundle 'YankRing.vim'
 Bundle 'https://github.com/Lokaltog/vim-powerline.git'
 Bundle 'https://github.com/Shougo/neocomplcache.git'
 

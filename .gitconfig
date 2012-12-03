@@ -1,0 +1,7 @@
+[user]
+	name = yubo
+	email = yubo@yubo.org
+[diff]
+	tool = vimdiff
+[difftool]
+	prompt = No
