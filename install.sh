@@ -23,10 +23,6 @@ install_file .bashrc
 install_file .dircolors
 
 git clone http://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
-echo "
-vim
-BundleInstall
-"
 
 
 

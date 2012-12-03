@@ -442,6 +442,7 @@ Bundle 'bufexplorer.zip'
 Bundle 'taglist.vim'
 Bundle 'OmniCppComplete'
 Bundle 'https://github.com/Lokaltog/vim-powerline.git'
+Bundle 'https://github.com/Shougo/neocomplcache.git'
 
 
 filetype plugin indent on    " required!

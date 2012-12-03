@@ -2,4 +2,9 @@
 
 ## 第一次提交,待整理
 
+    git clone git@github.com:yubo/home.git ~/.yubo
+    cd ~/.yubo && sh install.sh
+    vim
+    :BundleInstall
+    :q
         
