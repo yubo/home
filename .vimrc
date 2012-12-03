@@ -169,14 +169,6 @@ winpos 620 45
 "nnoremap <leader>_ff :call g:Jsbeautify()<CR> 
 let g:EasyMotion_leader_key = '<Leader><Leader>' 
 let g:fencview_autodetect=1
-""nmap <leader>nt :NERDTree<cr>:set rnu<cr>
-""let NERDTreeShowBookmarks=1
-""let NERDTreeShowFiles=1
-""let NERDTreeShowHidden=1
-""let NERDTreeIgnore=['\.$','\~$']
-""let NERDTreeShowLineNumbers=1
-""let NERDTreeWinPos=1
-""let NERDShutUp=1
 "支持单行和多行的选择，//格式
 "map <c-h> ,c<space>
 
@@ -284,7 +276,6 @@ nnoremap *               : let @/=printf('\<%s\>\c', expand('<cword>'))<CR>
 nnoremap #               : let @/=printf('\<%s\>\C', expand('<cword>'))<CR>
 nnoremap <expr> gm         float2nr(strdisplaywidth(getline('.'))/2+1) . "\<BAR>"
 nnoremap <F5>            : noh \| redraw!<CR>
-nnoremap <silent> <F4>   : NERDTree<CR>
 nnoremap <C-l>           gt
 nnoremap <C-h>           gT
 nnoremap <C-j>           <C-e>
