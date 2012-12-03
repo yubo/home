@@ -75,7 +75,8 @@ set wrapscan
 set wildignore=*.swp,*.bak,*.pyc,*~
 "set wildignorecase
 set wildmenu
-set foldmethod=syntax
+""代码自动折叠
+""set foldmethod=syntax
 filetype off
 filetype plugin indent on
 "打开高亮
@@ -109,7 +110,7 @@ set backspace=indent,eol,start
 "显示行号
 "set number
 "无限undo
-"set undofile
+set undofile
 "自动换行
 set wrap
 "禁止自动换行
@@ -234,7 +235,7 @@ endfun
 let g:neocomplcache_enable_at_startup = 1
 "set cscopequickfix=s-,c-,d-,i-,t-,e-
 if has("cscope")
-    set csprg=/usr/bin/cscope
+""    set csprg=/usr/bin/cscope
     set csto=0
     set cst
     set nocsverb
@@ -277,7 +278,7 @@ nnoremap <leader>l       : wincmd l<CR>
 nnoremap <leader>p       : wincmd p<CR>
 nnoremap <leader>s       : so $MYVIMRC<CR>
 nnoremap <leader>v       : tabe $MYVIMRC<CR>
-nnoremap <leader>t       : tabe<CR>
+nnoremap <leader>t       : Tlist<CR>
 nnoremap <leader>o       : tabo<CR>
 nnoremap <leader>q       : q<CR>
 nnoremap <leader>f       : !firefox %<CR>
@@ -286,19 +287,18 @@ nnoremap <leader>;       : noh<CR>
 nnoremap <leader><space> : NERDTreeToggle<CR>
 nnoremap <leader><enter> : NERDTreeToggle<CR>
 " insert mode
-inoremap <leader>co      © YUBO <http://www.yubo.org>
+inoremap <leader>co        YUBO<yubo@yubo.org>
 inoremap <expr> <leader>fn     expand('%:p')
 inoremap <leader>dt      <C-r>=strftime('%Y-%m-%d')<CR>
 inoremap <leader>tm      <C-r>=strftime('%H:%M:%S')<CR>
-inoremap <C-t>           <esc>!!toilet -f future<CR>
-inoremap <C-@>           <C-x><C-u>
-inoremap <C-space>       <C-x><C-u>
+""inoremap <C-@>           <C-x><C-u>
+""inoremap <C-space>       <C-x><C-u>
 inoremap <C-a>           <home>
 inoremap <C-e>           <end>
 inoremap <C-b>           <left>
 inoremap <C-f>           <right>
-inoremap <A-b>           <S-left>
-inoremap <A-f>           <S-right>
+""inoremap <A-b>           <S-left>
+""inoremap <A-f>           <S-right>
 inoremap <C-d>           <del>
 inoremap <A-d>           <C-o>dw
 " command mode
@@ -306,9 +306,9 @@ cnoremap <C-a>           <home>
 cnoremap <C-e>           <end>
 cnoremap <C-b>           <left>
 cnoremap <C-f>           <right>
-cnoremap <leader>b       <S-left>
-cnoremap <leader>f       <S-right>
-cnoremap <leader>d       <S-right><C-w>
+""cnoremap <leader>b       <S-left>
+""cnoremap <leader>f       <S-right>
+""cnoremap <leader>d       <S-right><C-w>
 cnoremap <C-d>           <delete>
 cnoremap <C-p>           <up>
 cnoremap <C-n>           <down>
@@ -316,25 +316,17 @@ cnoremap <C-n>           <down>
 vnoremap <C-m>           !markdown<CR>
 vnoremap <C-p>           !pandoc<CR>
 vnoremap <C-f>           !figlet<CR>
-vnoremap <C-t>           !toilet -f future<CR>
 " others
 cnoreabb <expr> W        getcmdtype()==':'&&getcmdline()=~#'^W'?'w':'W'
 "esc的映射
 "imap jj <esc>
-"屏蔽掉讨厌的F1键
-""inoremap <F1> <ESC>
-""nnoremap <F1> <ESC>
-""vnoremap <F1> <ESC>
-"修改vim的正则表达
-""nnoremap / /\v
-""vnoremap / /\v
 "使用tab键来代替%进行匹配跳转
 nnoremap <tab> %
 vnoremap <tab> %
 "折叠html标签 ,fold tag
 nnoremap <leader>ft vatzf
 ""搜索替换
-"nmap <leader>s :,s///c
+""nmap <leader>s :,s///c
 
 
 "取消粘贴缩进
@@ -345,12 +337,6 @@ nmap <leader>pp :set nopaste<CR>
 "nmap <leader>fc :set ft=css<CR>
 "nmap <leader>fx :set ft=xml<CR>
 "nmap <leader>fm :set ft=mako<CR>
-"匹配括号的规则，增加针对html的<>
-
-"set matchpairs=(:),{:},[:],<:>
-"让退格，空格，上下箭头遇到行首行尾时自动移到下一行（包括insert模式）
-"set whichwrap=b,s,<,>,[,]
-"插入模式下移动
 inoremap <c-j> <down>
 inoremap <c-k> <up>
 inoremap <c-l> <right>
@@ -393,6 +379,7 @@ Bundle 'bufexplorer.zip'
 Bundle 'taglist.vim'
 Bundle 'OmniCppComplete'
 Bundle 'YankRing.vim'
+Bundle 'cscope.vim'
 Bundle 'https://github.com/Lokaltog/vim-powerline.git'
 Bundle 'https://github.com/Shougo/neocomplcache.git'
 

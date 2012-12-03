@@ -25,7 +25,7 @@ then
     alias ls='ls -GF'
     alias la='ls -GFa'
     alias ll='ls -lGF'
-    PATH=$PATH:/usr/local/homebrew/bin
+    PATH=/usr/local/homebrew/bin:$PATH
 else
     alias ls='ls -F --color '
     alias la='ls -Fa --color '
