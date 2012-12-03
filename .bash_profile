@@ -30,7 +30,7 @@ then
     PATH=$PATH:/usr/local/homebrew/bin
 else
     alias ll='ls -lF --color '
-    alias ls='ls -F -color '
+    alias ls='ls -F --color '
 fi
 
 alias tmux='tmux -2'

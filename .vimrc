@@ -37,7 +37,7 @@ set laststatus=2
 set listchars=precedes:«,extends:»,tab:▸―,trail:∙,eol:¶
 set modeline
 set mouse=a
-set number numberwidth=4 showbreak=\ \ \ ????cpo+=n
+set number numberwidth=4 showbreak=\ \ \ ↳ cpo+=n
 "set pastetoggle=<F7>
 set path=.,/usr/local/include/*,/usr/include/**1
 set ruler
