@@ -6,9 +6,6 @@ install_file()
 {
 	src=`pwd`"/"$1
 	des="$HOME/$1"
-	echo "
-	src $src
-	des $des"
 	if [ -f $des -o -d $des ]; then
 		mv -f $des $des".backup"
 	fi
