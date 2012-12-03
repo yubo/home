@@ -11,7 +11,7 @@ set shiftwidth=4
 set softtabstop=4
 set guifont=Inconsolata\ XL:h17,Inconsolata:h20,Monaco:h17
 "GUI界面里的字体，默认有抗锯齿
-""set guifont=Inconsolata:h12
+"set guifont=Inconsolata:h12
 set nocompatible
 set nolinebreak nowrap nocursorline
 set autoindent smartindent
@@ -22,8 +22,9 @@ set clipboard=unnamedplus
 "set colorcolumn=100
 set completefunc=
 "set cryptmethod=blowfish
-set dictionary=/usr/lib/firefox/dictionaries/en_US.dic
+"set dictionary=/usr/lib/firefox/dictionaries/en_US.dic
 " 中文支持
+"
 set fencs=utf-8,chinese,latin1 fenc=utf-8 enc=utf-8
 set fileencodings=utf-8,gb2312,gbk,gb18030
 set termencoding=utf-8
@@ -46,11 +47,15 @@ set history=50
 set hlsearch incsearch
 set ignorecase smartcase
 set isfname-== isfname-=,
-set laststatus=2
-set listchars=precedes:«,extends:»,tab:▸―,trail:∙,eol:¶
-set number numberwidth=4 showbreak=\ \ \ ↳ cpo+=n
+
+set listchars=precedes:«,extends:»,tab:>-,trail:∙,eol:$
 set modeline
 set mouse=a
+set number numberwidth=4 showbreak=->
+
+
+set laststatus=2
+
 set path=.,/usr/local/include/*,/usr/include/**1
 set ruler
 set selectmode=key keymodel=startsel
@@ -222,27 +227,6 @@ let g:alternateExtensions_markdown = 'html'
 let g:alternateExtensions_coffee = 'js'
 let g:alternateExtensions_js = 'coffee'
 
-let g:vimwiki_list = [
-                        \{
-                            \'template_path': '~/vimwiki/templates/',
-                            \'template_ext': '.html',
-                            \'template_default': 'default',
-                            \'nested_syntaxes': {'python': 'python', 'bash': 'sh'}
-                        \},
-                        \{
-                            \'path': '~/github/hjkl/_posts/',
-                            \'syntax': 'markdown', 'ext': '.md'
-                        \}
-                    \]
-let g:vimwiki_menu = 0
-let g:vimwiki_folding = 0
-let g:vimwiki_auto_checkbox = 1
-let g:vimwiki_hl_cb_checked = 1
-let g:vimwiki_CJK_length = 1
-let g:vimwiki_valid_html_tags = 'b,i,s,u,sub,sup,kbd,br,hr,table,tr,td'
-let g:vimwiki_html_header_numbering = 1
-let g:vimwiki_html_header_numbering_sym = '.'
-"let g:vimwiki_listsyms = ' ¼½¾✓'
 
 let g:SuperTabMappingBackward = '<C-p'
 let g:SuperTabMappingForward = '<C-n>'
@@ -286,8 +270,10 @@ if has("cscope")
      set cscopetag
     " set cscopequickfix=s-,g-,c-,d-,t-,e-,f-,i-
 endif
-
+""NERDTree
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 "}}}
+
 
 
 " mappings {{{
@@ -298,6 +284,7 @@ nnoremap *               : let @/=printf('\<%s\>\c', expand('<cword>'))<CR>
 nnoremap #               : let @/=printf('\<%s\>\C', expand('<cword>'))<CR>
 nnoremap <expr> gm         float2nr(strdisplaywidth(getline('.'))/2+1) . "\<BAR>"
 nnoremap <F5>            : noh \| redraw!<CR>
+nnoremap <silent> <F4>   : NERDTree<CR>
 nnoremap <C-l>           gt
 nnoremap <C-h>           gT
 nnoremap <C-j>           <C-e>
@@ -355,9 +342,9 @@ cnoreabb <expr> W        getcmdtype()==':'&&getcmdline()=~#'^W'?'w':'W'
 "esc的映射
 "imap jj <esc>
 "屏蔽掉讨厌的F1键
-inoremap <F1> <ESC>
-nnoremap <F1> <ESC>
-vnoremap <F1> <ESC>
+""inoremap <F1> <ESC>
+""nnoremap <F1> <ESC>
+""vnoremap <F1> <ESC>
 "修改vim的正则表达
 ""nnoremap / /\v
 ""vnoremap / /\v
@@ -444,7 +431,6 @@ Bundle 'OmniCppComplete'
 Bundle 'https://github.com/Lokaltog/vim-powerline.git'
 Bundle 'https://github.com/Shougo/neocomplcache.git'
 
-
 filetype plugin indent on    " required!
 
-
+let g:Powerline_cache_enabled = 0
