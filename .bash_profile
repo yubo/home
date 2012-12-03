@@ -25,12 +25,14 @@ alias mv='mv -i'
 
 if [ `uname` == 'Darwin' ]
 then
-    alias ll='ls -lGF'
     alias ls='ls -GF'
+    alias la='ls -GFa'
+    alias ll='ls -lGF'
     PATH=$PATH:/usr/local/homebrew/bin
 else
-    alias ll='ls -lF --color '
     alias ls='ls -F --color '
+    alias la='ls -Fa --color '
+    alias ll='ls -Fl --color '
 fi
 
 alias tmux='tmux -2'
