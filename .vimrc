@@ -5,10 +5,7 @@
 "set showtabline=0
 " tab替换为4空格 %retab! 
 set ts=4
-set expandtab
-set tabstop=4
-set shiftwidth=4
-set softtabstop=4
+set tabstop=4 softtabstop=4 shiftwidth=4 expandtab
 set guifont=Inconsolata\ XL:h17,Inconsolata:h20,Monaco:h17
 set nocompatible
 set nolinebreak nowrap nocursorline
@@ -44,7 +41,7 @@ set isfname-== isfname-=,
 set listchars=precedes:«,extends:»,tab:>-,trail:∙,eol:$
 set modeline
 set mouse=a
-set number numberwidth=4 showbreak=->
+set number numberwidth=4 showbreak=\ \ ->
 set laststatus=2
 
 set path=.,/usr/local/include/*,/usr/include/**1
@@ -56,7 +53,6 @@ set sidescroll=1 sidescrolloff=1
 set spelllang=en
 set splitright splitbelow
 set tabpagemax=50
-set tabstop=8 softtabstop=4 shiftwidth=4 expandtab
 set tags=./tags;/,~/.vim/tags
 set thesaurus=~/.vim/tsr.txt
 set timeoutlen=500 ttimeoutlen=0
