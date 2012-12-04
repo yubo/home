@@ -67,10 +67,11 @@ set wrapscan
 set wildignore=*.swp,*.bak,*.pyc,*~
 "set wildignorecase
 set wildmenu
-"代码自动折叠
-"set foldmethod=syntax
+"代码折叠
+"set foldmethod=indent
 filetype off
 filetype plugin indent on
+set t_Co=256
 "打开高亮
 syntax enable
 "使用color solarized
@@ -84,9 +85,7 @@ if has('gui_running')
 else
     set background=dark
 endif
-set t_Co=256
 set modelines=0
-"一些其他的设定
 set autoindent
 set hidden
 "设置光标高亮显示
@@ -159,14 +158,12 @@ cnoremap <C-@>     :CtrlPMRUFiles<CR>
 
 let g:solarized_menu = 0
 
-let g:yankring_default_menu_mode = 0
 
 let g:alternateExtensions_html = 'md,markdown'
 let g:alternateExtensions_md = 'html'
 let g:alternateExtensions_markdown = 'html'
 let g:alternateExtensions_coffee = 'js'
 let g:alternateExtensions_js = 'coffee'
-
 
 let g:SuperTabMappingBackward = '<C-p>'
 let g:SuperTabMappingForward = '<C-n>'
@@ -224,6 +221,7 @@ nnoremap *               : let @/=printf('\<%s\>\c', expand('<cword>'))<CR>
 nnoremap #               : let @/=printf('\<%s\>\C', expand('<cword>'))<CR>
 nnoremap <expr> gm         float2nr(strdisplaywidth(getline('.'))/2+1) . "\<BAR>"
 nnoremap <F5>            : noh \| redraw!<CR>
+nnoremap <C-b>           : buffers<CR>
 nnoremap <C-l>           gt
 nnoremap <C-h>           gT
 nnoremap <C-j>           <C-e>
@@ -337,7 +335,6 @@ Bundle 'bufexplorer.zip'
 "Bundle 'minibufexpl.vim'
 Bundle 'taglist.vim'
 Bundle 'OmniCppComplete'
-Bundle 'YankRing.vim'
 Bundle 'cscope.vim'
 Bundle 'https://github.com/Lokaltog/vim-powerline.git'
 Bundle 'https://github.com/Shougo/neocomplcache.git'

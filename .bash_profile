@@ -19,6 +19,7 @@ alias grep='grep --color '
 alias rm='rm -i'
 alias cp='cp -i'
 alias mv='mv -i'
+alias gitd='git difftool'
 
 if [ `uname` == 'Darwin' ]
 then
