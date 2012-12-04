@@ -10,8 +10,6 @@ set tabstop=4
 set shiftwidth=4
 set softtabstop=4
 set guifont=Inconsolata\ XL:h17,Inconsolata:h20,Monaco:h17
-"GUI界面里的字体，默认有抗锯齿
-"set guifont=Inconsolata:h12
 set nocompatible
 set nolinebreak nowrap nocursorline
 set autoindent smartindent
@@ -32,10 +30,7 @@ set encoding=utf-8
 set scrolloff=3
 set fenc=utf-8
 set foldnestmax=2
-" don't auto wrap long text
-"set formatoptions=mnoq
-" mbyte/list-header support when <gq>
-set formatoptions+=mn
+set formatoptions=mnoqt
 " gVim will load `$VIM/vimrc` before loading `~/.vimrc`,
 " add `finish` at the beginning of `$VIM/vimrc` to hide `Menu`,
 " because `$VIM/vimrc` calls `syntax on` which will build menu!
@@ -46,13 +41,10 @@ set history=50
 set hlsearch incsearch
 set ignorecase smartcase
 set isfname-== isfname-=,
-
 set listchars=precedes:«,extends:»,tab:>-,trail:∙,eol:$
 set modeline
 set mouse=a
 set number numberwidth=4 showbreak=->
-
-
 set laststatus=2
 
 set path=.,/usr/local/include/*,/usr/include/**1
@@ -69,32 +61,30 @@ set tags=./tags;/,~/.vim/tags
 set thesaurus=~/.vim/tsr.txt
 set timeoutlen=500 ttimeoutlen=0
 set titlestring=%F\ %M
-""set undofile
+"set undofile
 set virtualedit=block
 set wrapscan
 set wildignore=*.swp,*.bak,*.pyc,*~
 "set wildignorecase
 set wildmenu
-""代码自动折叠
-""set foldmethod=syntax
+"代码自动折叠
+"set foldmethod=syntax
 filetype off
 filetype plugin indent on
 "打开高亮
 syntax enable
-"不要兼容vi
-set nocompatible
 "使用color solarized
+colorscheme solarized
+let g:solarized_termtrans=1
+let g:solarized_termcolors=256
+let g:solarized_contrast="high"
+let g:solarized_visibility="high"
 if has('gui_running')
     set background=light
 else
     set background=dark
 endif
-colorscheme solarized
-"terminal下面的背景问题
-let g:solarized_termtrans=1
-let g:solarized_termcolors=256
-let g:solarized_contrast="high"
-let g:solarized_visibility="high"
+set t_Co=256
 set modelines=0
 "一些其他的设定
 set autoindent
@@ -103,14 +93,17 @@ set hidden
 "set cursorline
 "set cursorcolumn
 set ttyfast
-set ruler
-set backspace=indent,eol,start
 "相对行号 要想相对行号起作用要放在显示行号后面
-""set relativenumber
+"set relativenumber
 "显示行号
 "set number
 "无限undo
-set undofile
+"7.3功能
+" Enable modelines only on secure vim versions
+if (v:version >= 703)
+    set undofile
+else
+endif
 "自动换行
 set wrap
 "禁止自动换行
@@ -126,48 +119,17 @@ set smartcase
 set incsearch
 set showmatch
 set hlsearch
-"加入html标签配对
-"runtime macros/matchit.vim 
-"以下设置用来是vim正确显示过长的行
-"set textwidth=80
-"set formatoptions=qrnl
-"彩色显示第85行
-"set colorcolumn=85
-"设置256色显示
-set t_Co=256
-"行号栏的宽度
-set numberwidth=4
-"初始窗口的宽度
-"set columns=135
-"初始窗口的高度
-"set lines=50
-"初始窗口的位置
-"设置隐藏gvim的菜单和工具栏 F2切换
-set guioptions-=m
-set guioptions-=T
-"去除左右两边的滚动条
-set go-=r
-set go-=L
-map <silent> <F2> :if &guioptions =~# 'T' <Bar>
-        \set guioptions-=T <Bar>
-        \set guioptions-=m <bar>
-    \else <Bar>
-        \set guioptions+=T <Bar>
-        \set guioptions+=m <Bar>
-    \endif<CR>
-
-winpos 620 45 
 "}}}
-
-
 
 
 " plugins {{{
 "call pathogen#infect()
-
 let g:fencview_autodetect=1
+
 "支持单行和多行的选择，//格式
-let g:Powerline_symbols = 'unicode'
+"let g:Powerline_symbols = 'unicode'
+let g:Powerline_symbols = 'fancy'
+let g:Powerline_cache_enabled = 1
 let g:showmarks_enable = 0
 let g:showmarks_include = "abcdefghijklmnopqrstuvwxyz".
                         \ "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
@@ -192,10 +154,8 @@ let g:ctrlp_custom_ignore = {
                                     \ '\.zip$\|\.bz2$\|\.gz$\|\.tar$\|\.7z$\|\.rar$',
                             \ 'link': 'SOME_BAD_SYMBOLIC_LINKS',
                             \}
-cnoremap <C-o> :CtrlPMRUFiles<CR>
+cnoremap <C-o>     :CtrlPMRUFiles<CR>
 cnoremap <C-@>     :CtrlPMRUFiles<CR>
-
-let g:Powerline_symbols = 'fancy'
 
 let g:solarized_menu = 0
 
@@ -235,7 +195,7 @@ endfun
 let g:neocomplcache_enable_at_startup = 1
 "set cscopequickfix=s-,c-,d-,i-,t-,e-
 if has("cscope")
-""    set csprg=/usr/bin/cscope
+"    set csprg=/usr/bin/cscope
     set csto=0
     set cst
     set nocsverb
@@ -250,7 +210,7 @@ if has("cscope")
      set cscopetag
     " set cscopequickfix=s-,g-,c-,d-,t-,e-,f-,i-
 endif
-""NERDTree
+"NERDTree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 "}}}
 
@@ -291,14 +251,14 @@ inoremap <leader>co        YUBO<yubo@yubo.org>
 inoremap <expr> <leader>fn     expand('%:p')
 inoremap <leader>dt      <C-r>=strftime('%Y-%m-%d')<CR>
 inoremap <leader>tm      <C-r>=strftime('%H:%M:%S')<CR>
-""inoremap <C-@>           <C-x><C-u>
-""inoremap <C-space>       <C-x><C-u>
+"inoremap <C-@>           <C-x><C-u>
+"inoremap <C-space>       <C-x><C-u>
 inoremap <C-a>           <home>
 inoremap <C-e>           <end>
 inoremap <C-b>           <left>
 inoremap <C-f>           <right>
-""inoremap <A-b>           <S-left>
-""inoremap <A-f>           <S-right>
+"inoremap <A-b>           <S-left>
+"inoremap <A-f>           <S-right>
 inoremap <C-d>           <del>
 inoremap <A-d>           <C-o>dw
 " command mode
@@ -306,9 +266,9 @@ cnoremap <C-a>           <home>
 cnoremap <C-e>           <end>
 cnoremap <C-b>           <left>
 cnoremap <C-f>           <right>
-""cnoremap <leader>b       <S-left>
-""cnoremap <leader>f       <S-right>
-""cnoremap <leader>d       <S-right><C-w>
+"cnoremap <leader>b       <S-left>
+"cnoremap <leader>f       <S-right>
+"cnoremap <leader>d       <S-right><C-w>
 cnoremap <C-d>           <delete>
 cnoremap <C-p>           <up>
 cnoremap <C-n>           <down>
@@ -325,8 +285,8 @@ nnoremap <tab> %
 vnoremap <tab> %
 "折叠html标签 ,fold tag
 nnoremap <leader>ft vatzf
-""搜索替换
-""nmap <leader>s :,s///c
+"搜索替换
+"nmap <leader>s :,s///c
 
 
 "取消粘贴缩进
@@ -337,10 +297,10 @@ nmap <leader>pp :set nopaste<CR>
 "nmap <leader>fc :set ft=css<CR>
 "nmap <leader>fx :set ft=xml<CR>
 "nmap <leader>fm :set ft=mako<CR>
-inoremap <c-j> <down>
-inoremap <c-k> <up>
-inoremap <c-l> <right>
-inoremap <c-h> <left>
+inoremap <C-j> <down>
+inoremap <C-k> <up>
+inoremap <C-l> <right>
+inoremap <C-h> <left>
 
 
 "}}}
@@ -353,7 +313,6 @@ inoremap <c-h> <left>
 "===================================================
 " vim 插件管理 
 " git clone http://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
-set nocompatible    " be iMproved
 filetype off        " required!
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
@@ -375,14 +334,14 @@ Bundle 'The-NERD-tree'
 Bundle 'The-NERD-Commenter'
 Bundle 'snipMate'
 Bundle 'bufexplorer.zip'
-""Bundle 'minibufexpl.vim'
+"Bundle 'minibufexpl.vim'
 Bundle 'taglist.vim'
 Bundle 'OmniCppComplete'
 Bundle 'YankRing.vim'
 Bundle 'cscope.vim'
 Bundle 'https://github.com/Lokaltog/vim-powerline.git'
 Bundle 'https://github.com/Shougo/neocomplcache.git'
+Bundle 'https://github.com/spiiph/vim-space'
 
 filetype plugin indent on    " required!
 
-let g:Powerline_cache_enabled = 0
