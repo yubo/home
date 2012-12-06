@@ -186,23 +186,6 @@ endfun
 
 
 let g:neocomplcache_enable_at_startup = 1
-"set cscopequickfix=s-,c-,d-,i-,t-,e-
-if has("cscope")
-"    set csprg=/usr/bin/cscope
-    set csto=0
-    set cst
-    set nocsverb
-    " add any database in current directory
-     if filereadable("cscope.out")
-     cs add cscope.out
-    " else add database pointed to by environment
-     elseif $CSCOPE_DB != ""
-     cs add $CSCOPE_DB
-     endif
-     set csverb
-     set cscopetag
-    " set cscopequickfix=s-,g-,c-,d-,t-,e-,f-,i-
-endif
 "NERDTree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 "}}}
@@ -331,7 +314,6 @@ Bundle 'bufexplorer.zip'
 "Bundle 'minibufexpl.vim'
 Bundle 'taglist.vim'
 Bundle 'OmniCppComplete'
-Bundle 'cscope.vim'
 Bundle 'https://github.com/Lokaltog/vim-powerline.git'
 Bundle 'https://github.com/Shougo/neocomplcache.git'
 Bundle 'https://github.com/spiiph/vim-space'
