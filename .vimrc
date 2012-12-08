@@ -42,6 +42,7 @@ set listchars=precedes:«,extends:»,tab:>-,trail:∙,eol:$
 set modeline
 set mouse=a
 set number numberwidth=4 showbreak=\ \ ->
+set nonumber
 set laststatus=2
 
 set path=.,/usr/local/include/*,/usr/include/**1
@@ -195,89 +196,89 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTree
 " mappings {{{
 let mapleader = ','
 " normal mode
-nnoremap Y               y$
-nnoremap *               : let @/=printf('\<%s\>\c', expand('<cword>'))<CR>
-nnoremap #               : let @/=printf('\<%s\>\C', expand('<cword>'))<CR>
-nnoremap <expr> gm         float2nr(strdisplaywidth(getline('.'))/2+1) . "\<BAR>"
-nnoremap <F5>            : noh \| redraw!<CR>
-nnoremap <C-b>           : buffers<CR>
-nnoremap <C-l>           gt
-nnoremap <C-h>           gT
-nnoremap <C-j>           <C-e>
-nnoremap <C-k>           <C-y>
-nnoremap <leader>y       : YRShow<CR>
-nnoremap <leader>u       : GundoToggle \| wincmd l<CR>
-nnoremap <leader>w         <C-w>
-nnoremap <leader>h       : wincmd h<CR>
-nnoremap <leader>j       : wincmd j<CR>
-nnoremap <leader>k       : wincmd k<CR>
-nnoremap <leader>l       : wincmd l<CR>
-nnoremap <leader>p       : wincmd p<CR>
-nnoremap <leader>s       : so $MYVIMRC<CR>
-nnoremap <leader>v       : tabe $MYVIMRC<CR>
-nnoremap <leader>t       : Tlist<CR>
-nnoremap <leader>o       : tabo<CR>
-nnoremap <leader>q       : q<CR>
-nnoremap <leader>f       : !firefox %<CR>
-nnoremap <leader>z       : setl fdm=indent fdc=1 fdn=1<CR>
-nnoremap <leader>;       : noh<CR>
-nnoremap <leader>p       : set paste<CR>
-nnoremap <leader>pp      : set nopaste<CR>
-nnoremap <leader>n       : set number<CR>
-nnoremap <leader>nn      : set nonumber<CR>
-nnoremap <leader><space> : NERDTreeToggle<CR>
-nnoremap <leader><enter> : NERDTreeToggle<CR>
+nnoremap Y                     y$
+nnoremap *                     : let @/=printf('\<%s\>\c', expand('<cword>'))<CR>
+nnoremap #                     : let @/=printf('\<%s\>\C', expand('<cword>'))<CR>
+nnoremap <expr> gm               float2nr(strdisplaywidth(getline('.'))/2+1) . "\<BAR>"
+nnoremap <F5>                  : noh \| redraw!<CR>
+nnoremap <C-b>                 : buffers<CR>
+nnoremap <C-l>                 gt
+nnoremap <C-h>                 gT
+nnoremap <C-j>                 <C-e>
+nnoremap <C-k>                 <C-y>
+nnoremap <leader>y             : YRShow<CR>
+nnoremap <leader>u             : GundoToggle \| wincmd l<CR>
+nnoremap <leader>w               <C-w>
+nnoremap <leader>h             : wincmd h<CR>
+nnoremap <leader>j             : wincmd j<CR>
+nnoremap <leader>k             : wincmd k<CR>
+nnoremap <leader>l             : wincmd l<CR>
+nnoremap <leader>p             : wincmd p<CR>
+nnoremap <leader>s             : so $MYVIMRC<CR>
+nnoremap <leader>v             : tabe $MYVIMRC<CR>
+nnoremap <leader>t             : Tlist<CR>
+nnoremap <leader>o             : tabo<CR>
+nnoremap <leader>q             : q<CR>
+nnoremap <leader>f             : !firefox %<CR>
+nnoremap <leader>z             : setl fdm=indent fdc=1 fdn=1<CR>
+nnoremap <leader>;             : noh<CR>
+nnoremap <leader>p             : set paste<CR>
+nnoremap <leader>pp            : set nopaste<CR>
+nnoremap <leader><space>       : NERDTreeToggle<CR>
+nnoremap <leader><enter>       : NERDTreeToggle<CR>
+nnoremap <silent><leader>n     : set number<CR>
+nnoremap <leader>nn            : set nonumber<CR>
 " insert mode
-inoremap <leader>co        YUBO<yubo@yubo.org>
+inoremap <leader>co            YUBO<yubo@yubo.org>
 inoremap <expr> <leader>fn     expand('%:p')
-inoremap <leader>dt      <C-r>=strftime('%Y-%m-%d')<CR>
-inoremap <leader>tm      <C-r>=strftime('%H:%M:%S')<CR>
-"inoremap <C-@>           <C-x><C-u>
-"inoremap <C-space>       <C-x><C-u>
-inoremap <C-a>           <home>
-inoremap <C-e>           <end>
-inoremap <C-b>           <left>
-inoremap <C-f>           <right>
-"inoremap <A-b>           <S-left>
-"inoremap <A-f>           <S-right>
-inoremap <C-d>           <del>
-inoremap <A-d>           <C-o>dw
+inoremap <leader>dt            <C-r>=strftime('%Y-%m-%d')<CR>
+inoremap <leader>tm            <C-r>=strftime('%H:%M:%S')<CR>
+"inoremap <C-@>                 <C-x><C-u>
+"inoremap <C-space>             <C-x><C-u>
+inoremap <C-a>                 <home>
+inoremap <C-e>                 <end>
+inoremap <C-b>                 <left>
+inoremap <C-f>                 <right>
+"inoremap <A-b>                 <S-left>
+"inoremap <A-f>                 <S-right>
+inoremap <C-d>                 <del>
+inoremap <A-d>                 <C-o>dw
 " command mode
-cnoremap <C-a>           <home>
-cnoremap <C-e>           <end>
-cnoremap <C-b>           <left>
-cnoremap <C-f>           <right>
-"cnoremap <leader>b       <S-left>
-"cnoremap <leader>f       <S-right>
-"cnoremap <leader>d       <S-right><C-w>
-cnoremap <C-d>           <delete>
-cnoremap <C-p>           <up>
-cnoremap <C-n>           <down>
+cnoremap <C-a>                 <home>
+cnoremap <C-e>                 <end>
+cnoremap <C-b>                 <left>
+cnoremap <C-f>                 <right>
+"cnoremap <leader>b             <S-left>
+"cnoremap <leader>f             <S-right>
+"cnoremap <leader>d             <S-right><C-w>
+cnoremap <C-d>                 <delete>
+cnoremap <C-p>                 <up>
+cnoremap <C-n>                 <down>
 " visual mode
-vnoremap <C-m>           !markdown<CR>
-vnoremap <C-p>           !pandoc<CR>
-vnoremap <C-f>           !figlet<CR>
+vnoremap <C-m>                 !markdown<CR>
+vnoremap <C-p>                 !pandoc<CR>
+vnoremap <C-f>                 !figlet<CR>
 " others
-cnoreabb <expr> W        getcmdtype()==':'&&getcmdline()=~#'^W'?'w':'W'
+cnoreabb <expr> W              getcmdtype()==':'&&getcmdline()=~#'^W'?'w':'W'
 "esc的映射
 "imap jj <esc>
 "使用tab键来代替%进行匹配跳转
-nnoremap <tab> %
-vnoremap <tab> %
+nnoremap <tab>                 %
+vnoremap <tab>                 %
 "折叠html标签 ,fold tag
-nnoremap <leader>ft vatzf
+nnoremap <leader>ft            vatzf
 "搜索替换
 "nmap <leader>s :,s///c
 
 "文件类型切换
-"nmap <leader>fj :set ft=javascript<CR>
-"nmap <leader>fc :set ft=css<CR>
-"nmap <leader>fx :set ft=xml<CR>
-"nmap <leader>fm :set ft=mako<CR>
-inoremap <C-j> <down>
-inoremap <C-k> <up>
-inoremap <C-l> <right>
-inoremap <C-h> <left>
+inoremap <C-j>                 <down>
+inoremap <C-k>                 <up>
+inoremap <C-l>                 <right>
+inoremap <C-h>                 <left>
+"nmap <leader>fj               :set ft=javascript<CR>
+"nmap <leader>fc               :set ft=css<CR>
+"nmap <leader>fx               :set ft=xml<CR>
+"nmap <leader>fm               :set ft=mako<CR>
 
 
 "}}}
