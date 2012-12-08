@@ -221,6 +221,10 @@ nnoremap <leader>q       : q<CR>
 nnoremap <leader>f       : !firefox %<CR>
 nnoremap <leader>z       : setl fdm=indent fdc=1 fdn=1<CR>
 nnoremap <leader>;       : noh<CR>
+nnoremap <leader>p       : set paste<CR>
+nnoremap <leader>pp      : set nopaste<CR>
+nnoremap <leader>n       : set number<CR>
+nnoremap <leader>nn      : set nonumber<CR>
 nnoremap <leader><space> : NERDTreeToggle<CR>
 nnoremap <leader><enter> : NERDTreeToggle<CR>
 " insert mode
@@ -265,10 +269,6 @@ nnoremap <leader>ft vatzf
 "搜索替换
 "nmap <leader>s :,s///c
 
-
-"取消粘贴缩进
-nmap <leader>p :set paste<CR>
-nmap <leader>pp :set nopaste<CR>
 "文件类型切换
 "nmap <leader>fj :set ft=javascript<CR>
 "nmap <leader>fc :set ft=css<CR>
