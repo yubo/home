@@ -41,7 +41,8 @@ set isfname-== isfname-=,
 set listchars=precedes:«,extends:»,tab:>-,trail:∙,eol:$
 set modeline
 set mouse=a
-set number numberwidth=4 showbreak=\ \ ->
+"set number numberwidth=4 showbreak=\ \ ->
+set number numberwidth=4
 set nonumber
 set laststatus=2
 
