@@ -58,7 +58,6 @@ set tags=./tags;/,~/.vim/tags
 set thesaurus=~/.vim/tsr.txt
 set timeoutlen=500 ttimeoutlen=0
 set titlestring=%F\ %M
-"set undofile
 set virtualedit=block
 set wrapscan
 set wildignore=*.swp,*.bak,*.pyc,*~
@@ -97,7 +96,7 @@ set ttyfast
 "7.3功能
 " Enable modelines only on secure vim versions
 if (v:version >= 703)
-    set undofile
+"    set undofile
 else
 endif
 "自动换行
@@ -224,8 +223,7 @@ nnoremap <leader>z             : setl fdm=indent fdc=1 fdn=1<CR>
 nnoremap <leader>;             : noh<CR>
 nnoremap <leader>p             : set paste<CR>
 nnoremap <leader>pp            : set nopaste<CR>
-nnoremap <leader><space>       : NERDTreeToggle<CR>
-nnoremap <leader><enter>       : NERDTreeToggle<CR>
+nnoremap <silent><leader><space>       : NERDTreeToggle<CR>
 nnoremap <silent><leader>n     : set number<CR>
 nnoremap <leader>nn            : set nonumber<CR>
 " insert mode

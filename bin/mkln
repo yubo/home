@@ -16,4 +16,4 @@ if [ ! $# == 2 ]
 
 
 find $src -type d | sed -e "s|^$src|$des/|g" | xargs mkdir -p
-find $src -type f | sed -e 's/ /\ /g' | sed -e 's/(/\\(/g' | sed -e 's/')/\\)/g'| sed -e 's/\[/\\[/g' | sed -e 's/\']/\\]/g'|  awk '{print "ln "$0"  "$0}' | sed -e "s|  $src| $des/|g" | bash
+find $src -type f | sed -e 's/ /\ /g' | sed -e 's/(/\\(/g' | sed -e 's/)/\\)/g'| sed -e 's/\[/\\[/g' | sed -e 's/\]/\\]/g'|  awk '{print "ln "$0"  "$0}' | sed -e "s|  $src| $des/|g" | bash
