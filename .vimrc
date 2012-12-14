@@ -67,7 +67,6 @@ set wildmenu
 "代码折叠
 "set foldmethod=indent
 filetype off
-filetype plugin indent on
 set t_Co=256
 "打开高亮
 syntax enable
@@ -115,6 +114,11 @@ set smartcase
 set incsearch
 set showmatch
 set hlsearch
+"行号自动跳转
+if has("autocmd")
+  au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
+    \| exe "normal! g'\"" | endif
+endif
 "}}}
 
 
@@ -318,5 +322,4 @@ Bundle 'https://github.com/Lokaltog/vim-powerline.git'
 Bundle 'https://github.com/Shougo/neocomplcache.git'
 Bundle 'https://github.com/spiiph/vim-space'
 
-filetype plugin indent on    " required!
-
+filetype plugin indent on
