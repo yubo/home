@@ -19,8 +19,9 @@ install_file .bash_profile
 install_file .bashrc
 install_file .dircolors
 install_file .gitconfig
+install_file .fonts
 
-git clone http://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
+git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
 
 
 

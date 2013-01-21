@@ -127,8 +127,9 @@ endif
 let g:fencview_autodetect=1
 
 "支持单行和多行的选择，//格式
-"let g:Powerline_symbols = 'unicode'
-let g:Powerline_symbols = 'fancy'
+source ~/.vim/bundle/powerline/powerline/bindings/vim/source_plugin.vim
+let g:Powerline_symbols = 'unicode'
+"let g:Powerline_symbols = 'fancy'
 let g:Powerline_cache_enabled = 1
 let g:showmarks_enable = 0
 let g:showmarks_include = "abcdefghijklmnopqrstuvwxyz".
@@ -290,7 +291,6 @@ inoremap <C-h>                 <left>
 
 
 
-
 "===================================================
 " vim 插件管理 
 " git clone http://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
@@ -318,7 +318,8 @@ Bundle 'bufexplorer.zip'
 "Bundle 'minibufexpl.vim'
 Bundle 'taglist.vim'
 Bundle 'OmniCppComplete'
-Bundle 'https://github.com/Lokaltog/vim-powerline.git'
+""Bundle 'https://github.com/Lokaltog/vim-powerline.git'
+Bundle 'https://github.com/Lokaltog/powerline.git'
 Bundle 'https://github.com/Shougo/neocomplcache.git'
 Bundle 'https://github.com/spiiph/vim-space'
 
