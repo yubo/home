@@ -18,6 +18,7 @@ export GIT_PROXY_IGNORE="xiaomi.com"
 EOF
 chmod 755 ~/bin/proxy_env
 
+#git 
 cat > ~/bin/git-proxy << 'EOF'
 #!/bin/bash
 
@@ -37,5 +38,15 @@ esac
 nc $METHOD $*
 EOF
 chmod 755 ~/bin/git-proxy
+
+#git ssh
+cat >> ~/.ssh/config << 'EOF'
+host github.com
+    user git
+    hostname github.com
+    port 22
+    proxycommand socat - PROXY:192.168.122.1:%h:%p,proxyport=3128,proxyauth=user:pwd
+EOF
+chmod 700 ~/.ssh/config
 
 . ~/bin/proxy_env
