@@ -24,7 +24,9 @@ install_file .fonts
 git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
 
 
-
+if [ -f src/connect.c ]; then
+    gcc -o bin/connect src/connect.c
+fi
 
 
 

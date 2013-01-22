@@ -32,4 +32,8 @@ else
     alias la='ls -Fa --color '
     alias ll='ls -Fl --color '
 fi
+. ~/bin/proxy.sh 
 
+
+#export PATH="$HOME/.rbenv/bin:$PATH"
+#eval "$(rbenv init -)"
