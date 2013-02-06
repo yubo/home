@@ -4,6 +4,7 @@
 
     git clone git@github.com:yubo/home.git ~/.yubo
     cd ~/.yubo && sh install.sh
+    fc-cache -vf ~/.fonts
     vim
     :BundleInstall
     :q
