@@ -33,3 +33,5 @@ else
     alias ll='ls -Fl --color '
 fi
 
+#export PATH="$HOME/.rbenv/bin:$PATH"
+#eval "$(rbenv init -)"
