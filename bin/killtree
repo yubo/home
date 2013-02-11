@@ -1,0 +1,15 @@
+#!/bin/sh
+#set -o monitor
+
+kill_tree() {
+    if [ $# -eq 0 ]; then
+        return 0
+    fi
+    for pid in $*; do
+        kill_tree `pgrep  -P $pid -d ' '`
+    done
+    echo "kill -9 $*"
+    kill -9 $*
+}
+
+kill_tree $@
