@@ -39,3 +39,4 @@ fi
 #export PATH="$HOME/.rbenv/bin:$PATH"
 #eval "$(rbenv init -)"
 #. ~/bin/proxy_env
+. ~/.cloudfoundry_deployment_profile
