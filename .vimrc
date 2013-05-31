@@ -26,7 +26,7 @@ set fileformats=unix
 set encoding=utf-8
 set scrolloff=3
 set fenc=utf-8
-set foldnestmax=2
+"set foldnestmax=2
 set formatoptions=mnoqt
 " gVim will load `$VIM/vimrc` before loading `~/.vimrc`,
 " add `finish` at the beginning of `$VIM/vimrc` to hide `Menu`,
@@ -40,7 +40,7 @@ set ignorecase smartcase
 set isfname-== isfname-=,
 set listchars=precedes:«,extends:»,tab:>-,trail:∙,eol:$
 set modeline
-set mouse=a
+"set mouse=a
 "set number numberwidth=4 showbreak=\ \ ->
 set number numberwidth=4
 set nonumber
@@ -212,6 +212,7 @@ nnoremap <C-l>                 gt
 nnoremap <C-h>                 gT
 nnoremap <C-j>                 <C-e>
 nnoremap <C-k>                 <C-y>
+nnoremap <leader>b             : %!xxd<CR>
 nnoremap <leader>y             : YRShow<CR>
 nnoremap <leader>u             : GundoToggle \| wincmd l<CR>
 nnoremap <leader>w               <C-w>
