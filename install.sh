@@ -9,6 +9,7 @@ install_file()
 	if [ -f $des -o -d $des ]; then
 		mv -f $des $des".backup"
 	fi
+	rm -f $des
 	ln -s $src $des
 }
 
