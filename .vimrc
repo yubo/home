@@ -214,7 +214,6 @@ nnoremap <C-j>                 <C-e>
 nnoremap <C-k>                 <C-y>
 nnoremap <leader>b             : %!xxd<CR>
 nnoremap <leader>y             : YRShow<CR>
-nnoremap <leader>u             : GundoToggle \| wincmd l<CR>
 nnoremap <leader>w               <C-w>
 nnoremap <leader>h             : wincmd h<CR>
 nnoremap <leader>j             : wincmd j<CR>
@@ -234,6 +233,8 @@ nnoremap <leader>pp            : set nopaste<CR>
 nnoremap <silent><leader><space>       : NERDTreeToggle<CR>
 nnoremap <silent><leader>n     : set number<CR>
 nnoremap <leader>nn            : set nonumber<CR>
+" diff "
+nnoremap <leader>u             :diffupdate<CR>
 " insert mode
 inoremap <leader>co            YUBO<yubo@yubo.org>
 inoremap <expr> <leader>fn     expand('%:p')
