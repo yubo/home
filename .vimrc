@@ -213,6 +213,7 @@ nnoremap <C-h>                 gT
 nnoremap <C-j>                 <C-e>
 nnoremap <C-k>                 <C-y>
 nnoremap <leader>b             : %!xxd<CR>
+nnoremap <leader>bb            : %!xxd -r<CR>
 nnoremap <leader>y             : YRShow<CR>
 nnoremap <leader>w               <C-w>
 nnoremap <leader>h             : wincmd h<CR>
