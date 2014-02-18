@@ -225,6 +225,7 @@ nnoremap <leader>v             : tabe $MYVIMRC<CR>
 nnoremap <leader>t             : Tlist<CR>
 nnoremap <leader>o             : tabo<CR>
 nnoremap <leader>q             : q<CR>
+nnoremap <leader>g             gg=G
 nnoremap <leader>f             : !firefox %<CR>
 nnoremap <leader>z             : setl fdm=indent fdc=1 fdn=1<CR>
 nnoremap <leader>;             : noh<CR>
