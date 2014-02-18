@@ -48,4 +48,3 @@ eval "$(rbenv init -)"
 if [ -f $HOME/.localrc ]; then
     . $HOME/.localrc
 fi
-alias gocf='ssh -X root@localhost -p 22222'
