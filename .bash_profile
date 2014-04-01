@@ -9,7 +9,7 @@ fi
 
 # User specific environment and startup programs
 
-export PATH=$PATH:$HOME/bin:/usr/local/apache-maven-3.0.5/bin
+export PATH=$HOME/bin:/root/BcmXiaoQiang/external_toolchain/arm-xiaomi-linux-uclibcgnueabi/bin:$PATH
 export LANG="zh_CN.UTF-8"
 export PS1='[${debian_chroot:+($debian_chroot)}\u@\h:\w]\$'
 
@@ -47,4 +47,13 @@ eval "$(rbenv init -)"
 #. ~/.cloudfoundry_deployment_profile
 if [ -f $HOME/.localrc ]; then
     . $HOME/.localrc
+fi
+export TERM=xterm-color
+
+function parse_git_branch {
+    git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/[\1]/"
+}
+
+if [ -n $(parse_git_branch) ]; then
+	export PS1='[${debian_chroot:+($debian_chroot)}\u@\h:\w]\[\e[1;36m\]$(parse_git_branch)\[\e[0m\]\$'
 fi

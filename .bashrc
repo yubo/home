@@ -10,6 +10,7 @@ fi
 # User specific environment and startup programs
 
 export PATH=$PATH:$HOME/bin:/usr/local/eclipse
+export PATH=$PATH:/root/r1d/external_toolchain/arm-xiaomi-linux-uclibcgnueabi/bin
 export LANG="zh_CN.UTF-8"
 export PS1='[${debian_chroot:+($debian_chroot)}\u@\h:\w]\$'
 
@@ -22,6 +23,8 @@ alias rm='rm -i'
 alias cp='cp -i'
 alias mv='mv -i'
 alias gitd='git difftool'
+alias xldd='/root/BcmXiaoQiang/external_toolchain/hndtools-arm-linux-2.6.36-uclibc-4.5.3/bin/ldd'
+alias xnm='/root/BcmXiaoQiang/external_toolchain/hndtools-arm-linux-2.6.36-uclibc-4.5.3/bin/arm-brcm-linux-uclibcgnueabi-nm'
 
 if [ `uname` == 'Darwin' ]
 then
@@ -45,4 +48,4 @@ export JAVA_HOME=/usr/lib/jvm/java-1.6.0-openjdk-1.6.0.0.x86_64
 #. ~/bin/proxy_env
 #PATH=/usr/local/maven/bin:$PATH
 #. ~/.cloudfoundry_deployment_profile
-alias gocf='ssh -X  root@localhost -p 22222'
+export TERM=xterm-color

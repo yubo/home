@@ -5,7 +5,10 @@
 "set showtabline=0
 " tab替换为4空格 %retab! 
 set ts=4
-set tabstop=4 softtabstop=4 shiftwidth=4 expandtab
+"set tabstop=4 softtabstop=4 shiftwidth=4 expandtab
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
 set guifont=Inconsolata\ XL:h17,Inconsolata:h20,Monaco:h17
 set nocompatible
 set nolinebreak nowrap nocursorline
