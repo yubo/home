@@ -40,8 +40,8 @@ export JAVA_HOME=/usr/lib/jvm/java-1.6.0-openjdk-1.6.0.0.x86_64
 #export PATH="$HOME/.rbenv/bin:$PATH"
 #eval "$(rbenv init -)"
 
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
+#export PATH="$HOME/.rbenv/bin:$PATH"
+#eval "$(rbenv init -)"
 #. ~/bin/proxy_env
 #PATH=/usr/local/maven/bin:$PATH
 #. ~/.cloudfoundry_deployment_profile
@@ -49,11 +49,3 @@ if [ -f $HOME/.localrc ]; then
     . $HOME/.localrc
 fi
 export TERM=xterm-color
-
-function parse_git_branch {
-    git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/[\1]/"
-}
-
-if [ -n $(parse_git_branch) ]; then
-	export PS1='[${debian_chroot:+($debian_chroot)}\u@\h:\w]\[\e[1;36m\]$(parse_git_branch)\[\e[0m\]\$'
-fi
