@@ -9,6 +9,11 @@
     :BundleInstall
     :q
 
+####
+	#install rbenv
+    git clone https://github.com/sstephenson/rbenv.git ~/.rbenv
+    git clone https://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
+
 ## tips        
 
 	leader 设置为逗号，以下简称为l
