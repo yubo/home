@@ -1,8 +1,10 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =6
+let g:netrw_dirhist_cnt =8
 let g:netrw_dirhist_1='/root/program/nsdat'
 let g:netrw_dirhist_2='/root'
 let g:netrw_dirhist_3='/root/src/lvs-fullnat-synproxy/tools/.git'
 let g:netrw_dirhist_4='/root/.neocon'
 let g:netrw_dirhist_5='/root/.config'
 let g:netrw_dirhist_6='/root/git.n.xiaomi.com/zabbix/database/postgresql'
+let g:netrw_dirhist_7='/home/yubo/xq/yubo/apache/httpd-2.2.15/srclib/apr/misc'
+let g:netrw_dirhist_8='/etc/nginx/sites-available'

@@ -41,9 +41,10 @@ set history=50
 set hlsearch incsearch
 set ignorecase smartcase
 set isfname-== isfname-=,
-set listchars=precedes:«,extends:»,tab:>-,trail:∙,eol:$
+set listchars=precedes:«,extends:»,tab:>-,trail:-
+""set list
 set modeline
-"set mouse=a
+set mouse=a
 "set number numberwidth=4 showbreak=\ \ ->
 set number numberwidth=4
 set nonumber
@@ -80,9 +81,9 @@ let g:solarized_termcolors=256
 let g:solarized_contrast="high"
 let g:solarized_visibility="high"
 if has('gui_running')
-    set background=light
+	set background=light
 else
-    set background=dark
+	set background=dark
 endif
 set modelines=0
 set autoindent
@@ -99,7 +100,7 @@ set ttyfast
 "7.3功能
 " Enable modelines only on secure vim versions
 if (v:version >= 703)
-"    set undofile
+	"    set undofile
 else
 endif
 "自动换行
@@ -119,8 +120,8 @@ set showmatch
 set hlsearch
 "行号自动跳转
 if has("autocmd")
-  au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
-    \| exe "normal! g'\"" | endif
+	au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
+				\| exe "normal! g'\"" | endif
 endif
 "}}}
 
@@ -137,7 +138,7 @@ let g:Powerline_symbols = 'fancy'
 let g:Powerline_cache_enabled = 1
 let g:showmarks_enable = 0
 let g:showmarks_include = "abcdefghijklmnopqrstuvwxyz".
-                        \ "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+			\ "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 let g:showmarks_textlower = " "
 let g:showmarks_textupper = " "
 let g:showmarks_textother = " "
@@ -152,13 +153,13 @@ let g:ctrlp_use_caching = 1
 let g:ctrlp_clear_cache_on_exit = 0
 let g:ctrlp_prompt_mappings = { 'MarkToOpen()': ['<C-z>', '<C-space', '<C-@>'] }
 let g:ctrlp_custom_ignore = {
-                            \ 'dir':  '\.git$\|\.hg$\|\.svn$',
-                            \ 'file': '\.pdf$\|\.epub$\|\.mobi$\|\.djvu$\|\.chm$\|'.
-                                    \ '\.mp[34]$\|\.og[gva]$\|\.flv$\|\.avi$\|\.mov$\|\.swf$\|'.
-                                    \ '\.jpe\?g$\|\.png$\|\.gif$\|'.
-                                    \ '\.zip$\|\.bz2$\|\.gz$\|\.tar$\|\.7z$\|\.rar$',
-                            \ 'link': 'SOME_BAD_SYMBOLIC_LINKS',
-                            \}
+			\ 'dir':  '\.git$\|\.hg$\|\.svn$',
+			\ 'file': '\.pdf$\|\.epub$\|\.mobi$\|\.djvu$\|\.chm$\|'.
+			\ '\.mp[34]$\|\.og[gva]$\|\.flv$\|\.avi$\|\.mov$\|\.swf$\|'.
+			\ '\.jpe\?g$\|\.png$\|\.gif$\|'.
+			\ '\.zip$\|\.bz2$\|\.gz$\|\.tar$\|\.7z$\|\.rar$',
+			\ 'link': 'SOME_BAD_SYMBOLIC_LINKS',
+			\}
 cnoremap <C-o>     :CtrlPMRUFiles<CR>
 cnoremap <C-@>     :CtrlPMRUFiles<CR>
 
@@ -176,22 +177,22 @@ let g:SuperTabMappingForward = '<C-n>'
 let g:SuperTabDefaultCompletionType = '<C-n>'
 let g:SuperTabContextDefaultCompletionType = '<C-n>'
 aug SuperTab
-    au!
-    au FileType *   call BindSuperTab()
+	au!
+	au FileType *   call BindSuperTab()
 aug END
 fun! BindSuperTab()
-    let g:SuperTabMappingForward = '<C-n>'
-    if index(['css'], &ft)!=-1
-        let tab = '<C-x><C-o>'
-    elseif index(['javascript', 'python', 'text'], &ft)!=-1
-        let tab = 'context'
-    elseif index(['html'], &ft)!=-1
-        let g:SuperTabMappingForward = '<C-random>'  "SPARKUP/SNIPMATE
-        let tab = '<C-p>'
-    else
-        let tab = '<C-n>'
-    endif
-    let g:SuperTabDefaultCompletionType = tab
+	let g:SuperTabMappingForward = '<C-n>'
+	if index(['css'], &ft)!=-1
+		let tab = '<C-x><C-o>'
+	elseif index(['javascript', 'python', 'text'], &ft)!=-1
+		let tab = 'context'
+	elseif index(['html'], &ft)!=-1
+		let g:SuperTabMappingForward = '<C-random>'  "SPARKUP/SNIPMATE
+		let tab = '<C-p>'
+	else
+		let tab = '<C-n>'
+	endif
+	let g:SuperTabDefaultCompletionType = tab
 endfun
 
 
@@ -210,7 +211,7 @@ nnoremap *                     : let @/=printf('\<%s\>\c', expand('<cword>'))<CR
 nnoremap #                     : let @/=printf('\<%s\>\C', expand('<cword>'))<CR>
 nnoremap <expr> gm               float2nr(strdisplaywidth(getline('.'))/2+1) . "\<BAR>"
 nnoremap <F5>                  : noh \| redraw!<CR>
-nnoremap <C-b>                 : buffers<CR>
+nnoremap <C-b>                 : BufExplorerHorizontalSplit<CR>
 nnoremap <C-l>                 gt
 nnoremap <C-h>                 gT
 nnoremap <C-j>                 <C-e>
@@ -313,7 +314,7 @@ Bundle 'gmarik/vundle'
 "Bundle 'vim-plugin-bar'
 Bundle 'ctrlp.vim'
 Bundle 'AutoClose'
-Bundle 'ZenCoding.vim'
+""Bundle 'ZenCoding.vim'
 Bundle 'matchit.zip'
 Bundle 'ShowTrailingWhitespace'
 Bundle '_jsbeautify'
@@ -329,3 +330,7 @@ Bundle 'https://github.com/Lokaltog/vim-powerline'
 Bundle 'https://github.com/Shougo/neocomplcache.git'
 
 filetype plugin indent on
+hi SpecialKey ctermfg=238
+let Tlist_Show_One_File=1
+let Tlist_Exit_OnlyWindow=1
+

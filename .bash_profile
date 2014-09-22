@@ -22,6 +22,7 @@ alias rm='rm -i'
 alias cp='cp -i'
 alias mv='mv -i'
 alias gitd='git difftool'
+alias mountr1d='sudo mount -t smbfs //192.168.31.1/XiaoMi /mnt/r1d'
 
 if [ `uname` == 'Darwin' ]
 then
