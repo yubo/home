@@ -43,7 +43,7 @@ set ignorecase smartcase
 set isfname-== isfname-=,
 "set listchars=precedes:«,extends:»,tab:>-,trail:-
 set listchars=trail:«
-set list
+"set list
 set modeline
 "set mouse=a
 "set number numberwidth=4 showbreak=\ \ ->
