@@ -41,10 +41,11 @@ set history=50
 set hlsearch incsearch
 set ignorecase smartcase
 set isfname-== isfname-=,
-set listchars=precedes:«,extends:»,tab:>-,trail:-
-""set list
+"set listchars=precedes:«,extends:»,tab:>-,trail:-
+set listchars=trail:«
+set list
 set modeline
-set mouse=a
+"set mouse=a
 "set number numberwidth=4 showbreak=\ \ ->
 set number numberwidth=4
 set nonumber
@@ -310,20 +311,15 @@ call vundle#rc()
 " required!
 Bundle 'gmarik/vundle'
 " vim-scripts repos
-"Bundle 'vim-plugin-foo'
-"Bundle 'vim-plugin-bar'
-Bundle 'ctrlp.vim'
 Bundle 'AutoClose'
-""Bundle 'ZenCoding.vim'
+Bundle 'bufexplorer.zip'
+Bundle 'ctrlp.vim'
 Bundle 'matchit.zip'
-Bundle 'ShowTrailingWhitespace'
-Bundle '_jsbeautify'
 Bundle 'EasyMotion'
 Bundle 'FencView.vim'
 Bundle 'The-NERD-tree'
 Bundle 'The-NERD-Commenter'
 Bundle 'snipMate'
-Bundle 'bufexplorer.zip'
 Bundle 'taglist.vim'
 Bundle 'OmniCppComplete'
 Bundle 'https://github.com/Lokaltog/vim-powerline'
@@ -333,4 +329,3 @@ filetype plugin indent on
 hi SpecialKey ctermfg=238
 let Tlist_Show_One_File=1
 let Tlist_Exit_OnlyWindow=1
-

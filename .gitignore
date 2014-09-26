@@ -1,3 +1,4 @@
 .vim/bundle
 bin
 *.swp
+.vim/.netrwhist
