@@ -31,3 +31,7 @@ comment current line or text selected in visual mode
 	[count]<leader>cc 
 	[count]<leader>ci
 
+---
+##### tablify
+
+	-<leader>tt
