@@ -29,6 +29,7 @@ else
     alias ls='ls -F --color '
     alias la='ls -Fa --color '
     alias ll='ls -Fl --color '
+
 fi
 
 if [ -f $HOME/.rbenv/bin/rbenv ]; then

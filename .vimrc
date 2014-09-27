@@ -287,8 +287,11 @@ nnoremap <leader>ft            vatzf
 "文件类型切换
 inoremap <C-j>                 <down>
 inoremap <C-k>                 <up>
-inoremap <C-l>                 <right>
-inoremap <C-h>                 <left>
+
+"use c-b c-f"
+"inoremap <C-l>                 <right>  
+"inoremap <C-h>                 <left>
+
 "nmap <leader>fj               :set ft=javascript<CR>
 "nmap <leader>fc               :set ft=css<CR>
 "nmap <leader>fx               :set ft=xml<CR>
