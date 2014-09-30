@@ -67,3 +67,7 @@ comment current line or text selected in visual mode
 ##### tablify
 ---
   - <leader>tt
+
+##### ZoomWin
+---
+  - c-w o

@@ -328,6 +328,8 @@ Bundle 'OmniCppComplete'
 Bundle 'https://github.com/Lokaltog/vim-powerline'
 Bundle 'https://github.com/Shougo/neocomplcache.git'
 Bundle 'https://github.com/Stormherz/tablify.git'
+Bundle 'https://github.com/vim-scripts/ZoomWin.git'
+
 
 filetype plugin indent on
 hi SpecialKey ctermfg=238
