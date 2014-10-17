@@ -161,8 +161,8 @@ let g:ctrlp_custom_ignore = {
 			\ '\.zip$\|\.bz2$\|\.gz$\|\.tar$\|\.7z$\|\.rar$',
 			\ 'link': 'SOME_BAD_SYMBOLIC_LINKS',
 			\}
-cnoremap <C-o>     :CtrlPMRUFiles<CR>
-cnoremap <C-@>     :CtrlPMRUFiles<CR>
+"cnoremap <C-o>     :CtrlPMRUFiles<CR>
+"cnoremap <C-@>     :CtrlPMRUFiles<CR>
 
 let g:solarized_menu = 0
 
@@ -208,7 +208,6 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTree
 let mapleader = ','
 " normal mode
 nnoremap Y                     y$
-nnoremap *                     : let @/=printf('\<%s\>\c', expand('<cword>'))<CR>
 nnoremap #                     : let @/=printf('\<%s\>\C', expand('<cword>'))<CR>
 nnoremap <expr> gm               float2nr(strdisplaywidth(getline('.'))/2+1) . "\<BAR>"
 nnoremap <F5>                  : noh \| redraw!<CR>
@@ -217,6 +216,7 @@ nnoremap <C-l>                 gt
 nnoremap <C-h>                 gT
 nnoremap <C-j>                 <C-e>
 nnoremap <C-k>                 <C-y>
+nnoremap <leader>r             :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q --language-force=C++ .<CR>
 nnoremap <leader>b             : %!xxd<CR>
 nnoremap <leader>bb            : %!xxd -r<CR>
 nnoremap <leader>y             : YRShow<CR>
@@ -279,10 +279,6 @@ cnoreabb <expr> W              getcmdtype()==':'&&getcmdline()=~#'^W'?'w':'W'
 "使用tab键来代替%进行匹配跳转
 nnoremap <tab>                 %
 vnoremap <tab>                 %
-"折叠html标签 ,fold tag
-nnoremap <leader>ft            vatzf
-"搜索替换
-"nmap <leader>s :,s///c
 
 "文件类型切换
 inoremap <C-j>                 <down>
@@ -313,25 +309,43 @@ call vundle#rc()
 " let Vundle manage Vundle
 " required!
 Bundle 'gmarik/vundle'
-" vim-scripts repos
 Bundle 'AutoClose'
 Bundle 'bufexplorer.zip'
 Bundle 'ctrlp.vim'
-"Bundle 'matchit.zip'
 Bundle 'EasyMotion'
-Bundle 'FencView.vim'
 Bundle 'The-NERD-tree'
 Bundle 'The-NERD-Commenter'
 Bundle 'snipMate'
-Bundle 'taglist.vim'
 Bundle 'OmniCppComplete'
+Bundle 'winmanager'
 Bundle 'https://github.com/Lokaltog/vim-powerline'
 Bundle 'https://github.com/Shougo/neocomplcache.git'
 Bundle 'https://github.com/Stormherz/tablify.git'
 Bundle 'https://github.com/vim-scripts/ZoomWin.git'
 
 
-filetype plugin indent on
 hi SpecialKey ctermfg=238
 let Tlist_Show_One_File=1
 let Tlist_Exit_OnlyWindow=1
+filetype plugin indent on
+set omnifunc=syntaxcomplete#Complete
+
+""""""""""""""""""""""""""""""
+" winManager setting
+""""""""""""""""""""""""""""""
+let g:winManagerWindowLayout = "BufExplorer,FileExplorer|TagList"
+let g:winManagerWidth = 30
+let g:defaultExplorer = 0
+nmap <C-W><C-F> :FirstExplorerWindow<cr>
+nmap <C-W><C-B> :BottomExplorerWindow<cr>
+nmap <silent> <leader>wm :WMToggle<cr>
+
+"NERD Tree
+let NERDChristmasTree=1
+let NERDTreeWinPos='right'
+
+"Taglist"
+let Tlist_Show_One_File = 1 " Displaying tags for only one file~
+let Tlist_Exit_OnlyWindow = 1 " if you are the last, kill yourself
+
+
