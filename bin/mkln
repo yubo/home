@@ -2,11 +2,10 @@
 
 src=$1
 des=$2
-if [ ! $# == 2 ]
-    then
-        echo "Usage: $0 SOURCE DEST"
-            exit
-            fi
+if [ $# -ne 2 ]; then
+    echo "Usage: $0 SOURCE DEST"
+    exit
+fi
 
 #if [ -f $des -o -d $des ]
 #then 
