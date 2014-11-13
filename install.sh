@@ -22,6 +22,7 @@ install_file .dircolors
 install_file .gitconfig
 install_file .fonts
 install_file .tmux.conf
+install_file .git-completion.bash
 
 git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
 

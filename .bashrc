@@ -45,3 +45,7 @@ function parse_git_branch {
 if [ -n $(parse_git_branch) ]; then
 	export PS1='[${debian_chroot:+($debian_chroot)}\u@\h:\w]\[\e[1;36m\]$(parse_git_branch)\[\e[0m\]\$'
 fi
+
+if [ -f $HOME/.git-completion.bash ]; then
+	source $HOME/.git-completion.bash
+fi
