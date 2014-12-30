@@ -51,3 +51,9 @@ if [ -f $HOME/.git-completion.bash ]; then
 fi
 
 alias si='wine ~/.wine/drive_c/Program\ Files\ \(x86\)/Source\ Insight\ 3/Insight3.exe'
+
+PATH=/home/yubo/xq/bin/brcm4709/sdk_package/toolchain/bin:$PATH
+
+if [ "x"$TERM == "xxterm" ]; then
+	alias sshx='ssh -X'
+fi
