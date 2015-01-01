@@ -19,6 +19,7 @@ alias gitd='git difftool'
 alias xldd='/root/BcmXiaoQiang/external_toolchain/hndtools-arm-linux-2.6.36-uclibc-4.5.3/bin/ldd'
 alias xnm='/root/BcmXiaoQiang/external_toolchain/hndtools-arm-linux-2.6.36-uclibc-4.5.3/bin/arm-brcm-linux-uclibcgnueabi-nm'
 alias tmux='tmux -2'
+alias u='ssh -X yubo@u'
 
 if [ `uname` == 'Darwin' ]
 then
