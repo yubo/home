@@ -39,6 +39,11 @@ if [ -f $HOME/.rbenv/bin/rbenv ]; then
 	eval "$(rbenv init -)"
 fi
 
+if [ -e $HOME/go ]; then
+	export GOPATH=$HOME/go
+	export PATH=$PATH:$GOPATH/bin
+fi
+
 function parse_git_branch {
     git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/[\1]/"
 }
