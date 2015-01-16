@@ -211,11 +211,13 @@ nnoremap Y                     y$
 nnoremap #                     : let @/=printf('\<%s\>\C', expand('<cword>'))<CR>
 nnoremap <expr> gm               float2nr(strdisplaywidth(getline('.'))/2+1) . "\<BAR>"
 nnoremap <F5>                  : noh \| redraw!<CR>
-nnoremap <C-b>                 : BufExplorerHorizontalSplit<CR>
-nnoremap <C-l>                 gt
-nnoremap <C-h>                 gT
-nnoremap <C-j>                 7<C-e>
-nnoremap <C-k>                 7<C-y>
+nnoremap <C-B>                 : MBEFocus<CR>
+nnoremap <C-L>                 : bn<CR>
+nnoremap <C-H>                 : bp<CR>
+nnoremap <C-J>                 7<C-e>
+nnoremap <C-K>                 7<C-y>
+""nnoremap <leader>h             gT
+""nnoremap <leader>l             gt
 nnoremap <leader>r             :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q --language-force=C++ .<CR>
 nnoremap <leader>b             : %!xxd<CR>
 nnoremap <leader>bb            : %!xxd -r<CR>
@@ -310,7 +312,6 @@ call vundle#rc()
 " required!
 Bundle 'gmarik/vundle'
 Bundle 'AutoClose'
-Bundle 'bufexplorer.zip'
 Bundle 'ctrlp.vim'
 Bundle 'EasyMotion'
 Bundle 'The-NERD-tree'
@@ -322,6 +323,7 @@ Bundle 'https://github.com/Shougo/neocomplcache.git'
 Bundle 'https://github.com/Stormherz/tablify.git'
 Bundle 'https://github.com/vim-scripts/ZoomWin.git'
 Bundle 'https://github.com/fatih/vim-go.git'
+Bundle 'https://github.com/fholgado/minibufexpl.vim.git'
 
 
 hi SpecialKey ctermfg=238
@@ -333,7 +335,7 @@ set omnifunc=syntaxcomplete#Complete
 """"""""""""""""""""""""""""""
 " winManager setting
 """"""""""""""""""""""""""""""
-let g:winManagerWindowLayout = "BufExplorer,FileExplorer|TagList"
+let g:winManagerWindowLayout = "FileExplorer|TagList"
 let g:winManagerWidth = 30
 let g:defaultExplorer = 0
 nmap <C-W><C-F> :FirstExplorerWindow<cr>
@@ -413,3 +415,6 @@ let g:neocomplcache_force_omni_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\
 " https://github.com/c9s/perlomni.vim
 let g:neocomplcache_force_omni_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
 set completeopt=longest,menu
+
+"minibufexpl"
+let g:miniBufExplMapCTabSwitchBufs = 0
