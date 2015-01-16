@@ -214,8 +214,8 @@ nnoremap <F5>                  : noh \| redraw!<CR>
 nnoremap <C-b>                 : BufExplorerHorizontalSplit<CR>
 nnoremap <C-l>                 gt
 nnoremap <C-h>                 gT
-nnoremap <C-j>                 <C-e>
-nnoremap <C-k>                 <C-y>
+nnoremap <C-j>                 7<C-e>
+nnoremap <C-k>                 7<C-y>
 nnoremap <leader>r             :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q --language-force=C++ .<CR>
 nnoremap <leader>b             : %!xxd<CR>
 nnoremap <leader>bb            : %!xxd -r<CR>
