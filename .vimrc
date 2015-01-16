@@ -400,7 +400,7 @@ set cscopequickfix=s-,c-,d-,i-,t-,e-
 
 "srcexpl"
 " // The switch of the Source Explorer 
-nmap <F8> :SrcExplToggle<CR> 
+nnoremap <leader>se :SrcExplToggle<CR> 
 
 " // Set the height of Source Explorer window 
 let g:SrcExpl_winHeight = 8 
@@ -432,13 +432,13 @@ let g:SrcExpl_isUpdateTags = 0
 
 " // Use 'Exuberant Ctags' with '--sort=foldcase -R .' or '-L cscope.files' to 
 " // create/update the tags file 
-let g:SrcExpl_updateTagsCmd = "ctags --sort=foldcase -R ." 
+""let g:SrcExpl_updateTagsCmd = "ctags -L cscope.files" 
 
 " // Set "<F12>" key for updating the tags file artificially 
-let g:SrcExpl_updateTagsKey = "<F12>" 
+""let g:SrcExpl_updateTagsKey = "<leader>su" 
 
 " // Set "<F3>" key for displaying the previous definition in the jump list 
-let g:SrcExpl_prevDefKey = "<F3>" 
+let g:SrcExpl_prevDefKey = "<leader>sp" 
 
 " // Set "<F4>" key for displaying the next definition in the jump list 
-let g:SrcExpl_nextDefKey = "<F4>" 
+let g:SrcExpl_nextDefKey = "<leader>sn" 
