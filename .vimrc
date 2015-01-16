@@ -45,8 +45,8 @@ set isfname-== isfname-=,
 set listchars=trail:«
 "set list
 set modeline
-"set mouse=a
-"set number numberwidth=4 showbreak=\ \ ->
+set mouse=a
+set number numberwidth=4 showbreak=\ \ ->
 set number numberwidth=4
 set nonumber
 set laststatus=2
@@ -71,7 +71,7 @@ set wildignore=*.swp,*.bak,*.pyc,*~
 set wildmenu
 "代码折叠
 "set foldmethod=indent
-filetype off
+"filetype off
 set t_Co=256
 "打开高亮
 syntax enable
@@ -173,29 +173,6 @@ let g:alternateExtensions_markdown = 'html'
 let g:alternateExtensions_coffee = 'js'
 let g:alternateExtensions_js = 'coffee'
 
-let g:SuperTabMappingBackward = '<C-p>'
-let g:SuperTabMappingForward = '<C-n>'
-let g:SuperTabDefaultCompletionType = '<C-n>'
-let g:SuperTabContextDefaultCompletionType = '<C-n>'
-aug SuperTab
-	au!
-	au FileType *   call BindSuperTab()
-aug END
-fun! BindSuperTab()
-	let g:SuperTabMappingForward = '<C-n>'
-	if index(['css'], &ft)!=-1
-		let tab = '<C-x><C-o>'
-	elseif index(['javascript', 'python', 'text'], &ft)!=-1
-		let tab = 'context'
-	elseif index(['html'], &ft)!=-1
-		let g:SuperTabMappingForward = '<C-random>'  "SPARKUP/SNIPMATE
-		let tab = '<C-p>'
-	else
-		let tab = '<C-n>'
-	endif
-	let g:SuperTabDefaultCompletionType = tab
-endfun
-
 
 let g:neocomplcache_enable_at_startup = 1
 "NERDTree
@@ -222,17 +199,15 @@ nnoremap <leader>r             :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+
 nnoremap <leader>b             : %!xxd<CR>
 nnoremap <leader>bb            : %!xxd -r<CR>
 nnoremap <leader>y             : YRShow<CR>
-nnoremap <leader>w               <C-w>
-nnoremap <leader>h             : wincmd h<CR>
-nnoremap <leader>j             : wincmd j<CR>
-nnoremap <leader>k             : wincmd k<CR>
-nnoremap <leader>l             : wincmd l<CR>
-nnoremap <leader>p             : wincmd p<CR>
+nnoremap <leader>h             <C-W>h
+nnoremap <leader>j             <C-W>j
+nnoremap <leader>k             <C-W>k
+nnoremap <leader>l             <C-W>l
 nnoremap <leader>s             : so $MYVIMRC<CR>
 nnoremap <leader>v             : tabe $MYVIMRC<CR>
 nnoremap <leader>t             : Tlist<CR>
 nnoremap <leader>o             : tabo<CR>
-nnoremap <leader>q             : q<CR>
+nnoremap <leader>q             : Bdelete<CR>
 nnoremap <leader>g             gg=G
 nnoremap <leader>f             : !firefox %<CR>
 nnoremap <leader>z             : setl fdm=indent fdc=1 fdn=1<CR>
@@ -305,25 +280,25 @@ inoremap <C-k>                 <up>
 "===================================================
 " vim 插件管理 
 " git clone http://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
-filetype off        " required!
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 " let Vundle manage Vundle
 " required!
 Bundle 'gmarik/vundle'
 Bundle 'AutoClose'
-Bundle 'ctrlp.vim'
+"Bundle 'ctrlp.vim'
 Bundle 'EasyMotion'
 Bundle 'The-NERD-tree'
 Bundle 'The-NERD-Commenter'
 Bundle 'snipMate'
 Bundle 'winmanager'
-Bundle 'https://github.com/Lokaltog/vim-powerline'
+Bundle 'moll/vim-bbye'
+Bundle 'wesleyche/SrcExpl'
+Bundle 'https://github.com/bling/vim-airline.git'
 Bundle 'https://github.com/Shougo/neocomplcache.git'
 Bundle 'https://github.com/Stormherz/tablify.git'
 Bundle 'https://github.com/vim-scripts/ZoomWin.git'
 Bundle 'https://github.com/fatih/vim-go.git'
-Bundle 'https://github.com/fholgado/minibufexpl.vim.git'
 
 
 hi SpecialKey ctermfg=238
@@ -338,8 +313,6 @@ set omnifunc=syntaxcomplete#Complete
 let g:winManagerWindowLayout = "FileExplorer|TagList"
 let g:winManagerWidth = 30
 let g:defaultExplorer = 0
-nmap <C-W><C-F> :FirstExplorerWindow<cr>
-nmap <C-W><C-B> :BottomExplorerWindow<cr>
 nmap <silent> <leader>wm :WMToggle<cr>
 
 "NERD Tree
@@ -416,5 +389,56 @@ let g:neocomplcache_force_omni_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\
 let g:neocomplcache_force_omni_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
 set completeopt=longest,menu
 
-"minibufexpl"
-let g:miniBufExplMapCTabSwitchBufs = 0
+let g:airline_powerline_fonts = 1
+let g:airline_theme = 'badwolf'
+let g:airline#extensions#tabline#enabled = 1
+
+
+"cscope"
+set cscopequickfix=s-,c-,d-,i-,t-,e-
+
+
+"srcexpl"
+" // The switch of the Source Explorer 
+nmap <F8> :SrcExplToggle<CR> 
+
+" // Set the height of Source Explorer window 
+let g:SrcExpl_winHeight = 8 
+
+" // Set 100 ms for refreshing the Source Explorer 
+let g:SrcExpl_refreshTime = 100 
+
+" // Set "Enter" key to jump into the exact definition context 
+let g:SrcExpl_jumpKey = "<ENTER>" 
+
+" // Set "Space" key for back from the definition context 
+let g:SrcExpl_gobackKey = "<SPACE>" 
+
+" // In order to avoid conflicts, the Source Explorer should know what plugins
+" // except itself are using buffers. And you need add their buffer names into
+" // below listaccording to the command ":buffers!"
+let g:SrcExpl_pluginList = [ 
+        \ "__Tag_List__", 
+        \ "_NERD_tree_" 
+    \ ] 
+
+" // Enable/Disable the local definition searching, and note that this is not 
+" // guaranteed to work, the Source Explorer doesn't check the syntax for now. 
+" // It only searches for a match with the keyword according to command 'gd' 
+let g:SrcExpl_searchLocalDef = 1 
+
+" // Do not let the Source Explorer update the tags file when opening 
+let g:SrcExpl_isUpdateTags = 0 
+
+" // Use 'Exuberant Ctags' with '--sort=foldcase -R .' or '-L cscope.files' to 
+" // create/update the tags file 
+let g:SrcExpl_updateTagsCmd = "ctags --sort=foldcase -R ." 
+
+" // Set "<F12>" key for updating the tags file artificially 
+let g:SrcExpl_updateTagsKey = "<F12>" 
+
+" // Set "<F3>" key for displaying the previous definition in the jump list 
+let g:SrcExpl_prevDefKey = "<F3>" 
+
+" // Set "<F4>" key for displaying the next definition in the jump list 
+let g:SrcExpl_nextDefKey = "<F4>" 
