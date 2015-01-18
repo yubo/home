@@ -112,7 +112,6 @@ endif
 
 filetype plugin indent on
 hi SpecialKey ctermfg=238
-set omnifunc=syntaxcomplete#Complete
 
 "}}}
 
@@ -125,6 +124,7 @@ set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 " let Vundle manage Vundle
 Bundle 'Valloric/YouCompleteMe'
+Bundle 'scrooloose/syntastic'
 Bundle 'gmarik/vundle'
 Bundle 'AutoClose'
 Bundle 'taglist.vim'
@@ -264,55 +264,87 @@ let Tlist_Exit_OnlyWindow = 1
 let tlist_c_settings = 'c;f:My Functions'
 let Tlist_Process_File_Always = 1
 
-" omnicppcomplete{{{
-"Note: This option must set it in .vimrc(_vimrc).  NOT IN .gvimrc(_gvimrc)!
-" Disable AutoComplPop.
-let g:acp_enableAtStartup = 0
-" Use neocomplcache.
-let g:neocomplcache_enable_at_startup = 1
-" Use smartcase.
-let g:neocomplcache_enable_smart_case = 1
-" Set minimum syntax keyword length.
-let g:neocomplcache_min_syntax_length = 3
-let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
 
-" Enable heavy features.
-" Use camel case completion.
-"let g:neocomplcache_enable_camel_case_completion = 1
-" Use underbar completion.
-"let g:neocomplcache_enable_underbar_completion = 1
-
-" <TAB>: completion.
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-" <C-h>, <BS>: close popup and delete backword char.
-inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
-inoremap <expr><C-y>  neocomplcache#close_popup()
-inoremap <expr><C-e>  neocomplcache#cancel_popup()
-" Close popup by <Space>.
-inoremap <expr><Space> pumvisible() ? neocomplcache#close_popup() : "\<Space>"
-
-" AutoComplPop like behavior.
-"let g:neocomplcache_enable_auto_select = 1
-
-" Enable omni completion.
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-
-" Enable heavy omni completion.
-if !exists('g:neocomplcache_force_omni_patterns')
-	let g:neocomplcache_force_omni_patterns = {}
+" YCM{{{
+" youcompleteme  默认tab  s-tab 和自动补全冲突
+" let g:ycm_key_list_select_completion=['<c-n>']
+" let g:ycm_key_list_select_completion = ['<Down>']
+" let g:ycm_key_list_previous_completion=['<c-p>']
+" let g:ycm_key_list_previous_completion = ['<Up>']
+set completeopt=longest,menu	"让Vim的补全菜单行为与一般IDE一致(参考VimTip1228)
+let g:ycm_confirm_extra_conf = 0      "关闭加载.ycm_extra_conf.py提示
+let g:ycm_complete_in_comments = 1    "在注释输入中也能补全
+let g:ycm_complete_in_strings = 1     "在字符串输入中也能补全
+let g:ycm_seed_identifiers_with_syntax = 1                  " 语言关键字补全, 不过python关键字都很短，所以，需要的自己打开
+let g:ycm_min_num_of_chars_for_completion = 2               " 从第2个键入字符就开始罗列匹配项
+let g:ycm_collect_identifiers_from_tags_files = 1           " 开启 YCM 基于标签引擎
+let g:ycm_collect_identifiers_from_comments_and_strings = 1 " 注释和字符串中的文字也会被收入补全
+if !empty(glob("~/.vim/.ycm_extra_conf.py"))
+    let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
 endif
-let g:neocomplcache_force_omni_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
-let g:neocomplcache_force_omni_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
-let g:neocomplcache_force_omni_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+nmap <leader>gd :YcmDiags<CR>
+nnoremap <leader>gh :YcmCompleter GoToDeclaration<CR>           " 跳转到申明处
+nnoremap <leader>gc :YcmCompleter GoToDefinition<CR>            " 跳转到定义处
+nnoremap <leader>g] :YcmCompleter GoToDefinitionElseDeclaration<CR>
+" 直接触发自动补全
+let g:ycm_key_invoke_completion = '<C-Space>'
+" 黑名单,不启用
+let g:ycm_filetype_blacklist = {
+      \ 'tagbar' : 1,
+      \ 'gitcommit' : 1,
+      \}
+" }}}
 
-" For perlomni.vim setting.
-" https://github.com/c9s/perlomni.vim
-let g:neocomplcache_force_omni_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
-set completeopt=longest,menu
+" omnicppcomplete{{{
+""set omnifunc=syntaxcomplete#Complete
+"""Note: This option must set it in .vimrc(_vimrc).  NOT IN .gvimrc(_gvimrc)!
+""" Disable AutoComplPop.
+""let g:acp_enableAtStartup = 0
+""" Use neocomplcache.
+""let g:neocomplcache_enable_at_startup = 1
+""" Use smartcase.
+""let g:neocomplcache_enable_smart_case = 1
+""" Set minimum syntax keyword length.
+""let g:neocomplcache_min_syntax_length = 3
+""let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
+""
+""" Enable heavy features.
+""" Use camel case completion.
+"""let g:neocomplcache_enable_camel_case_completion = 1
+""" Use underbar completion.
+"""let g:neocomplcache_enable_underbar_completion = 1
+""
+""" <TAB>: completion.
+""inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+""" <C-h>, <BS>: close popup and delete backword char.
+""inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
+""inoremap <expr><C-y>  neocomplcache#close_popup()
+""inoremap <expr><C-e>  neocomplcache#cancel_popup()
+""" Close popup by <Space>.
+""inoremap <expr><Space> pumvisible() ? neocomplcache#close_popup() : "\<Space>"
+""
+""" AutoComplPop like behavior.
+"""let g:neocomplcache_enable_auto_select = 1
+""
+""" Enable omni completion.
+""autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+""autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+""autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+""autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+""autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+""
+""" Enable heavy omni completion.
+""if !exists('g:neocomplcache_force_omni_patterns')
+""	let g:neocomplcache_force_omni_patterns = {}
+""endif
+""let g:neocomplcache_force_omni_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
+""let g:neocomplcache_force_omni_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
+""let g:neocomplcache_force_omni_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+""
+""" For perlomni.vim setting.
+""" https://github.com/c9s/perlomni.vim
+""let g:neocomplcache_force_omni_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
+""set completeopt=longest,menu
 " }}}
 
 "cscope"
