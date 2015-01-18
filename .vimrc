@@ -145,7 +145,7 @@ let g:fencview_autodetect=1
 let g:neocomplcache_enable_at_startup = 1
 "NERDTree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
-let NERDTreeIgnore = ['\.pyc', '\.mod\.c', '\.o']
+let NERDTreeIgnore = ['\.pyc', '\.mod\.c', '\.o', '\.ko', '\.a', '\.so']
 "}}}
 
 " mappings {{{
