@@ -8,7 +8,7 @@ if [ -f /etc/bashrc ]; then
 fi
 
 alias vi='vim'
-alias ff='find . | xargs grep -n --color '
+alias ff='find . -type f| xargs grep -n --color '
 alias ffh='find . -name \*.h -type f| xargs grep -n --color '
 alias ffc='find . -name \*.c -o -name \*.cpp -type f| xargs grep -n --color '
 alias grep='grep --color '
