@@ -21,8 +21,7 @@ alias xnm='/root/BcmXiaoQiang/external_toolchain/hndtools-arm-linux-2.6.36-uclib
 alias tmux='tmux -2'
 alias u='ssh -X yubo@u'
 
-if [ `uname` == 'Darwin' ]
-then
+if [ `uname` == 'Darwin' ]; then
     alias ls='ls -GF'
     alias la='ls -GFa'
     alias ll='ls -lGF'

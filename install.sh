@@ -6,8 +6,8 @@ install_file()
 {
 	src=`pwd`"/"$1
 	des="$HOME/$1"
-	if [ -f $des -o -d $des ]; then
-		mv -f $des $des".backup"
+	if [ -e $des ]; then
+		mv -f $des $des".bak"
 	fi
 	rm -f $des
 	ln -s $src $des
@@ -29,6 +29,10 @@ git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
 
 if [ -f src/connect.c ]; then
     gcc -o bin/connect src/connect.c
+fi
+
+if [ ! -e $HOME/go/bin ]; then
+    mkdir -p $HOME/go/bin
 fi
 
 
