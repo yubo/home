@@ -62,3 +62,5 @@ PATH=/home/yubo/xq/bin/brcm4709/sdk_package/toolchain/bin:$PATH
 if [ "x"$TERM == "xxterm" ]; then
 	alias sshx='ssh -X'
 fi
+
+stty -ixon

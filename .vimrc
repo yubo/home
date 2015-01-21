@@ -1,8 +1,4 @@
 " options {{{
-" If `$VIM/vimrc` didn't `set cp`, we don't need to `set nocp` here.
-" Please read the manual!
-" 不显示标签页
-"set showtabline=0
 " tab替换为4空格 %retab! 
 set ts=4
 "set tabstop=4 softtabstop=4 shiftwidth=4 expandtab
@@ -11,16 +7,14 @@ set softtabstop=4
 set shiftwidth=4
 set guifont=Inconsolata\ XL:h17,Inconsolata:h20,Monaco:h17
 set nocompatible
-set nolinebreak nowrap nocursorline
+set nolinebreak nowrap
 set autoindent smartindent
 set autoread
 set backspace=indent,eol,start
-set cedit=<C-x>
-set clipboard=unnamedplus
-"set colorcolumn=100
+set clipboard=unnamed
 set completefunc=
-"set cryptmethod=blowfish
-"set dictionary=/usr/lib/firefox/dictionaries/en_US.dic
+set nocursorcolumn cursorline
+
 " 中文支持
 set fencs=utf-8,chinese,latin1 fenc=utf-8 enc=utf-8
 set fileencodings=utf-8,gb2312,gbk,gb18030
@@ -29,7 +23,6 @@ set fileformats=unix
 set encoding=utf-8
 set scrolloff=3
 set fenc=utf-8
-"set foldnestmax=2
 set formatoptions=mnoqt
 " gVim will load `$VIM/vimrc` before loading `~/.vimrc`,
 " add `finish` at the beginning of `$VIM/vimrc` to hide `Menu`,
@@ -53,7 +46,6 @@ set laststatus=2
 
 set path=.,/usr/local/include/*,/usr/include/**1
 set ruler
-set selectmode=key keymodel=startsel
 set showcmd
 set showmatch matchpairs+=<:> matchtime=2
 set sidescroll=1 sidescrolloff=1
@@ -90,15 +82,10 @@ set modelines=0
 set autoindent
 set hidden
 "设置光标高亮显示
-"set cursorline
-"set cursorcolumn
 set ttyfast
-"相对行号 要想相对行号起作用要放在显示行号后面
-"set relativenumber
 "显示行号
 "set number
 "无限undo
-"7.3功能
 " Enable modelines only on secure vim versions
 if (v:version >= 703)
 	"    set undofile
@@ -117,7 +104,6 @@ set ignorecase
 set smartcase
 "set gdefault
 set incsearch
-set showmatch
 set hlsearch
 "行号自动跳转
 if has("autocmd")
@@ -128,51 +114,7 @@ endif
 
 
 " plugins {{{
-"call pathogen#infect()
 let g:fencview_autodetect=1
-
-"支持单行和多行的选择，//格式
-""let g:Powerline_symbols = 'unicode'
-let g:Powerline_symbols = 'fancy'
-""source ~/.vim/bundle/powerline/powerline/bindings/vim/source_plugin.vim
-
-let g:Powerline_cache_enabled = 1
-let g:showmarks_enable = 0
-let g:showmarks_include = "abcdefghijklmnopqrstuvwxyz".
-			\ "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-let g:showmarks_textlower = " "
-let g:showmarks_textupper = " "
-let g:showmarks_textother = " "
-let g:showmarks_hlline_lower = 1
-let g:showmarks_hlline_upper = 1
-let g:showmarks_hlline_other = 1
-
-let g:ctrlp_dotfiles = 0
-let g:ctrlp_max_depth = 30
-let g:ctrlp_max_height = 25
-let g:ctrlp_use_caching = 1
-let g:ctrlp_clear_cache_on_exit = 0
-let g:ctrlp_prompt_mappings = { 'MarkToOpen()': ['<C-z>', '<C-space', '<C-@>'] }
-let g:ctrlp_custom_ignore = {
-			\ 'dir':  '\.git$\|\.hg$\|\.svn$',
-			\ 'file': '\.pdf$\|\.epub$\|\.mobi$\|\.djvu$\|\.chm$\|'.
-			\ '\.mp[34]$\|\.og[gva]$\|\.flv$\|\.avi$\|\.mov$\|\.swf$\|'.
-			\ '\.jpe\?g$\|\.png$\|\.gif$\|'.
-			\ '\.zip$\|\.bz2$\|\.gz$\|\.tar$\|\.7z$\|\.rar$',
-			\ 'link': 'SOME_BAD_SYMBOLIC_LINKS',
-			\}
-"cnoremap <C-o>     :CtrlPMRUFiles<CR>
-"cnoremap <C-@>     :CtrlPMRUFiles<CR>
-
-let g:solarized_menu = 0
-
-
-let g:alternateExtensions_html = 'md,markdown'
-let g:alternateExtensions_md = 'html'
-let g:alternateExtensions_markdown = 'html'
-let g:alternateExtensions_coffee = 'js'
-let g:alternateExtensions_js = 'coffee'
-
 
 let g:neocomplcache_enable_at_startup = 1
 "NERDTree
@@ -261,16 +203,6 @@ vnoremap <tab>                 %
 inoremap <C-j>                 <down>
 inoremap <C-k>                 <up>
 
-"use c-b c-f"
-"inoremap <C-l>                 <right>  
-"inoremap <C-h>                 <left>
-
-"nmap <leader>fj               :set ft=javascript<CR>
-"nmap <leader>fc               :set ft=css<CR>
-"nmap <leader>fx               :set ft=xml<CR>
-"nmap <leader>fm               :set ft=mako<CR>
-
-
 "}}}
 
 
@@ -296,7 +228,6 @@ au FileType go nmap <Leader>e <Plug>(go-rename)
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 " let Vundle manage Vundle
-" required!
 Bundle 'gmarik/vundle'
 Bundle 'AutoClose'
 "Bundle 'ctrlp.vim'
@@ -314,10 +245,8 @@ Bundle 'https://github.com/vim-scripts/ZoomWin.git'
 Bundle 'https://github.com/fatih/vim-go.git'
 
 
-hi SpecialKey ctermfg=238
-let Tlist_Show_One_File=1
-let Tlist_Exit_OnlyWindow=1
 filetype plugin indent on
+hi SpecialKey ctermfg=238
 set omnifunc=syntaxcomplete#Complete
 
 """"""""""""""""""""""""""""""
@@ -335,7 +264,9 @@ let NERDTreeWinPos='right'
 "Taglist"
 let Tlist_Show_One_File = 1 " Displaying tags for only one file~
 let Tlist_Exit_OnlyWindow = 1 " if you are the last, kill yourself
-let Tlist_Use_SingleClick = 1 "to a tag on single mouse cliek"
+let Tlist_Use_SingleClick = 0 "to a tag on single mouse cliek"
+let Tlist_Exit_OnlyWindow = 1 
+let Tlist_Process_File_Always = 1
 
 "omnicppcomplete"
 "Note: This option must set it in .vimrc(_vimrc).  NOT IN .gvimrc(_gvimrc)!
@@ -362,26 +293,10 @@ inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
 inoremap <expr><C-y>  neocomplcache#close_popup()
 inoremap <expr><C-e>  neocomplcache#cancel_popup()
 " Close popup by <Space>.
-"inoremap <expr><Space> pumvisible() ? neocomplcache#close_popup() : "\<Space>"
-
-" For cursor moving in insert mode(Not recommended)
-"inoremap <expr><Left>  neocomplcache#close_popup() . "\<Left>"
-"inoremap <expr><Right> neocomplcache#close_popup() . "\<Right>"
-"inoremap <expr><Up>    neocomplcache#close_popup() . "\<Up>"
-"inoremap <expr><Down>  neocomplcache#close_popup() . "\<Down>"
-" Or set this.
-"let g:neocomplcache_enable_cursor_hold_i = 1
-" Or set this.
-"let g:neocomplcache_enable_insert_char_pre = 1
+inoremap <expr><Space> pumvisible() ? neocomplcache#close_popup() : "\<Space>"
 
 " AutoComplPop like behavior.
 "let g:neocomplcache_enable_auto_select = 1
-
-" Shell like behavior(not recommended).
-"set completeopt+=longest
-"let g:neocomplcache_enable_auto_select = 1
-"let g:neocomplcache_disable_auto_complete = 1
-"inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
 
 " Enable omni completion.
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
@@ -444,13 +359,13 @@ let g:SrcExpl_isUpdateTags = 0
 ""let g:SrcExpl_updateTagsCmd = "ctags -L cscope.files" 
 
 " // Set "<F12>" key for updating the tags file artificially 
-""let g:SrcExpl_updateTagsKey = "<leader>su" 
+let g:SrcExpl_updateTagsKey = "<F12>" 
 
 " // Set "<F3>" key for displaying the previous definition in the jump list 
-let g:SrcExpl_prevDefKey = "<leader>sp" 
+let g:SrcExpl_prevDefKey = "<F3>" 
 
 " // Set "<F4>" key for displaying the next definition in the jump list 
-let g:SrcExpl_nextDefKey = "<leader>sn" 
+let g:SrcExpl_nextDefKey = "<F4>" 
 
 
 " vim-airline {{{
@@ -478,7 +393,6 @@ let g:airline#extensions#default#layout = [
   \ [ 'a', 'b', 'c' ],
   \ [ 'x', 'y', 'z' ]
   \ ]
-let g:airline_section_b = '%{getcwd()}'
 let g:airline_section_c = '%t'
 let g:airline_section_x = '%{strlen(&ft) ? &ft : "Noft"}%{&bomb ? " BOM" : ""}'
 let g:airline_section_y = '%{&fileformat} %{(&fenc == "" ? &enc : &fenc)}'
