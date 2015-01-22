@@ -403,11 +403,6 @@ let g:neocomplcache_force_omni_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\
 let g:neocomplcache_force_omni_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
 set completeopt=longest,menu
 
-let g:airline_powerline_fonts = 1
-let g:airline_theme = 'badwolf'
-let g:airline#extensions#tabline#enabled = 1
-
-
 "cscope"
 set cscopequickfix=s-,c-,d-,i-,t-,e-
 
@@ -456,3 +451,36 @@ let g:SrcExpl_prevDefKey = "<leader>sp"
 
 " // Set "<F4>" key for displaying the next definition in the jump list 
 let g:SrcExpl_nextDefKey = "<leader>sn" 
+
+
+" vim-airline {{{
+let g:airline_theme='badwolf'
+let g:airline_powerline_fonts=0
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_left_sep=''
+let g:airline_right_sep=''
+
+" or copy paste the following into your vimrc for shortform text
+let g:airline_mode_map = {
+    \ '__' : '-',
+    \ 'n'  : 'N',
+    \ 'i'  : 'I',
+    \ 'R'  : 'R',
+    \ 'c'  : 'C',
+    \ 'v'  : 'V',
+    \ 'V'  : 'V',
+    \ '' : 'V',
+    \ 's'  : 'S',
+    \ 'S'  : 'S',
+    \ '' : 'S',
+    \ }
+let g:airline#extensions#default#layout = [
+  \ [ 'a', 'b', 'c' ],
+  \ [ 'x', 'y', 'z' ]
+  \ ]
+let g:airline_section_b = '%{getcwd()}'
+let g:airline_section_c = '%t'
+let g:airline_section_x = '%{strlen(&ft) ? &ft : "Noft"}%{&bomb ? " BOM" : ""}'
+let g:airline_section_y = '%{&fileformat} %{(&fenc == "" ? &enc : &fenc)}'
+let g:airline_section_z = '%2l:%-1v/%L'
+" }}}
