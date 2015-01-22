@@ -335,6 +335,7 @@ let NERDTreeWinPos='right'
 "Taglist"
 let Tlist_Show_One_File = 1 " Displaying tags for only one file~
 let Tlist_Exit_OnlyWindow = 1 " if you are the last, kill yourself
+let Tlist_Use_SingleClick = 1 "to a tag on single mouse cliek"
 
 "omnicppcomplete"
 "Note: This option must set it in .vimrc(_vimrc).  NOT IN .gvimrc(_gvimrc)!
