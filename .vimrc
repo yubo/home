@@ -137,7 +137,7 @@ nnoremap <C-J>                 7<C-e>
 nnoremap <C-K>                 7<C-y>
 ""nnoremap <leader>h             gT
 ""nnoremap <leader>l             gt
-nnoremap <leader>r             :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q --language-force=C++ .<CR>
+nnoremap <leader>r             :!ctags -R --fields=+iaS --extra=+q .<CR>
 nnoremap <leader>b             : %!xxd<CR>
 nnoremap <leader>bb            : %!xxd -r<CR>
 nnoremap <leader>y             : YRShow<CR>
@@ -230,7 +230,7 @@ call vundle#rc()
 " let Vundle manage Vundle
 Bundle 'gmarik/vundle'
 Bundle 'AutoClose'
-"Bundle 'ctrlp.vim'
+Bundle 'taglist.vim'
 Bundle 'EasyMotion'
 Bundle 'The-NERD-tree'
 Bundle 'The-NERD-Commenter'
@@ -264,8 +264,9 @@ let NERDTreeWinPos='right'
 "Taglist"
 let Tlist_Show_One_File = 1 " Displaying tags for only one file~
 let Tlist_Exit_OnlyWindow = 1 " if you are the last, kill yourself
-let Tlist_Use_SingleClick = 0 "to a tag on single mouse cliek"
+let Tlist_Use_SingleClick = 1 "to a tag on single mouse cliek"
 let Tlist_Exit_OnlyWindow = 1 
+let tlist_c_settings = 'c;f:My Functions'
 let Tlist_Process_File_Always = 1
 
 "omnicppcomplete"
