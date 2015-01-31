@@ -81,8 +81,9 @@ endif
 set modelines=0
 set autoindent
 set hidden
-"设置光标高亮显示
 set ttyfast
+set ttymouse=xterm
+set scroll=11
 "显示行号
 "set number
 "无限undo
@@ -95,11 +96,9 @@ endif
 set wrap
 "禁止自动换行
 "set nowrap
-"自动载入配置文件不需要重启
-"autocmd! bufwritepost _vimrc source %
 "将-连接符也设置为单词
 set isk+=-
-"设置大小写敏感和聪明感知(小写全搜，大写完全匹配)
+"设置大小写敏感
 set ignorecase
 set smartcase
 "set gdefault
@@ -110,18 +109,43 @@ if has("autocmd")
 	au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
 				\| exe "normal! g'\"" | endif
 endif
+
+filetype plugin indent on
+hi SpecialKey ctermfg=238
+set omnifunc=syntaxcomplete#Complete
+
 "}}}
 
 
 " plugins {{{
+"===================================================
+" vim 插件管理 
+" git clone http://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+" let Vundle manage Vundle
+Bundle 'gmarik/vundle'
+Bundle 'AutoClose'
+Bundle 'taglist.vim'
+Bundle 'EasyMotion'
+Bundle 'The-NERD-tree'
+Bundle 'The-NERD-Commenter'
+Bundle 'snipMate'
+Bundle 'winmanager'
+Bundle 'moll/vim-bbye'
+Bundle 'wesleyche/SrcExpl'
+Bundle 'https://github.com/bling/vim-airline.git'
+Bundle 'https://github.com/Shougo/neocomplcache.git'
+Bundle 'https://github.com/Stormherz/tablify.git'
+Bundle 'https://github.com/vim-scripts/ZoomWin.git'
+Bundle 'https://github.com/fatih/vim-go.git'
+
 let g:fencview_autodetect=1
 
 let g:neocomplcache_enable_at_startup = 1
 "NERDTree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 "}}}
-
-
 
 " mappings {{{
 let mapleader = ','
@@ -203,9 +227,6 @@ vnoremap <tab>                 %
 inoremap <C-j>                 <down>
 inoremap <C-k>                 <up>
 
-"}}}
-
-
 "for golang"
 au FileType go nmap <Leader>s <Plug>(go-implements)
 au FileType go nmap <Leader>i <Plug>(go-info)
@@ -221,33 +242,6 @@ au FileType go nmap <Leader>dv <Plug>(go-def-vertical)
 au FileType go nmap <Leader>dt <Plug>(go-def-tab)
 au FileType go nmap <Leader>e <Plug>(go-rename)
 
-
-"===================================================
-" vim 插件管理 
-" git clone http://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
-" let Vundle manage Vundle
-Bundle 'gmarik/vundle'
-Bundle 'AutoClose'
-Bundle 'taglist.vim'
-Bundle 'EasyMotion'
-Bundle 'The-NERD-tree'
-Bundle 'The-NERD-Commenter'
-Bundle 'snipMate'
-Bundle 'winmanager'
-Bundle 'moll/vim-bbye'
-Bundle 'wesleyche/SrcExpl'
-Bundle 'https://github.com/bling/vim-airline.git'
-Bundle 'https://github.com/Shougo/neocomplcache.git'
-Bundle 'https://github.com/Stormherz/tablify.git'
-Bundle 'https://github.com/vim-scripts/ZoomWin.git'
-Bundle 'https://github.com/fatih/vim-go.git'
-
-
-filetype plugin indent on
-hi SpecialKey ctermfg=238
-set omnifunc=syntaxcomplete#Complete
 
 """"""""""""""""""""""""""""""
 " winManager setting
@@ -269,7 +263,7 @@ let Tlist_Exit_OnlyWindow = 1
 let tlist_c_settings = 'c;f:My Functions'
 let Tlist_Process_File_Always = 1
 
-"omnicppcomplete"
+" omnicppcomplete{{{
 "Note: This option must set it in .vimrc(_vimrc).  NOT IN .gvimrc(_gvimrc)!
 " Disable AutoComplPop.
 let g:acp_enableAtStartup = 0
@@ -318,12 +312,13 @@ let g:neocomplcache_force_omni_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\
 " https://github.com/c9s/perlomni.vim
 let g:neocomplcache_force_omni_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
 set completeopt=longest,menu
+" }}}
 
 "cscope"
 set cscopequickfix=s-,c-,d-,i-,t-,e-
 
 
-"srcexpl"
+" srcexpl {{{
 " // The switch of the Source Explorer 
 nnoremap <leader>se :SrcExplToggle<CR> 
 
@@ -367,7 +362,7 @@ let g:SrcExpl_prevDefKey = "<F3>"
 
 " // Set "<F4>" key for displaying the next definition in the jump list 
 let g:SrcExpl_nextDefKey = "<F4>" 
-
+" }}}
 
 " vim-airline {{{
 let g:airline_theme='badwolf'
