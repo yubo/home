@@ -124,6 +124,7 @@ set omnifunc=syntaxcomplete#Complete
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 " let Vundle manage Vundle
+Bundle 'Valloric/YouCompleteMe'
 Bundle 'gmarik/vundle'
 Bundle 'AutoClose'
 Bundle 'taglist.vim'
@@ -135,7 +136,7 @@ Bundle 'winmanager'
 Bundle 'moll/vim-bbye'
 Bundle 'wesleyche/SrcExpl'
 Bundle 'https://github.com/bling/vim-airline.git'
-Bundle 'https://github.com/Shougo/neocomplcache.git'
+"Bundle 'https://github.com/Shougo/neocomplcache.git'
 Bundle 'https://github.com/Stormherz/tablify.git'
 Bundle 'https://github.com/vim-scripts/ZoomWin.git'
 Bundle 'https://github.com/fatih/vim-go.git'
