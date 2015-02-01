@@ -124,7 +124,6 @@ set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 " let Vundle manage Vundle
 Bundle 'Valloric/YouCompleteMe'
-Bundle 'scrooloose/syntastic'
 Bundle 'gmarik/vundle'
 Bundle 'AutoClose'
 Bundle 'taglist.vim'
@@ -272,8 +271,6 @@ let Tlist_Process_File_Always = 1
 " let g:ycm_key_list_previous_completion=['<c-p>']
 " let g:ycm_key_list_previous_completion = ['<Up>']
 set completeopt=longest,menu	"让Vim的补全菜单行为与一般IDE一致(参考VimTip1228)
-let g:syntastic_c_checkers = ['YouCompleteMe']
-let g:syntastic_c_checkers_header = 1
 let g:ycm_confirm_extra_conf = 0      "关闭加载.ycm_extra_conf.py提示
 let g:ycm_complete_in_comments = 1    "在注释输入中也能补全
 let g:ycm_complete_in_strings = 1     "在字符串输入中也能补全
@@ -281,7 +278,9 @@ let g:ycm_seed_identifiers_with_syntax = 1                  " 语言关键字补
 let g:ycm_min_num_of_chars_for_completion = 2               " 从第2个键入字符就开始罗列匹配项
 let g:ycm_collect_identifiers_from_tags_files = 1           " 开启 YCM 基于标签引擎
 let g:ycm_collect_identifiers_from_comments_and_strings = 1 " 注释和字符串中的文字也会被收入补全
-let g:ycm_add_preview_to_completeopt = 1
+let g:ycm_warning_symbol = '>>'
+let g:ycm_error_symbol = '->'
+"let g:ycm_add_preview_to_completeopt = 1
 if !empty(glob("~/.vim/.ycm_extra_conf.py"))
     let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
 endif
