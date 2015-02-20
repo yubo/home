@@ -1,0 +1,6 @@
+#!/bin/sh
+#touch -t "201207010000" dfile
+#find . ! -newer dfile
+if [ -e ./dfile ]; then
+	find .  -newer dfile -type f  ! \( -name "*.o"  -o -name "*.ko" \)
+fi
