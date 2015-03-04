@@ -57,7 +57,7 @@ fi
 
 alias si='wine ~/.wine/drive_c/Program\ Files\ \(x86\)/Source\ Insight\ 3/Insight3.exe'
 
-PATH=/home/yubo/xq/bin/brcm4709/sdk_package/toolchain/bin:$PATH
+PATH=~/Android/Sdk/tools:~/Android/android-ndk-r10d:~/Android/Sdk/platform-tools:~/xq/bin/brcm4709/sdk_package/toolchain/bin:$PATH
 
 if [ "x"$TERM == "xxterm" ]; then
 	alias sshx='ssh -X'

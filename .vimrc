@@ -145,7 +145,7 @@ let g:fencview_autodetect=1
 let g:neocomplcache_enable_at_startup = 1
 "NERDTree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
-let NERDTreeIgnore = ['\.pyc', '\.mod\.c', '\.o', '\.ko', '\.a', '\.so']
+let NERDTreeIgnore = ['\.pyc', '\.mod\.c', '\.o', '\.ko', '\.a', '\.so', 'CMakeFiles', '\.cmake', 'CMakeCache.txt']
 "}}}
 
 " mappings {{{
@@ -187,7 +187,7 @@ nnoremap <leader>nn            : set nonumber<CR>
 " diff "
 nnoremap <leader>u             :diffupdate<CR>
 " insert mode
-inoremap <leader>co            YUBO<yubo@yubo.org>
+inoremap <leader>co            Yu Bo<yubo@yubo.org> <C-r>=strftime('%Y-%m-%d')<CR>
 inoremap <expr> <leader>fn     expand('%:p')
 inoremap <leader>dt            <C-r>=strftime('%Y-%m-%d')<CR>
 inoremap <leader>tm            <C-r>=strftime('%H:%M:%S')<CR>

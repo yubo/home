@@ -3,3 +3,4 @@ bin
 *.swp
 .vim/.netrwhist
 .DS_Store
+*.pyc
