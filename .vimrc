@@ -13,7 +13,7 @@ set autoread
 set backspace=indent,eol,start
 set clipboard=unnamed
 set completefunc=
-set nocursorcolumn cursorline
+set cursorcolumn cursorline
 
 " 中文支持
 set fencs=utf-8,chinese,latin1 fenc=utf-8 enc=utf-8

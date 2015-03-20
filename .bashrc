@@ -59,6 +59,10 @@ alias si='wine ~/.wine/drive_c/Program\ Files\ \(x86\)/Source\ Insight\ 3/Insigh
 
 PATH=~/Android/Sdk/tools:~/Android/android-ndk-r10d:~/Android/Sdk/platform-tools:~/xq/bin/brcm4709/sdk_package/toolchain/bin:$PATH
 
+if [ -e /opt/android/android-studio/bin/studio.sh ]; then
+	PATH=/opt/android/android-studio/bin:$PATH
+fi
+
 if [ "x"$TERM == "xxterm" ]; then
 	alias sshx='ssh -X'
 fi
