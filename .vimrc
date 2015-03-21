@@ -138,6 +138,8 @@ Bundle 'https://github.com/bling/vim-airline.git'
 "Bundle 'https://github.com/Shougo/neocomplcache.git'
 Bundle 'https://github.com/Stormherz/tablify.git'
 Bundle 'https://github.com/vim-scripts/ZoomWin.git'
+"Bundle 'https://github.com/vim-scripts/cscope.vim'
+Bundle 'https://github.com/vim-scripts/gtags.vim.git'
 Bundle 'https://github.com/fatih/vim-go.git'
 
 let g:fencview_autodetect=1
@@ -152,16 +154,18 @@ let NERDTreeIgnore = ['\.pyc', '\.mod\.c', '\.o', '\.ko', '\.a', '\.so', 'CMakeF
 let mapleader = ','
 " normal mode
 nnoremap Y                     y$
-nnoremap #                     : let @/=printf('\<%s\>\C', expand('<cword>'))<CR>
-nnoremap <expr> gm               float2nr(strdisplaywidth(getline('.'))/2+1) . "\<BAR>"
-nnoremap <F5>                  : noh \| redraw!<CR>
-nnoremap <C-B>                 : MBEFocus<CR>
-nnoremap <C-L>                 : bn<CR>
-nnoremap <C-H>                 : bp<CR>
+nnoremap #                     :let @/=printf('\<%s\>\C', expand('<cword>'))<CR>
+nnoremap <C-L>                 :bn<CR>
+nnoremap <C-H>                 :bp<CR>
+nnoremap <C-N>                 :cn<CR>
+nnoremap <C-P>                 :cp<CR>
 nnoremap <C-J>                 7<C-e>
 nnoremap <C-K>                 7<C-y>
-""nnoremap <leader>h             gT
-""nnoremap <leader>l             gt
+nnoremap <C-[>                 :Gtags<CR><CR>
+nnoremap <C-R>                 :Gtags -r<CR><CR>
+nnoremap <C-F>                 :Gtags -gi<CR>
+"nnoremap <leader>h             gT
+"nnoremap <leader>l             gt
 nnoremap <leader>r             :!ctags -R --fields=+iaS --extra=+q .<CR>
 nnoremap <leader>b             : %!xxd<CR>
 nnoremap <leader>bb            : %!xxd -r<CR>
@@ -186,6 +190,8 @@ nnoremap <silent><leader>n     : set number<CR>
 nnoremap <leader>nn            : set nonumber<CR>
 " diff "
 nnoremap <leader>u             :diffupdate<CR>
+nnoremap <silent> <leader>wm   :WMToggle<cr>
+
 " insert mode
 inoremap <leader>co            Yu Bo<yubo@yubo.org> <C-r>=strftime('%Y-%m-%d')<CR>
 inoremap <expr> <leader>fn     expand('%:p')
@@ -201,6 +207,10 @@ inoremap <C-f>                 <right>
 "inoremap <A-f>                 <S-right>
 inoremap <C-d>                 <del>
 inoremap <A-d>                 <C-o>dw
+"文件类型切换
+inoremap <C-j>                 <down>
+inoremap <C-k>                 <up>
+
 " command mode
 cnoremap <C-a>                 <home>
 cnoremap <C-e>                 <end>
@@ -212,6 +222,7 @@ cnoremap <C-f>                 <right>
 cnoremap <C-d>                 <delete>
 cnoremap <C-p>                 <up>
 cnoremap <C-n>                 <down>
+
 " visual mode
 vnoremap <C-m>                 !markdown<CR>
 vnoremap <C-p>                 !pandoc<CR>
@@ -224,9 +235,6 @@ cnoreabb <expr> W              getcmdtype()==':'&&getcmdline()=~#'^W'?'w':'W'
 nnoremap <tab>                 %
 vnoremap <tab>                 %
 
-"文件类型切换
-inoremap <C-j>                 <down>
-inoremap <C-k>                 <up>
 
 "for golang"
 au FileType go nmap <Leader>s <Plug>(go-implements)
@@ -250,7 +258,6 @@ au FileType go nmap <Leader>e <Plug>(go-rename)
 let g:winManagerWindowLayout = "FileExplorer|TagList"
 let g:winManagerWidth = 30
 let g:defaultExplorer = 0
-nmap <silent> <leader>wm :WMToggle<cr>
 
 "NERD Tree
 let NERDChristmasTree=1
@@ -353,6 +360,8 @@ let g:ycm_filetype_blacklist = {
 "cscope"
 set cscopequickfix=s-,c-,d-,i-,t-,e-
 
+"gtags"
+let Gtags_OpenQuickfixWindow = 0
 
 " srcexpl {{{
 " // The switch of the Source Explorer 
