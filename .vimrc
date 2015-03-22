@@ -161,11 +161,13 @@ nnoremap <C-N>                 :cn<CR>
 nnoremap <C-P>                 :cp<CR>
 nnoremap <C-J>                 7<C-e>
 nnoremap <C-K>                 7<C-y>
-nnoremap <C-[>                 :Gtags<CR><CR>
+nnoremap <C-]>                 :Gtags<CR><CR>
 nnoremap <C-R>                 :Gtags -r<CR><CR>
 nnoremap <C-F>                 :Gtags -gi<CR>
 "nnoremap <leader>h             gT
 "nnoremap <leader>l             gt
+nnoremap <leader>c             :cclose<CR>
+nnoremap <leader>o             :copen<CR>
 nnoremap <leader>r             :!ctags -R --fields=+iaS --extra=+q .<CR>
 nnoremap <leader>b             : %!xxd<CR>
 nnoremap <leader>bb            : %!xxd -r<CR>
@@ -177,7 +179,6 @@ nnoremap <leader>l             <C-W>l
 nnoremap <leader>s             : so $MYVIMRC<CR>
 nnoremap <leader>v             : tabe $MYVIMRC<CR>
 nnoremap <leader>t             : Tlist<CR>
-nnoremap <leader>o             : tabo<CR>
 nnoremap <leader>q             : Bdelete<CR>
 nnoremap <leader>g=             gg=G
 nnoremap <leader>f             : !firefox %<CR>
