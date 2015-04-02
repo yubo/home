@@ -168,7 +168,7 @@ nnoremap <C-F>                 :Gtags -gi<CR>
 "nnoremap <leader>l             gt
 nnoremap <leader>c             :cclose<CR>
 nnoremap <leader>o             :copen<CR>
-nnoremap <leader>r             :!ctags -R --fields=+iaS --extra=+q .<CR>
+nnoremap <leader>r             :!gtags<CR>
 nnoremap <leader>b             : %!xxd<CR>
 nnoremap <leader>bb            : %!xxd -r<CR>
 nnoremap <leader>y             : YRShow<CR>
@@ -238,6 +238,8 @@ vnoremap <tab>                 %
 
 
 "for golang"
+syntax on
+au BufRead,BufNewFile *.go set filetype=go
 au FileType go nmap <Leader>s <Plug>(go-implements)
 au FileType go nmap <Leader>i <Plug>(go-info)
 au FileType go nmap <Leader>gd <Plug>(go-doc)
@@ -245,7 +247,7 @@ au FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
 au FileType go nmap <Leader>gb <Plug>(go-doc-browser)
 au FileType go nmap <leader>r <Plug>(go-run)
 au FileType go nmap <leader>b <Plug>(go-build)
-au FileType go nmap <leader>t <Plug>(go-test)
+""au FileType go nmap <leader>t <Plug>(go-test)
 au FileType go nmap <leader>c <Plug>(go-coverage)
 au FileType go nmap <Leader>ds <Plug>(go-def-split)
 au FileType go nmap <Leader>dv <Plug>(go-def-vertical)
@@ -262,7 +264,7 @@ let g:defaultExplorer = 0
 
 "NERD Tree
 let NERDChristmasTree=1
-let NERDTreeWinPos='right'
+let NERDTreeWinPos='left'
 
 "Taglist"
 let Tlist_Show_One_File = 1 " Displaying tags for only one file~
@@ -271,6 +273,7 @@ let Tlist_Use_SingleClick = 1 "to a tag on single mouse cliek"
 let Tlist_Exit_OnlyWindow = 1 
 let tlist_c_settings = 'c;f:My Functions'
 let Tlist_Process_File_Always = 1
+let Tlist_Use_Right_Window = 1
 
 
 " YCM{{{

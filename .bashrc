@@ -39,8 +39,9 @@ if [ -f $HOME/.rbenv/bin/rbenv ]; then
 fi
 
 if [ -e $HOME/go ]; then
-	export GOPATH=$HOME/go
-	export PATH=$PATH:$GOPATH/bin
+	export GOPATH=$HOME/gopath
+	export GOROOT=$HOME/go
+	export PATH=$GOROOT/bin:$PATH
 fi
 
 function parse_git_branch {
