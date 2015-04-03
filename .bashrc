@@ -44,6 +44,11 @@ if [ -e $HOME/go ]; then
 	export PATH=$GOROOT/bin:$PATH
 fi
 
+if [ -e $HOME/local ]; then
+	export CFLAGS=-I$HOME/local/include
+	export LDFLAGS=-L$HOME/local/lib
+fi
+
 function parse_git_branch {
     git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/[\1]/"
 }
