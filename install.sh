@@ -35,5 +35,4 @@ if [ ! -e $HOME/go/bin ]; then
     mkdir -p $HOME/go/bin
 fi
 
-
-
+source ~/.bashrc

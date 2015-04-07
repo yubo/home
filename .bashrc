@@ -68,4 +68,4 @@ if [ "x"$TERM == "xxterm" ]; then
 	alias sshx='ssh -X'
 fi
 
-stty -ixon
+#stty -ixon
