@@ -141,6 +141,10 @@ Bundle 'https://github.com/vim-scripts/ZoomWin.git'
 "Bundle 'https://github.com/vim-scripts/cscope.vim'
 Bundle 'https://github.com/vim-scripts/gtags.vim.git'
 Bundle 'https://github.com/fatih/vim-go.git'
+Bundle 'dgryski/vim-godef'
+"go get -v code.google.com/p/rog-go/exp/cmd/godef"
+Bundle 'majutsushi/tagbar'
+""Bundle 'cespare/vim-golang'
 
 let g:fencview_autodetect=1
 
@@ -155,6 +159,7 @@ let mapleader = ','
 " normal mode
 nnoremap Y                     y$
 nnoremap #                     :let @/=printf('\<%s\>\C', expand('<cword>'))<CR>
+nnoremap @                     :execute "vimgrep /" . expand("<cword>") . "/ **/*.go"<CR>
 nnoremap <C-L>                 :bn<CR>
 nnoremap <C-H>                 :bp<CR>
 nnoremap <C-N>                 :cn<CR>
@@ -179,6 +184,7 @@ nnoremap <leader>l             <C-W>l
 nnoremap <leader>s             : so $MYVIMRC<CR>
 nnoremap <leader>v             : tabe $MYVIMRC<CR>
 nnoremap <leader>t             : Tlist<CR>
+nnoremap <leader>T             : TagbarToggle<CR>
 nnoremap <leader>q             : Bdelete<CR>
 nnoremap <leader>g=             gg=G
 nnoremap <leader>f             : !firefox %<CR>
@@ -188,6 +194,7 @@ nnoremap <leader>p             : set paste<CR>
 nnoremap <leader>pp            : set nopaste<CR>
 nnoremap <silent><leader><space>       : NERDTreeToggle<CR>
 nnoremap <silent><leader>n     : set number<CR>
+nnoremap <silent><leader>N     : set nonumber<CR>
 nnoremap <leader>nn            : set nonumber<CR>
 " diff "
 nnoremap <leader>u             :diffupdate<CR>
@@ -239,6 +246,13 @@ vnoremap <tab>                 %
 
 "for golang"
 syntax on
+let g:go_fmt_command = "goimports"
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_build_constraints = 1
+let g:godef_split=2
 au BufRead,BufNewFile *.go set filetype=go
 au FileType go nmap <Leader>s <Plug>(go-implements)
 au FileType go nmap <Leader>i <Plug>(go-info)

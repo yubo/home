@@ -41,7 +41,7 @@ fi
 if [ -e $HOME/go ]; then
 	export GOPATH=$HOME/gopath
 	export GOROOT=$HOME/go
-	export PATH=$GOROOT/bin:$PATH
+	export PATH=$GOROOT/bin:$GOPATH/bin:$PATH
 fi
 
 function parse_git_branch {
@@ -68,4 +68,4 @@ if [ "x"$TERM == "xxterm" ]; then
 	alias sshx='ssh -X'
 fi
 
-#stty -ixon
+stty -ixon
