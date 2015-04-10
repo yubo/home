@@ -141,7 +141,7 @@ Bundle 'https://github.com/vim-scripts/ZoomWin.git'
 "Bundle 'https://github.com/vim-scripts/cscope.vim'
 Bundle 'https://github.com/vim-scripts/gtags.vim.git'
 Bundle 'https://github.com/fatih/vim-go.git'
-Bundle 'dgryski/vim-godef'
+"Bundle 'dgryski/vim-godef'
 "go get -v code.google.com/p/rog-go/exp/cmd/godef"
 Bundle 'majutsushi/tagbar'
 ""Bundle 'cespare/vim-golang'
@@ -252,7 +252,7 @@ let g:go_highlight_methods = 1
 let g:go_highlight_structs = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
-let g:godef_split=2
+let g:godef_split=3
 au BufRead,BufNewFile *.go set filetype=go
 au FileType go nmap <Leader>s <Plug>(go-implements)
 au FileType go nmap <Leader>i <Plug>(go-info)
@@ -267,6 +267,8 @@ au FileType go nmap <Leader>ds <Plug>(go-def-split)
 au FileType go nmap <Leader>dv <Plug>(go-def-vertical)
 au FileType go nmap <Leader>dt <Plug>(go-def-tab)
 au FileType go nmap <Leader>e <Plug>(go-rename)
+au FileType go nmap <C-]>	gd
+au FileType go nmap <C-g> <Plug>(go-def-vertical)
 
 
 """"""""""""""""""""""""""""""
