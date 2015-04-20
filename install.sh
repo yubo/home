@@ -13,6 +13,11 @@ install_file()
 	ln -s $src $des
 }
 
+if [ ! -d ~/.ssh ]; then
+	mkdir ~/.ssh
+	chmod 0600 ~/.ssh
+fi
+
 install_file bin
 install_file .vimrc
 install_file .vim
@@ -23,6 +28,7 @@ install_file .gitconfig
 install_file .fonts
 install_file .tmux.conf
 install_file .git-completion.bash
+install_file .ssh/config
 
 git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
 
@@ -34,5 +40,6 @@ fi
 if [ ! -e $HOME/go/bin ]; then
     mkdir -p $HOME/go/bin
 fi
+
 
 source ~/.bashrc
