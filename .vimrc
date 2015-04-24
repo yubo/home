@@ -73,11 +73,7 @@ let g:solarized_termtrans=1
 let g:solarized_termcolors=256
 let g:solarized_contrast="high"
 let g:solarized_visibility="high"
-if has('gui_running')
-	set background=light
-else
-	set background=dark
-endif
+set background=dark
 set modelines=0
 set autoindent
 set hidden
@@ -134,17 +130,12 @@ Bundle 'snipMate'
 Bundle 'winmanager'
 Bundle 'moll/vim-bbye'
 Bundle 'wesleyche/SrcExpl'
-Bundle 'https://github.com/bling/vim-airline.git'
-"Bundle 'https://github.com/Shougo/neocomplcache.git'
+Bundle 'https://github.com/yubo/vim-airline.git'
 Bundle 'https://github.com/Stormherz/tablify.git'
 Bundle 'https://github.com/vim-scripts/ZoomWin.git'
-"Bundle 'https://github.com/vim-scripts/cscope.vim'
 Bundle 'https://github.com/vim-scripts/gtags.vim.git'
 Bundle 'https://github.com/fatih/vim-go.git'
-"Bundle 'dgryski/vim-godef'
-"go get -v code.google.com/p/rog-go/exp/cmd/godef"
 Bundle 'majutsushi/tagbar'
-""Bundle 'cespare/vim-golang'
 
 let g:fencview_autodetect=1
 
