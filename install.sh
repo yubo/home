@@ -20,6 +20,7 @@ fi
 
 install_file bin
 install_file .vimrc
+install_file .gvimrc
 install_file .vim
 install_file .bash_profile
 install_file .bashrc
