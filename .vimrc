@@ -174,8 +174,8 @@ nnoremap <leader>k             <C-W>k
 nnoremap <leader>l             <C-W>l
 nnoremap <leader>s             : so $MYVIMRC<CR>
 nnoremap <leader>v             : tabe $MYVIMRC<CR>
-nnoremap <leader>t             : Tlist<CR>
-nnoremap <leader>T             : TagbarToggle<CR>
+"nnoremap <leader>t             : Tlist<CR>
+nnoremap <leader>t             : TagbarToggle<CR>
 nnoremap <leader>q             : Bdelete<CR>
 nnoremap <leader>g=             gg=G
 nnoremap <leader>f             : !firefox %<CR>
@@ -252,11 +252,11 @@ au FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
 au FileType go nmap <Leader>gb <Plug>(go-doc-browser)
 au FileType go nmap <leader>r <Plug>(go-run)
 au FileType go nmap <leader>b <Plug>(go-build)
-""au FileType go nmap <leader>t <Plug>(go-test)
+au FileType go nmap <leader>tt <Plug>(go-test)
 au FileType go nmap <leader>c <Plug>(go-coverage)
 au FileType go nmap <Leader>ds <Plug>(go-def-split)
-au FileType go nmap <Leader>dv <Plug>(go-def-vertical)
-au FileType go nmap <Leader>dt <Plug>(go-def-tab)
+"au FileType go nmap <Leader>dv <Plug>(go-def-vertical)
+"au FileType go nmap <Leader>dt <Plug>(go-def-tab)
 au FileType go nmap <Leader>e <Plug>(go-rename)
 au FileType go nmap <C-]>	gd
 au FileType go nmap <C-g> <Plug>(go-def-vertical)
@@ -294,7 +294,7 @@ let g:ycm_confirm_extra_conf = 0      "关闭加载.ycm_extra_conf.py提示
 let g:ycm_complete_in_comments = 1    "在注释输入中也能补全
 let g:ycm_complete_in_strings = 1     "在字符串输入中也能补全
 let g:ycm_seed_identifiers_with_syntax = 1                  " 语言关键字补全, 不过python关键字都很短，所以，需要的自己打开
-let g:ycm_min_num_of_chars_for_completion = 2               " 从第2个键入字符就开始罗列匹配项
+let g:ycm_min_num_of_chars_for_completion = 1               " 从第2个键入字符就开始罗列匹配项
 let g:ycm_collect_identifiers_from_tags_files = 1           " 开启 YCM 基于标签引擎
 let g:ycm_collect_identifiers_from_comments_and_strings = 1 " 注释和字符串中的文字也会被收入补全
 let g:ycm_warning_symbol = '>>'
@@ -450,3 +450,5 @@ let g:airline_section_x = '%{strlen(&ft) ? &ft : "Noft"}%{&bomb ? " BOM" : ""}'
 let g:airline_section_y = '%{&fileformat} %{(&fenc == "" ? &enc : &fenc)}'
 let g:airline_section_z = '%2l:%-1v/%L'
 " }}}
+
+highlight TagbarSignature guifg=#00afaf ctermfg=green
