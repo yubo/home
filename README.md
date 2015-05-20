@@ -39,6 +39,9 @@
 	            --enable-perlinterp \
 	            --enable-luainterp \
 	            --enable-gui=gtk2 --enable-cscope --prefix=/usr
+	## ycm
+	cd ~/.vim/bundle/YouCompleteMe                                                                                                                                                                                  
+	./install.sh --clang-completer
 
 ## tips        
 
