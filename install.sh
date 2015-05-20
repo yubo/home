@@ -38,8 +38,8 @@ if [ -f src/connect.c ]; then
     gcc -o bin/connect src/connect.c
 fi
 
-if [ ! -e $HOME/go/bin ]; then
-    mkdir -p $HOME/go/bin
+if [ ! -e $HOME/gopath ]; then
+    mkdir -p $HOME/gopath
 fi
 
 

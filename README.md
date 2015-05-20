@@ -30,6 +30,7 @@
 	wget http://tamacom.com/global/global-6.4.tar.gz
 	...
 	## vim7.3+
+	wget http://ftp.vim.org/pub/vim/unix/vim-7.4.tar.bz2
 	locate python | grep '/config$'
 	./configure --with-features=huge \
 	            --enable-multibyte \
@@ -38,10 +39,18 @@
 	            --with-python-config-dir=/usr/lib64/python2.6/config \
 	            --enable-perlinterp \
 	            --enable-luainterp \
-	            --enable-gui=gtk2 --enable-cscope --prefix=/usr
+	            --enable-gui=gtk2
 	## ycm
 	cd ~/.vim/bundle/YouCompleteMe                                                                                                                                                                                  
 	./install.sh --clang-completer
+	## golang
+	cd
+	mkdir gopath
+	git clone https://github.com/golang/go
+	cd go
+	git checkout go1.4.1
+	cd src
+	./all.bash
 
 ## tips        
 
