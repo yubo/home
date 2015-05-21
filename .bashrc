@@ -68,4 +68,6 @@ if [ "x"$TERM == "xxterm" ]; then
 	alias sshx='ssh -X'
 fi
 
-stty -ixon
+if [ -f ~/.bash_local ]; then
+	. ~/.bash_local
+fi
