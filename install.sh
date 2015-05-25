@@ -18,6 +18,11 @@ if [ ! -d ~/.ssh ]; then
 	chmod 0600 ~/.ssh
 fi
 
+if [ ! -e ~/.bash_local ]; then
+	touch ~/.bash_local
+	chmod 0644 ~/.bash_local
+fi
+
 install_file bin
 install_file .vimrc
 install_file .gvimrc
