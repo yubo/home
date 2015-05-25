@@ -30,6 +30,7 @@ install_file .fonts
 install_file .tmux.conf
 install_file .git-completion.bash
 install_file .ssh/config
+chmod 0600 ~/.ssh/config
 
 git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
 
