@@ -150,7 +150,7 @@ let mapleader = ','
 " normal mode
 nnoremap Y                     y$
 nnoremap #                     :let @/=printf('\<%s\>\C', expand('<cword>'))<CR>
-nnoremap @                     :execute "vimgrep /" . expand("<cword>") . "/ **/*.go"<CR>
+nnoremap @                     :execute "vimgrep /" . expand("<cword>") . "/ **/*.c"<CR>
 nnoremap <C-L>                 :bn<CR>
 nnoremap <C-H>                 :bp<CR>
 nnoremap <C-N>                 :cn<CR>

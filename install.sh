@@ -24,17 +24,19 @@ if [ ! -e ~/.bash_local ]; then
 fi
 
 install_file bin
-install_file .vimrc
-install_file .gvimrc
-install_file .vim
 install_file .bash_profile
 install_file .bashrc
 install_file .dircolors
-install_file .gitconfig
 install_file .fonts
-install_file .tmux.conf
 install_file .git-completion.bash
+install_file .gvimrc
+install_file .globalrc
+install_file .gitconfig
 install_file .ssh/config
+install_file .tmux.conf
+install_file .vimrc
+install_file .vim
+
 chmod 0600 ~/.ssh/config
 
 git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
