@@ -28,6 +28,7 @@ install_file .bash_profile
 install_file .bashrc
 install_file .dircolors
 install_file .fonts
+install_file .gdbinit
 install_file .git-completion.bash
 install_file .gvimrc
 install_file .globalrc
