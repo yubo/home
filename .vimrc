@@ -158,7 +158,7 @@ nnoremap <C-P>                 :cp<CR>
 nnoremap <C-J>                 7<C-e>
 nnoremap <C-K>                 7<C-y>
 nnoremap <C-]>                 :Gtags<CR><CR>
-nnoremap <C-R>                 :Gtags -r<CR><CR>
+nnoremap <C-T>                 :Gtags -r<CR><CR>
 nnoremap <C-F>                 :Gtags -gi<CR>
 "nnoremap <leader>h             gT
 "nnoremap <leader>l             gt
