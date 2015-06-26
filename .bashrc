@@ -7,6 +7,13 @@ if [ -f /etc/bashrc ]; then
 	. /etc/bashrc
 fi
 
+add_path()
+{
+	if [ -d $1 ]; then
+		PATH=$1:$PATH
+	fi
+}
+
 alias vi='vim'
 alias ff='find . -type f| xargs grep -n --color '
 alias ffh='find . -name \*.h -type f| xargs grep -n --color '
@@ -26,7 +33,7 @@ if [ `uname` == 'Darwin' ]; then
     alias ls='ls -GF'
     alias la='ls -GFa'
     alias ll='ls -lGF'
-    PATH=/usr/local/homebrew/bin:$PATH
+    add_path /usr/local/homebrew/bin
 else
     alias ls='ls -F --color '
     alias la='ls -Fa --color '
@@ -35,14 +42,16 @@ else
 fi
 
 if [ -f $HOME/.rbenv/bin/rbenv ]; then
-	export PATH=$HOME/.rbenv/bin:$PATH
+	add_path $HOME/.rbenv/bin
 	eval "$(rbenv init -)"
 fi
 
 if [ -e $HOME/go ]; then
 	export GOPATH=$HOME/gopath
 	export GOROOT=$HOME/go
-	export PATH=$GOROOT/bin:$GOPATH/bin:$PATH
+	add_path $GOROOT/bin
+	add_path $GOPATH/bin
+	add_path $PATH
 fi
 
 function parse_git_branch {
@@ -59,11 +68,11 @@ fi
 
 alias si='wine ~/.wine/drive_c/Program\ Files\ \(x86\)/Source\ Insight\ 3/Insight3.exe'
 
-PATH=~/Android/Sdk/tools:~/Android/android-ndk-r10d:~/Android/Sdk/platform-tools:~/xq/bin/brcm4709/sdk_package/toolchain/bin:$PATH
-
-if [ -e /opt/android/android-studio/bin/studio.sh ]; then
-	PATH=/opt/android/android-studio/bin:$PATH
-fi
+add_path ~/Android/Sdk/tools
+add_path ~/Android/android-ndk-r10d
+add_path ~/Android/Sdk/platform-tools
+add_path ~/xq/bin/brcm4709/sdk_package/toolchain/bin
+add_path /opt/android/android-studio/bin
 
 if [ "x"$TERM == "xxterm" ]; then
 	alias sshx='ssh -X'
