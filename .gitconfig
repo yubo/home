@@ -8,7 +8,17 @@
 [core]
 	editor = vim
 [alias]
+	s = status
+	co = checkout
+	cm = commit
 	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --
+	l = log --oneline --decorate -12 --color
+	ll = log --oneline --decorate --color
+	lc = log --graph --color
+	sbi = submodule init
+	sbu = submodule update
+	sbp = submodule foreach git pull
+	sbc = submodule foreach git co master
 [push]
 	default = matching
 [color]
