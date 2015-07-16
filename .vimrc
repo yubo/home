@@ -281,6 +281,7 @@ let Tlist_Exit_OnlyWindow = 1
 let tlist_c_settings = 'c;f:My Functions'
 let Tlist_Process_File_Always = 1
 let Tlist_Use_Right_Window = 1
+let Tlist_Sort_Type = "order"
 
 
 " YCM{{{
