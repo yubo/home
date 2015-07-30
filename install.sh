@@ -15,7 +15,7 @@ install_file()
 
 if [ ! -d ~/.ssh ]; then
 	mkdir ~/.ssh
-	chmod 0600 ~/.ssh
+	chmod 0700 ~/.ssh
 fi
 
 if [ ! -e ~/.bash_local ]; then
