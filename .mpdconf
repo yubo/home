@@ -1,0 +1,13 @@
+bind_to_address     "localhost"
+music_directory     "/opt/public/music"
+playlist_directory  "/home/yubo/.config/mpd/playlists"
+db_file             "/home/yubo/.config/mpd/db"
+log_file            "/home/yubo/.config/mpd/log"
+state_file          "/home/yubo/.config/mpd/state"
+user                "yubo"
+group               "yubo"
+#id3vl_encoding      "GBK"
+audio_output {
+	type "pulse"
+	name "MyMPD PulseAudio Output"
+}

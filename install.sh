@@ -37,6 +37,7 @@ install_file .ssh/config
 install_file .tmux.conf
 install_file .vimrc
 install_file .vim
+install_file .mpdconf
 
 chmod 0600 ~/.ssh/config
 
