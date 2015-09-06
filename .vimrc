@@ -11,7 +11,6 @@ set nolinebreak nowrap
 set autoindent smartindent
 set autoread
 set backspace=indent,eol,start
-set clipboard=unnamed
 set completefunc=
 set cursorcolumn cursorline
 
@@ -111,6 +110,11 @@ hi SpecialKey ctermfg=238
 
 "}}}
 
+set clipboard=unnamed
+let g:fakeclip_terminal_multiplexer_type = 'tmux'
+vmap <C-t>y                 <Plug>(fakeclip-screen-y)
+nmap <C-t>P                 <Plug>(fakeclip-screen-P)
+nmap <C-t>p                 <Plug>(fakeclip-screen-p)
 
 " plugins {{{
 "===================================================
@@ -135,6 +139,7 @@ Bundle 'https://github.com/Stormherz/tablify.git'
 Bundle 'https://github.com/vim-scripts/ZoomWin.git'
 Bundle 'https://github.com/vim-scripts/gtags.vim.git'
 Bundle 'https://github.com/fatih/vim-go.git'
+Bundle 'https://github.com/kana/vim-fakeclip.git'
 Bundle 'majutsushi/tagbar'
 
 let g:fencview_autodetect=1
@@ -150,7 +155,7 @@ let mapleader = ','
 " normal mode
 nnoremap Y                     y$
 nnoremap #                     :let @/=printf('\<%s\>\C', expand('<cword>'))<CR>
-nnoremap @                     :execute "vimgrep /" . expand("<cword>") . "/ **/*.c"<CR>
+nnoremap @                     :execute "vimgrep /" . expand("<cword>") . "/ **/*.go"<CR>
 nnoremap <C-L>                 :bn<CR>
 nnoremap <C-H>                 :bp<CR>
 nnoremap <C-N>                 :cn<CR>
