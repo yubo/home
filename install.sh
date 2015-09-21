@@ -52,5 +52,3 @@ if [ ! -e $HOME/gopath ]; then
     mkdir -p $HOME/gopath
 fi
 
-
-source ~/.bashrc
