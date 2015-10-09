@@ -37,7 +37,7 @@ set isfname-== isfname-=,
 set listchars=trail:«
 "set list
 set modeline
-set mouse=a
+set mouse=
 set number numberwidth=4 showbreak=\ \ ->
 set number numberwidth=4
 set nonumber
