@@ -163,6 +163,7 @@ nnoremap <C-P>                 :cp<CR>
 nnoremap <C-J>                 7<C-e>
 nnoremap <C-K>                 7<C-y>
 nnoremap <C-]>                 :Gtags<CR><CR>
+nnoremap <C-g>                 <C-w>l:silent! hide<CR>:vs<CR>:Gtags<CR><CR><C-w>h
 nnoremap <C-T>                 :Gtags -r<CR><CR>
 nnoremap <C-F>                 :Gtags -gi<CR>
 "nnoremap <leader>h             gT
@@ -261,10 +262,11 @@ au FileType go nmap <leader>tt <Plug>(go-test)
 au FileType go nmap <leader>c <Plug>(go-coverage)
 au FileType go nmap <Leader>ds <Plug>(go-def-split)
 "au FileType go nmap <Leader>dv <Plug>(go-def-vertical)
+"au FileType go nmap <C-s> <Plug>(go-def-vertical)
 "au FileType go nmap <Leader>dt <Plug>(go-def-tab)
 au FileType go nmap <Leader>e <Plug>(go-rename)
-au FileType go nmap <C-g>	gd
-au FileType go nmap <C-s> <Plug>(go-def-vertical)
+au FileType go nmap <C-]>	gd
+au FileType go nmap <C-g>   <C-w>l:silent! hide<CR>:vs<CR>gd<C-w>h
 
 
 """"""""""""""""""""""""""""""
