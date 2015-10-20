@@ -28,6 +28,7 @@ alias xnm='/root/BcmXiaoQiang/external_toolchain/hndtools-arm-linux-2.6.36-uclib
 alias tmux='tmux -2'
 alias u='ssh -X yubo@u'
 alias shs='python -m SimpleHTTPServer'
+alias dstat='dstat -cdlmnpsy'
 
 if [ `uname` == 'Darwin' ]; then
     alias ls='ls -GF'

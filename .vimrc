@@ -162,8 +162,6 @@ nnoremap <C-N>                 :cn<CR>
 nnoremap <C-P>                 :cp<CR>
 nnoremap <C-J>                 7<C-e>
 nnoremap <C-K>                 7<C-y>
-nnoremap <C-]>                 :Gtags<CR><CR>
-nnoremap <C-g>                 <C-w>l:silent! hide<CR>:vs<CR>:Gtags<CR><CR><C-w>h
 nnoremap <C-T>                 :Gtags -r<CR><CR>
 nnoremap <C-F>                 :Gtags -gi<CR>
 "nnoremap <leader>h             gT
@@ -251,23 +249,6 @@ let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
 let g:godef_split=3
 au BufRead,BufNewFile *.go set filetype=go
-au FileType go nmap <Leader>s <Plug>(go-implements)
-au FileType go nmap <Leader>i <Plug>(go-info)
-au FileType go nmap <Leader>gd <Plug>(go-doc)
-au FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
-au FileType go nmap <Leader>gb <Plug>(go-doc-browser)
-au FileType go nmap <leader>rr <Plug>(go-run)
-au FileType go nmap <leader>b <Plug>(go-build)
-au FileType go nmap <leader>tt <Plug>(go-test)
-au FileType go nmap <leader>c <Plug>(go-coverage)
-au FileType go nmap <Leader>ds <Plug>(go-def-split)
-"au FileType go nmap <Leader>dv <Plug>(go-def-vertical)
-"au FileType go nmap <C-s> <Plug>(go-def-vertical)
-"au FileType go nmap <Leader>dt <Plug>(go-def-tab)
-au FileType go nmap <Leader>e <Plug>(go-rename)
-au FileType go nmap <C-]>	gd
-au FileType go nmap <C-g>   <C-w>l:silent! hide<CR>:vs<CR>gd<C-w>h
-
 
 """"""""""""""""""""""""""""""
 " winManager setting
@@ -309,7 +290,7 @@ let g:ycm_warning_symbol = '>>'
 let g:ycm_error_symbol = '->'
 "let g:ycm_add_preview_to_completeopt = 1
 if !empty(glob("~/.vim/.ycm_extra_conf.py"))
-    let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
+	let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
 endif
 nmap <leader>gd :YcmDiags<CR>
 nnoremap <leader>gh :YcmCompleter GoToDeclaration<CR>           " 跳转到申明处
@@ -319,9 +300,9 @@ nnoremap <leader>gg :YcmCompleter GoToDefinitionElseDeclaration<CR>
 let g:ycm_key_invoke_completion = '<C-Space>'
 " 黑名单,不启用
 let g:ycm_filetype_blacklist = {
-      \ 'tagbar' : 1,
-      \ 'gitcommit' : 1,
-      \}
+			\ 'tagbar' : 1,
+			\ 'gitcommit' : 1,
+			\}
 " }}}
 
 " omnicppcomplete{{{
@@ -402,9 +383,9 @@ let g:SrcExpl_gobackKey = "<SPACE>"
 " // except itself are using buffers. And you need add their buffer names into
 " // below listaccording to the command ":buffers!"
 let g:SrcExpl_pluginList = [ 
-        \ "__Tag_List__", 
-        \ "_NERD_tree_" 
-    \ ] 
+			\ "__Tag_List__", 
+			\ "_NERD_tree_" 
+			\ ] 
 
 " // Enable/Disable the local definition searching, and note that this is not 
 " // guaranteed to work, the Source Explorer doesn't check the syntax for now. 
@@ -437,22 +418,22 @@ let g:airline_right_sep=''
 
 " or copy paste the following into your vimrc for shortform text
 let g:airline_mode_map = {
-    \ '__' : '-',
-    \ 'n'  : 'N',
-    \ 'i'  : 'I',
-    \ 'R'  : 'R',
-    \ 'c'  : 'C',
-    \ 'v'  : 'V',
-    \ 'V'  : 'V',
-    \ '' : 'V',
-    \ 's'  : 'S',
-    \ 'S'  : 'S',
-    \ '' : 'S',
-    \ }
+			\ '__' : '-',
+			\ 'n'  : 'N',
+			\ 'i'  : 'I',
+			\ 'R'  : 'R',
+			\ 'c'  : 'C',
+			\ 'v'  : 'V',
+			\ 'V'  : 'V',
+			\ '' : 'V',
+			\ 's'  : 'S',
+			\ 'S'  : 'S',
+			\ '' : 'S',
+			\ }
 let g:airline#extensions#default#layout = [
-  \ [ 'a', 'b', 'c' ],
-  \ [ 'x', 'y', 'z' ]
-  \ ]
+			\ [ 'a', 'b', 'c' ],
+			\ [ 'x', 'y', 'z' ]
+			\ ]
 let g:airline_section_c = '%t'
 let g:airline_section_x = '%{strlen(&ft) ? &ft : "Noft"}%{&bomb ? " BOM" : ""}'
 let g:airline_section_y = '%{&fileformat} %{(&fenc == "" ? &enc : &fenc)}'
@@ -460,3 +441,50 @@ let g:airline_section_z = '%2l:%-1v/%L'
 " }}}
 
 highlight TagbarSignature guifg=#00afaf ctermfg=green
+
+
+
+" preview def function
+function! s:pre_go(...)
+	let pos = getpos('.')
+	silent! wincmd P			" jump to preview window
+	if &previewwindow			" if we really get there...
+		match none			" delete existing highlight
+		wincmd p			" back to old window
+	endif
+
+	ped %
+
+	silent! wincmd P			" jump to preview window
+	if &previewwindow		" if we really get there...
+		call setpos('.', pos)
+		""call go#def#Jump()
+		GoDef
+		wincmd p			" back to old window
+	endif
+
+	call setpos('.', pos)
+endfunction
+command! -nargs=*  PreGo call s:pre_go()
+
+function! s:pre_c(...)
+	let pos = getpos('.')
+	silent! wincmd P			" jump to preview window
+	if &previewwindow			" if we really get there...
+		match none			" delete existing highlight
+		wincmd p			" back to old window
+	endif
+
+	ped %
+
+	silent! wincmd P			" jump to preview window
+	if &previewwindow		" if we really get there...
+		call setpos('.', pos)
+		GtagsCursor
+		wincmd p			" back to old window
+	endif
+
+	call setpos('.', pos)
+endfunction
+command! -nargs=*  PreC call s:pre_c()
+
