@@ -26,6 +26,7 @@ fi
 install_file bin
 install_file .bash_profile
 install_file .bashrc
+install_file .bash_docker
 install_file .dircolors
 install_file .fonts
 install_file .gdbinit

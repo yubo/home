@@ -84,3 +84,8 @@ fi
 if [ -f ~/.bash_local ]; then
 	. ~/.bash_local
 fi
+
+if [ -f ~/.bash_docker ]; then
+	. ~/.bash_docker
+fi
+
