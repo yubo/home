@@ -1,4 +1,5 @@
 # tmux tips
+tmux默认键改为 ctrl-a
 
 ### session
 ```

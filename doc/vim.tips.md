@@ -1,5 +1,15 @@
 # vim tips
+```
+	leader 设置为逗号，以下简称为l
+	l-x 表示先按leader,再按x
+	C-x 表示按住ctrl的同时，按下x
 
+	<l-space>	打开/关闭NERD_tree
+		t		在tab中打开
+	<C-h/l>		tab间切换
+	<l-h/j/k/l> wincmd 方向
+	<l-u>		update diff
+```
 
 ##### i
 ---
