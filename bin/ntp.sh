@@ -1,2 +1,2 @@
 #!/bin/sh
-sudo /usr/sbin/ntpdate ntp.fudan.edu.cn | logger -t NTP
+sudo /usr/sbin/ntpdate cn.pool.ntp.org | logger -t NTP
