@@ -1,0 +1,24 @@
+# tmux tips
+tmux默认键改为 ctrl-a
+
+### session
+```
+bind $ #修改当前会话名称(session name)
+bind d #退出当前会话
+tmux ls #列出会话
+tmux a[ttach] -t session_name #进入session_name
+```
+
+
+### window
+```
+bind , #修改tmux window name
+bind c #create window
+bind n #next window
+bind p #pre window
+bind N #swap next window
+bind P #swap pre window
+bind - #split window
+bind | #vsplit window
+bind z #zoom window
+```
