@@ -1,24 +1,19 @@
 ## install rbenv
 ```shell
+#vim
+sudo apt-get install tmux indent ctags
+
+#dev
+sudo apt-get build-dep
+sudo apt-get install git-core build-essential libssl-dev libncurses5-dev unzip cmake
+
+#kernel dev
+sudo apt-get build-dep linux-image-$(uname -r)
+sudo apt-get install git-core libncurses5 libncurses5-dev libelf-dev asciidoc binutils-dev
+
+#rbenv
 git clone https://github.com/sstephenson/rbenv.git ~/.rbenv
 git clone https://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
-```
-
-## libevent 2.x
-```shell
-git clone https://github.com/libevent/libevent.git 
-cd libevent; git checkout -b release-2.0.22-stable release-2.0.22-stable; ...
-```
-
-## tmux
-```shell
-git clone git://git.code.sf.net/p/tmux/tmux-code tmux
-cd tmux; ...
-```
-
-## cmake
-```shell
-wget http://www.cmake.org/files/v3.2/cmake-3.2.1.tar.gz
 ```
 
 ## global 
