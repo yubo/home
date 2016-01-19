@@ -29,6 +29,7 @@ alias tmux='tmux -2'
 alias u='ssh -X yubo@u'
 alias shs='python -m SimpleHTTPServer'
 alias dstat='dstat -cdlmnpsy'
+alias docker-dev='GOPATH=/go:/go/src/github.com/docker/vendor'
 
 if [ `uname` == 'Darwin' ]; then
     alias ls='ls -GF'
