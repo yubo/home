@@ -143,8 +143,8 @@ Bundle 'https://github.com/kana/vim-fakeclip.git'
 Bundle 'majutsushi/tagbar'
 
 "cfmt
-autocmd BufWritePre *.c,*.h Cfmt
-let g:cfmt_style = '-npro -kr -i8 -ts8 -sob -l80 -ss -ncs -cp1'
+"autocmd BufWritePre *.c,*.h Cfmt
+"let g:cfmt_style = '-npro -kr -i8 -ts8 -sob -l80 -ss -ncs -cp1'
 ""let g:cfmt_style = '-linux'
 "let g:cfmt_style = '-kr'
 ""let g:cfmt_style = '-gnu'
