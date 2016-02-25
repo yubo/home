@@ -126,7 +126,7 @@ call vundle#rc()
 Bundle 'Valloric/YouCompleteMe'
 Bundle 'gmarik/vundle'
 Bundle 'AutoClose'
-Bundle 'taglist.vim'
+"Bundle 'taglist.vim'
 Bundle 'EasyMotion'
 Bundle 'The-NERD-tree'
 Bundle 'The-NERD-Commenter'
@@ -163,7 +163,7 @@ let mapleader = ','
 " normal mode
 nnoremap Y                     y$
 nnoremap #                     :let @/=printf('\<%s\>\C', expand('<cword>'))<CR>
-nnoremap @                     :execute "vimgrep /" . expand("<cword>") . "/ **/*.go"<CR>
+nnoremap @                     :execute "vimgrep /" . expand("<cword>") . "/ **/*.c"<CR>
 nnoremap <C-L>                 :bn<CR>
 nnoremap <C-H>                 :bp<CR>
 nnoremap <C-N>                 :cn<CR>
@@ -186,7 +186,6 @@ nnoremap <leader>k             <C-W>k
 nnoremap <leader>l             <C-W>l
 nnoremap <leader>s             : so $MYVIMRC<CR>
 nnoremap <leader>v             : tabe $MYVIMRC<CR>
-"nnoremap <leader>t             : Tlist<CR>
 nnoremap <leader>t             : TagbarToggle<CR>
 nnoremap <leader>q             : Bdelete<CR>
 nnoremap <leader>g=             gg=G
@@ -261,6 +260,7 @@ au BufRead,BufNewFile *.go set filetype=go
 """"""""""""""""""""""""""""""
 " winManager setting
 """"""""""""""""""""""""""""""
+
 let g:winManagerWindowLayout = "FileExplorer|TagList"
 let g:winManagerWidth = 30
 let g:defaultExplorer = 0
@@ -278,6 +278,9 @@ let tlist_c_settings = 'c;f:My Functions'
 let Tlist_Process_File_Always = 1
 let Tlist_Use_Right_Window = 1
 let Tlist_Sort_Type = "order"
+
+"tagbar"
+let g:tagbar_sort = 0
 
 
 " YCM{{{
