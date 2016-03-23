@@ -65,17 +65,16 @@ set wildmenu
 "za zM zR
 set foldmethod=marker
 "filetype off
-set t_Co=256
 "打开高亮
 syntax enable
 "显示行号
 "set number
-"无限undo
-" Enable modelines only on secure vim versions
-if (v:version >= 703)
-	"    set undofile
-else
-endif
+set modelines=0
+set autoindent
+set hidden
+set ttyfast
+set ttymouse=xterm
+set scroll=11
 "自动换行
 set wrap
 "禁止自动换行
@@ -96,22 +95,7 @@ endif
 
 filetype plugin indent on
 hi SpecialKey ctermfg=238
-"}}}
 
-"color scheme
-"{{{
-colorscheme solarized
-let g:solarized_termtrans=1
-let g:solarized_termcolors=256
-let g:solarized_contrast="high"
-let g:solarized_visibility="high"
-set background=dark
-set modelines=0
-set autoindent
-set hidden
-set ttyfast
-set ttymouse=xterm
-set scroll=11
 "}}}
 
 " plugins
@@ -127,12 +111,18 @@ Bundle 'The-NERD-tree'
 Bundle 'The-NERD-Commenter'
 Bundle 'moll/vim-bbye'
 Bundle 'majutsushi/tagbar'
-Bundle 'https://github.com/yubo/vim-airline.git'
-Bundle 'https://github.com/Stormherz/tablify.git'
-Bundle 'https://github.com/vim-scripts/ZoomWin.git'
-Bundle 'https://github.com/vim-scripts/gtags.vim.git'
-Bundle 'https://github.com/fatih/vim-go.git'
+Bundle 'tpope/vim-fugitive'
+Bundle 'vim-airline/vim-airline'
+Bundle 'vim-airline/vim-airline-themes'
+Bundle 'Stormherz/tablify'
+Bundle 'vim-scripts/ZoomWin'
+Bundle 'vim-scripts/gtags.vim'
+Bundle 'fatih/vim-go'
 Bundle 'Valloric/YouCompleteMe'
+Bundle 'tpope/vim-surround'
+Bundle 'airblade/vim-gitgutter'
+"Bundle 'yubo/vim-colorschemes'
+"Bundle 'SirVer/ultisnips'
 "Bundle 'wesleyche/SrcExpl'
 "Bundle 'snipMate'
 "Bundle 'taglist.vim'
@@ -257,10 +247,21 @@ let g:SrcExpl_nextDefKey = "<F4>"
 "vim-airline
 " {{{
 let g:airline_theme='badwolf'
-let g:airline_powerline_fonts=0
 let g:airline#extensions#tabline#enabled = 1
-let g:airline_left_sep=''
-let g:airline_right_sep=''
+let g:airline#extensions#branch#enabled = 1
+let g:airline#extensions#hunks#enabled = 0
+let g:airline_powerline_fonts=1
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
+endif
+
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = ''
+let g:airline_symbols.branch = '⭠'
+let g:airline_symbols.readonly = '⭤'
+let g:airline_symbols.linenr = ''
 
 " or copy paste the following into your vimrc for shortform text
 let g:airline_mode_map = {
@@ -280,8 +281,8 @@ let g:airline#extensions#default#layout = [
 			\ [ 'a', 'b', 'c' ],
 			\ [ 'x', 'y', 'z' ]
 			\ ]
-let g:airline_section_c = '%t'
-let g:airline_section_x = '%{strlen(&ft) ? &ft : "Noft"}%{&bomb ? " BOM" : ""}'
+"let g:airline_section_c = '%t'
+"let g:airline_section_x = '%{strlen(&ft) ? &ft : "Noft"}%{&bomb ? " BOM" : ""}'
 let g:airline_section_y = '%{&fileformat} %{(&fenc == "" ? &enc : &fenc)}'
 let g:airline_section_z = '%2l:%-1v/%L'
 " }}}
@@ -292,6 +293,15 @@ set cscopequickfix=s-,c-,d-,i-,t-,e-
 "gtags"
 let Gtags_OpenQuickfixWindow = 0
 
+"}}}
+
+"color scheme
+"{{{
+set t_Co=256
+colorscheme molokai 
+let g:molokai_original = 1
+let g:rehash256 = 1
+"set background=dark
 "}}}
 
 " mappings
@@ -429,4 +439,3 @@ function! s:pre_c(...)
 endfunction
 command! -nargs=*  PreC call s:pre_c()
 "}}}
-
