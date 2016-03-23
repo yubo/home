@@ -1,4 +1,5 @@
-" options {{{
+" options
+" {{{
 " tab替换为4空格 %retab! 
 set ts=4
 "set tabstop=4 softtabstop=4 shiftwidth=4 expandtab
@@ -61,24 +62,12 @@ set wildignore=*.swp,*.bak,*.pyc,*~
 "set wildignorecase
 set wildmenu
 "代码折叠
-"set foldmethod=indent
+"za zM zR
+set foldmethod=marker
 "filetype off
 set t_Co=256
 "打开高亮
 syntax enable
-"使用color solarized
-colorscheme solarized
-let g:solarized_termtrans=1
-let g:solarized_termcolors=256
-let g:solarized_contrast="high"
-let g:solarized_visibility="high"
-set background=dark
-set modelines=0
-set autoindent
-set hidden
-set ttyfast
-set ttymouse=xterm
-set scroll=11
 "显示行号
 "set number
 "无限undo
@@ -107,148 +96,71 @@ endif
 
 filetype plugin indent on
 hi SpecialKey ctermfg=238
-
 "}}}
 
-set clipboard=unnamed
-let g:fakeclip_terminal_multiplexer_type = 'tmux'
-vmap <C-t>y                 <Plug>(fakeclip-screen-y)
-nmap <C-t>P                 <Plug>(fakeclip-screen-P)
-nmap <C-t>p                 <Plug>(fakeclip-screen-p)
+"color scheme
+"{{{
+colorscheme solarized
+let g:solarized_termtrans=1
+let g:solarized_termcolors=256
+let g:solarized_contrast="high"
+let g:solarized_visibility="high"
+set background=dark
+set modelines=0
+set autoindent
+set hidden
+set ttyfast
+set ttymouse=xterm
+set scroll=11
+"}}}
 
-" plugins {{{
-"===================================================
-" vim 插件管理 
+" plugins
+" {{{
 " git clone http://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 " let Vundle manage Vundle
-Bundle 'Valloric/YouCompleteMe'
 Bundle 'gmarik/vundle'
 Bundle 'AutoClose'
-Bundle 'taglist.vim'
 Bundle 'EasyMotion'
 Bundle 'The-NERD-tree'
 Bundle 'The-NERD-Commenter'
-Bundle 'snipMate'
-Bundle 'winmanager'
 Bundle 'moll/vim-bbye'
-Bundle 'wesleyche/SrcExpl'
+Bundle 'majutsushi/tagbar'
 Bundle 'https://github.com/yubo/vim-airline.git'
 Bundle 'https://github.com/Stormherz/tablify.git'
 Bundle 'https://github.com/vim-scripts/ZoomWin.git'
 Bundle 'https://github.com/vim-scripts/gtags.vim.git'
 Bundle 'https://github.com/fatih/vim-go.git'
-Bundle 'https://github.com/kana/vim-fakeclip.git'
-Bundle 'majutsushi/tagbar'
+Bundle 'Valloric/YouCompleteMe'
+"Bundle 'wesleyche/SrcExpl'
+"Bundle 'snipMate'
+"Bundle 'taglist.vim'
+"Bundle 'https://github.com/kana/vim-fakeclip.git'
 
-"cfmt
-"autocmd BufWritePre *.c,*.h Cfmt
-"let g:cfmt_style = '-npro -kr -i8 -ts8 -sob -l80 -ss -ncs -cp1'
-""let g:cfmt_style = '-linux'
-"let g:cfmt_style = '-kr'
-""let g:cfmt_style = '-gnu'
-"}}}
-
-let g:fencview_autodetect=1
-
-let g:neocomplcache_enable_at_startup = 1
-"NERDTree
+" NERDTree {{{
+let NERDChristmasTree=1
+let NERDTreeWinPos='left'
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 let NERDTreeIgnore = ['\.pyc', '\.mod\.c', '\.o', '\.ko', '\.a', '\.so', 'CMakeFiles', '\.cmake', 'CMakeCache.txt']
+" }}}
+
+"fakeclip
+"{{{
+set clipboard=unnamed
+let g:fakeclip_terminal_multiplexer_type = 'tmux'
+vmap <C-t>y                 <Plug>(fakeclip-screen-y)
+nmap <C-t>P                 <Plug>(fakeclip-screen-P)
+nmap <C-t>p                 <Plug>(fakeclip-screen-p)
 "}}}
 
-" mappings {{{
-let mapleader = ','
-" normal mode
-nnoremap Y                     y$
-nnoremap #                     :let @/=printf('\<%s\>\C', expand('<cword>'))<CR>
-nnoremap @                     :execute "vimgrep /" . expand("<cword>") . "/ **/*.go"<CR>
-nnoremap <C-L>                 :bn<CR>
-nnoremap <C-H>                 :bp<CR>
-nnoremap <C-N>                 :cn<CR>
-nnoremap <C-P>                 :cp<CR>
-nnoremap <C-J>                 7<C-e>
-nnoremap <C-K>                 7<C-y>
-nnoremap <C-T>                 :Gtags -r<CR><CR>
-nnoremap <C-F>                 :Gtags -gi<CR>
-"nnoremap <leader>h             gT
-"nnoremap <leader>l             gt
-nnoremap <leader>c             :cclose<CR>
-nnoremap <leader>o             :copen<CR>
-nnoremap <leader>r             :!gtags<CR>
-nnoremap <leader>b             : %!xxd<CR>
-nnoremap <leader>bb            : %!xxd -r<CR>
-nnoremap <leader>y             : YRShow<CR>
-nnoremap <leader>h             <C-W>h
-nnoremap <leader>j             <C-W>j
-nnoremap <leader>k             <C-W>k
-nnoremap <leader>l             <C-W>l
-nnoremap <leader>s             : so $MYVIMRC<CR>
-nnoremap <leader>v             : tabe $MYVIMRC<CR>
-"nnoremap <leader>t             : Tlist<CR>
-nnoremap <leader>t             : TagbarToggle<CR>
-nnoremap <leader>q             : Bdelete<CR>
-nnoremap <leader>g=             gg=G
-nnoremap <leader>f             : !firefox %<CR>
-nnoremap <leader>z             : setl fdm=indent fdc=1 fdn=1<CR>
-nnoremap <leader>;             : noh<CR>
-nnoremap <leader>p             : set paste<CR>
-nnoremap <leader>pp            : set nopaste<CR>
-nnoremap <silent><leader><space>       : NERDTreeToggle<CR>
-nnoremap <silent><leader>n     : set number<CR>
-nnoremap <silent><leader>N     : set nonumber<CR>
-nnoremap <leader>nn            : set nonumber<CR>
-" diff "
-nnoremap <leader>u             :diffupdate<CR>
-nnoremap <silent> <leader>wm   :WMToggle<cr>
+"tarbar
+"{{{
+highlight TagbarSignature guifg=#00afaf ctermfg=green
+"}}}
 
-" insert mode
-inoremap <leader>co            Yu Bo<yubo@yubo.org> <C-r>=strftime('%Y-%m-%d')<CR>
-inoremap <expr> <leader>fn     expand('%:p')
-inoremap <leader>dt            <C-r>=strftime('%Y-%m-%d')<CR>
-inoremap <leader>tm            <C-r>=strftime('%H:%M:%S')<CR>
-"inoremap <C-@>                 <C-x><C-u>
-"inoremap <C-space>             <C-x><C-u>
-inoremap <C-a>                 <home>
-inoremap <C-e>                 <end>
-inoremap <C-b>                 <left>
-inoremap <C-f>                 <right>
-"inoremap <A-b>                 <S-left>
-"inoremap <A-f>                 <S-right>
-inoremap <C-d>                 <del>
-inoremap <A-d>                 <C-o>dw
-"文件类型切换
-inoremap <C-j>                 <down>
-inoremap <C-k>                 <up>
-
-" command mode
-cnoremap <C-a>                 <home>
-cnoremap <C-e>                 <end>
-cnoremap <C-b>                 <left>
-cnoremap <C-f>                 <right>
-"cnoremap <leader>b             <S-left>
-"cnoremap <leader>f             <S-right>
-"cnoremap <leader>d             <S-right><C-w>
-cnoremap <C-d>                 <delete>
-cnoremap <C-p>                 <up>
-cnoremap <C-n>                 <down>
-
-" visual mode
-vnoremap <C-m>                 !markdown<CR>
-vnoremap <C-p>                 !pandoc<CR>
-vnoremap <C-f>                 !figlet<CR>
-" others
-cnoreabb <expr> W              getcmdtype()==':'&&getcmdline()=~#'^W'?'w':'W'
-"esc的映射
-"imap jj <esc>
-"使用tab键来代替%进行匹配跳转
-nnoremap <tab>                 %
-vnoremap <tab>                 %
-
-
-"for golang"
-syntax on
+"vim-go
+"{{{
 let g:go_fmt_command = "goimports"
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
@@ -258,29 +170,11 @@ let g:go_highlight_build_constraints = 1
 let g:godef_split=3
 au BufRead,BufNewFile *.go set filetype=go
 
-""""""""""""""""""""""""""""""
-" winManager setting
-""""""""""""""""""""""""""""""
-let g:winManagerWindowLayout = "FileExplorer|TagList"
-let g:winManagerWidth = 30
-let g:defaultExplorer = 0
 
-"NERD Tree
-let NERDChristmasTree=1
-let NERDTreeWinPos='left'
+"}}}
 
-"Taglist"
-let Tlist_Show_One_File = 1 " Displaying tags for only one file~
-let Tlist_Exit_OnlyWindow = 1 " if you are the last, kill yourself
-let Tlist_Use_SingleClick = 1 "to a tag on single mouse cliek"
-let Tlist_Exit_OnlyWindow = 1 
-let tlist_c_settings = 'c;f:My Functions'
-let Tlist_Process_File_Always = 1
-let Tlist_Use_Right_Window = 1
-let Tlist_Sort_Type = "order"
-
-
-" YCM{{{
+"YCM
+" {{{
 " youcompleteme  默认tab  s-tab 和自动补全冲突
 " let g:ycm_key_list_select_completion=['<c-n>']
 " let g:ycm_key_list_select_completion = ['<Down>']
@@ -311,67 +205,10 @@ let g:ycm_filetype_blacklist = {
 			\ 'tagbar' : 1,
 			\ 'gitcommit' : 1,
 			\}
-" }}}
+"}}}
 
-" omnicppcomplete{{{
-""set omnifunc=syntaxcomplete#Complete
-"""Note: This option must set it in .vimrc(_vimrc).  NOT IN .gvimrc(_gvimrc)!
-""" Disable AutoComplPop.
-""let g:acp_enableAtStartup = 0
-""" Use neocomplcache.
-""let g:neocomplcache_enable_at_startup = 1
-""" Use smartcase.
-""let g:neocomplcache_enable_smart_case = 1
-""" Set minimum syntax keyword length.
-""let g:neocomplcache_min_syntax_length = 3
-""let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
-""
-""" Enable heavy features.
-""" Use camel case completion.
-"""let g:neocomplcache_enable_camel_case_completion = 1
-""" Use underbar completion.
-"""let g:neocomplcache_enable_underbar_completion = 1
-""
-""" <TAB>: completion.
-""inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-""" <C-h>, <BS>: close popup and delete backword char.
-""inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
-""inoremap <expr><C-y>  neocomplcache#close_popup()
-""inoremap <expr><C-e>  neocomplcache#cancel_popup()
-""" Close popup by <Space>.
-""inoremap <expr><Space> pumvisible() ? neocomplcache#close_popup() : "\<Space>"
-""
-""" AutoComplPop like behavior.
-"""let g:neocomplcache_enable_auto_select = 1
-""
-""" Enable omni completion.
-""autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-""autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-""autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-""autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-""autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-""
-""" Enable heavy omni completion.
-""if !exists('g:neocomplcache_force_omni_patterns')
-""	let g:neocomplcache_force_omni_patterns = {}
-""endif
-""let g:neocomplcache_force_omni_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
-""let g:neocomplcache_force_omni_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
-""let g:neocomplcache_force_omni_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
-""
-""" For perlomni.vim setting.
-""" https://github.com/c9s/perlomni.vim
-""let g:neocomplcache_force_omni_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
-""set completeopt=longest,menu
-" }}}
-
-"cscope"
-set cscopequickfix=s-,c-,d-,i-,t-,e-
-
-"gtags"
-let Gtags_OpenQuickfixWindow = 0
-
-" srcexpl {{{
+"srcexpl
+" {{{
 " // The switch of the Source Explorer 
 nnoremap <leader>se :SrcExplToggle<CR> 
 
@@ -417,7 +254,8 @@ let g:SrcExpl_prevDefKey = "<F3>"
 let g:SrcExpl_nextDefKey = "<F4>" 
 " }}}
 
-" vim-airline {{{
+"vim-airline
+" {{{
 let g:airline_theme='badwolf'
 let g:airline_powerline_fonts=0
 let g:airline#extensions#tabline#enabled = 1
@@ -448,10 +286,105 @@ let g:airline_section_y = '%{&fileformat} %{(&fenc == "" ? &enc : &fenc)}'
 let g:airline_section_z = '%2l:%-1v/%L'
 " }}}
 
-highlight TagbarSignature guifg=#00afaf ctermfg=green
+"cscope"
+set cscopequickfix=s-,c-,d-,i-,t-,e-
 
+"gtags"
+let Gtags_OpenQuickfixWindow = 0
 
+"}}}
 
+" mappings
+" {{{
+let mapleader = ','
+" normal mode
+nnoremap Y                     y$
+nnoremap #                     :let @/=printf('\<%s\>\C', expand('<cword>'))<CR>
+nnoremap @                     :execute "vimgrep /" . expand("<cword>") . "/ **/*.c"<CR>
+nnoremap <C-L>                 :bn<CR>
+nnoremap <C-H>                 :bp<CR>
+nnoremap <C-N>                 :cn<CR>
+nnoremap <C-P>                 :cp<CR>
+nnoremap <C-J>                 7<C-e>
+nnoremap <C-K>                 7<C-y>
+nnoremap <C-T>                 :Gtags -r<CR><CR>
+nnoremap <C-F>                 :Gtags -gi<CR>
+"nnoremap <leader>h             gT
+"nnoremap <leader>l             gt
+nnoremap <leader>c             :cclose<CR>
+nnoremap <leader>o             :copen<CR>
+nnoremap <leader>r             :!gtags<CR>
+nnoremap <leader>b             : %!xxd<CR>
+nnoremap <leader>bb            : %!xxd -r<CR>
+nnoremap <leader>y             : YRShow<CR>
+nnoremap <leader>h             <C-W>h
+nnoremap <leader>j             <C-W>j
+nnoremap <leader>k             <C-W>k
+nnoremap <leader>l             <C-W>l
+nnoremap <leader>s             : so $MYVIMRC<CR>
+nnoremap <leader>v             : tabe $MYVIMRC<CR>
+"nnoremap <leader>t             : Tlist<CR>
+nnoremap <leader>t             : TagbarToggle<CR>
+nnoremap <leader>q             : Bdelete<CR>
+nnoremap <leader>g=             gg=G
+nnoremap <leader>f             : !firefox %<CR>
+nnoremap <leader>z             : setl fdm=indent fdc=1 fdn=1<CR>
+nnoremap <leader>;             : noh<CR>
+nnoremap <leader>p             : set paste<CR>
+nnoremap <leader>pp            : set nopaste<CR>
+nnoremap <silent><leader><space>       : NERDTreeToggle<CR>
+nnoremap <silent><leader>n     : set number<CR>
+nnoremap <silent><leader>N     : set nonumber<CR>
+nnoremap <leader>nn            : set nonumber<CR>
+"diff
+nnoremap <leader>u             :diffupdate<CR>
+"insert mode
+inoremap <leader>co            Yu Bo<yubo@yubo.org> <C-r>=strftime('%Y-%m-%d')<CR>
+inoremap <expr> <leader>fn     expand('%:p')
+inoremap <leader>dt            <C-r>=strftime('%Y-%m-%d')<CR>
+inoremap <leader>tm            <C-r>=strftime('%H:%M:%S')<CR>
+"inoremap <C-@>                 <C-x><C-u>
+"inoremap <C-space>             <C-x><C-u>
+inoremap <C-a>                 <home>
+inoremap <C-e>                 <end>
+inoremap <C-b>                 <left>
+inoremap <C-f>                 <right>
+"inoremap <A-b>                 <S-left>
+"inoremap <A-f>                 <S-right>
+inoremap <C-d>                 <del>
+inoremap <A-d>                 <C-o>dw
+"文件类型切换
+inoremap <C-j>                 <down>
+inoremap <C-k>                 <up>
+
+"command mode
+cnoremap <C-a>                 <home>
+cnoremap <C-e>                 <end>
+cnoremap <C-b>                 <left>
+cnoremap <C-f>                 <right>
+"cnoremap <leader>b             <S-left>
+"cnoremap <leader>f             <S-right>
+"cnoremap <leader>d             <S-right><C-w>
+cnoremap <C-d>                 <delete>
+cnoremap <C-p>                 <up>
+cnoremap <C-n>                 <down>
+
+"visual mode
+vnoremap <C-m>                 !markdown<CR>
+vnoremap <C-p>                 !pandoc<CR>
+vnoremap <C-f>                 !figlet<CR>
+" others
+cnoreabb <expr> W              getcmdtype()==':'&&getcmdline()=~#'^W'?'w':'W'
+"esc的映射
+"imap jj <esc>
+"使用tab键来代替%进行匹配跳转
+nnoremap <tab>                 %
+vnoremap <tab>                 %
+
+"}}}
+
+" funcs
+" {{{
 " preview def function
 function! s:pre_go(...)
 	let pos = getpos('.')
@@ -495,4 +428,5 @@ function! s:pre_c(...)
 	call setpos('.', pos)
 endfunction
 command! -nargs=*  PreC call s:pre_c()
+"}}}
 
