@@ -11,9 +11,7 @@
 	<l-u>		update diff
 ```
 
-##### i
----
-块选择
+##### 块选择
 ```
 	+-----+-----------------------------+
 	| di" | 删除双引号内的字符          |
@@ -25,7 +23,6 @@
 ```
 
 ##### 缩进
----
 ```
 	+---+--------+--------+--------+
 	|   | NORMAL | INSERT | VISUAL |
@@ -40,7 +37,6 @@
 ## 插件
 
 ##### EasyMotion
----
 ```
 	+---------------------+--------------+
 	| <leader><leader><w> | forward      |
@@ -49,21 +45,10 @@
 	+---------------------+--------------+
 ```
 
-##### ctrlp
----
-  - <c-p> 开启
-  - o-t 在新tab中打开
-
-##### bufexplorer
----
-  - <c-b> 开启
-
-##### snipMate
----
-
 ##### 注释 The-NERD-Commenter
----
+
 comment current line or text selected in visual mode
+
 ```
 	+--------+------------+------------+
 	|        |  line      | block      |
@@ -75,9 +60,7 @@ comment current line or text selected in visual mode
 ```
 
 ##### tablify
----
-  - <leader>tt
+  - `<leader>tt`
 
 ##### ZoomWin
----
-  - c-w o
+  - `c-w o`
