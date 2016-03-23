@@ -77,6 +77,7 @@ add_path ~/xq/bin/brcm4709/sdk_package/toolchain/bin
 add_path /opt/android/android-studio/bin
 add_path $HOME/bin
 add_path /usr/local/eclipse
+add_path /usr/games
 
 if [ "x"$TERM == "xxterm" ]; then
 	alias sshx='ssh -X'

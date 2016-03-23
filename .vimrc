@@ -1,5 +1,4 @@
-" options
-" {{{
+" options {{{
 " tab替换为4空格 %retab! 
 set ts=4
 "set tabstop=4 softtabstop=4 shiftwidth=4 expandtab
@@ -98,8 +97,7 @@ hi SpecialKey ctermfg=238
 
 "}}}
 
-" plugins
-" {{{
+" plugins {{{
 " git clone http://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
@@ -135,8 +133,7 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTree
 let NERDTreeIgnore = ['\.pyc', '\.mod\.c', '\.o', '\.ko', '\.a', '\.so', 'CMakeFiles', '\.cmake', 'CMakeCache.txt']
 " }}}
 
-"fakeclip
-"{{{
+"fakeclip {{{
 set clipboard=unnamed
 let g:fakeclip_terminal_multiplexer_type = 'tmux'
 vmap <C-t>y                 <Plug>(fakeclip-screen-y)
@@ -144,13 +141,11 @@ nmap <C-t>P                 <Plug>(fakeclip-screen-P)
 nmap <C-t>p                 <Plug>(fakeclip-screen-p)
 "}}}
 
-"tarbar
-"{{{
+"tarbar {{{
 highlight TagbarSignature guifg=#00afaf ctermfg=green
 "}}}
 
-"vim-go
-"{{{
+"vim-go {{{
 let g:go_fmt_command = "goimports"
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
@@ -163,8 +158,7 @@ au BufRead,BufNewFile *.go set filetype=go
 
 "}}}
 
-"YCM
-" {{{
+"YCM {{{
 " youcompleteme  默认tab  s-tab 和自动补全冲突
 " let g:ycm_key_list_select_completion=['<c-n>']
 " let g:ycm_key_list_select_completion = ['<Down>']
@@ -197,8 +191,7 @@ let g:ycm_filetype_blacklist = {
 			\}
 "}}}
 
-"srcexpl
-" {{{
+"srcexpl {{{
 " // The switch of the Source Explorer 
 nnoremap <leader>se :SrcExplToggle<CR> 
 
@@ -244,8 +237,7 @@ let g:SrcExpl_prevDefKey = "<F3>"
 let g:SrcExpl_nextDefKey = "<F4>" 
 " }}}
 
-"vim-airline
-" {{{
+"vim-airline {{{
 let g:airline_theme='badwolf'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#branch#enabled = 1
@@ -259,9 +251,9 @@ let g:airline_left_sep = ''
 let g:airline_left_alt_sep = ''
 let g:airline_right_sep = ''
 let g:airline_right_alt_sep = ''
-let g:airline_symbols.branch = '⭠'
+let g:airline_symbols.branch = '⎇'
 let g:airline_symbols.readonly = '⭤'
-let g:airline_symbols.linenr = ''
+let g:airline_symbols.linenr = '⭡'
 
 " or copy paste the following into your vimrc for shortform text
 let g:airline_mode_map = {
@@ -295,17 +287,22 @@ let Gtags_OpenQuickfixWindow = 0
 
 "}}}
 
-"color scheme
-"{{{
+"color scheme {{{
 set t_Co=256
-colorscheme molokai 
-let g:molokai_original = 1
-let g:rehash256 = 1
-"set background=dark
+syntax enable
+set background=dark
+let g:solarized_termtrans=1
+let g:solarized_termcolors=256
+let g:solarized_contrast="high"
+let g:solarized_visibility="high"
+colorscheme solarized
+
+"let g:molokai_original = 1
+"let g:rehash256 = 1
+"colorscheme molokai 
 "}}}
 
-" mappings
-" {{{
+" mappings {{{
 let mapleader = ','
 " normal mode
 nnoremap Y                     y$
@@ -393,8 +390,7 @@ vnoremap <tab>                 %
 
 "}}}
 
-" funcs
-" {{{
+" funcs {{{
 " preview def function
 function! s:pre_go(...)
 	let pos = getpos('.')
