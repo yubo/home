@@ -141,10 +141,6 @@ nmap <C-t>P                 <Plug>(fakeclip-screen-P)
 nmap <C-t>p                 <Plug>(fakeclip-screen-p)
 "}}}
 
-"tarbar {{{
-highlight TagbarSignature guifg=#00afaf ctermfg=green
-"}}}
-
 "vim-go {{{
 let g:go_fmt_command = "goimports"
 let g:go_highlight_functions = 1
@@ -300,6 +296,10 @@ colorscheme solarized
 "let g:molokai_original = 1
 "let g:rehash256 = 1
 "colorscheme molokai 
+
+"plugins color"
+hi VertSplit		ctermfg=244 ctermbg=232   cterm=bold
+hi TagbarSignature	ctermfg=37
 "}}}
 
 " mappings {{{
