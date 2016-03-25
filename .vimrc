@@ -298,8 +298,10 @@ colorscheme solarized
 "colorscheme molokai 
 
 "plugins color"
-hi VertSplit		ctermfg=244 ctermbg=232   cterm=bold
-hi TagbarSignature	ctermfg=37
+hi		VertSplit		ctermfg=244 ctermbg=232   cterm=bold
+hi		TagbarSignature	ctermfg=37
+hi		OverLength		ctermbg=red ctermfg=white guibg=#592929 
+match	OverLength		/\%81v.\+/
 "}}}
 
 " mappings {{{
