@@ -97,6 +97,94 @@ hi SpecialKey ctermfg=238
 
 "}}}
 
+" mappings {{{
+let mapleader = ','
+" normal mode
+nnoremap Y                     y$
+nnoremap #                     :let @/=printf('\<%s\>\C', expand('<cword>'))<CR>
+nnoremap @                     :execute "vimgrep /" . expand("<cword>") . "/ **/*.c"<CR>
+nnoremap <C-L>                 :bn<CR>
+nnoremap <C-H>                 :bp<CR>
+nnoremap <C-N>                 :cn<CR>
+nnoremap <C-P>                 :cp<CR>
+nnoremap <C-J>                 7<C-e>
+nnoremap <C-K>                 7<C-y>
+nnoremap <C-T>                 :Gtags -r<CR><CR>
+nnoremap <C-F>                 :Gtags -gi<CR>
+"nnoremap <leader>h             gT
+"nnoremap <leader>l             gt
+nnoremap <leader>c             :cclose<CR>
+nnoremap <leader>o             :copen<CR>
+nnoremap <leader>r             :!gtags<CR>
+nnoremap <leader>b             : %!xxd<CR>
+nnoremap <leader>bb            : %!xxd -r<CR>
+nnoremap <leader>y             : YRShow<CR>
+nnoremap <leader>h             <C-W>h
+nnoremap <leader>j             <C-W>j
+nnoremap <leader>k             <C-W>k
+nnoremap <leader>l             <C-W>l
+nnoremap <leader>s             : so $MYVIMRC<CR>
+nnoremap <leader>v             : tabe $MYVIMRC<CR>
+"nnoremap <leader>t             : Tlist<CR>
+nnoremap <leader>t             : TagbarToggle<CR>
+nnoremap <leader>q             : Bdelete<CR>
+nnoremap <leader>g=             gg=G
+nnoremap <leader>f             : !firefox %<CR>
+nnoremap <leader>z             : setl fdm=indent fdc=1 fdn=1<CR>
+nnoremap <leader>;             : noh<CR>
+nnoremap <leader>p             : set paste<CR>
+nnoremap <leader>pp            : set nopaste<CR>
+nnoremap <silent><leader><space>       : NERDTreeToggle<CR>
+nnoremap <silent><leader>n     : set number<CR>
+nnoremap <silent><leader>N     : set nonumber<CR>
+nnoremap <leader>nn            : set nonumber<CR>
+"diff
+nnoremap <leader>u             :diffupdate<CR>
+"insert mode
+inoremap <leader>co            Yu Bo<yubo@yubo.org> <C-r>=strftime('%Y-%m-%d')<CR>
+inoremap <expr> <leader>fn     expand('%:p')
+inoremap <leader>dt            <C-r>=strftime('%Y-%m-%d')<CR>
+inoremap <leader>tm            <C-r>=strftime('%H:%M:%S')<CR>
+"inoremap <C-@>                 <C-x><C-u>
+"inoremap <C-space>             <C-x><C-u>
+inoremap <C-a>                 <home>
+inoremap <C-e>                 <end>
+inoremap <C-b>                 <left>
+inoremap <C-f>                 <right>
+"inoremap <A-b>                 <S-left>
+"inoremap <A-f>                 <S-right>
+inoremap <C-d>                 <del>
+inoremap <A-d>                 <C-o>dw
+"文件类型切换
+inoremap <C-j>                 <down>
+inoremap <C-k>                 <up>
+
+"command mode
+cnoremap <C-a>                 <home>
+cnoremap <C-e>                 <end>
+cnoremap <C-b>                 <left>
+cnoremap <C-f>                 <right>
+"cnoremap <leader>b             <S-left>
+"cnoremap <leader>f             <S-right>
+"cnoremap <leader>d             <S-right><C-w>
+cnoremap <C-d>                 <delete>
+cnoremap <C-p>                 <up>
+cnoremap <C-n>                 <down>
+
+"visual mode
+vnoremap <C-m>                 !markdown<CR>
+vnoremap <C-p>                 !pandoc<CR>
+vnoremap <C-f>                 !figlet<CR>
+" others
+cnoreabb <expr> W              getcmdtype()==':'&&getcmdline()=~#'^W'?'w':'W'
+"esc的映射
+"imap jj <esc>
+"使用tab键来代替%进行匹配跳转
+nnoremap <tab>                 %
+vnoremap <tab>                 %
+
+"}}}
+
 " plugins {{{
 " git clone http://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
 set rtp+=~/.vim/bundle/vundle/
@@ -175,9 +263,9 @@ if !empty(glob("~/.vim/.ycm_extra_conf.py"))
 	let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
 endif
 nmap <leader>gd :YcmDiags<CR>
-nnoremap <leader>gh :YcmCompleter GoToDeclaration<CR>           " 跳转到申明处
-nnoremap <leader>gc :YcmCompleter GoToDefinition<CR>            " 跳转到定义处
-nnoremap <leader>gg :YcmCompleter GoToDefinitionElseDeclaration<CR>
+nmap <leader>gh :YcmCompleter GoToDeclaration<CR>           " 跳转到申明处
+nmap <leader>gc :YcmCompleter GoToDefinition<CR>            " 跳转到定义处
+nmap <leader>ge :YcmCompleter GoToDefinitionElseDeclaration<CR>
 " 直接触发自动补全
 let g:ycm_key_invoke_completion = '<C-Space>'
 " 黑名单,不启用
@@ -304,136 +392,3 @@ hi		OverLength		ctermbg=red ctermfg=white guibg=#592929
 match	OverLength		/\%81v.\+/
 "}}}
 
-" mappings {{{
-let mapleader = ','
-" normal mode
-nnoremap Y                     y$
-nnoremap #                     :let @/=printf('\<%s\>\C', expand('<cword>'))<CR>
-nnoremap @                     :execute "vimgrep /" . expand("<cword>") . "/ **/*.c"<CR>
-nnoremap <C-L>                 :bn<CR>
-nnoremap <C-H>                 :bp<CR>
-nnoremap <C-N>                 :cn<CR>
-nnoremap <C-P>                 :cp<CR>
-nnoremap <C-J>                 7<C-e>
-nnoremap <C-K>                 7<C-y>
-nnoremap <C-T>                 :Gtags -r<CR><CR>
-nnoremap <C-F>                 :Gtags -gi<CR>
-"nnoremap <leader>h             gT
-"nnoremap <leader>l             gt
-nnoremap <leader>c             :cclose<CR>
-nnoremap <leader>o             :copen<CR>
-nnoremap <leader>r             :!gtags<CR>
-nnoremap <leader>b             : %!xxd<CR>
-nnoremap <leader>bb            : %!xxd -r<CR>
-nnoremap <leader>y             : YRShow<CR>
-nnoremap <leader>h             <C-W>h
-nnoremap <leader>j             <C-W>j
-nnoremap <leader>k             <C-W>k
-nnoremap <leader>l             <C-W>l
-nnoremap <leader>s             : so $MYVIMRC<CR>
-nnoremap <leader>v             : tabe $MYVIMRC<CR>
-"nnoremap <leader>t             : Tlist<CR>
-nnoremap <leader>t             : TagbarToggle<CR>
-nnoremap <leader>q             : Bdelete<CR>
-nnoremap <leader>g=             gg=G
-nnoremap <leader>f             : !firefox %<CR>
-nnoremap <leader>z             : setl fdm=indent fdc=1 fdn=1<CR>
-nnoremap <leader>;             : noh<CR>
-nnoremap <leader>p             : set paste<CR>
-nnoremap <leader>pp            : set nopaste<CR>
-nnoremap <silent><leader><space>       : NERDTreeToggle<CR>
-nnoremap <silent><leader>n     : set number<CR>
-nnoremap <silent><leader>N     : set nonumber<CR>
-nnoremap <leader>nn            : set nonumber<CR>
-"diff
-nnoremap <leader>u             :diffupdate<CR>
-"insert mode
-inoremap <leader>co            Yu Bo<yubo@yubo.org> <C-r>=strftime('%Y-%m-%d')<CR>
-inoremap <expr> <leader>fn     expand('%:p')
-inoremap <leader>dt            <C-r>=strftime('%Y-%m-%d')<CR>
-inoremap <leader>tm            <C-r>=strftime('%H:%M:%S')<CR>
-"inoremap <C-@>                 <C-x><C-u>
-"inoremap <C-space>             <C-x><C-u>
-inoremap <C-a>                 <home>
-inoremap <C-e>                 <end>
-inoremap <C-b>                 <left>
-inoremap <C-f>                 <right>
-"inoremap <A-b>                 <S-left>
-"inoremap <A-f>                 <S-right>
-inoremap <C-d>                 <del>
-inoremap <A-d>                 <C-o>dw
-"文件类型切换
-inoremap <C-j>                 <down>
-inoremap <C-k>                 <up>
-
-"command mode
-cnoremap <C-a>                 <home>
-cnoremap <C-e>                 <end>
-cnoremap <C-b>                 <left>
-cnoremap <C-f>                 <right>
-"cnoremap <leader>b             <S-left>
-"cnoremap <leader>f             <S-right>
-"cnoremap <leader>d             <S-right><C-w>
-cnoremap <C-d>                 <delete>
-cnoremap <C-p>                 <up>
-cnoremap <C-n>                 <down>
-
-"visual mode
-vnoremap <C-m>                 !markdown<CR>
-vnoremap <C-p>                 !pandoc<CR>
-vnoremap <C-f>                 !figlet<CR>
-" others
-cnoreabb <expr> W              getcmdtype()==':'&&getcmdline()=~#'^W'?'w':'W'
-"esc的映射
-"imap jj <esc>
-"使用tab键来代替%进行匹配跳转
-nnoremap <tab>                 %
-vnoremap <tab>                 %
-
-"}}}
-
-" funcs {{{
-" preview def function
-function! s:pre_go(...)
-	let pos = getpos('.')
-	silent! wincmd P			" jump to preview window
-	if &previewwindow			" if we really get there...
-		match none			" delete existing highlight
-		wincmd p			" back to old window
-	endif
-
-	ped %
-
-	silent! wincmd P			" jump to preview window
-	if &previewwindow		" if we really get there...
-		call setpos('.', pos)
-		""call go#def#Jump()
-		GoDef
-		wincmd p			" back to old window
-	endif
-
-	call setpos('.', pos)
-endfunction
-command! -nargs=*  PreGo call s:pre_go()
-
-function! s:pre_c(...)
-	let pos = getpos('.')
-	silent! wincmd P			" jump to preview window
-	if &previewwindow			" if we really get there...
-		match none			" delete existing highlight
-		wincmd p			" back to old window
-	endif
-
-	ped %
-
-	silent! wincmd P			" jump to preview window
-	if &previewwindow		" if we really get there...
-		call setpos('.', pos)
-		GtagsCursor
-		wincmd p			" back to old window
-	endif
-
-	call setpos('.', pos)
-endfunction
-command! -nargs=*  PreC call s:pre_c()
-"}}}

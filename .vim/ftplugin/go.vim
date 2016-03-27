@@ -19,4 +19,3 @@ nmap <Leader>e  <Plug>(go-rename)
 
 nmap <C-]>	:GoDef<CR>
 nmap <C-g>   <C-w>l:silent! hide<CR>:vs<CR>:GoDef<CR><C-w>h
-"nmap <C-g>   :PreGo<CR>
