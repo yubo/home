@@ -175,13 +175,13 @@ cnoremap <C-n>                 <down>
 vnoremap <C-m>                 !markdown<CR>
 vnoremap <C-p>                 !pandoc<CR>
 vnoremap <C-f>                 !figlet<CR>
+
 " others
 cnoreabb <expr> W              getcmdtype()==':'&&getcmdline()=~#'^W'?'w':'W'
 "esc的映射
 "imap jj <esc>
 "使用tab键来代替%进行匹配跳转
-nnoremap <tab>                 %
-vnoremap <tab>                 %
+"nnoremap <tab>                 %
 
 "}}}
 
@@ -218,7 +218,7 @@ Bundle 'airblade/vim-gitgutter'
 let NERDChristmasTree=1
 let NERDTreeWinPos='left'
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
-let NERDTreeIgnore = ['\.pyc', '\.mod\.c', '\.o', '\.ko', '\.a', '\.so', 'CMakeFiles', '\.cmake', 'CMakeCache.txt']
+let NERDTreeIgnore = ['\.pyc', '\.mod\.c', '\.o', '\.ko', '\.a', '\.so', 'CMakeFiles', '\.cmake', 'CMakeCache.txt', 'GPATH', 'GRTAGS', 'GTAGS']
 " }}}
 
 "fakeclip {{{
@@ -230,13 +230,14 @@ nmap <C-t>p                 <Plug>(fakeclip-screen-p)
 "}}}
 
 "vim-go {{{
-let g:go_fmt_command = "goimports"
+"golang
+let g:go_fmt_command = "gofmt"
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
 let g:go_highlight_structs = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
-let g:godef_split=3
+""let g:godef_split=3
 au BufRead,BufNewFile *.go set filetype=go
 
 
@@ -388,7 +389,7 @@ colorscheme solarized
 "plugins color"
 hi		VertSplit		ctermfg=244 ctermbg=232   cterm=bold
 hi		TagbarSignature	ctermfg=37
-hi		OverLength		ctermbg=red ctermfg=white guibg=#592929 
-match	OverLength		/\%81v.\+/
+"hi		OverLength		ctermbg=red ctermfg=white guibg=#592929 
+"match	OverLength		/\%81v.\+/
 "}}}
 
