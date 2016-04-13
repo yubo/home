@@ -214,6 +214,11 @@ Bundle 'airblade/vim-gitgutter'
 "Bundle 'taglist.vim'
 "Bundle 'https://github.com/kana/vim-fakeclip.git'
 
+" EasyMotion {{{
+let g:EasyMotion_mapping_b = '<C-b>'
+let g:EasyMotion_mapping_w = '<C-f>'
+"}}} 
+
 " NERDTree {{{
 let NERDChristmasTree=1
 let NERDTreeWinPos='left'

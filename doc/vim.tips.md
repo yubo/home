@@ -37,10 +37,10 @@
 
 ##### EasyMotion
 
-| map                   | desc         |
-|-----------------------|--------------|
-| `<leader><leader><w>` | forward      |
-| `<leader><leader><k>` | back         |
+| map     | desc         |
+|---------|--------------|
+| `<c-f>` | forward      |
+| `<c-b>` | back         |
 
 ##### 注释 The-NERD-Commenter
 
