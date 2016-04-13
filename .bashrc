@@ -91,3 +91,8 @@ if [ -f ~/.bash_docker ]; then
 	. ~/.bash_docker
 fi
 
+if [ -d ~/src/dpdk ]; then
+	export RTE_SDK=~/src/dpdk
+	export RTE_TARGET=x86_64-native-linuxapp-gcc
+fi
+
