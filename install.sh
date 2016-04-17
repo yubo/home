@@ -54,3 +54,8 @@ if [ ! -e $HOME/gopath ]; then
     mkdir -p $HOME/gopath
 fi
 
+if [ `uname` == 'Darwin' ]; then
+    cp -a ./osx $HOME/Downloads/
+fi
+
+
