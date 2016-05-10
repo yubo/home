@@ -114,8 +114,9 @@ nnoremap <C-F>                 :Gtags -gi<CR>
 nnoremap <leader>c             :cclose<CR>
 nnoremap <leader>o             :copen<CR>
 nnoremap <leader>r             :!gtags<CR>
-nnoremap <leader>b             : %!xxd<CR>
-nnoremap <leader>bb            : %!xxd -r<CR>
+"nnoremap <leader>b             : %!xxd<CR>
+"nnoremap <leader>bb            : %!xxd -r<CR>
+nnoremap <leader>b             : BufExplorer<CR>
 nnoremap <leader>y             : YRShow<CR>
 nnoremap <leader>h             <C-W>h
 nnoremap <leader>j             <C-W>j
@@ -190,6 +191,7 @@ call vundle#rc()
 " let Vundle manage Vundle
 Bundle 'gmarik/vundle'
 Bundle 'AutoClose'
+Bundle 'jlanzarotta/bufexplorer'
 Bundle 'EasyMotion'
 Bundle 'The-NERD-tree'
 Bundle 'The-NERD-Commenter'
