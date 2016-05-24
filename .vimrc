@@ -140,7 +140,7 @@ nnoremap <leader>nn            : set nonumber<CR>
 "diff
 nnoremap <leader>u             :diffupdate<CR>
 "insert mode
-inoremap <leader>co            Yu Bo<yubo@yubo.org> <C-r>=strftime('%Y-%m-%d')<CR>
+inoremap <leader>co            // Copyright <C-r>=strftime('%Y')<CR> yubo. All rights reserved.<CR>// Use of this source code is governed by a BSD-style<CR>// license that can be found in the LICENSE file.<CR>
 inoremap <expr> <leader>fn     expand('%:p')
 inoremap <leader>dt            <C-r>=strftime('%Y-%m-%d')<CR>
 inoremap <leader>tm            <C-r>=strftime('%H:%M:%S')<CR>
