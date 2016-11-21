@@ -4,7 +4,8 @@ endif
 
 
 nmap <Leader>s  <Plug>(go-implements)
-nmap <Leader>i  <Plug>(go-info)
+"nmap <Leader>i  <Plug>(go-info)
+nmap <Leader>i   :GoImports<CR>
 nmap <Leader>gd <Plug>(go-doc)
 nmap <Leader>gv <Plug>(go-doc-vertical)
 nmap <Leader>gb <Plug>(go-doc-browser)

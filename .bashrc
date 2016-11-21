@@ -30,6 +30,7 @@ alias u='ssh -X yubo@u'
 alias shs='python -m SimpleHTTPServer'
 alias dstat='dstat -cdlmnpsy'
 alias docker-dev='GOPATH=/go:/go/src/github.com/docker/vendor'
+alias mm='make 2>&1 | more'
 
 if [ `uname` == 'Darwin' ]; then
     alias ls='ls -GF'
@@ -53,7 +54,6 @@ if [ -e $HOME/go ]; then
 	export GOROOT=$HOME/go
 	add_path $GOROOT/bin
 	add_path $GOPATH/bin
-	add_path $PATH
 fi
 
 function parse_git_branch {
