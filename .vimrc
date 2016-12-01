@@ -227,7 +227,9 @@ let NERDTreeIgnore = ['\.pyc', '\.mod\.c', '\.o', '\.ko', '\.a', '\.so', 'CMakeF
 " }}}
 
 "fakeclip {{{
-set clipboard=unnamed
+if $TMUX == ''
+set clipboard+=unnamed
+endif
 let g:fakeclip_terminal_multiplexer_type = 'tmux'
 vmap <C-t>y                 <Plug>(fakeclip-screen-y)
 nmap <C-t>P                 <Plug>(fakeclip-screen-P)
