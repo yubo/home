@@ -1,6 +1,6 @@
 # .bash_profile 
 #
-export LANG="zh_CN.UTF-8"
+export LANG=C
 export PS1='[${debian_chroot:+($debian_chroot)}\u@\h:\w]\$'
 export TERM=xterm-color
 
