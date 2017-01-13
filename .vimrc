@@ -213,6 +213,10 @@ Bundle 'maksimr/vim-jsbeautify'
 "Bundle 'taglist.vim'
 "Bundle 'https://github.com/kana/vim-fakeclip.git'
 
+" AutoClose {{{
+imap {{ {{}}<Esc>hi
+"}}} 
+"
 "vim-jsbeautify {{{
 let g:editorconfig_Beautifier = '~/.vim/.editorconfig'
 nnoremap <leader>f :call JsBeautify()<cr>
@@ -227,7 +231,6 @@ autocmd FileType jsx        vnoremap <buffer> <leader>f :call RangeJsxBeautify()
 autocmd FileType html       vnoremap <buffer> <leader>f :call RangeHtmlBeautify()<cr>
 autocmd FileType css        vnoremap <buffer> <leader>f :call RangeCSSBeautify()<cr>
 "}}}
-
 
 " EasyMotion {{{
 let g:EasyMotion_mapping_b = '<C-b>'
