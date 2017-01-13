@@ -50,8 +50,8 @@ if [ -f $HOME/.rbenv/bin/rbenv ]; then
 fi
 
 if [ -e $HOME/go ]; then
-	export GOPATH=$HOME/gopath
 	export GOROOT=$HOME/go
+	export GOPATH=$HOME/gopath
 	add_path $GOROOT/bin
 	add_path $GOPATH/bin
 fi

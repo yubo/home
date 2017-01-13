@@ -128,7 +128,6 @@ nnoremap <leader>v             : tabe $MYVIMRC<CR>
 nnoremap <leader>t             : TagbarToggle<CR>
 nnoremap <leader>q             : Bdelete<CR>
 nnoremap <leader>g=             gg=G
-nnoremap <leader>f             : !firefox %<CR>
 nnoremap <leader>z             : setl fdm=indent fdc=1 fdn=1<CR>
 nnoremap <leader>;             : noh<CR>
 nnoremap <leader>p             : set paste<CR>
@@ -181,7 +180,6 @@ cnoreabb <expr> W              getcmdtype()==':'&&getcmdline()=~#'^W'?'w':'W'
 "imap jj <esc>
 "使用tab键来代替%进行匹配跳转
 "nnoremap <tab>                 %
-
 "}}}
 
 " plugins {{{
@@ -207,12 +205,29 @@ Bundle 'fatih/vim-go'
 Bundle 'Valloric/YouCompleteMe'
 Bundle 'tpope/vim-surround'
 Bundle 'airblade/vim-gitgutter'
+Bundle 'maksimr/vim-jsbeautify'
 "Bundle 'yubo/vim-colorschemes'
 "Bundle 'SirVer/ultisnips'
 "Bundle 'wesleyche/SrcExpl'
 "Bundle 'snipMate'
 "Bundle 'taglist.vim'
 "Bundle 'https://github.com/kana/vim-fakeclip.git'
+
+"vim-jsbeautify {{{
+let g:editorconfig_Beautifier = '~/.vim/.editorconfig'
+nnoremap <leader>f :call JsBeautify()<cr>
+autocmd FileType javascript nnoremap <buffer> <leader>f :call JsBeautify()<cr>
+autocmd FileType json       nnoremap <buffer> <leader>f :call JsonBeautify()<cr>
+autocmd FileType jsx        nnoremap <buffer> <leader>f :call JsxBeautify()<cr>
+autocmd FileType html       nnoremap <buffer> <leader>f :call HtmlBeautify()<cr>
+autocmd FileType css        nnoremap <buffer> <leader>f :call CSSBeautify()<cr>"
+autocmd FileType javascript vnoremap <buffer> <leader>f :call RangeJsBeautify()<cr>
+autocmd FileType json       vnoremap <buffer> <leader>f :call RangeJsonBeautify()<cr>
+autocmd FileType jsx        vnoremap <buffer> <leader>f :call RangeJsxBeautify()<cr>
+autocmd FileType html       vnoremap <buffer> <leader>f :call RangeHtmlBeautify()<cr>
+autocmd FileType css        vnoremap <buffer> <leader>f :call RangeCSSBeautify()<cr>
+"}}}
+
 
 " EasyMotion {{{
 let g:EasyMotion_mapping_b = '<C-b>'
