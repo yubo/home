@@ -93,6 +93,9 @@ endif
 filetype plugin indent on
 hi SpecialKey ctermfg=238
 
+au BufRead,BufNewFile *.go set filetype=go
+au BufRead,BufNewFile *.vue set filetype=html
+
 "}}}
 
 " mappings {{{
@@ -185,7 +188,7 @@ cnoreabb <expr> W              getcmdtype()==':'&&getcmdline()=~#'^W'?'w':'W'
 " plugins {{{
 " git clone http://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
 set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+call vundle#begin()
 " let Vundle manage Vundle
 Bundle 'gmarik/vundle'
 Bundle 'AutoClose'
@@ -212,6 +215,7 @@ Bundle 'maksimr/vim-jsbeautify'
 "Bundle 'snipMate'
 "Bundle 'taglist.vim'
 "Bundle 'https://github.com/kana/vim-fakeclip.git'
+call vundle#end()
 
 " AutoClose {{{
 imap {{ {{}}<Esc>hi
@@ -263,7 +267,6 @@ let g:go_highlight_structs = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
 ""let g:godef_split=3
-au BufRead,BufNewFile *.go set filetype=go
 
 
 "}}}
