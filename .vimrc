@@ -95,6 +95,11 @@ hi SpecialKey ctermfg=238
 
 au BufRead,BufNewFile *.go set filetype=go
 au BufRead,BufNewFile *.vue set filetype=html
+au FileType html setlocal et sta sw=2 sts=2
+au FileType js setlocal et sta sw=2 sts=2
+au FileType css setlocal et sta sw=2 sts=2
+au FileType json setlocal et sta sw=2 sts=2
+au FileType jsx setlocal et sta sw=2 sts=2
 
 "}}}
 
