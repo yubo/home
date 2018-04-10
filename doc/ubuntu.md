@@ -41,14 +41,4 @@ cd ~/.vim/bundle/YouCompleteMe
 ./install.sh --clang-completer
 ```
 
-## golang
-```shell
-cd
-mkdir gopath
-git clone https://github.com/golang/go
-cd go
-git checkout go1.4.1
-cd src
-./all.bash
-```
-
+## [golang](golang.md)
