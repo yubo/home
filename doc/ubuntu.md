@@ -4,8 +4,7 @@
 sudo apt-get install tmux indent ctags
 
 #dev
-sudo apt-get build-dep
-sudo apt-get install git-core build-essential libssl-dev libncurses5-dev unzip cmake
+sudo apt-get install git-core build-essential libssl-dev libncurses5-dev unzip cmake global
 
 #kernel dev
 sudo apt-get build-dep linux-image-$(uname -r)
@@ -16,29 +15,11 @@ git clone https://github.com/sstephenson/rbenv.git ~/.rbenv
 git clone https://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
 ```
 
-## global 
-```shell
-wget http://tamacom.com/global/global-6.4.tar.gz
-```
-
-## vim7.3+
-```shell
-wget http://ftp.vim.org/pub/vim/unix/vim-7.4.tar.bz2
-locate python | grep '/config$'
-./configure --with-features=huge \
-            --enable-multibyte \
-            --enable-rubyinterp \
-            --enable-pythoninterp \
-            --with-python-config-dir=/usr/lib64/python2.6/config \
-            --enable-perlinterp \
-            --enable-luainterp \
-            --enable-gui=gtk2
-```
+## [golang](golang.md)
 
 ## ycm
 ```shell
 cd ~/.vim/bundle/YouCompleteMe
-./install.sh --clang-completer
+./install.sh --clang-completer --go-completer
 ```
 
-## [golang](golang.md)
