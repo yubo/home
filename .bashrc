@@ -18,6 +18,7 @@ alias vi='vim'
 alias ff='find . -type f| xargs grep -n --color '
 alias ffh='find . -name \*.h -type f| xargs grep -n --color '
 alias ffc='find . -name \*.c -o -name \*.cpp -type f| xargs grep -n --color '
+alias ffgo='find . -name \*.go -type f| xargs grep -n --color '
 alias grep='grep --color '
 alias rm='rm -i'
 alias cp='cp -i'
@@ -95,4 +96,3 @@ if [ -d ~/src/dpdk ]; then
 	export RTE_SDK=~/src/dpdk
 	export RTE_TARGET=x86_64-native-linuxapp-gcc
 fi
-
