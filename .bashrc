@@ -34,6 +34,7 @@ alias docker-dev='GOPATH=/go:/go/src/github.com/docker/vendor'
 alias mm='make 2>&1 | more'
 alias canary="/Applications/Google\ Chrome\ Canary.app/Contents/MacOS/Google\ Chrome\ Canary"
 alias cgdb="canary --remote-debugging-port=9222 http://localhost:9222 http://chromium.org"
+alias golist="go list -f '{{join .Imports \"\n\"}}'"
 
 if [ `uname` == 'Darwin' ]; then
     alias ls='ls -GF'
