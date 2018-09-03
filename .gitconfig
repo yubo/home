@@ -24,3 +24,6 @@
 	default = matching
 [color]
 	ui = auto
+[credential]
+	helper = store --file ~/.git-credentials
+	helper = cache --timeout 2592000
