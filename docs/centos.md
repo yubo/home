@@ -3,7 +3,10 @@
 
 #dev
 sudo yum update
-sudo yum install clang clang-analyzer java make gcc-c++ gcc-gfortran gcc compat-gcc-44-c++ compat-gcc-44-gfortran compat-libf2c-34 gdb cmake git tig git-svn curl-devel expat-devel gettext-devel openssl-devel zlib-devel gcc perl-ExtUtils-MakeMaker nodejs npm wget python-devel bind-utils
+sudo yum install clang clang-analyzer java make gcc-c++ gcc-gfortran gcc compat-gcc-44-c++ \
+compat-gcc-44-gfortran compat-libf2c-34 gdb cmake git tig git-svn curl-devel expat-devel \
+gettext-devel openssl-devel zlib-devel gcc perl-ExtUtils-MakeMaker nodejs npm wget \
+python-devel bind-utils
 
 #vim
 sudo yum install tmux indent ctags vim

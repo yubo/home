@@ -11,13 +11,14 @@ vim
 ```
 
 #### env install
-  * [ubuntu](doc/ubuntu.md)
-  * [osx](doc/osx.md)
+  * [ubuntu](docs/ubuntu.md)
+  * [centos](docs/centos.md)
+  * [osx](docs/osx.md)
 
 #### tips
-  * [shell](doc/sh.tips.md)
-  * [tmux](doc/tmux.tips.md)
-  * [vim](doc/vim.tips.md)
+  * [shell](docs/sh.tips.md)
+  * [tmux](docs/tmux.tips.md)
+  * [vim](docs/vim.tips.md)
 	
 ```
                     __
