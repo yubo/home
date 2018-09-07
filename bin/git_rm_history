@@ -1,12 +1,12 @@
 #!/bin/sh
-
-if [[ $# < 2 ]]; then
+if [[ $# < 1 ]]; then
 	echo $0 '<YOUR-FILE-WITH-SENSITIVE-DATA>'
 	exit 1
 fi
 
+set -x
 git filter-branch --force --index-filter \
-	'git rm --cached --ignore-unmatch cmd/trailerctl/trailerctl' \
+	"git rm --cached --ignore-unmatch $1" \
 	--prune-empty --tag-name-filter cat -- --all
 
 git for-each-ref --format='delete %(refname)' refs/original | git update-ref --stdin
