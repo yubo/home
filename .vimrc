@@ -100,6 +100,7 @@ au FileType javascript setlocal et sta sw=2 sts=2
 au FileType css setlocal et sta sw=2 sts=2
 au FileType json setlocal et sta sw=2 sts=2
 au FileType jsx setlocal et sta sw=2 sts=2
+au BufRead,BufNewFile *.asm,*.c,*.cpp,*.java,*.cs,*.sh,*.lua,*.pl,*.pm,*.py,*.rb,*.hs,*.vim,*.go 2match Underlined /.\%>81v.*/
 
 "}}}
 
