@@ -71,7 +71,7 @@ function parse_git_branch {
 }
 
 if [ -n $(parse_git_branch) ]; then
-	export PS1='\[\e[1;36m\]$(e=$? && [ $e -ne 0 ] && echo "[$e]" )\[\e[0m\][${debian_chroot:+($debian_chroot)}\u@\h:\w]\[\e[1;36m\]$(parse_git_branch)\[\e[0m\]\$'
+	export PS1='\[\e[1;36m\]$(e=$? && [ $e -ne 0 ] && echo "[$e]" )\[\e[0m\][${debian_chroot:+($debian_chroot)}\u@\h:\w]\[\e[1;36m\]$(parse_git_branch)\[\e[0m\]\[\e[1;31m\]${REC}\[\e[0m\]\$'
 fi
 
 if [ -f $HOME/.git-completion.bash ]; then
