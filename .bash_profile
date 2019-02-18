@@ -8,3 +8,6 @@ if [ -f ~/.bashrc ]; then
 	. ~/.bashrc
 fi
 
+
+[ -f /usr/local/homebrew/etc/bash_completion ] && . /usr/local/homebrew/etc/bash_completion
+
