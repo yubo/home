@@ -18,7 +18,7 @@ set fileencodings=utf-8,gb2312,gbk,gb18030
 set termencoding=utf-8
 set fileformats=unix
 set encoding=utf-8
-set scrolloff=3
+set scrolloff=2
 set fenc=utf-8
 set formatoptions=mnoqt
 " gVim will load `$VIM/vimrc` before loading `~/.vimrc`,
@@ -100,7 +100,7 @@ au FileType javascript setlocal et sta sw=2 sts=2
 au FileType css setlocal et sta sw=2 sts=2
 au FileType json setlocal et sta sw=2 sts=2
 au FileType jsx setlocal et sta sw=2 sts=2
-au BufRead,BufNewFile *.asm,*.c,*.cpp,*.java,*.cs,*.sh,*.lua,*.pl,*.pm,*.py,*.rb,*.hs,*.vim,*.go 2match Underlined /.\%>81v.*/
+"au BufRead,BufNewFile *.asm,*.c,*.cpp,*.java,*.cs,*.sh,*.lua,*.pl,*.pm,*.py,*.rb,*.hs,*.vim,*.go 2match Underlined /.\%>81v.*/
 
 "}}}
 
@@ -123,6 +123,8 @@ nnoremap <C-F>                 :Gtags -gi<CR>
 nnoremap <leader>c             :cclose<CR>
 nnoremap <leader>o             :copen<CR>
 nnoremap <leader>r             :!gtags<CR>
+nnoremap <leader>j             /## <CR>z<CR>: noh<CR>
+nnoremap <leader>k             ?## <CR>z<CR>: noh<CR>
 "nnoremap <leader>b             : %!xxd<CR>
 "nnoremap <leader>bb            : %!xxd -r<CR>
 nnoremap <leader>b             : BufExplorer<CR>
