@@ -42,6 +42,9 @@ alias sstop="sudo systemctl stop "
 alias srestart="sudo systemctl restart "
 alias sreload="sudo systemctl reload "
 alias ccd='cd $(readlink -f .)'
+alias antlr4='java -Xmx500M -cp "~/bin/antlr-4.7.1-complete.jar:$CLASSPATH" org.antlr.v4.Tool'
+alias grun='java -Xmx500M -cp "~/bin/antlr-4.7.1-complete.jar:$CLASSPATH" org.antlr.v4.gui.TestRig'
+alias bfg='java -jar ~/bin/bfg-1.13.0.jar'
 
 if [ `uname` == 'Darwin' ]; then
     alias ls='ls -GF'
@@ -106,3 +109,6 @@ if [ -d ~/src/dpdk ]; then
 	export RTE_SDK=~/src/dpdk
 	export RTE_TARGET=x86_64-native-linuxapp-gcc
 fi
+
+## java
+export CLASSPATH=".:~/bin/antlr-4.7.1-complete.jar:$CLASSPATH"

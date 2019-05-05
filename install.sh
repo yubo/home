@@ -58,4 +58,11 @@ if [ `uname` = "Darwin" ]; then
     cp -a ./osx $HOME/Downloads/
 fi
 
+if [ ! -f ~/bin/bfg-1.13.0.jar ]; then
+	curl -O https://repo1.maven.org/maven2/com/madgag/bfg/1.13.0/bfg-1.13.0.jar
+fi
 
+
+if [ ! -f ~/bin/antlr-4.7.1-complete.jar ]; then
+	curl -O https://www.antlr.org/download/antlr-4.7.1-complete.jar
+fi
