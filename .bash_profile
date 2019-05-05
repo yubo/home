@@ -9,5 +9,8 @@ if [ -f ~/.bashrc ]; then
 fi
 
 
-[ -f /usr/local/homebrew/etc/bash_completion ] && . /usr/local/homebrew/etc/bash_completion
-
+if [ -f /usr/local/homebrew/etc/bash_completion ]; then
+	. /usr/local/homebrew/etc/bash_completion
+elif [ -f /usr/local/etc/bash_completion ]; then
+	. /usr/local/etc/bash_completion
+fi
