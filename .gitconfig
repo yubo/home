@@ -10,6 +10,9 @@
 	whitespace = tab-in-indent,trailing-space
 [alias]
 	s = status
+	d = difftool
+	dl = difftool HEAD^ HEAD
+	dc = difftool --cached
 	co = checkout
 	cm = commit
 	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --
@@ -26,3 +29,8 @@
 	ui = auto
 [credential]
 	helper = cache --timeout 2592000
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true

@@ -42,9 +42,10 @@ alias sstop="sudo systemctl stop "
 alias srestart="sudo systemctl restart "
 alias sreload="sudo systemctl reload "
 alias ccd='cd $(readlink -f .)'
-alias antlr4='java -Xmx500M -cp "~/bin/antlr-4.7.1-complete.jar:$CLASSPATH" org.antlr.v4.Tool'
-alias grun='java -Xmx500M -cp "~/bin/antlr-4.7.1-complete.jar:$CLASSPATH" org.antlr.v4.gui.TestRig'
+alias antlr4='java -Xmx500M -cp "${HOME}/bin/antlr-4.7.1-complete.jar:$CLASSPATH" org.antlr.v4.Tool'
+alias grun='java -Xmx500M -cp "${HOME}/bin/antlr-4.7.1-complete.jar:$CLASSPATH" org.antlr.v4.gui.TestRig'
 alias bfg='java -jar ~/bin/bfg-1.13.0.jar'
+alias gotest='go test -v -args -v 10 -logtostderr true'
 
 if [ `uname` == 'Darwin' ]; then
     alias ls='ls -GF'
@@ -111,4 +112,7 @@ if [ -d ~/src/dpdk ]; then
 fi
 
 ## java
-export CLASSPATH=".:~/bin/antlr-4.7.1-complete.jar:$CLASSPATH"
+export CLASSPATH=".:${HOME}/bin/antlr-4.7.1-complete.jar:$CLASSPATH"
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"
