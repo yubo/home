@@ -112,7 +112,11 @@ if [ -d ~/src/dpdk ]; then
 fi
 
 ## java
-export CLASSPATH=".:${HOME}/bin/antlr-4.7.1-complete.jar:$CLASSPATH"
+if [ -f "${HOME}/bin/antlr-4.7.1-complete.jar" ]; then
+	export CLASSPATH=".:${HOME}/bin/antlr-4.7.1-complete.jar:$CLASSPATH"
+fi
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="$PATH:$HOME/.rvm/bin"
+if [ -d "${HOME}/.rvm/bin" ]; then
+	export PATH="$PATH:$HOME/.rvm/bin"
+fi
