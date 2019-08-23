@@ -255,7 +255,7 @@ let g:EasyMotion_mapping_w = '<C-f>'
 let NERDChristmasTree=1
 let NERDTreeWinPos='left'
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
-let NERDTreeIgnore = ['\.pyc', '\.mod\.c', '\.o', '\.ko', '\.a', '\.so', 'CMakeFiles', '\.cmake', 'CMakeCache.txt', 'GPATH', 'GRTAGS', 'GTAGS']
+let NERDTreeIgnore = ['\.pyc', '\.mod\.c', '\.o', '\.ko', '\.a', '\.so', 'CMakeFiles', 'CMakeCache.txt', 'GPATH', 'GRTAGS', 'GTAGS']
 " }}}
 
 "fakeclip {{{

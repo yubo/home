@@ -1,5 +1,4 @@
 .vim/bundle
-bin
 *.swp
 .vim/.netrwhist
 .DS_Store
