@@ -1,0 +1,407 @@
+#!/usr/bin/env perl
+
+##    PDFCrop  version 0.4b
+##    -------  ------- ----
+## 
+##  Copyright 2011 -- Eric Doviak <eric@doviak.net>
+##  Copyright 2011 -- Tomas Janousek <tomi@nomi.cz>
+## 
+##  Eric Doviak wrote most of this Perl script, but Tomas Janousek wrote 
+##  the template for the PDFedit script. Eric Doviak's work is copyrighted 
+##  under the terms of the GPL v3. Janousek's work is copyrighted under 
+##  the terms of the BSD license. The BSD licensed portions are denoted 
+##  in the text of this script and the PDFedit script that this script
+##  generates.
+
+
+##  Syntax:   pdfcrop input.pdf [papersize] [output.pdf]
+##  
+##  Function: 
+##    calculates the page metrics and scale factor of a PDF file, 
+##    then crops and scales the PDF, so that it neatly fits on a 
+##    standard size sheet of paper
+##  
+##  Options:
+##    -h  --help  help      print usage and exit
+##  
+##    letter  Letter        if you want letter size paper
+##    a4      A4            if you want A4 size paper 
+##    legal   Legal         if you want legal size paper 
+##  
+##  Details:
+##    pdfcrop attempts to determine your desired paper size by
+##    reading /etc/papersize. If that file cannot be read, it 
+##    assumes that you want letter size pages.
+##  
+##    If an output file name is not given, then pdfcrop assumes
+##    that the input file should be cropped and scaled.
+##  
+##  Examples:
+##    pdfcrop input.pdf
+##    pdfcrop input.pdf A4 output.pdf
+
+use strict ; 
+use warnings ; 
+no warnings qw( uninitialized ) ; 
+use File::Copy ; 
+
+## read arguments
+my ( $infile , $pagesize , $otfile ) = read_arguments( @ARGV ) ; 
+
+## create a randomly named directory in /tmp/
+my $random = sprintf( "%04d" , int( 1000*rand() ) )  ; 
+my $tmpdir = "/tmp/pdfcrop_$random/" ; 
+mkdir( $tmpdir ) ; 
+
+## if a different output file is desired, then create it
+## all scripts will then operate on that output file, 
+## so reset the input file name
+if ( $infile ne $otfile ) {
+    copy( $infile , $otfile ) ; 
+    $infile = $otfile ; 
+}
+
+## names of script files
+my $gsfile = $tmpdir . $infile . ".gs.out" ; 
+my $qsfile = $tmpdir . $infile . ".fix.qs" ; 
+
+## run ghostscript
+open( BASH , "|/bin/bash") || die "could not open BASH" ; 
+print BASH "gs -dSAFER -dNOPAUSE -dBATCH -q -r72 -sDEVICE=bbox -f $infile 2> $gsfile" ; 
+close BASH ; 
+
+## print the prologue
+open( OVERWRITE , ">$qsfile" ) || die "could not overwrite $qsfile" ; 
+print OVERWRITE make_prologue() ; 
+
+## initialize page numbers
+my $pagenumber = 1 ; 
+
+## read the ghostscript file and create the script for "pdfedit"
+open( GSFILE , $gsfile ) || die "could not read $gsfile" ; 
+while (<GSFILE>) {
+
+    chomp ; 
+    my $line = $_ ; 
+
+    if ( $line =~ /HiResBoundingBox: (\S+) (\S+) (\S+) (\S+)/ ) {
+
+	## what are the borders? 
+	my @borders = ($1 , $2 , $3 , $4) ; 
+
+	## check for correctness
+	check_borders( @borders ) ; 
+
+	## print it all out
+	my ( $hl , $vb , $hr , $vt ) = @borders ; 
+
+	print OVERWRITE "runPDFcrop( doc , $pagenumber , \"$pagesize\" , $hl , $vb , $hr , $vt );\n" ;
+
+	## increment the page number
+	$pagenumber++ ; 
+    }
+}
+close GSFILE ; 
+
+## print the epilogue
+print OVERWRITE make_epilogue() ; 
+close OVERWRITE ; 
+
+## crop and resize the pages
+open( BASH , "|/bin/bash") || die "could not open BASH" ; 
+print BASH "pdfedit -console -run $qsfile $infile 2> /dev/null" ; 
+close BASH ; 
+
+## get rid of junk
+unlink( $gsfile , $qsfile ) ; 
+rmdir( $tmpdir ) ; 
+
+
+##  ##  ##  ##  ##  ##  ##  ##  ##  ##  ##  ##  ##  ##  ##  ##  ##  ##  
+  ##  ##  ##  ##  ##  ##  ##  ##  ##  ##  ##  ##  ##  ##  ##  ##  ##  
+##  ##  ##  ##  ##  ##  ##  ##  ##  ##  ##  ##  ##  ##  ##  ##  ##  ##  
+
+## SUBROUTINES
+## ===========
+
+## read arguments
+
+sub read_arguments {
+
+    my @args = @_ ; 
+
+    ## do you need help?
+    if ( ! @args) {
+	print_usage() ; 
+    }
+
+    foreach my $arg (@args) {
+	if ( $arg =~ /^-h$|^--help$|^help$/ ) {
+	    print_usage() ; 
+	}
+    }
+
+    ## which arguments are PDF files? which are not
+    my @pdffiles ; 
+    my $pagesize ;
+
+    foreach my $arg (@args) {
+	if ( $arg =~ /pdf$/i ) {
+	    push( @pdffiles , $arg ) ; 
+
+	} elsif ( $arg =~ /^letter$|^legal$|^a4$/i ) {
+	    $pagesize = lc( $arg ) ; 
+	}
+    }
+
+    ## first PDF is assumed to be the input file
+    my $infile = $pdffiles[0] ; 
+    my $otfile ; 
+    if ( ! $pdffiles[1] ) { 
+	$otfile = $infile ;
+	$otfile =~ s/pdf$/pdfcrop.pdf/i ; 
+    } else {
+	$otfile = $pdffiles[1] ;
+    }
+
+    ## if $infile is not a file, then there's an error
+    if ( ! -f $infile ) {
+	print "\n\tError! $infile not found.\n\n";
+	print_usage() ; 
+    }
+    
+    ## what is desired papersize? -- attempt to read "/etc/papersize"
+    my $etc_papersize ; 
+    if ( -f "/etc/papersize" ) {
+	open( PAPERSIZE , "/etc/papersize" ) ; 
+	chomp( $etc_papersize = <PAPERSIZE> ) ; 
+	$etc_papersize = lc( $etc_papersize ) ; 
+	close PAPERSIZE ; 
+    } 
+
+    ## if $pagesize not found, then check /etc/papersize
+    ## if still not found, then assume "letter"    
+    ## note: "papersize" vs. "pagesize" ... <roll eyes>
+    if ( ! $pagesize ) {
+	$pagesize = ( $etc_papersize !~ /^letter$|^legal$|^a4$/ ) ? "letter" : $etc_papersize ; 
+    }
+    
+    my @otarray = ( $infile , $pagesize , $otfile ) ; 
+    return @otarray ; 
+}
+
+
+
+## need a function that evaluates correctness of borders
+sub check_borders {
+    
+    my @borders = @_[0..3] ; 
+    my ( $hl , $vb , $hr , $vt ) = @borders ; 
+    
+    foreach my $border (@borders) {
+	if ( ! is_float( $border )) {
+	    die "Could not determine the Bounding Box borders."
+	}
+    }
+    
+    ## die if page has zero width or height
+    if ( $hl == $hr || $vb == $vt ) { 
+	
+	print "\n" ; 
+	if ( $hl == $hr ) { 
+	    print "\tError! Bounding Box borders imply page width of zero.\n";
+	}
+	if ( $vb == $vt ) { 
+	    print "\tError! Bounding Box borders imply page height of zero.\n";
+	}
+	print "\n" ; 
+	die ; 
+    }
+}
+
+
+
+## these two are modified versions from:
+## http://stackoverflow.com/questions/12647/how-do-i-tell-if-a-variable-has-a-numeric-value-in-perl
+
+sub is_integer {
+    my $inval = $_[0] ; 
+    defined $inval && $inval =~ /^[+-]?\d+$/;
+}
+
+sub is_float {
+    my $inval = $_[0] ; 
+    defined $inval && $inval =~ /^[+-]?\d+(\.\d+)?$/;
+}
+
+
+
+## we need prologue and epilogue for PDFedit script
+
+sub make_prologue {
+    
+    my $text = <<END;
+
+/* Beginning of BSD licensed code from Tomas Janousek. */
+function setProp4( dict, p, a, b, c, d ) {
+    if ( !dict.exist( p ) ) {
+	var n = createArray();
+	n.add( createReal( 0 ) );
+	n.add( createReal( 0 ) );
+	n.add( createReal( 0 ) );
+	n.add( createReal( 0 ) );
+	dict.add( p, n );
+    }
+    
+    x = dict.property( p );
+    x.property( 0 ).set( a );
+    x.property( 1 ).set( b );
+    x.property( 2 ).set( c );
+    x.property( 3 ).set( d );
+}
+/* End of BSD licensed code from Tomas Janousek. */
+
+function setScale( doc , pagenum , sx , sy ) {
+    var pg = doc.getPage( pagenum ) ; 
+    pg.setTransformMatrix([sx,0,0,sy,0,0]);
+}
+
+
+function runPDFcrop( doc, pagenum , papersize , hl , vb , hr , vt ) {
+
+    dict = doc.getPage( pagenum ).getDictionary();
+    
+    /* get the MediaBox borders:  mbhl  mbvb  mbhr  mbvt */ 
+    media = dict.property( "MediaBox" );
+    mbhl = media.property( 0 ).value();
+    mbvb = media.property( 1 ).value();
+    mbhr = media.property( 2 ).value();
+    mbvt = media.property( 3 ).value();
+
+    /* determine orientation -- portrait or landscape */
+    /* if horizontal longer then landscape, else portrait */
+    if ( mbhr - mbhl > mbvt - mbvb ) { 
+	if ( papersize == "letter" ) { 
+	    pgwidth  =  792 ; 
+	    pgheight =  612 ; 
+	}
+	if ( papersize == "legal" ) { 
+	    pgwidth  = 1008 ; 
+	    pgheight =  612 ;
+	}
+	if ( papersize == "a4" ) {
+	    pgwidth  =  29.7 * 28.3464567 ;
+	    pgheight =  21.0 * 28.3464567 ; 
+	}
+    } else {
+	if ( papersize == "letter" ) {
+	    pgwidth  =  612 ; 
+	    pgheight =  792 ; 
+	}
+	if ( papersize == "legal" ) { 
+	    pgwidth  =  612 ; 
+	    pgheight = 1008 ;
+	}
+	if ( papersize == "a4" ) {
+	    pgwidth  = 21.0 * 28.3464567 ; 
+	    pgheight = 29.7 * 28.3464567 ;
+	}
+    }
+    
+
+    /*  now work with the borders of the bounding box    */
+
+    /* we want 5 percent margins on each side */
+    margins = 1.10 ; 
+    
+    /* get scale factor */
+    horiz = pgwidth  / (margins*(hr-hl)) ;
+    vert  = pgheight / (margins*(vt-vb)) ;
+    
+    if ( horiz < vert ) { 
+	scale = horiz ; 
+    } else {
+	scale = vert  ;
+    }
+    
+    /* find midpoints on the page */
+    midh = ((hr - hl) / 2 ) + hl ;
+    midv = ((vt - vb) / 2 ) + vb ;
+
+    
+    /* here are the new page metrics -- everything centered */
+    nhl = ( midh * scale ) - ( pgwidth  / 2 ) ;
+    nhr = nhl + pgwidth   ; 
+    /* nvb = ( midv * scale ) - ( pgheight / 2 ) ;  */
+    /* nvt = nvb + pgheight ;                       */
+
+    /* alternative is to top-align the pages */
+    halfmargin = 1 + (( margins - 1 )/2) ; 
+    nvt = vt * scale * halfmargin ; 
+    nvb = nvt - pgheight  ; 
+
+    /* set CropBox, MediaBox and TrimBox. */
+    setProp4( dict, "CropBox",  nhl, nvb, nhr, nvt ) ;
+    setProp4( dict, "MediaBox", nhl, nvb, nhr, nvt ) ;
+    setProp4( dict, "TrimBox",  nhl, nvb, nhr, nvt ) ;
+   
+    /* rescale the page */
+    setScale( doc , pagenum , scale , scale );
+}
+
+doc = loadPdf( takeParameter(), false );
+END
+
+    return $text ; 
+}
+
+sub make_epilogue {
+
+    my $text = <<END;
+doc.save( false );
+exit( 0 );
+END
+
+    return $text ; 
+}
+
+## print usage of this script
+
+sub print_usage {
+
+    my $program = "pdfcrop" ;
+
+my $usage = <<"END_OF_USAGE";
+Syntax:   \L$program\E input.pdf [papersize] [output.pdf]
+
+Function: 
+  calculates the page metrics and scale factor of a PDF file, 
+  then crops and scales the PDF, so that it neatly fits on a 
+  standard size sheet of paper
+
+Options:
+  -h  --help  help      print usage and exit
+
+  letter  Letter        if you want letter size paper
+  a4      A4            if you want A4 size paper 
+  legal   Legal         if you want legal size paper 
+
+Details:
+  $program attempts to determine your desired paper size by
+  reading /etc/papersize. If that file cannot be read, it 
+  assumes that you want letter size pages.
+
+  If an output file name is not given, then $program assumes
+  that the input file should be cropped and scaled.
+
+Examples:
+  \L$program\E input.pdf
+  \L$program\E input.pdf A4 output.pdf
+END_OF_USAGE
+
+
+    ## now print it out and quit 
+    print "\n";
+    print $usage ;
+    die "\n"; 
+}
