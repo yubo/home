@@ -115,16 +115,17 @@ au FileType typescript setlocal et sta sw=2 sts=2
 " typescript {{{
 autocmd FileType typescript nmap <buffer> <leader>e <Plug>(TsuquyomiRenameSymbol)
 autocmd FileType typescript nmap <buffer> <leader>E <Plug>(TsuquyomiRenameSymbolC)
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-let g:tsuquyomi_disable_quickfix = 1
-let g:syntastic_typescript_checkers = ['tsuquyomi']
 
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
+set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+"let g:tsuquyomi_disable_quickfix = 1
+"let g:syntastic_typescript_checkers = ['tsuquyomi']
+"
+"let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_auto_loc_list = 1
+"let g:syntastic_check_on_open = 1
+"let g:syntastic_check_on_wq = 0
 " }}}
 
 " mappings {{{
@@ -224,7 +225,6 @@ call vundle#begin()
 Bundle 'gmarik/vundle'
 Bundle 'AutoClose'
 Bundle 'jlanzarotta/bufexplorer'
-Bundle 'EasyMotion'
 Bundle 'The-NERD-tree'
 Bundle 'The-NERD-Commenter'
 Bundle 'moll/vim-bbye'
@@ -238,13 +238,15 @@ Bundle 'vim-scripts/gtags.vim'
 Bundle 'fatih/vim-go'
 Bundle 'Valloric/YouCompleteMe'
 Bundle 'tpope/vim-surround'
-Bundle 'Shougo/vimproc'
 Bundle 'airblade/vim-gitgutter'
 Bundle 'maksimr/vim-jsbeautify'
-Bundle 'vim-syntastic/syntastic'
 "typescript
-Bundle 'leafgarland/typescript-vim'
+Bundle 'Shougo/vimproc'
 Bundle 'Quramy/tsuquyomi'
+Bundle 'leafgarland/typescript-vim'
+
+Bundle 'EasyMotion'
+"Bundle 'vim-syntastic/syntastic'
 "Bundle 'vim-scripts/groovy.vim'
 "Bundle 'groovyindent'
 "Bundle 'yubo/vim-colorschemes'
@@ -257,6 +259,7 @@ call vundle#end()
 
 " AutoClose {{{
 imap {{ {{}}<Esc>hi
+imap {{{ {{{}}}<Esc>2hi
 "}}} 
 "
 "vim-jsbeautify {{{
