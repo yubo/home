@@ -15,10 +15,10 @@ add_path()
 }
 
 alias vi='vim'
-alias ff='find $(readlink -f .) -type f| xargs grep -n --color '
-alias ffh='find $(readlink -f .) -name \*.h -type f| xargs grep -n --color '
-alias ffc='find $(readlink -f .) -name \*.c -o -name \*.cpp -type f| xargs grep -n --color '
-alias ffgo='find $(readlink -f .) -name \*.go -type f| xargs grep -n --color '
+alias ff='find . -type f| xargs grep -n --color '
+alias ffh='find . -name \*.h -type f| xargs grep -n --color '
+alias ffc='find . -name \*.c -o -name \*.cpp -type f| xargs grep -n --color '
+alias ffgo='find . -name \*.go -type f| xargs grep -n --color '
 alias grep='grep --color '
 alias rm='rm -i'
 alias cp='cp -i'

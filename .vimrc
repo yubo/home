@@ -93,16 +93,39 @@ endif
 filetype plugin indent on
 hi SpecialKey ctermfg=238
 
+" sw   shiftwidth
+" ts   tabstop
+" et   expandtab
+" sts  softtabstop
+" st   smarttab
+au BufNewFile,BufRead *.ts,*.tsx setlocal filetype=typescript
+au BufNewFile,BufRead *.js,*.jsx setlocal filetype=javascript
 au BufRead,BufNewFile *.go set filetype=go
 au BufRead,BufNewFile *.vue set filetype=html
-au FileType html setlocal et sta sw=2 sts=2
+au FileType html setlocal et sta sw=4 sts=4
+au FileType css setlocal et sta sw=4 sts=2
+au FileType json setlocal et sta sw=4 sts=4
 au FileType javascript setlocal et sta sw=2 sts=2
-au FileType css setlocal et sta sw=2 sts=2
-au FileType json setlocal et sta sw=2 sts=2
-au FileType jsx setlocal et sta sw=2 sts=2
+au FileType typescript setlocal et sta sw=2 sts=2
+
 "au BufRead,BufNewFile *.asm,*.c,*.cpp,*.java,*.cs,*.sh,*.lua,*.pl,*.pm,*.py,*.rb,*.hs,*.vim,*.go 2match Underlined /.\%>81v.*/
 
 "}}}
+
+" typescript {{{
+autocmd FileType typescript nmap <buffer> <leader>e <Plug>(TsuquyomiRenameSymbol)
+autocmd FileType typescript nmap <buffer> <leader>E <Plug>(TsuquyomiRenameSymbolC)
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+let g:tsuquyomi_disable_quickfix = 1
+let g:syntastic_typescript_checkers = ['tsuquyomi']
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+" }}}
 
 " mappings {{{
 let mapleader = ','
@@ -215,8 +238,13 @@ Bundle 'vim-scripts/gtags.vim'
 Bundle 'fatih/vim-go'
 Bundle 'Valloric/YouCompleteMe'
 Bundle 'tpope/vim-surround'
+Bundle 'Shougo/vimproc'
 Bundle 'airblade/vim-gitgutter'
 Bundle 'maksimr/vim-jsbeautify'
+Bundle 'vim-syntastic/syntastic'
+"typescript
+Bundle 'leafgarland/typescript-vim'
+Bundle 'Quramy/tsuquyomi'
 "Bundle 'vim-scripts/groovy.vim'
 "Bundle 'groovyindent'
 "Bundle 'yubo/vim-colorschemes'
