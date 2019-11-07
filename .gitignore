@@ -3,3 +3,5 @@
 .vim/.netrwhist
 .DS_Store
 *.pyc
+ip.sh
+tmp/
