@@ -120,3 +120,25 @@ fi
 if [ -d "${HOME}/.rvm/bin" ]; then
 	export PATH="$PATH:$HOME/.rvm/bin"
 fi
+
+
+
+if [ -f ~/.grab/bash/grab.bash ]; then
+	source ~/.grab/bash/grab.bash
+fi
+
+if [ -f ~/.grab/grab.bash ]; then
+        source ~/.grab/grab.bash
+fi
+if [ -f ~/.grab/grab.bash ]; then
+        source ~/.grab/grab.bash
+fi
+if [ -f ~/.grab/grab.bash ]; then
+        source ~/.grab/grab.bash
+fi
+if [ -f ~/.grab/grab.bash ]; then
+        source ~/.grab/grab.bash
+fi
+if [ -f ~/.grab/grab.bash ]; then
+        source ~/.grab/grab.bash
+fi

@@ -100,11 +100,12 @@ hi SpecialKey ctermfg=238
 " st   smarttab
 au BufNewFile,BufRead *.ts,*.tsx setlocal filetype=typescript
 au BufNewFile,BufRead *.js,*.jsx setlocal filetype=javascript
+au BufNewFile,BufRead *.css,*.less setlocal filetype=css
 au BufRead,BufNewFile *.go set filetype=go
 au BufRead,BufNewFile *.vue set filetype=html
-au FileType html setlocal et sta sw=4 sts=4
-au FileType css setlocal et sta sw=4 sts=2
-au FileType json setlocal et sta sw=4 sts=4
+au FileType html       setlocal et sta sw=4 sts=4
+au FileType css        setlocal et sta sw=2 sts=2
+au FileType json       setlocal et sta sw=4 sts=4
 au FileType javascript setlocal et sta sw=2 sts=2
 au FileType typescript setlocal et sta sw=2 sts=2
 
@@ -307,6 +308,7 @@ let g:go_highlight_methods = 1
 let g:go_highlight_structs = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
+let g:go_metalinter_enabled = ['vet']
 ""let g:godef_split=3
 
 

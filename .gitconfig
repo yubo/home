@@ -24,8 +24,10 @@
 	sbu = submodule update
 	sbp = submodule foreach git pull
 	sbc = submodule foreach git co master
+	df = "!f() { git diff --name-status \"$1^\" \"$1\"; }; f"
+	dd = "!f() { git difftool \"$1^\" \"$1\"; }; f"
 [push]
-	default = matching
+	default = tracking
 [color]
 	ui = auto
 [credential]
