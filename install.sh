@@ -56,7 +56,7 @@ install_file .tmux.conf
 install_file .vimrc
 install_file .vim
 install_file .mpdconf
-install_file .kermrc 
+#install_file .kermrc 
 
 if [[ ! -d ~/.vim/bundle/vundle ]]; then
 	git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
