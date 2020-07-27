@@ -1,7 +1,6 @@
-.vim/bundle
+home/.vim/bundle
+home/.vim/.netrwhist
 *.swp
-.vim/.netrwhist
 .DS_Store
 *.pyc
-ip.sh
 tmp/
