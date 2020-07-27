@@ -1,4 +1,5 @@
-# 工作环境
+# HOME
+My working development environment configuration, including shell, tmux, vim, git, ssh, etc.
 
 ## install
 ```shell
@@ -10,23 +11,11 @@ vim
 :q
 ```
 
-#### env install
+
+#### SEE ALSO
   * [ubuntu](docs/ubuntu.md)
   * [centos](docs/centos.md)
   * [osx](docs/osx.md)
-
-#### tips
-  * [shell](docs/sh.tips.md)
-  * [tmux](docs/tmux.tips.md)
-  * [vim](docs/vim.tips.md)
-	
-```
-                    __
-                   / /
-    __    ____  __/ /_  ____ 
-    \ \  / / / / /  _ \/ _  \
-     \ \/ / /_/ / /_/ / /_/ /
-      \  /\____/_____/\____/
-      / /   www.yubo.org
-     /_/
-```
+  * [vim](docs/vim.md)
+  * [shell](docs/shell.md)
+  * [tmux](docs/tmux.md)

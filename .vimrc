@@ -239,7 +239,8 @@ Bundle 'Stormherz/tablify'
 Bundle 'vim-scripts/ZoomWin'
 Bundle 'vim-scripts/gtags.vim'
 Bundle 'fatih/vim-go'
-Bundle 'Valloric/YouCompleteMe'
+"Move to .vim_local"
+"Bundle 'Valloric/YouCompleteMe' 
 Bundle 'tpope/vim-surround'
 Bundle 'airblade/vim-gitgutter'
 Bundle 'maksimr/vim-jsbeautify'
@@ -496,3 +497,8 @@ nnoremap <C-w><C-l> :call MarkSwapAway()<CR> <C-w>l :call DoWindowToss()<CR>
 set dir=$HOME/.vim/tmp/swap
 if !isdirectory(&dir) | call mkdir(&dir, 'p', 0700) | endif
 "}}}
+
+"for local vimrc
+if filereadable(expand("./.vim_local"))
+    source ./.vim_local
+endif
