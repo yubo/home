@@ -18,9 +18,18 @@ if [ ! -d ~/.ssh ]; then
 	chmod 0700 ~/.ssh
 fi
 
+if [ ! -d ~/.ssh/config.d ]; then
+	mkdir -p ~/.ssh/config.d
+fi
+
 if [ ! -e ~/.bash_local ]; then
 	touch ~/.bash_local
 	chmod 0644 ~/.bash_local
+fi
+
+if [ ! -e ~/.vim_local ]; then
+	touch ~/.vim_local
+	chmod 0644 ~/.vim_local
 fi
 
 install_file bin
