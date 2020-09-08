@@ -240,7 +240,7 @@ Bundle 'vim-scripts/ZoomWin'
 Bundle 'vim-scripts/gtags.vim'
 Bundle 'fatih/vim-go'
 "Move to .vim_local"
-"Bundle 'Valloric/YouCompleteMe' 
+Bundle 'Valloric/YouCompleteMe' 
 Bundle 'tpope/vim-surround'
 Bundle 'airblade/vim-gitgutter'
 Bundle 'maksimr/vim-jsbeautify'

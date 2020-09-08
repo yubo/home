@@ -4,3 +4,4 @@ home/.vim/.netrwhist
 .DS_Store
 *.pyc
 tmp/
+home/bin

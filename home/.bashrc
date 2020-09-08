@@ -52,6 +52,7 @@ if [ `uname` == 'Darwin' ]; then
     alias la='ls -GFa'
     alias ll='ls -lGF'
     add_path /usr/local/homebrew/bin
+    export BASH_SILENCE_DEPRECATION_WARNING=1
 else
     alias ls='ls -F --color '
     alias la='ls -Fa --color '
