@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #git clone git@github.com:yubo/home.git ~/.yubo
 
 bak_dir="$HOME/.home_bak"
