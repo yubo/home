@@ -46,7 +46,14 @@ alias antlr4='java -Xmx500M -cp "${HOME}/bin/antlr-4.7.1-complete.jar:$CLASSPATH
 alias grun='java -Xmx500M -cp "${HOME}/bin/antlr-4.7.1-complete.jar:$CLASSPATH" org.antlr.v4.gui.TestRig'
 alias bfg='java -jar ~/bin/bfg-1.13.0.jar'
 alias gotest='go test -v -args -v 10 -logtostderr true'
-alias k='kubectl'
+alias git-email="git config user.email steveyubo@didichuxing.com"
+
+# kubectl
+if type kubectl >/dev/null; then
+    source <(kubectl completion bash)
+    alias k='kubectl'
+    complete -F __start_kubectl k
+fi
 
 if [ `uname` == 'Darwin' ]; then
     alias ls='ls -GF'
