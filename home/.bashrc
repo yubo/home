@@ -49,7 +49,7 @@ alias gotest='go test -v -args -v 10 -logtostderr true'
 alias git-email="git config user.email steveyubo@didichuxing.com"
 
 # kubectl
-if type kubectl >/dev/null; then
+if type kubectl >/dev/null 2>&1; then
     source <(kubectl completion bash)
     alias k='kubectl'
     complete -F __start_kubectl k
