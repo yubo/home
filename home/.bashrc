@@ -50,22 +50,22 @@ alias git-email="git config user.email steveyubo@didichuxing.com"
 
 # kubectl
 if type kubectl >/dev/null 2>&1; then
-    source <(kubectl completion bash)
-    alias k='kubectl'
-    complete -F __start_kubectl k
+	export KUBE_EDITOR="vim"
+	source <(kubectl completion bash)
+	alias k='kubectl'
+	complete -F __start_kubectl k
 fi
 
 if [ `uname` == 'Darwin' ]; then
-    alias ls='ls -GF'
-    alias la='ls -GFa'
-    alias ll='ls -lGF'
-    add_path /usr/local/homebrew/bin
-    export BASH_SILENCE_DEPRECATION_WARNING=1
+	alias ls='ls -GF'
+	alias la='ls -GFa'
+	alias ll='ls -lGF'
+	add_path /usr/local/homebrew/bin
+	export BASH_SILENCE_DEPRECATION_WARNING=1
 else
-    alias ls='ls -F --color '
-    alias la='ls -Fa --color '
-    alias ll='ls -Fl --color '
-
+	alias ls='ls -F --color '
+	alias la='ls -Fa --color '
+	alias ll='ls -Fl --color '
 fi
 
 if [ -f $HOME/.rbenv/bin/rbenv ]; then
@@ -81,7 +81,7 @@ if [ -e $HOME/go ]; then
 fi
 
 function parse_git_branch {
-    git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/[\1]/"
+	git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/[\1]/"
 }
 
 if [ -n $(parse_git_branch) ]; then
@@ -128,26 +128,4 @@ fi
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 if [ -d "${HOME}/.rvm/bin" ]; then
 	export PATH="$PATH:$HOME/.rvm/bin"
-fi
-
-
-
-if [ -f ~/.grab/bash/grab.bash ]; then
-	source ~/.grab/bash/grab.bash
-fi
-
-if [ -f ~/.grab/grab.bash ]; then
-        source ~/.grab/grab.bash
-fi
-if [ -f ~/.grab/grab.bash ]; then
-        source ~/.grab/grab.bash
-fi
-if [ -f ~/.grab/grab.bash ]; then
-        source ~/.grab/grab.bash
-fi
-if [ -f ~/.grab/grab.bash ]; then
-        source ~/.grab/grab.bash
-fi
-if [ -f ~/.grab/grab.bash ]; then
-        source ~/.grab/grab.bash
 fi
