@@ -129,3 +129,7 @@ fi
 if [ -d "${HOME}/.rvm/bin" ]; then
 	export PATH="$PATH:$HOME/.rvm/bin"
 fi
+
+
+alias k=kubectl
+complete -F __start_kubectl k
