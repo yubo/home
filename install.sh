@@ -19,8 +19,8 @@ if [[ ! -d ~/.ssh ]]; then
 	chmod 0700 ~/.ssh
 fi
 
-if [[ ! -d ~/.ssh/config.d ]]; then
-	mkdir -p ~/.ssh/config.d
+if [[ ! -d ~/.ssh/conf.d ]]; then
+	mkdir -p ~/.ssh/conf.d
 fi
 
 if [[ ! -e ~/.bash_local ]]; then
