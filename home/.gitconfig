@@ -37,7 +37,7 @@
 	process = git-lfs filter-process
 	required = true
 	clean = git-lfs clean -- %f
-#[url "https://gitclone.com/"]
-#	insteadOf = https://
+[init]
+	defaultBranch = master
 [url "https://github.com.cnpmjs.org/"]
 	insteadOf = https://github.com/
