@@ -11,7 +11,6 @@ vim
 :q
 ```
 
-
 #### SEE ALSO
   * [ubuntu](docs/ubuntu.md)
   * [centos](docs/centos.md)
