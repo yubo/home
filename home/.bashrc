@@ -131,5 +131,28 @@ if [ -d "${HOME}/.rvm/bin" ]; then
 fi
 
 
+<<<<<<< HEAD
+=======
+
+if [ -f ~/.grab/bash/grab.bash ]; then
+	source ~/.grab/bash/grab.bash
+fi
+
+if [ -f ~/.grab/grab.bash ]; then
+        source ~/.grab/grab.bash
+fi
+if [ -f ~/.grab/grab.bash ]; then
+        source ~/.grab/grab.bash
+fi
+if [ -f ~/.grab/grab.bash ]; then
+        source ~/.grab/grab.bash
+fi
+if [ -f ~/.grab/grab.bash ]; then
+        source ~/.grab/grab.bash
+fi
+if [ -f ~/.grab/grab.bash ]; then
+        source ~/.grab/grab.bash
+fi
+>>>>>>> update
 alias k=kubectl
 complete -F __start_kubectl k
