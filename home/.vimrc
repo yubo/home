@@ -150,7 +150,6 @@ nnoremap <C-F>                 :Gtags -gi<CR>
 nnoremap <leader>c             :cclose<CR>
 nnoremap <leader>o             :copen<CR>
 nnoremap <leader>r             :!gtags<CR>
-nnoremap <leader>rr            :.,+1s/\([a-z]\)_\([a-z]\)/\1\U\2/g
 nnoremap <leader>j             /## <CR>z<CR>: noh<CR>
 nnoremap <leader>k             ?## <CR>z<CR>: noh<CR>
 "nnoremap <leader>b             : %!xxd<CR>
