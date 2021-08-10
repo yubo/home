@@ -29,7 +29,8 @@ set guitablabel=(%N)\ %t\ %M
 set hidden
 set history=50
 set hlsearch incsearch
-set ignorecase smartcase
+set ignorecase smartcase "忽略大小写
+"set noignorecase
 set isfname-== isfname-=,
 "set listchars=precedes:«,extends:»,tab:>-,trail:-
 set listchars=trail:«
@@ -150,6 +151,7 @@ nnoremap <C-F>                 :Gtags -gi<CR>
 nnoremap <leader>c             :cclose<CR>
 nnoremap <leader>o             :copen<CR>
 nnoremap <leader>r             :!gtags<CR>
+nnoremap <leader>rr            :.,+1s/\([a-z]\)_\([a-z]\)/\1\U\2/g
 nnoremap <leader>j             /## <CR>z<CR>: noh<CR>
 nnoremap <leader>k             ?## <CR>z<CR>: noh<CR>
 "nnoremap <leader>b             : %!xxd<CR>
@@ -259,6 +261,9 @@ Bundle 'EasyMotion'
 "Bundle 'snipMate'
 "Bundle 'taglist.vim'
 "Bundle 'https://github.com/kana/vim-fakeclip.git'
+"
+"rust"
+Bundle 'rust-lang/rust.vim'
 call vundle#end()
 
 " AutoClose {{{
@@ -301,6 +306,11 @@ let g:fakeclip_terminal_multiplexer_type = 'tmux'
 vmap <C-t>y                 <Plug>(fakeclip-screen-y)
 nmap <C-t>P                 <Plug>(fakeclip-screen-P)
 nmap <C-t>p                 <Plug>(fakeclip-screen-p)
+"}}}
+"
+
+" Rust {{{
+let g:rustfmt_autosave = 1
 "}}}
 
 "vim-go {{{

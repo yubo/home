@@ -129,6 +129,11 @@ if [ -d "${HOME}/.rvm/bin" ]; then
 	export PATH="$PATH:$HOME/.rvm/bin"
 fi
 
+# rust
+if [ -f "$HOME/.cargo/env" ]; then
+	source $HOME/.cargo/env
+fi
+
 
 if [ -f ~/.grab/bash/grab.bash ]; then
 	source ~/.grab/bash/grab.bash
@@ -151,3 +156,4 @@ if [ -f ~/.grab/grab.bash ]; then
 fi
 alias k=kubectl
 complete -F __start_kubectl k
+. "$HOME/.cargo/env"
