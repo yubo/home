@@ -154,6 +154,7 @@ fi
 if [ -f ~/.grab/grab.bash ]; then
         source ~/.grab/grab.bash
 fi
+
+# kubectl
 alias k=kubectl
 complete -F __start_kubectl k
-. "$HOME/.cargo/env"
