@@ -34,3 +34,5 @@
 	helper = cache --timeout 2592000
 [url "https://github.com.cnpmjs.org/"]
 	insteadOf = https://github.com/
+[pull]
+	rebase = false
