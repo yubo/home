@@ -10,10 +10,12 @@
 	whitespace = tab-in-indent,trailing-space
 	trustctime = false
 [alias]
-	s = status
+	s = show --color --pretty=format:%b
 	d = difftool
 	dl = difftool HEAD^ HEAD
 	dc = difftool --cached
+	df = "!f() { git diff --name-status \"$1^\" \"$1\"; }; f"
+	dd = "!f() { git difftool \"$1^\" \"$1\"; }; f"
 	co = checkout
 	cm = commit
 	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --
@@ -24,15 +26,13 @@
 	sbu = submodule update
 	sbp = submodule foreach git pull
 	sbc = submodule foreach git co master
-	df = "!f() { git diff --name-status \"$1^\" \"$1\"; }; f"
-	dd = "!f() { git difftool \"$1^\" \"$1\"; }; f"
 [push]
 	default = tracking
 [color]
 	ui = auto
 [credential]
 	helper = cache --timeout 2592000
-[url "https://github.com.cnpmjs.org/"]
-	insteadOf = https://github.com/
+#[url "https://github.com.cnpmjs.org/"]
+#	insteadOf = https://github.com/
 [pull]
 	rebase = false
