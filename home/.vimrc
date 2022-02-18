@@ -99,12 +99,15 @@ hi SpecialKey ctermfg=238
 " et   expandtab
 " sts  softtabstop
 " st   smarttab
-au BufNewFile,BufRead *.ts,*.tsx setlocal filetype=typescript
-au BufNewFile,BufRead *.js,*.jsx setlocal filetype=javascript
-au BufNewFile,BufRead *.css,*.less setlocal filetype=css
-au BufNewFile,BufRead *.yaml,*.yml setlocal filetype=yaml
-au BufRead,BufNewFile *.go set filetype=go
-au BufRead,BufNewFile *.vue set filetype=html
+au BufRead,BufNewFile *.ts,*.tsx   setfiletype typescript
+au BufRead,BufNewFile *.js,*.jsx   setfiletype javascript
+au BufRead,BufNewFile *.css,*.less setfiletype css
+au BufRead,BufNewFile *.yaml,*.yml setfiletype yaml
+au BufRead,BufNewFile *.go         setfiletype go
+au BufRead,BufNewFile *.vue        setfiletype html
+au BufRead,BufNewFile *.txt        setfiletype text
+au BufRead,BufNewFile *.jsonnet    setfiletype jsonnet
+
 au FileType html       setlocal et sta sw=4 sts=4
 au FileType css        setlocal et sta sw=2 sts=2
 au FileType json       setlocal et sta sw=4 sts=4
@@ -224,47 +227,48 @@ cnoreabb <expr> W              getcmdtype()==':'&&getcmdline()=~#'^W'?'w':'W'
 
 " plugins {{{
 " git clone http://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
+set nocompatible              " be iMproved, required
+filetype off                  " required
+" set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/vundle/
 call vundle#begin()
 " let Vundle manage Vundle
-Bundle 'gmarik/vundle'
-Bundle 'AutoClose'
-Bundle 'jlanzarotta/bufexplorer'
-Bundle 'The-NERD-tree'
-Bundle 'The-NERD-Commenter'
-Bundle 'moll/vim-bbye'
-Bundle 'majutsushi/tagbar'
-Bundle 'tpope/vim-fugitive'
-Bundle 'vim-airline/vim-airline'
-Bundle 'vim-airline/vim-airline-themes'
-Bundle 'Stormherz/tablify'
-Bundle 'vim-scripts/ZoomWin'
-Bundle 'vim-scripts/gtags.vim'
-Bundle 'fatih/vim-go'
-"Move to .vim_local"
-Bundle 'Valloric/YouCompleteMe' 
-Bundle 'tpope/vim-surround'
-Bundle 'airblade/vim-gitgutter'
-Bundle 'maksimr/vim-jsbeautify'
+Plugin 'AutoClose'
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'jlanzarotta/bufexplorer'
+Plugin 'vim-scripts/The-NERD-tree'
+Plugin 'vim-scripts/The-NERD-Commenter'
+Plugin 'moll/vim-bbye'
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-surround'
+"theme
+Plugin 'majutsushi/tagbar'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+"
+Plugin 'Stormherz/tablify'
+Plugin 'vim-scripts/ZoomWin'
+Plugin 'vim-scripts/gtags.vim'
+Plugin 'Valloric/YouCompleteMe' 
+Plugin 'airblade/vim-gitgutter'
+Plugin 'maksimr/vim-jsbeautify'
 "typescript
-Bundle 'Shougo/vimproc'
-Bundle 'Quramy/tsuquyomi'
-Bundle 'leafgarland/typescript-vim'
+Plugin 'Shougo/vimproc'
+Plugin 'Quramy/tsuquyomi'
+Plugin 'leafgarland/typescript-vim'
 
-Bundle 'EasyMotion'
-"Bundle 'vim-syntastic/syntastic'
-"Bundle 'vim-scripts/groovy.vim'
-"Bundle 'groovyindent'
-"Bundle 'yubo/vim-colorschemes'
-"Bundle 'SirVer/ultisnips'
-"Bundle 'wesleyche/SrcExpl'
-"Bundle 'snipMate'
-"Bundle 'taglist.vim'
-"Bundle 'https://github.com/kana/vim-fakeclip.git'
+"language"
+Plugin 'google/vim-jsonnet'
+Plugin 'fatih/vim-go'
+Plugin 'rust-lang/rust.vim'
+"Plugin 'vim-scripts/groovy.vim'
+
+Plugin 'EasyMotion'
+"Plugin 'kana/vim-fakeclip.git'
 "
 "rust"
-Bundle 'rust-lang/rust.vim'
 call vundle#end()
+filetype plugin indent on
 
 " AutoClose {{{
 imap {{ {{}}<Esc>hi
@@ -512,3 +516,4 @@ if !isdirectory(&dir) | call mkdir(&dir, 'p', 0700) | endif
 if filereadable(expand("./.vim_local"))
     source ./.vim_local
 endif
+
