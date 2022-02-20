@@ -65,6 +65,7 @@ set foldmethod=marker
 "filetype off
 "打开高亮
 syntax enable
+""syntax on
 "显示行号
 "set number
 set modelines=0
@@ -104,9 +105,11 @@ au BufRead,BufNewFile *.js,*.jsx   setfiletype javascript
 au BufRead,BufNewFile *.css,*.less setfiletype css
 au BufRead,BufNewFile *.yaml,*.yml setfiletype yaml
 au BufRead,BufNewFile *.go         setfiletype go
+au BufRead,BufNewFile go.mod       setfiletype gomod
 au BufRead,BufNewFile *.vue        setfiletype html
 au BufRead,BufNewFile *.txt        setfiletype text
 au BufRead,BufNewFile *.jsonnet    setfiletype jsonnet
+au BufRead,BufNewFile *.md         setfiletype markdown
 
 au FileType html       setlocal et sta sw=4 sts=4
 au FileType css        setlocal et sta sw=2 sts=2
@@ -116,8 +119,15 @@ au FileType typescript setlocal et sta sw=2 sts=2
 au FileType yaml       setlocal et sta sw=2 sts=2
 
 "au BufRead,BufNewFile *.asm,*.c,*.cpp,*.java,*.cs,*.sh,*.lua,*.pl,*.pm,*.py,*.rb,*.hs,*.vim,*.go 2match Underlined /.\%>81v.*/
-
 "}}}
+" golang {{{
+"https://github.com/govim/govim/blob/main/ftplugin/go.vim
+autocmd FileType go nmap <leader>e :GOVIMRename<CR>
+autocmd FileType go nmap <leader>i :GOVIMGoImports<CR>
+autocmd FileType go nmap <leader>r :GOVIMReferences<CR>
+autocmd FileType go nmap <buffer> <silent> gd :GOVIMImplements<cr>
+" }}}
+
 
 " typescript {{{
 autocmd FileType typescript nmap <buffer> <leader>e <Plug>(TsuquyomiRenameSymbol)
@@ -226,49 +236,56 @@ cnoreabb <expr> W              getcmdtype()==':'&&getcmdline()=~#'^W'?'w':'W'
 "}}}
 
 " plugins {{{
-" git clone http://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
-set nocompatible              " be iMproved, required
-filetype off                  " required
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/vundle/
-call vundle#begin()
-" let Vundle manage Vundle
-Plugin 'AutoClose'
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'jlanzarotta/bufexplorer'
-Plugin 'vim-scripts/The-NERD-tree'
-Plugin 'vim-scripts/The-NERD-Commenter'
-Plugin 'moll/vim-bbye'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-surround'
-"theme
-Plugin 'majutsushi/tagbar'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
+" https://github.com/junegunn/vim-plug
+call plug#begin('~/.vim/plugged')
+Plug 'VundleVim/Vundle.vim'
+Plug 'jlanzarotta/bufexplorer'
+
+"Plug 'vim-scripts/The-NERD-tree'
+"Plug 'vim-scripts/The-NERD-Commenter'
+
+"Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
+"Plug 'guns/vim-clojure-static'
+"Plug 'guns/vim-clojure-highlight'
 "
-Plugin 'Stormherz/tablify'
-Plugin 'vim-scripts/ZoomWin'
-Plugin 'vim-scripts/gtags.vim'
-Plugin 'Valloric/YouCompleteMe' 
-Plugin 'airblade/vim-gitgutter'
-Plugin 'maksimr/vim-jsbeautify'
-"typescript
-Plugin 'Shougo/vimproc'
-Plugin 'Quramy/tsuquyomi'
-Plugin 'leafgarland/typescript-vim'
+"Plug 'Valloric/YouCompleteMe', { 'branch': 'master' }
+Plug 'junegunn/goyo.vim', { 'for': 'markdown' }
+
+"scripts
+Plug 'moll/vim-bbye'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-surround'
+
+"theme
+Plug 'preservim/nerdtree', { 'on':  'NERDTreeToggle' }
+Plug 'majutsushi/tagbar'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'Stormherz/tablify'
+Plug 'vim-scripts/ZoomWin'
+Plug 'vim-scripts/gtags.vim'
+Plug 'airblade/vim-gitgutter'
+Plug 'maksimr/vim-jsbeautify'
+Plug 'vim-scripts/EasyMotion'
+Plug 'vim-scripts/AutoClose'
+
+Plug 'Shougo/vimproc', {'do' : 'make'}
+Plug 'Quramy/tsuquyomi'
+Plug 'leafgarland/typescript-vim'
 
 "language"
-Plugin 'google/vim-jsonnet'
-Plugin 'fatih/vim-go'
-Plugin 'rust-lang/rust.vim'
-"Plugin 'vim-scripts/groovy.vim'
-
-Plugin 'EasyMotion'
-"Plugin 'kana/vim-fakeclip.git'
-"
-"rust"
-call vundle#end()
-filetype plugin indent on
+Plug 'google/vim-jsonnet', { 'for': 'jsonnet' }
+"Plug 'fatih/vim-go', { 'tag': '*' }
+Plug 'govim/govim', { 'branch': 'main' }
+Plug 'nsf/gocode', { 'tag': 'v.20150303', 'rtp': 'vim' }
+Plug 'rust-lang/rust.vim'
+Plug 'mattn/vim-lsp-settings'
+Plug 'prabirshrestha/vim-lsp'
+Plug 'prabirshrestha/asyncomplete.vim'
+Plug 'prabirshrestha/asyncomplete-lsp.vim'
+Plug 'prabirshrestha/asyncomplete-gocode.vim', { 'for': 'go' }
+"Plug 'vim-scripts/groovy.vim'
+call plug#end()
 
 " AutoClose {{{
 imap {{ {{}}<Esc>hi
@@ -317,19 +334,6 @@ nmap <C-t>p                 <Plug>(fakeclip-screen-p)
 let g:rustfmt_autosave = 1
 "}}}
 
-"vim-go {{{
-"golang
-let g:go_fmt_command = "gofmt"
-let g:go_highlight_functions = 1
-let g:go_highlight_methods = 1
-let g:go_highlight_structs = 1
-let g:go_highlight_operators = 1
-let g:go_highlight_build_constraints = 1
-let g:go_metalinter_enabled = ['vet']
-""let g:godef_split=3
-
-
-"}}}
 
 "YCM {{{
 " youcompleteme  默认tab  s-tab 和自动补全冲突
@@ -516,4 +520,3 @@ if !isdirectory(&dir) | call mkdir(&dir, 'p', 0700) | endif
 if filereadable(expand("./.vim_local"))
     source ./.vim_local
 endif
-
