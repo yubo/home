@@ -1,8 +1,49 @@
 # tmux tips
 tmux默认键改为 ctrl-a
 
-### build from source
+### install
 ```shell
+# ubuntu & debian
+apt install tmux
+
+# centos
+yum install tmux
+
+# darwin
+brew install tmux
+```
+
+
+### session
+```
+tmux ls #列出会话
+tmux a[ttach] -t session_name #进入session_name
+```
+
+map    | desc
+--     | --
+bind $ | 修改当前会话名称(session name)
+bind d | 退出当前会话
+
+
+### window
+
+map    | desc
+--     | --
+bind , | 修改tmux window name
+bind c | create window
+bind n | next window
+bind p | pre window
+bind N | swap next window
+bind P | swap pre window
+bind - | split window
+bind | | vsplit window
+bind z | zoom window
+
+
+
+#### build from source
+```
 mkdir -p -m 0700 ~/.tmux.tmp
 cd ~/.tmux.tmp
 
@@ -36,29 +77,3 @@ make install
 
 cd ~/local/bin
 ```
-
-### session
-```
-tmux ls #列出会话
-tmux a[ttach] -t session_name #进入session_name
-```
-
-map    | desc
---     | --
-bind $ | 修改当前会话名称(session name)
-bind d | 退出当前会话
-
-
-### window
-
-map    | desc
---     | --
-bind , | 修改tmux window name
-bind c | create window
-bind n | next window
-bind p | pre window
-bind N | swap next window
-bind P | swap pre window
-bind - | split window
-bind | | vsplit window
-bind z | zoom window

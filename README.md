@@ -5,9 +5,8 @@ My working development environment configuration, including shell, tmux, vim, gi
 ```shell
 git clone git@github.com:yubo/home.git ~/.yubo
 cd ~/.yubo && sh install.sh
-fc-cache -vf ~/.fonts
 vim
-:BundleInstall
+:PlugInstall
 :q
 ```
 

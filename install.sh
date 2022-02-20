@@ -58,16 +58,6 @@ install_file .vim
 install_file .mpdconf
 #install_file .kermrc 
 
-if [[ ! -d ~/.vim/bundle/vundle ]]; then
-	git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
-else
-	echo "~/.vim/bundle/vundle already exists, skip clone"
-fi
-
-if [[ -f misc/connect.c ]]; then
-    gcc -o bin/connect misc/connect.c
-fi
-
 if [[ ! -e $HOME/gopath ]]; then
     mkdir -p $HOME/gopath
 fi
