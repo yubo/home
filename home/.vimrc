@@ -124,10 +124,20 @@ au FileType yaml       setlocal et sta sw=2 sts=2
 "https://github.com/govim/govim/blob/main/ftplugin/go.vim
 autocmd FileType go nmap <leader>e :GOVIMRename<CR>
 autocmd FileType go nmap <leader>i :GOVIMGoImports<CR>
+"goto references"
 autocmd FileType go nmap <leader>r :GOVIMReferences<CR>
+"goto implements"
 autocmd FileType go nmap <buffer> <silent> gd :GOVIMImplements<cr>
 " }}}
 
+"自动补全 complete {{{
+" 回车替换 c-y
+inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+augroup complete
+  autocmd!
+  autocmd CompleteDone * pclose
+augroup end
+"}}}
 
 " typescript {{{
 autocmd FileType typescript nmap <buffer> <leader>e <Plug>(TsuquyomiRenameSymbol)
@@ -276,14 +286,15 @@ Plug 'leafgarland/typescript-vim'
 "language"
 Plug 'google/vim-jsonnet', { 'for': 'jsonnet' }
 "Plug 'fatih/vim-go', { 'tag': '*' }
-Plug 'govim/govim', { 'branch': 'main' }
-Plug 'nsf/gocode', { 'tag': 'v.20150303', 'rtp': 'vim' }
 Plug 'rust-lang/rust.vim'
 Plug 'mattn/vim-lsp-settings'
 Plug 'prabirshrestha/vim-lsp'
 Plug 'prabirshrestha/asyncomplete.vim'
 Plug 'prabirshrestha/asyncomplete-lsp.vim'
+" golang
+Plug 'govim/govim', { 'branch': 'main' }
 Plug 'prabirshrestha/asyncomplete-gocode.vim', { 'for': 'go' }
+"Plug 'nsf/gocode', { 'tag': 'v.20150303', 'rtp': 'vim' }
 "Plug 'vim-scripts/groovy.vim'
 call plug#end()
 
@@ -334,39 +345,6 @@ nmap <C-t>p                 <Plug>(fakeclip-screen-p)
 let g:rustfmt_autosave = 1
 "}}}
 
-
-"YCM {{{
-" youcompleteme  默认tab  s-tab 和自动补全冲突
-" let g:ycm_key_list_select_completion=['<c-n>']
-" let g:ycm_key_list_select_completion = ['<Down>']
-" let g:ycm_key_list_previous_completion=['<c-p>']
-" let g:ycm_key_list_previous_completion = ['<Up>']
-set completeopt=longest,menu	"让Vim的补全菜单行为与一般IDE一致(参考VimTip1228)
-let g:ycm_confirm_extra_conf = 0      "关闭加载.ycm_extra_conf.py提示
-let g:ycm_complete_in_comments = 1    "在注释输入中也能补全
-let g:ycm_complete_in_strings = 1     "在字符串输入中也能补全
-let g:ycm_seed_identifiers_with_syntax = 1                  " 语言关键字补全, 不过python关键字都很短，所以，需要的自己打开
-let g:ycm_min_num_of_chars_for_completion = 1               " 从第2个键入字符就开始罗列匹配项
-let g:ycm_collect_identifiers_from_tags_files = 1           " 开启 YCM 基于标签引擎
-let g:ycm_collect_identifiers_from_comments_and_strings = 1 " 注释和字符串中的文字也会被收入补全
-let g:ycm_warning_symbol = '>>'
-let g:ycm_error_symbol = '->'
-"let g:ycm_add_preview_to_completeopt = 1
-if !empty(glob("~/.vim/.ycm_extra_conf.py"))
-	let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
-endif
-nmap <leader>gd :YcmDiags<CR>
-nmap <leader>gh :YcmCompleter GoToDeclaration<CR>           " 跳转到申明处
-nmap <leader>gc :YcmCompleter GoToDefinition<CR>            " 跳转到定义处
-nmap <leader>ge :YcmCompleter GoToDefinitionElseDeclaration<CR>
-" 直接触发自动补全
-let g:ycm_key_invoke_completion = '<C-Space>'
-" 黑名单,不启用
-let g:ycm_filetype_blacklist = {
-			\ 'tagbar' : 1,
-			\ 'gitcommit' : 1,
-			\}
-"}}}
 
 "srcexpl {{{
 " // The switch of the Source Explorer 
