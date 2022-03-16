@@ -1,4 +1,8 @@
 " options {{{
+
+set dir=$HOME/.vim/tmp/swap
+if !isdirectory(&dir) | call mkdir(&dir, 'p', 0700) | endif
+
 " tab替换为4空格 %retab! 
 "set ts=8
 "set tabstop=4 softtabstop=4 shiftwidth=4 expandtab
@@ -120,150 +124,94 @@ au FileType yaml       setlocal et sta sw=2 sts=2
 
 "au BufRead,BufNewFile *.asm,*.c,*.cpp,*.java,*.cs,*.sh,*.lua,*.pl,*.pm,*.py,*.rb,*.hs,*.vim,*.go 2match Underlined /.\%>81v.*/
 "}}}
-" golang {{{
-"https://github.com/govim/govim/blob/main/ftplugin/go.vim
-autocmd FileType go nmap <leader>e :GOVIMRename<CR>
-autocmd FileType go nmap <leader>i :GOVIMGoImports<CR>
-"goto references"
-autocmd FileType go nmap <leader>r :GOVIMReferences<CR>
-"goto implements"
-autocmd FileType go nmap <buffer> <silent> gd :GOVIMImplements<cr>
-" }}}
-
-"自动补全 complete {{{
-" 回车替换 c-y
-inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-augroup complete
-  autocmd!
-  autocmd CompleteDone * pclose
-augroup end
-"}}}
-
-" typescript {{{
-autocmd FileType typescript nmap <buffer> <leader>e <Plug>(TsuquyomiRenameSymbol)
-autocmd FileType typescript nmap <buffer> <leader>E <Plug>(TsuquyomiRenameSymbolC)
-
-set statusline+=%#warningmsg#
-"set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-"let g:tsuquyomi_disable_quickfix = 1
-"let g:syntastic_typescript_checkers = ['tsuquyomi']
-"
-"let g:syntastic_always_populate_loc_list = 1
-"let g:syntastic_auto_loc_list = 1
-"let g:syntastic_check_on_open = 1
-"let g:syntastic_check_on_wq = 0
-" }}}
 
 " mappings {{{
-let mapleader = ','
+let mapleader=','
 " normal mode
-nnoremap Y                     y$
-nnoremap #                     :let @/=printf('\<%s\>\C', expand('<cword>'))<CR>
-"nnoremap @                     :execute "vimgrep /" . expand("<cword>") . "/ **/*.c"<CR>
-nnoremap <C-L>                 :bn<CR>
-nnoremap <C-H>                 :bp<CR>
-nnoremap <C-N>                 :cn<CR>
-nnoremap <C-P>                 :cp<CR>
-nnoremap <C-J>                 7<C-e>
-nnoremap <C-K>                 7<C-y>
-nnoremap <C-T>                 :Gtags -r<CR><CR>
-nnoremap <C-F>                 :Gtags -gi<CR>
-"nnoremap <leader>h             gT
-"nnoremap <leader>l             gt
-nnoremap <leader>c             :cclose<CR>
-nnoremap <leader>o             :copen<CR>
-nnoremap <leader>r             :!gtags<CR>
-nnoremap <leader>rr            :.,+1s/\([a-z]\)_\([a-z]\)/\1\U\2/g
-nnoremap <leader>j             /## <CR>z<CR>: noh<CR>
-nnoremap <leader>k             ?## <CR>z<CR>: noh<CR>
-"nnoremap <leader>b             : %!xxd<CR>
-"nnoremap <leader>bb            : %!xxd -r<CR>
-nnoremap <leader>b             : BufExplorer<CR>
-nnoremap <leader>y             : YRShow<CR>
-nnoremap <leader>h             <C-W>h
-nnoremap <leader>j             <C-W>j
-nnoremap <leader>k             <C-W>k
-nnoremap <leader>l             <C-W>l
-nnoremap <leader>s             : so $MYVIMRC<CR>
-nnoremap <leader>v             : tabe $MYVIMRC<CR>
-"nnoremap <leader>t             : Tlist<CR>
-nnoremap <leader>t             : TagbarToggle<CR>
-nnoremap <leader>q             : Bdelete<CR>
-nnoremap <leader>g=             gg=G
-nnoremap <leader>z             : setl fdm=indent fdc=1 fdn=1<CR>
-nnoremap <leader>;             : noh<CR>
-nnoremap <leader>p             : set paste<CR>
-nnoremap <leader>pp            : set nopaste<CR>
-nnoremap <silent><leader><space>       : NERDTreeToggle<CR>
-nnoremap <silent><leader>n     : set number<CR>
-nnoremap <silent><leader>N     : set nonumber<CR>
-nnoremap <leader>nn            : set nonumber<CR>
+nnoremap Y                        y$
+nnoremap #                        :let @/=printf('\<%s\>\C', expand('<cword>'))<CR>
+nnoremap <c-l>                    :bn<CR>
+nnoremap <c-h>                    :bp<CR>
+nnoremap <c-n>                    :cn<CR>
+nnoremap <c-p>                    :cp<CR>
+nnoremap <c-j>                    7<C-e>
+nnoremap <c-k>                    7<C-y>
+nnoremap <leader>c                :cclose<CR>
+nnoremap <leader>o                :copen<CR>
+nnoremap <leader>x                : %!xxd<CR>
+nnoremap <leader>xx               : %!xxd -r<CR>
+nnoremap <leader>b                : BufExplorer<CR>
+nnoremap <leader>h                <c-w>h
+nnoremap <leader>j                <c-w>j
+nnoremap <leader>k                <c-w>k
+nnoremap <leader>l                <c-w>l
+nnoremap <leader>s                :so $MYVIMRC<CR>
+nnoremap <leader>t                :TagbarToggle<CR>
+nnoremap <leader>q                :bdelete<CR>
+nnoremap <leader>g=                gg=G
+nnoremap <leader>z                :setl fdm=indent fdc=1 fdn=1<CR>
+nnoremap <leader>;                :noh<CR>
+nnoremap <leader>p                :set paste<CR>
+nnoremap <leader>pp               :set nopaste<CR>
+nnoremap <silent><leader><space>  :NERDTreeToggle<CR>
+nnoremap <silent><leader>n        :set number<CR>
+nnoremap <silent><leader>nn       :set nonumber<CR>
+nnoremap <silent>fm               :LspDocumentFormat<cr>
+nnoremap <silent>md               :Goyo 120x70%<CR>
 "diff
-nnoremap <leader>u             :diffupdate<CR>
+nnoremap <leader>u                :diffupdate<CR>
 "insert mode
-inoremap <leader>co            // Copyright <C-r>=strftime('%Y')<CR> yubo. All rights reserved.<CR>// Use of this source code is governed by a BSD-style<CR>// license that can be found in the LICENSE file.<CR>
+inoremap <leader>co            // Copyright <c-r>=strftime('%Y')<CR> yubo. All rights reserved.<CR>// Use of this source code is governed by a BSD-style<CR>// license that can be found in the LICENSE file.<CR>
+" current file name"
 inoremap <expr> <leader>fn     expand('%:p')
-inoremap <leader>dt            <C-r>=strftime('%Y-%m-%d')<CR>
-inoremap <leader>tm            <C-r>=strftime('%H:%M:%S')<CR>
-"inoremap <C-@>                 <C-x><C-u>
-"inoremap <C-space>             <C-x><C-u>
-inoremap <C-a>                 <home>
-inoremap <C-e>                 <end>
-inoremap <C-b>                 <left>
-inoremap <C-f>                 <right>
-"inoremap <A-b>                 <S-left>
-"inoremap <A-f>                 <S-right>
-inoremap <C-d>                 <del>
-inoremap <A-d>                 <C-o>dw
-"文件类型切换
-inoremap <C-j>                 <down>
-inoremap <C-k>                 <up>
+" date "
+inoremap <leader>dt            <c-r>=strftime('%Y-%m-%d')<CR>
+" time "
+inoremap <leader>tm            <c-r>=strftime('%H:%M:%S')<CR>
+"inoremap <c-space>             <c-x><c-u>
+inoremap <c-a>                 <home>
+inoremap <c-e>                 <end>
+inoremap <c-b>                 <left>
+inoremap <c-f>                 <right>
+inoremap <c-n>                 <down>
+inoremap <c-p>                 <up>
+inoremap <c-d>                 <del>
+inoremap {{                    {{}}<Esc>hi
+inoremap {{{                   {{{}}}<Esc>2hi
 
 "command mode
-cnoremap <C-a>                 <home>
-cnoremap <C-e>                 <end>
-cnoremap <C-b>                 <left>
-cnoremap <C-f>                 <right>
-"cnoremap <leader>b             <S-left>
-"cnoremap <leader>f             <S-right>
-"cnoremap <leader>d             <S-right><C-w>
-cnoremap <C-d>                 <delete>
-cnoremap <C-p>                 <up>
-cnoremap <C-n>                 <down>
+cnoremap <c-a>                 <home>
+cnoremap <c-e>                 <end>
+cnoremap <c-b>                 <left>
+cnoremap <c-f>                 <right>
+cnoremap <c-p>                 <up>
+cnoremap <c-n>                 <down>
+cnoremap <c-d>                 <del>
 
 "visual mode
-vnoremap <C-m>                 !markdown<CR>
-vnoremap <C-p>                 !pandoc<CR>
-vnoremap <C-f>                 !figlet<CR>
+vnoremap <c-m>                 !markdown<CR>
+vnoremap <c-p>                 !pandoc<CR>
+vnoremap <c-f>                 !figlet<CR>
 
 " others
 cnoreabb <expr> W              getcmdtype()==':'&&getcmdline()=~#'^W'?'w':'W'
-"esc的映射
-"imap jj <esc>
-"使用tab键来代替%进行匹配跳转
-"nnoremap <tab>                 %
 "}}}
 
 " plugins {{{
 " https://github.com/junegunn/vim-plug
 call plug#begin('~/.vim/plugged')
-Plug 'VundleVim/Vundle.vim'
 Plug 'jlanzarotta/bufexplorer'
 
-"Plug 'vim-scripts/The-NERD-tree'
-"Plug 'vim-scripts/The-NERD-Commenter'
-
-"Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
-"Plug 'guns/vim-clojure-static'
-"Plug 'guns/vim-clojure-highlight'
-"
-"Plug 'Valloric/YouCompleteMe', { 'branch': 'master' }
+"markdown"
 Plug 'junegunn/goyo.vim', { 'for': 'markdown' }
+Plug 'junegunn/limelight.vim', { 'for': 'markdown' }
+
 
 "scripts
-Plug 'moll/vim-bbye'
-Plug 'tpope/vim-fugitive'
+" cs"'		'hello'		-> "hello"
+" cs'<p>	'hello'		-> <p>hello</p>
+" cst"		<p>hello</p>	-> "hello"
+" ds"		"hello"		-> hello
 Plug 'tpope/vim-surround'
 
 "theme
@@ -271,128 +219,101 @@ Plug 'preservim/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'majutsushi/tagbar'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+"<leader>tt 格式化表格
 Plug 'Stormherz/tablify'
+"<c-o> zoomwin"
 Plug 'vim-scripts/ZoomWin'
+" The gtags.vim plugin script integrates the GNU GLOBAL source code tag system
+" with Vim. About the details, see http://www.gnu.org/software/global/.
 Plug 'vim-scripts/gtags.vim'
+"vim-gitgutter: A Vim plugin which shows a git diff in the sign column. "
 Plug 'airblade/vim-gitgutter'
-Plug 'maksimr/vim-jsbeautify'
 Plug 'vim-scripts/EasyMotion'
 Plug 'vim-scripts/AutoClose'
 
-Plug 'Shougo/vimproc', {'do' : 'make'}
-Plug 'Quramy/tsuquyomi'
-Plug 'leafgarland/typescript-vim'
-
-"language"
-Plug 'google/vim-jsonnet', { 'for': 'jsonnet' }
-"Plug 'fatih/vim-go', { 'tag': '*' }
-Plug 'rust-lang/rust.vim'
-Plug 'mattn/vim-lsp-settings'
-Plug 'prabirshrestha/vim-lsp'
+"complete"
+Plug 'prabirshrestha/async.vim'
 Plug 'prabirshrestha/asyncomplete.vim'
+Plug 'prabirshrestha/asyncomplete-file.vim'
+Plug 'wellle/tmux-complete.vim'
+
+"lsp - Language Server Protocol"
+Plug 'prabirshrestha/vim-lsp'
 Plug 'prabirshrestha/asyncomplete-lsp.vim'
-" golang
-Plug 'govim/govim', { 'branch': 'main' }
-Plug 'prabirshrestha/asyncomplete-gocode.vim', { 'for': 'go' }
-"Plug 'nsf/gocode', { 'tag': 'v.20150303', 'rtp': 'vim' }
-"Plug 'vim-scripts/groovy.vim'
+Plug 'mattn/vim-lsp-settings'
+
+"jsonnet"
+Plug 'google/vim-jsonnet', { 'for': 'jsonnet' }
+
+" golang"
+Plug 'govim/govim', { 'branch': 'main', 'for': 'go' }
+
 call plug#end()
 
-" AutoClose {{{
-imap {{ {{}}<Esc>hi
-imap {{{ {{{}}}<Esc>2hi
-"}}} 
-"
-"vim-jsbeautify {{{
-let g:editorconfig_Beautifier = '~/.vim/.editorconfig'
-nnoremap <leader>f :call JsBeautify()<cr>
-autocmd FileType javascript nnoremap <buffer> <leader>f :call JsBeautify()<cr>
-autocmd FileType json       nnoremap <buffer> <leader>f :call JsonBeautify()<cr>
-autocmd FileType jsx        nnoremap <buffer> <leader>f :call JsxBeautify()<cr>
-autocmd FileType html       nnoremap <buffer> <leader>f :call HtmlBeautify()<cr>
-autocmd FileType css        nnoremap <buffer> <leader>f :call CSSBeautify()<cr>"
-autocmd FileType javascript vnoremap <buffer> <leader>f :call RangeJsBeautify()<cr>
-autocmd FileType json       vnoremap <buffer> <leader>f :call RangeJsonBeautify()<cr>
-autocmd FileType jsx        vnoremap <buffer> <leader>f :call RangeJsxBeautify()<cr>
-autocmd FileType html       vnoremap <buffer> <leader>f :call RangeHtmlBeautify()<cr>
-autocmd FileType css        vnoremap <buffer> <leader>f :call RangeCSSBeautify()<cr>
+" {{{ lsp
+let g:lsp_settings = {
+    \  'golangci-lint-langserver': {
+    \    'disabled': 1
+    \   }
+    \}
+
+let g:lsp_semantic_enabled = 1
+let g:lsp_diagnostics_enabled = 0
+let g:lsp_document_highlight_enabled = 0
+
+function! s:on_lsp_buffer_enabled() abort
+    setlocal omnifunc=lsp#complete
+    setlocal signcolumn=yes
+    if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
+    nmap <buffer> gd <plug>(lsp-definition)
+    nmap <buffer> gs <plug>(lsp-document-symbol-search)
+    nmap <buffer> gS <plug>(lsp-workspace-symbol-search)
+    nmap <buffer> gr <plug>(lsp-references)
+    nmap <buffer> gi <plug>(lsp-implementation)
+    nmap <buffer> gt <plug>(lsp-type-definition)
+    nmap <buffer> <leader>rn <plug>(lsp-rename)
+    nmap <buffer> [g <plug>(lsp-previous-diagnostic)
+    nmap <buffer> ]g <plug>(lsp-next-diagnostic)
+    nmap <buffer> K <plug>(lsp-hover)
+
+    let g:lsp_format_sync_timeout = 1000
+    autocmd! BufWritePre *.rs,*.go call execute('LspDocumentFormatSync')
+endfunction
+
+augroup lsp_install
+    au!
+    " call s:on_lsp_buffer_enabled only for languages that has the server registered.
+    autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
+augroup END
 "}}}
 
-" EasyMotion {{{
-let g:EasyMotion_mapping_b = '<C-b>'
-let g:EasyMotion_mapping_w = '<C-f>'
-"}}} 
 
-" NERDTree {{{
-let NERDChristmasTree=1
-let NERDTreeWinPos='left'
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
-let NERDTreeIgnore = ['\.pyc', '\.mod\.c', '\.o', '\.ko', '\.a', '\.so', 'CMakeFiles', 'CMakeCache.txt', 'GPATH', 'GRTAGS', 'GTAGS']
+" {{{ 自动补全
+let g:tmuxcomplete#asyncomplete_source_options = {
+    \ 'name':      'tmuxcomplete',
+    \ 'whitelist': ['*'],
+    \ 'config': {
+    \     'splitmode':      'words',
+    \     'filter_prefix':   1,
+    \     'show_incomplete': 1,
+    \     'sort_candidates': 0,
+    \     'scrollback':      0,
+    \     'truncate':        0
+    \     }
+    \ }
+
+au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#file#get_source_options({
+    \ 'name': 'file',
+    \ 'allowlist': ['*'],
+    \ 'priority': 10,
+    \ 'completor': function('asyncomplete#sources#file#completor')
+    \ }))
+
 " }}}
 
-"fakeclip {{{
-if $TMUX == ''
-set clipboard+=unnamed
-endif
-let g:fakeclip_terminal_multiplexer_type = 'tmux'
-vmap <C-t>y                 <Plug>(fakeclip-screen-y)
-nmap <C-t>P                 <Plug>(fakeclip-screen-P)
-nmap <C-t>p                 <Plug>(fakeclip-screen-p)
-"}}}
-"
+" scheme {{{
 
-" Rust {{{
-let g:rustfmt_autosave = 1
-"}}}
-
-
-"srcexpl {{{
-" // The switch of the Source Explorer 
-nnoremap <leader>se :SrcExplToggle<CR> 
-
-" // Set the height of Source Explorer window 
-let g:SrcExpl_winHeight = 8 
-
-" // Set 100 ms for refreshing the Source Explorer 
-let g:SrcExpl_refreshTime = 100 
-
-" // Set "Enter" key to jump into the exact definition context 
-let g:SrcExpl_jumpKey = "<ENTER>" 
-
-" // Set "Space" key for back from the definition context 
-let g:SrcExpl_gobackKey = "<SPACE>" 
-
-" // In order to avoid conflicts, the Source Explorer should know what plugins
-" // except itself are using buffers. And you need add their buffer names into
-" // below listaccording to the command ":buffers!"
-let g:SrcExpl_pluginList = [ 
-			\ "__Tag_List__", 
-			\ "_NERD_tree_" 
-			\ ] 
-
-" // Enable/Disable the local definition searching, and note that this is not 
-" // guaranteed to work, the Source Explorer doesn't check the syntax for now. 
-" // It only searches for a match with the keyword according to command 'gd' 
-let g:SrcExpl_searchLocalDef = 1 
-
-" // Do not let the Source Explorer update the tags file when opening 
-let g:SrcExpl_isUpdateTags = 0 
-
-" // Use 'Exuberant Ctags' with '--sort=foldcase -R .' or '-L cscope.files' to 
-" // create/update the tags file 
-""let g:SrcExpl_updateTagsCmd = "ctags -L cscope.files" 
-
-" // Set "<F12>" key for updating the tags file artificially 
-let g:SrcExpl_updateTagsKey = "<F12>" 
-
-" // Set "<F3>" key for displaying the previous definition in the jump list 
-let g:SrcExpl_prevDefKey = "<F3>" 
-
-" // Set "<F4>" key for displaying the next definition in the jump list 
-let g:SrcExpl_nextDefKey = "<F4>" 
-" }}}
-
-"vim-airline {{{
+"vim-airline 
 let g:airline_theme='badwolf'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#branch#enabled = 1
@@ -432,17 +353,8 @@ let g:airline#extensions#default#layout = [
 "let g:airline_section_x = '%{strlen(&ft) ? &ft : "Noft"}%{&bomb ? " BOM" : ""}'
 let g:airline_section_y = '%{&fileformat} %{(&fenc == "" ? &enc : &fenc)}'
 let g:airline_section_z = '%2l:%-1v/%L'
-" }}}
 
-"cscope"
-set cscopequickfix=s-,c-,d-,i-,t-,e-
-
-"gtags"
-let Gtags_OpenQuickfixWindow = 0
-
-"}}}
-
-"color scheme {{{
+"color 
 set t_Co=256
 syntax enable
 set background=dark
@@ -452,49 +364,63 @@ let g:solarized_contrast="high"
 let g:solarized_visibility="high"
 colorscheme solarized
 
-"let g:molokai_original = 1
-"let g:rehash256 = 1
-"colorscheme molokai 
-
 "plugins color"
-hi		VertSplit		ctermfg=244 ctermbg=232   cterm=bold
-hi		TagbarSignature	ctermfg=37
-"hi		OverLength		ctermbg=red ctermfg=white guibg=#592929 
-"match	OverLength		/\%81v.\+/
+hi	VertSplit	ctermfg=244 ctermbg=232   cterm=bold
+hi	TagbarSignature	ctermfg=37
+"hi	OverLength	ctermbg=red ctermfg=white guibg=#592929 
+"match	OverLength	/\%81v.\+/
 "}}}
 
-"swap window {{{
-function! MarkSwapAway()
-    " marked window number
-    let g:markedOldWinNum = winnr()
-    let g:markedOldBufNum = bufnr("%")
-endfunction
-function! DoWindowToss()
-    let newWinNum = winnr()
-    let newBufNum = bufnr("%")
-    " Switch focus to marked window
-    exe g:markedOldWinNum . "wincmd w"
-    " Load current buffer on marked window
-    exe 'hide buf' newBufNum
-    " Switch focus to current window
-    exe newWinNum . "wincmd w"
-    " Load marked buffer on current window
-    exe 'hide buf' g:markedOldBufNum
-    " …and come back to the new one
-    exe g:markedOldWinNum . "wincmd w"
-endfunction
-nnoremap <C-w><C-h> :call MarkSwapAway()<CR> <C-w>h :call DoWindowToss()<CR>
-nnoremap <C-w><C-j> :call MarkSwapAway()<CR> <C-w>j :call DoWindowToss()<CR>
-nnoremap <C-w><C-k> :call MarkSwapAway()<CR> <C-w>k :call DoWindowToss()<CR>
-nnoremap <C-w><C-l> :call MarkSwapAway()<CR> <C-w>l :call DoWindowToss()<CR>
-"}}}
 
-" other {{{
-set dir=$HOME/.vim/tmp/swap
-if !isdirectory(&dir) | call mkdir(&dir, 'p', 0700) | endif
-"}}}
+" Generic {{{
+"cscope"
+set cscopequickfix=s-,c-,d-,i-,t-,e-
+
+""
+"gtags"
+let Gtags_OpenQuickfixWindow = 0
+
+"EasyMotion"
+let g:EasyMotion_mapping_b = '<c-b>'
+let g:EasyMotion_mapping_w = '<c-f>'
+
+" NERDTree
+let NERDChristmasTree=1
+let NERDTreeWinPos='left'
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+let NERDTreeIgnore = ['\.pyc', '\.mod\.c', '\.o', '\.ko', '\.a', '\.so', 'CMakeFiles', 'CMakeCache.txt', 'GPATH', 'GRTAGS', 'GTAGS']
+
+"自动补全 complete
+" 回车替换 c-y
+"inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+let g:asyncomplete_auto_popup = 0
+
+function! s:check_back_space() abort
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~ '\s'
+endfunction
+
+inoremap <silent><expr> <TAB>
+  \ pumvisible() ? "\<C-n>" :
+  \ <SID>check_back_space() ? "\<TAB>" :
+  \ asyncomplete#force_refresh()
+inoremap <expr> <cr> pumvisible() ? asyncomplete#close_popup() : "\<cr>"
+
+
+""augroup complete
+""autocmd!
+""  autocmd CompleteDone * pclose
+""augroup end
+
+"markdown"
+let g:limelight_conceal_ctermfg = 'gray'
+let g:limelight_conceal_ctermfg = 240
+autocmd! User GoyoEnter Limelight
+autocmd! User GoyoLeave Limelight!
 
 "for local vimrc
 if filereadable(expand("./.vim_local"))
     source ./.vim_local
 endif
+
+"}}} 
