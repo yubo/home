@@ -22,7 +22,7 @@ function add_classpath {
 
 function _source {
 	for file in $*; do
-		if [ -f $1 ]; then
+		if [ -f $file ]; then
 			source $file
 		fi
 	done

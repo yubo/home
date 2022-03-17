@@ -197,7 +197,6 @@ vnoremap <c-f>                 !figlet<CR>
 cnoreabb <expr> W              getcmdtype()==':'&&getcmdline()=~#'^W'?'w':'W'
 "}}}
 
-
 " plugins {{{
 " https://github.com/junegunn/vim-plug
 call plug#begin('~/.vim/plugged')
@@ -256,6 +255,9 @@ call plug#end()
 let g:lsp_settings = {
     \  'golangci-lint-langserver': {
     \    'disabled': 1
+    \   },
+    \  'remark-language-server': {
+    \    'disabled': 1
     \   }
     \}
 
@@ -288,7 +290,6 @@ augroup lsp_install
     autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
 augroup END
 "}}}
-
 
 " {{{ 自动补全
 let g:tmuxcomplete#asyncomplete_source_options = {
@@ -372,7 +373,6 @@ hi	TagbarSignature	ctermfg=37
 "hi	OverLength	ctermbg=red ctermfg=white guibg=#592929 
 "match	OverLength	/\%81v.\+/
 "}}}
-
 
 " Generic {{{
 "cscope"
