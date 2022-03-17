@@ -176,8 +176,8 @@ inoremap <c-f>                 <right>
 inoremap <c-n>                 <down>
 inoremap <c-p>                 <up>
 inoremap <c-d>                 <del>
-inoremap {{                    {{}}<Esc>hi
-inoremap {{{                   {{{}}}<Esc>2hi
+inoremap { {                   {{}}<Esc>hi
+inoremap { { {                 {{{}}}<Esc>2hi
 
 "command mode
 cnoremap <c-a>                 <home>
@@ -196,6 +196,7 @@ vnoremap <c-f>                 !figlet<CR>
 " others
 cnoreabb <expr> W              getcmdtype()==':'&&getcmdline()=~#'^W'?'w':'W'
 "}}}
+
 
 " plugins {{{
 " https://github.com/junegunn/vim-plug
@@ -249,6 +250,7 @@ Plug 'google/vim-jsonnet', { 'for': 'jsonnet' }
 Plug 'govim/govim', { 'branch': 'main', 'for': 'go' }
 
 call plug#end()
+"}}}
 
 " {{{ lsp
 let g:lsp_settings = {

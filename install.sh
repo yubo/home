@@ -4,8 +4,7 @@
 bak_dir="$HOME/.home_bak"
 pwd_dir=$(pwd)
 
-install_file()
-{
+function install_file {
 	src="${pwd_dir}/home/$1"
 	dst="$HOME/$1"
 	if [[ -e $dst || -L $dst ]]; then
@@ -23,11 +22,6 @@ if [[ ! -d ~/.ssh/conf.d ]]; then
 	mkdir -p ~/.ssh/conf.d
 fi
 
-if [[ ! -e ~/.bash_local ]]; then
-	touch ~/.bash_local
-	chmod 0644 ~/.bash_local
-fi
-
 if [[ ! -e ~/.vim_local ]]; then
 	touch ~/.vim_local
 	chmod 0644 ~/.vim_local
@@ -42,12 +36,9 @@ mkdir -p $bak_dir
 
 install_file bin
 install_file .bash_profile
-install_file .bashrc
-install_file .bash_docker
 install_file .dircolors
 install_file .fonts
 install_file .gdbinit
-install_file .git-completion.bash
 install_file .gvimrc
 install_file .globalrc
 install_file .gitconfig
@@ -55,7 +46,7 @@ install_file .ssh/config
 install_file .tmux.conf
 install_file .vimrc
 install_file .vim
-install_file .mpdconf
+install_file .config
 #install_file .kermrc 
 
 if [[ ! -e $HOME/gopath ]]; then
