@@ -19,6 +19,4 @@ if [ -f "$HOME/.rvm/scripts/rvm" ]; then
 	source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 fi
 
-# Setting PATH for Python 3.8
-# The original version is saved in .bash_profile.pysave
-export PATH="/Library/Frameworks/Python.framework/Versions/3.8/bin:${PATH}"
+

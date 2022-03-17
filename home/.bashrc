@@ -1,18 +1,41 @@
-# .bashrc
-
-# User specific aliases and functions
-
-# Source global definitions
-if [ -f /etc/bashrc ]; then
-	. /etc/bashrc
-fi
-
-add_path()
-{
-	if [ -d $1 ]; then
-		PATH=$1:$PATH
-	fi
+function add_path {
+	for path in $*; do
+		if [ -f $path ]; then
+			CLASSPATH=$path:$PATH
+		fi
+	done
 }
+
+function add_classpath {
+	for path in $*; do
+		if [ -f $path ]; then
+			CLASSPATH=$path:$CLASSPATH
+		fi
+	done
+}
+
+function _source {
+	for file in $*; do
+		if [ -f $1 ]; then
+			source $file
+		fi
+	done
+}
+
+add_path					\
+	$HOME/bin				\
+	${HOME}/.rvm/bin			\
+	/usr/local/homebrew/bin
+
+add_classpath ${HOME}/bin/antlr-4.7.1-complete.jar
+
+_source /etc/bashrc				\
+	/etc/profile.d/bash_completion.sh	\
+	/etc/profile.d/bash_completion.sh	\
+	${HOME}/.config/git-completion.bash	\
+	${HOME}/.cargo/env			\
+	${HOME}/.bash_docker			\
+	${HOME}/.bash_local
 
 alias vi='vim'
 alias ff='find . -type f| xargs grep -n --color'
@@ -44,8 +67,13 @@ alias sreload="sudo systemctl reload"
 alias ccd='cd $(pwd -P)'
 alias antlr4='java -Xmx500M -cp "${HOME}/bin/antlr-4.7.1-complete.jar:$CLASSPATH" org.antlr.v4.Tool'
 alias grun='java -Xmx500M -cp "${HOME}/bin/antlr-4.7.1-complete.jar:$CLASSPATH" org.antlr.v4.gui.TestRig'
-alias bfg='java -jar ~/bin/bfg-1.13.0.jar'
+alias bfg='java -jar ${HOME}/bin/bfg-1.13.0.jar'
 alias gotest='go test -v -args -v 10 -logtostderr true'
+
+if [ "x"$TERM == "xxterm" ]; then
+	alias sshx='ssh -X'
+fi
+
 
 # kubectl
 if type kubectl >/dev/null 2>&1; then
@@ -59,7 +87,6 @@ if [ `uname` == 'Darwin' ]; then
 	alias ls='ls -GF'
 	alias la='ls -GFa'
 	alias ll='ls -lGF'
-	add_path /usr/local/homebrew/bin
 	export BASH_SILENCE_DEPRECATION_WARNING=1
 else
 	alias ls='ls -F --color '
@@ -79,82 +106,16 @@ if [ -e $HOME/go ]; then
 	add_path $GOPATH/bin
 fi
 
+
 function parse_git_branch {
 	git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/[\1]/"
 }
 
 if [ -n $(parse_git_branch) ]; then
-	export PS1='\[\e[1;36m\]$(e=$? && [ $e -ne 0 ] && echo "[$e]" )\[\e[0m\][${debian_chroot:+($debian_chroot)}\u@\h:\w]\[\e[1;36m\]$(parse_git_branch)\[\e[0m\]\[\e[1;31m\]${REC}\[\e[0m\]\$'
+	export PS1='\[\e[1;36m\]$(e=$? && [ $e -ne 0 ] && echo "[$e]" )\[\e[0m\][\u@\h:\w]\[\e[1;36m\]$(parse_git_branch)\[\e[0m\]\[\e[1;31m\]${REC}\[\e[0m\]\$'
 fi
 
-if [ -f $HOME/.git-completion.bash ]; then
-	source $HOME/.git-completion.bash
-fi
-
-alias si='wine ~/.wine/drive_c/Program\ Files\ \(x86\)/Source\ Insight\ 3/Insight3.exe'
-
-add_path ~/Android/Sdk/tools
-add_path ~/Android/android-ndk-r10d
-add_path ~/Android/Sdk/platform-tools
-add_path ~/xq/bin/brcm4709/sdk_package/toolchain/bin
-add_path /opt/android/android-studio/bin
-add_path $HOME/bin
-add_path /usr/local/eclipse
-add_path /usr/games
-
-if [ "x"$TERM == "xxterm" ]; then
-	alias sshx='ssh -X'
-fi
-
-if [ -f ~/.bash_local ]; then
-	. ~/.bash_local
-fi
-
-if [ -f ~/.bash_docker ]; then
-	. ~/.bash_docker
-fi
-
-if [ -d ~/src/dpdk ]; then
-	export RTE_SDK=~/src/dpdk
+if [ -d ${HOME}/src/dpdk ]; then
+	export RTE_SDK=${HOME}/src/dpdk
 	export RTE_TARGET=x86_64-native-linuxapp-gcc
 fi
-
-## java
-if [ -f "${HOME}/bin/antlr-4.7.1-complete.jar" ]; then
-	export CLASSPATH=".:${HOME}/bin/antlr-4.7.1-complete.jar:$CLASSPATH"
-fi
-
-# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-if [ -d "${HOME}/.rvm/bin" ]; then
-	export PATH="$PATH:$HOME/.rvm/bin"
-fi
-
-# rust
-if [ -f "$HOME/.cargo/env" ]; then
-	source $HOME/.cargo/env
-fi
-
-
-if [ -f ~/.grab/bash/grab.bash ]; then
-	source ~/.grab/bash/grab.bash
-fi
-
-if [ -f ~/.grab/grab.bash ]; then
-        source ~/.grab/grab.bash
-fi
-if [ -f ~/.grab/grab.bash ]; then
-        source ~/.grab/grab.bash
-fi
-if [ -f ~/.grab/grab.bash ]; then
-        source ~/.grab/grab.bash
-fi
-if [ -f ~/.grab/grab.bash ]; then
-        source ~/.grab/grab.bash
-fi
-if [ -f ~/.grab/grab.bash ]; then
-        source ~/.grab/grab.bash
-fi
-
-# kubectl
-alias k=kubectl
-complete -F __start_kubectl k

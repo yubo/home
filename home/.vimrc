@@ -393,18 +393,19 @@ let NERDTreeIgnore = ['\.pyc', '\.mod\.c', '\.o', '\.ko', '\.a', '\.so', 'CMakeF
 "自动补全 complete
 " 回车替换 c-y
 "inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-let g:asyncomplete_auto_popup = 0
-
-function! s:check_back_space() abort
-    let col = col('.') - 1
-    return !col || getline('.')[col - 1]  =~ '\s'
-endfunction
-
-inoremap <silent><expr> <TAB>
-  \ pumvisible() ? "\<C-n>" :
-  \ <SID>check_back_space() ? "\<TAB>" :
-  \ asyncomplete#force_refresh()
-inoremap <expr> <cr> pumvisible() ? asyncomplete#close_popup() : "\<cr>"
+let g:asyncomplete_min_chars = 1
+"let g:asyncomplete_auto_popup = 0
+"
+"function! s:check_back_space() abort
+"    let col = col('.') - 1
+"    return !col || getline('.')[col - 1]  =~ '\s'
+"endfunction
+"
+"inoremap <silent><expr> <TAB>
+"  \ pumvisible() ? "\<C-n>" :
+"  \ <SID>check_back_space() ? "\<TAB>" :
+"  \ asyncomplete#force_refresh()
+"inoremap <expr> <cr> pumvisible() ? asyncomplete#close_popup() : "\<cr>"
 
 
 ""augroup complete
