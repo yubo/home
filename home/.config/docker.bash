@@ -6,7 +6,7 @@ alias docker-pid="sudo docker inspect --format '{{.State.Pid}}'"
 alias docker-ip="sudo docker inspect --format '{{ .NetworkSettings.IPAddress }}'"
 
 #the implementation refs from https://github.com/jpetazzo/nsenter/blob/master/docker-enter
-function docker-enter() {
+function docker-enter {
     #if [ -e $(dirname "$0")/nsenter ]; then
     #Change for centos bash running
     if [ -e $(dirname '$0')/nsenter ]; then

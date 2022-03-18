@@ -5,25 +5,25 @@ export PS1='[\u@\h:\w]\$'
 
 
 function add_path {
-	for path in $*; do
-		if [ -f $path ]; then
-			CLASSPATH=$path:$PATH
+	for v in $*; do
+		if [ -e $v ]; then
+			export PATH=$v:$PATH
 		fi
 	done
 }
 
 function add_classpath {
-	for path in $*; do
-		if [ -f $path ]; then
-			CLASSPATH=$path:$CLASSPATH
+	for v in $*; do
+		if [ -e $v ]; then
+			export CLASSPATH=$v:$CLASSPATH
 		fi
 	done
 }
 
 function _source {
-	for file in $*; do
-		if [ -f $file ]; then
-			source $file
+	for v in $*; do
+		if [ -e $v ]; then
+			source $v
 		fi
 	done
 }
