@@ -3,6 +3,9 @@
 set dir=$HOME/.vim/tmp/swap
 if !isdirectory(&dir) | call mkdir(&dir, 'p', 0700) | endif
 
+"关闭数字栏中符号显示"
+set signcolumn=no
+
 " tab替换为4空格 %retab! 
 "set ts=8
 "set tabstop=4 softtabstop=4 shiftwidth=4 expandtab
@@ -98,6 +101,7 @@ endif
 
 filetype plugin indent on
 hi SpecialKey ctermfg=238
+
 
 " sw   shiftwidth
 " ts   tabstop
@@ -262,12 +266,15 @@ let g:lsp_settings = {
     \}
 
 let g:lsp_semantic_enabled = 1
+"enable signs column"
 let g:lsp_diagnostics_enabled = 0
+"enable virtual text"
+let g:lsp_diagnostics_virtual_text_enabled = 0
 let g:lsp_document_highlight_enabled = 0
 
 function! s:on_lsp_buffer_enabled() abort
     setlocal omnifunc=lsp#complete
-    setlocal signcolumn=yes
+    "setlocal signcolumn=yes
     if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
     nmap <buffer> gd <plug>(lsp-definition)
     nmap <buffer> gs <plug>(lsp-document-symbol-search)
@@ -275,7 +282,7 @@ function! s:on_lsp_buffer_enabled() abort
     nmap <buffer> gr <plug>(lsp-references)
     nmap <buffer> gi <plug>(lsp-implementation)
     nmap <buffer> gt <plug>(lsp-type-definition)
-    nmap <buffer> <leader>rn <plug>(lsp-rename)
+    nmap <buffer> <leader>e <plug>(lsp-rename)
     nmap <buffer> [g <plug>(lsp-previous-diagnostic)
     nmap <buffer> ]g <plug>(lsp-next-diagnostic)
     nmap <buffer> K <plug>(lsp-hover)
@@ -420,6 +427,10 @@ let g:limelight_conceal_ctermfg = 'gray'
 let g:limelight_conceal_ctermfg = 240
 autocmd! User GoyoEnter Limelight
 autocmd! User GoyoLeave Limelight!
+
+"golang"
+nmap <buffer> <Leader>i  :GOVIMGoImports<CR>
+
 
 "for local vimrc
 if filereadable(expand("./.vim_local"))
