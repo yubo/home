@@ -250,7 +250,8 @@ Plug 'mattn/vim-lsp-settings'
 Plug 'google/vim-jsonnet', { 'for': 'jsonnet' }
 
 " golang"
-Plug 'govim/govim', { 'branch': 'main', 'for': 'go' }
+"Plug 'govim/govim', { 'branch': 'main', 'for': 'go' }
+Plug 'fatih/vim-go', { 'for': 'go' }
 
 call plug#end()
 "}}}
@@ -429,8 +430,7 @@ autocmd! User GoyoEnter Limelight
 autocmd! User GoyoLeave Limelight!
 
 "golang"
-nmap <buffer> <Leader>i  :GOVIMGoImports<CR>
-
+nmap <buffer> <Leader>i  :GoImports<CR>
 
 "for local vimrc
 if filereadable(expand("./.vim_local"))
