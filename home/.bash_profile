@@ -94,9 +94,9 @@ if type kubectl >/dev/null 2>&1; then
 fi
 
 if [ `uname` == 'Darwin' ]; then
-	alias ls='ls -GF'
-	alias la='ls -GFa'
-	alias ll='ls -lGF'
+	alias ls='ls -GF --color'
+	alias la='ls -GFa --color'
+	alias ll='ls -lGF --color'
 	export BASH_SILENCE_DEPRECATION_WARNING=1
 else
 	alias ls='ls -F --color '

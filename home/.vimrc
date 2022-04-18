@@ -1,3 +1,8 @@
+" {{{ plugin setting
+let g:mustache_abbreviations = 1
+let g:polyglot_disabled = ['autoindent', 'sensible']
+" }}}
+
 " options {{{
 
 set dir=$HOME/.vim/tmp/swap
@@ -117,7 +122,6 @@ au BufRead,BufNewFile go.mod       setfiletype gomod
 au BufRead,BufNewFile *.vue        setfiletype html
 au BufRead,BufNewFile *.txt        setfiletype text
 au BufRead,BufNewFile *.jsonnet    setfiletype jsonnet
-au BufRead,BufNewFile *.md         setfiletype markdown
 
 au FileType html       setlocal et sta sw=4 sts=4
 au FileType css        setlocal et sta sw=2 sts=2
@@ -180,8 +184,6 @@ inoremap <c-f>                 <right>
 inoremap <c-n>                 <down>
 inoremap <c-p>                 <up>
 inoremap <c-d>                 <del>
-inoremap { {                   {{}}<Esc>hi
-inoremap { { {                 {{{}}}<Esc>2hi
 
 "command mode
 cnoremap <c-a>                 <home>
@@ -206,9 +208,7 @@ cnoreabb <expr> W              getcmdtype()==':'&&getcmdline()=~#'^W'?'w':'W'
 call plug#begin('~/.vim/plugged')
 Plug 'jlanzarotta/bufexplorer'
 
-"markdown"
-Plug 'junegunn/goyo.vim', { 'for': 'markdown' }
-Plug 'junegunn/limelight.vim', { 'for': 'markdown' }
+Plug 'sheerun/vim-polyglot'
 
 
 "scripts
@@ -252,6 +252,8 @@ Plug 'google/vim-jsonnet', { 'for': 'jsonnet' }
 " golang"
 "Plug 'govim/govim', { 'branch': 'main', 'for': 'go' }
 Plug 'fatih/vim-go', { 'for': 'go' }
+
+Plug 'mustache/vim-mustache-handlebars'
 
 call plug#end()
 "}}}
@@ -321,6 +323,32 @@ au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#source
     \ }))
 
 " }}}
+
+"swap window {{{
+function! MarkSwapAway()
+    " marked window number
+    let g:markedOldWinNum = winnr()
+    let g:markedOldBufNum = bufnr("%")
+endfunction
+function! DoWindowToss()
+    let newWinNum = winnr()
+    let newBufNum = bufnr("%")
+    " Switch focus to marked window
+    exe g:markedOldWinNum . "wincmd w"
+    " Load current buffer on marked window
+    exe 'hide buf' newBufNum
+    " Switch focus to current window
+    exe newWinNum . "wincmd w"
+    " Load marked buffer on current window
+    exe 'hide buf' g:markedOldBufNum
+    " …and come back to the new one
+    exe g:markedOldWinNum . "wincmd w"
+endfunction
+nnoremap <C-w><C-h> :call MarkSwapAway()<CR> <C-w>h :call DoWindowToss()<CR>
+nnoremap <C-w><C-j> :call MarkSwapAway()<CR> <C-w>j :call DoWindowToss()<CR>
+nnoremap <C-w><C-k> :call MarkSwapAway()<CR> <C-w>k :call DoWindowToss()<CR>
+nnoremap <C-w><C-l> :call MarkSwapAway()<CR> <C-w>l :call DoWindowToss()<CR>
+"}}}
 
 " scheme {{{
 
@@ -423,11 +451,6 @@ let g:asyncomplete_min_chars = 1
 ""  autocmd CompleteDone * pclose
 ""augroup end
 
-"markdown"
-let g:limelight_conceal_ctermfg = 'gray'
-let g:limelight_conceal_ctermfg = 240
-autocmd! User GoyoEnter Limelight
-autocmd! User GoyoLeave Limelight!
 
 "golang"
 nmap <buffer> <Leader>i  :GoImports<CR>
@@ -437,4 +460,7 @@ if filereadable(expand("./.vim_local"))
     source ./.vim_local
 endif
 
+
 "}}} 
+"
+"

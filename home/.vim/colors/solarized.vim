@@ -1121,3 +1121,6 @@ augroup SolarizedHiTrail
 		"
 		" vim:foldmethod=marker:foldlevel=0
 		"}}}
+" custom "{{{
+"exe "hi! goComment"         .s:fmt_none .s:fg_cyan  .s:bg_none
+"}}}
