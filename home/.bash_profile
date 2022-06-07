@@ -45,7 +45,8 @@ _source						\
 	${HOME}/.config/docker.bash		\
 	${HOME}/.cargo/env			\
 	$HOME/.rvm/scripts/rvm			\
-	${HOME}/.bashrc
+	${HOME}/.bashrc				\
+	${HOME}/.bash_local
 
 alias vi='vim'
 alias ff='find . -type f| xargs grep -n --color'

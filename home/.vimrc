@@ -453,7 +453,7 @@ let g:asyncomplete_min_chars = 1
 
 
 "golang"
-nmap <buffer> <Leader>i  :GoImports<CR>
+nmap <buffer> <leader>i  :GoImports<CR>
 
 "for local vimrc
 if filereadable(expand("./.vim_local"))
