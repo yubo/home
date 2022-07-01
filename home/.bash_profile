@@ -1,3 +1,5 @@
+#!/bin/bash
+
 export LANG='en_US.UTF-8'
 export TERM=xterm-color
 export PS1='[\u@\h:\w]\$'
@@ -6,7 +8,7 @@ export PS1='[\u@\h:\w]\$'
 
 function add_path {
 	for v in $*; do
-		if [ -e $v ]; then
+		if [[ -e $v && ! ":${PATH}:" =~ ":${v}:" ]]; then
 			export PATH=$v:$PATH
 		fi
 	done
@@ -14,7 +16,7 @@ function add_path {
 
 function add_classpath {
 	for v in $*; do
-		if [ -e $v ]; then
+		if [[ -e $v  && ! ":${CLASSPATH}:" =~ ":${v}:" ]]; then
 			export CLASSPATH=$v:$CLASSPATH
 		fi
 	done
@@ -29,17 +31,17 @@ function _source {
 }
 
 add_path					\
-	$HOME/bin				\
+	/sbin					\
+	/usr/sbin				\
+	/usr/local/sbin				\
 	${HOME}/.rvm/bin			\
-	/usr/local/homebrew/bin
+	$HOME/bin
 
 add_classpath					\
 	${HOME}/bin/antlr-4.7.1-complete.jar
 
 _source						\
-	/etc/bashrc				\
 	/etc/profile.d/bash_completion.sh	\
-	/usr/local/homebrew/etc/bash_completion	\
 	/usr/local/etc/bash_completion		\
 	${HOME}/.config/git-completion.bash	\
 	${HOME}/.config/docker.bash		\
@@ -94,6 +96,7 @@ if type kubectl >/dev/null 2>&1; then
 	complete -F __start_kubectl k
 fi
 
+# mac os
 if [ `uname` == 'Darwin' ]; then
 	alias ls='ls -GF --color'
 	alias la='ls -GFa --color'
@@ -117,14 +120,17 @@ if [ -e $HOME/go ]; then
 	add_path $GOPATH/bin
 fi
 
-
-function parse_git_branch {
-	git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/[\1]/"
+function color_my_prompt {
+    local __user_and_host="\[\033[01;32m\]\u@\h"
+    local __cur_location="\[\033[01;34m\]\w"
+    local __git_branch_color="\[\033[31m\]"
+    local __git_branch='`git branch --no-color 2> /dev/null | sed -e "/^[^*]/d" -e "s/* \(.*\)/[\1]/"`'
+    local __prompt_tail="\[\033[35m\]$"
+    local __last_color="\[\033[00m\]"
+    export PS1="$__user_and_host $__cur_location $__git_branch_color$__git_branch$__prompt_tail$__last_color "
 }
+color_my_prompt
 
-if [ -n $(parse_git_branch) ]; then
-	export PS1='\[\e[1;36m\]$(e=$? && [ $e -ne 0 ] && echo "[$e]" )\[\e[0m\][\u@\h:\w]\[\e[1;36m\]$(parse_git_branch)\[\e[0m\]\[\e[1;31m\]${REC}\[\e[0m\]\$'
-fi
 
 if [ -d ${HOME}/src/dpdk ]; then
 	export RTE_SDK=${HOME}/src/dpdk
