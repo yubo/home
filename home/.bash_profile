@@ -30,6 +30,19 @@ function _source {
 	done
 }
 
+PATH=""
+
+_source						\
+	/etc/profile				\
+	/etc/profile.d/bash_completion.sh	\
+	/usr/local/etc/bash_completion		\
+	${HOME}/.config/git-completion.bash	\
+	${HOME}/.config/docker.bash		\
+	${HOME}/.cargo/env			\
+	$HOME/.rvm/scripts/rvm			\
+	${HOME}/.bashrc				\
+	${HOME}/.bash_local
+
 add_path					\
 	/sbin					\
 	/usr/sbin				\
@@ -39,16 +52,6 @@ add_path					\
 
 add_classpath					\
 	${HOME}/bin/antlr-4.7.1-complete.jar
-
-_source						\
-	/etc/profile.d/bash_completion.sh	\
-	/usr/local/etc/bash_completion		\
-	${HOME}/.config/git-completion.bash	\
-	${HOME}/.config/docker.bash		\
-	${HOME}/.cargo/env			\
-	$HOME/.rvm/scripts/rvm			\
-	${HOME}/.bashrc				\
-	${HOME}/.bash_local
 
 alias vi='vim'
 alias ff='find . -type f| xargs grep -n --color'
@@ -66,7 +69,6 @@ alias tmux='tmux -2'
 alias u='ssh -X yubo@u'
 alias shs='python -m SimpleHTTPServer'
 alias dstat='dstat -cdlmnpsy'
-alias docker-dev='GOPATH=/go:/go/src/github.com/docker/vendor'
 alias mm='make 2>&1 | more'
 alias canary="/Applications/Google\ Chrome\ Canary.app/Contents/MacOS/Google\ Chrome\ Canary"
 alias cgdb="canary --remote-debugging-port=9222 http://localhost:9222 http://chromium.org"
