@@ -30,7 +30,7 @@ function _source {
 	done
 }
 
-PATH=""
+export PATH="/bin:/usr/bin:/usr/local/bin"
 
 _source						\
 	/etc/profile				\
