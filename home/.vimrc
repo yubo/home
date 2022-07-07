@@ -414,6 +414,9 @@ hi	TagbarSignature	ctermfg=37
 "cscope"
 set cscopequickfix=s-,c-,d-,i-,t-,e-
 
+"clipboard"
+set clipboard^=unnamed
+
 ""
 "gtags"
 let Gtags_OpenQuickfixWindow = 0
