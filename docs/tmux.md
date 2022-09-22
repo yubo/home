@@ -16,8 +16,17 @@ brew install tmux
 
 ### session
 ```
-tmux ls #列出会话
-tmux a[ttach] -t session_name #进入session_name
+#列出会话
+tmux ls
+
+# 创建会话
+tmux new -s <session_name>
+
+# 加入会话
+tmux a[ttach] -t session_name
+
+# create a new named session and attach to it if one exists
+tmux new -As <session_name>
 ```
 
 map    | desc
