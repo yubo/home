@@ -113,15 +113,15 @@ hi SpecialKey ctermfg=238
 " et   expandtab
 " sts  softtabstop
 " st   smarttab
-au BufRead,BufNewFile *.ts,*.tsx   setfiletype typescript
-au BufRead,BufNewFile *.js,*.jsx   setfiletype javascript
-au BufRead,BufNewFile *.css,*.less setfiletype css
-au BufRead,BufNewFile *.yaml,*.yml setfiletype yaml
-au BufRead,BufNewFile *.go         setfiletype go
 au BufRead,BufNewFile go.mod       setfiletype gomod
-au BufRead,BufNewFile *.vue        setfiletype html
+au BufRead,BufNewFile *.go         setfiletype go
 au BufRead,BufNewFile *.txt        setfiletype text
 au BufRead,BufNewFile *.jsonnet    setfiletype jsonnet
+au BufRead,BufNewFile *.ts,*.tsx   setfiletype typescript
+au BufRead,BufNewFile *.js,*.jsx   setfiletype javascript
+au BufRead,BufNewFile *.yaml,*.yml setfiletype yaml
+au BufRead,BufNewFile *.wxml,*.vue setfiletype html
+au BufRead,BufNewFile *.wxs,*.css,*.less setfiletype css
 
 au FileType html       setlocal et sta sw=4 sts=4
 au FileType css        setlocal et sta sw=2 sts=2
@@ -129,6 +129,7 @@ au FileType json       setlocal et sta sw=4 sts=4
 au FileType javascript setlocal et sta sw=2 sts=2
 au FileType typescript setlocal et sta sw=2 sts=2
 au FileType yaml       setlocal et sta sw=2 sts=2
+au FileType xml        setlocal et sta sw=4 sts=4
 
 "au BufRead,BufNewFile *.asm,*.c,*.cpp,*.java,*.cs,*.sh,*.lua,*.pl,*.pm,*.py,*.rb,*.hs,*.vim,*.go 2match Underlined /.\%>81v.*/
 "}}}
@@ -155,7 +156,7 @@ nnoremap <leader>k                <c-w>k
 nnoremap <leader>l                <c-w>l
 nnoremap <leader>s                :so $MYVIMRC<CR>
 nnoremap <leader>t                :TagbarToggle<CR>
-nnoremap <leader>q                :bdelete<CR>
+nnoremap <leader>q                :bprevious<CR>:bdelete #<CR>
 nnoremap <leader>g=                gg=G
 nnoremap <leader>z                :setl fdm=indent fdc=1 fdn=1<CR>
 nnoremap <leader>;                :noh<CR>
