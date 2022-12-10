@@ -275,6 +275,10 @@ let g:lsp_diagnostics_enabled = 0
 "enable virtual text"
 let g:lsp_diagnostics_virtual_text_enabled = 0
 let g:lsp_document_highlight_enabled = 0
+let g:lsp_completion_resolve_timeout = 0
+let g:lsp_completion_documentation_enabled = 0
+let g:lsp_insert_text_enabled = 0
+let g:lsp_text_edit_enabled = 0
 
 function! s:on_lsp_buffer_enabled() abort
     setlocal omnifunc=lsp#complete

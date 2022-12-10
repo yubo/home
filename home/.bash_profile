@@ -4,8 +4,6 @@ export LANG='en_US.UTF-8'
 export TERM=xterm-color
 export PS1='[\u@\h:\w]\$'
 
-
-
 function add_path {
 	for v in $*; do
 		if [[ -e $v && ! ":${PATH}:" =~ ":${v}:" ]]; then
@@ -49,8 +47,6 @@ add_path					\
 	${HOME}/.rvm/bin			\
 	$HOME/bin
 
-add_classpath					\
-	${HOME}/bin/antlr-4.7.1-complete.jar
 
 alias vi='vim'
 alias ff='find . -type f| xargs grep -n --color'
@@ -66,26 +62,10 @@ alias ta='tmux -2 new -As'
 alias shs='python -m SimpleHTTPServer'
 alias dstat='dstat -cdlmnpsy'
 alias mm='make 2>&1 | more'
-alias canary="/Applications/Google\ Chrome\ Canary.app/Contents/MacOS/Google\ Chrome\ Canary"
-alias cgdb="canary --remote-debugging-port=9222 http://localhost:9222 http://chromium.org"
 alias ccd='cd $(pwd -P)'
-alias antlr4='java -Xmx500M -cp "${HOME}/bin/antlr-4.7.1-complete.jar:$CLASSPATH" org.antlr.v4.Tool'
-alias grun='java -Xmx500M -cp "${HOME}/bin/antlr-4.7.1-complete.jar:$CLASSPATH" org.antlr.v4.gui.TestRig'
-alias bfg='java -jar ${HOME}/bin/bfg-1.13.0.jar'
 
 if [ "x"$TERM == "xxterm" ]; then
 	alias sshx='ssh -X'
-fi
-
-
-
-
-# kubectl
-if type kubectl >/dev/null 2>&1; then
-	export KUBE_EDITOR="vim"
-	source <(kubectl completion bash)
-	alias k='kubectl'
-	complete -F __start_kubectl k
 fi
 
 # mac os
@@ -94,6 +74,8 @@ if [ `uname` == 'Darwin' ]; then
 	alias la='ls -GFa --color'
 	alias ll='ls -lGF --color'
 	export BASH_SILENCE_DEPRECATION_WARNING=1
+	alias canary="/Applications/Google\ Chrome\ Canary.app/Contents/MacOS/Google\ Chrome\ Canary"
+	alias cgdb="canary --remote-debugging-port=9222 http://localhost:9222 http://chromium.org"
 else
 	alias ls='ls -F --color '
 	alias la='ls -Fa --color '
@@ -111,6 +93,23 @@ if [ -e $HOME/go ]; then
 	add_path $GOROOT/bin
 	add_path $GOPATH/bin
 fi
+
+# kubectl
+command -v kubectl >/dev/null 2>&1 && {
+	export KUBE_EDITOR="vim"
+	source <(kubectl completion bash)
+	alias k='kubectl'
+	complete -F __start_kubectl k
+}
+
+command -v java >/dev/null 2>&1 && {
+	alias antlr4='java -Xmx500M -cp "${HOME}/bin/antlr-4.7.1-complete.jar:$CLASSPATH" org.antlr.v4.Tool'
+	alias grun='java -Xmx500M -cp "${HOME}/bin/antlr-4.7.1-complete.jar:$CLASSPATH" org.antlr.v4.gui.TestRig'
+	alias bfg='java -jar ${HOME}/bin/bfg-1.13.0.jar'
+
+	add_classpath					\
+		${HOME}/bin/antlr-4.7.1-complete.jar
+}
 
 command -v go >/dev/null 2>&1 && {
 	alias golist="go list -f '{{join .Imports \"\n\"}}'"
