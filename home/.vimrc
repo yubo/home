@@ -154,7 +154,8 @@ nnoremap <leader>h                <c-w>h
 nnoremap <leader>j                <c-w>j
 nnoremap <leader>k                <c-w>k
 nnoremap <leader>l                <c-w>l
-nnoremap <leader>s                :so $MYVIMRC<CR>
+nnoremap <leader>s                :<C-u>call gitblame#echo()<CR>
+nnoremap <leader>ss               :so $MYVIMRC<CR>
 nnoremap <leader>t                :TagbarToggle<CR>
 nnoremap <leader>q                :bprevious<CR>:bdelete #<CR>
 nnoremap <leader>g=                gg=G
@@ -255,6 +256,8 @@ Plug 'google/vim-jsonnet', { 'for': 'jsonnet' }
 Plug 'fatih/vim-go', { 'for': 'go' }
 
 Plug 'mustache/vim-mustache-handlebars'
+
+Plug 'zivyangll/git-blame.vim'
 
 call plug#end()
 "}}}
