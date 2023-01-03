@@ -4,35 +4,36 @@
 bak_dir="$HOME/.home_bak"
 pwd_dir=$(pwd)
 
+function install_dir {
+	if [[ ! -d $1 ]]; then
+		mkdir -p $1
+	fi
+	if [[ -n $2 ]]; then
+		chmod $2 $1
+	fi
+}
+
 function install_file {
 	src="${pwd_dir}/home/$1"
 	dst="$HOME/$1"
-	if [[ -e $dst || -L $dst ]]; then
+	if [[ -e $dst || -L $dst || -d $dst ]]; then
 		mv $dst "${bak_dir}/"
 	fi
 	ln -s $src $dst
 }
 
-if [[ ! -d ~/.ssh ]]; then
-	mkdir ~/.ssh
-	chmod 0700 ~/.ssh
-fi
-
-if [[ ! -d ~/.ssh/conf.d ]]; then
-	mkdir -p ~/.ssh/conf.d
-fi
-
-if [[ ! -e ~/.vim_local ]]; then
-	touch ~/.vim_local
-	chmod 0644 ~/.vim_local
-fi
-
 if [[ -d "$bak_dir" ]]; then
-	tmp_dir=$(mktemp -d -t home-XXXXXXXXXX)
+	tmp_dir=$(mktemp -d -t home_XXXXXXXXXX)
 	mv $bak_dir $tmp_dir
-	echo "move last bak to $tmp_dir"
+	echo "move $bak_dir to $tmp_dir"
 fi
-mkdir -p $bak_dir
+
+install_dir $bak_dir
+install_dir ~/.ssh 0700
+install_dir ~/.ssh/conf.d
+install_dir ~/.vim_local
+install_dir ~/.config
+install_dir ~/gopath
 
 install_file bin
 install_file .bash_profile
@@ -46,9 +47,4 @@ install_file .ssh/config
 install_file .tmux.conf
 install_file .vimrc
 install_file .vim
-install_file .config
-#install_file .kermrc 
-
-if [[ ! -e $HOME/gopath ]]; then
-    mkdir -p $HOME/gopath
-fi
+install_file .config/nvim
