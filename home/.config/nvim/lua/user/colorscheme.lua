@@ -30,7 +30,7 @@
 -- vim.opt.background = "dark"
 -- vim.g.solarized_termtrans = 1
 -- vim.g.solarized_termcolors = 256
-local colors = require("kanagawa.colors").setup()
+-- local colors = require("kanagawa.colors").setup()
 
 -- this will affect all the hl-groups where the redefined colors are used
 local my_colors = {
@@ -50,7 +50,7 @@ local my_colors = {
     -- bg_light3 = colors.springViolet1,
     bg_light3 = "#8a8a8a",
     -- bg_status = colors.sumiInk0,
-    bg_visual = "#262626";
+    bg_visual = "#04395e";
     -- bg_search = "#101000",
     fg_border = "#8a8a8a",
     --fg_dark = "#ffffff",
@@ -60,37 +60,37 @@ local my_colors = {
     -- 注释 	fujiGray Comments
     fg_comment = "#585858", --  #727169
     -- 普通字符，变量名，包名等 fujiWhite		Default foreground
-    fg = "#8a8a8a", -- #DCD7BA
+    fg = "#b4b4b4", -- #DCD7BA
     -- menu 字符 fujiWhite       Default foreground
-    fg_menu = "#8a8a8a", -- #DCD7BA
-    -- constants; csurimiOrange		Constants, imports, boolean
+    fg_menu = "#b4b4b4", -- #DCD7BA
+    -- Constants, imports, boolean e.g. constants, ture, imports
     co = "#7E9CD8", -- #FFA066
-    -- string 	springGreen		Strings
-    st = "#00afaf", -- #98BB6C
-    -- number sakuraPink		Numbers
-    nu = "#E6C384",   -- #D27E99
-    -- field name id carpYellow	Identifiers
-    id = "#8a8a8a", -- #E6C384
+    -- Strings
+    st = "#ce9278", -- #98BB6C
+    -- Numbers
+    nu = "#B5CEA7",   -- #D27E99
+    -- Identifiers e.g. struct.field
+    id = "#b4b4b4", -- #E6C384
     -- fucntion  crystalBlue		Functions and Titles
-    fn = "#bcbc8a", -- #7E9CD8
-    -- if, switch,  oniViolet		Statements and Keywords
-    sm = "#5f8700", -- #957FB8
-    -- defer, keyword, koniViolet  Statements and Keyword
-    kw = "#5f8700", -- #957FB8
+    fn = "#bCbC8A", -- #7E9CD8
+    -- Statements and Keywords e.g. if, switch
+    sm = "#a566a0", -- #957FB8
+    -- koniViolet  Statements and Keyword e.g. func, type, const, defer, keyword
+    kw = "#559CD6", -- #957FB8
     -- boatYellow2		Operators, RegEx
     op = "#C0A36E", -- #C0A36E
     -- surimiOrange		Constants, imports, booleans
-    pp = "#5f8700", -- #FFA066
-    -- type waveAqua2		Types
-    ty = "#af8700", -- #7AA89F
-    -- nil, make, len	Specials and builtin functions
-    sp = "#0087ff", -- #7FB4CA
+    pp = "#559CD6", -- #FFA066
+    -- Types e.g. int, type xxx struct ...
+    ty = "#3Db9a0", -- #7AA89F
+    -- Specials and builtin functions, e.g. nil, make, len
+    sp = "#bCbC8A", -- #7FB4CA
     -- waveRed	Standout specials 1 (builtin variables)
-    sp2 = "#E46876", -- #E46876
+    sp2 = "#d45866", -- #E46876
     -- Standout specials 2 (exception handling, return)
-    sp3 = "#5f8700", -- #FF5D62
-    --  [(){},] springViolet2		Brackets and punctuation
-    br = "#8a8a3a",   -- #9CABCA
+    sp3 = "#C284BD", -- #FF5D62
+    --  Brackets and punctuation e.g. [, (, ), {, }, ]
+    br = "#a6a6a6",   -- #9CABCA
     -- regex boatYellow2 Operators, RegEx
     re = "#C0A36E", -- #C0A36E
     -- katanaGray Deprecated
@@ -98,7 +98,9 @@ local my_colors = {
 }
 
 local overrides = {
-    Search = {fg="#262626", bg = "#af8700"},
+    Search = {fg="#262626", bg = "#a07700"},
+    Directory = {fg="#559CD6"},
+    ["@variable"] = { fg = "#7CbCdD" },
 }
 
 

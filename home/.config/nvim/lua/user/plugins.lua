@@ -67,7 +67,7 @@ return packer.startup(function(use)
 		end
 	}
 	use { "farmergreg/vim-lastplace" }
-	use { "airblade/vim-gitgutter" }
+	use { "zivyangll/git-blame.vim" }
 
 	-- Colorschemes
 	use "rebelot/kanagawa.nvim"
@@ -89,10 +89,11 @@ return packer.startup(function(use)
 	use { "williamboman/mason-lspconfig.nvim" }
 	use { "jose-elias-alvarez/null-ls.nvim" } -- for formatters and linters
 	use { "RRethy/vim-illuminate" }
+	use { "fatih/vim-go" }
 
 	-- Telescope
 	use { "nvim-telescope/telescope.nvim" }
-	use {"nvim-telescope/telescope-fzf-native.nvim", run = 'make'}
+	use { "nvim-telescope/telescope-fzf-native.nvim", run = "make" }
 
 	-- Treesitter
 	use { "nvim-treesitter/nvim-treesitter" }

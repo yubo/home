@@ -48,7 +48,6 @@ add_path					\
 	$HOME/bin
 
 
-alias vi='vim'
 alias ff='find . -type f| xargs grep -n --color'
 alias ffh='find . -name \*.h -type f| xargs grep -n --color'
 alias ffc='find . -name \*.c -o -name \*.cpp -type f| xargs grep -n --color'
@@ -63,6 +62,13 @@ alias shs='python -m SimpleHTTPServer'
 alias dstat='dstat -cdlmnpsy'
 alias mm='make 2>&1 | more'
 alias ccd='cd $(pwd -P)'
+
+command -v vim >/dev/null 2>&1 && {
+	alias vi='vim'
+}
+command -v nvim >/dev/null 2>&1 && {
+	alias vi='nvim'
+}
 
 if [ "x"$TERM == "xxterm" ]; then
 	alias sshx='ssh -X'

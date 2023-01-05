@@ -76,28 +76,28 @@ bufferline.setup {
   highlights = {
     fill = {
       fg = '#9e9e9e',
-      bg = '#303030',
+      bg = '#262626',
     },
     background = {
-      fg = '#9e9e9e',
-      bg = '#303030',
+      fg = '#262626',
+      bg = '#444444',
     },
     buffer_selected = {
-      fg = '#005F01',
-      bg = '#AFDF01',
+      fg = '#080808',
+      bg = '#AFFA02',
       italic = false,
     },
     buffer_visible = {
-      fg = '#9e9e9e',
-      bg = '#303030',
+      fg = '#87FBAF',
+      bg = '#262626',
     },
     indicator_selected = {
-      fg = '#005F01',
-      bg = '#AFDF01',
+      fg = '#080808',
+      bg = '#AFFA02',
     },
     indicator_visible = {
       fg = '#9e9e9e',
-      bg = '#303030',
+      bg = '#262626',
     },
     close_button = {
       fg = { attribute = "fg", highlight = "TabLine" },

@@ -52,10 +52,10 @@ end
 
 local filename = {
 	'filename',
-	file_status = false,
-	newfile_status = false,
-	path = 0,
-	-- shorting_target = 40,
+	-- file_status = false,
+	-- newfile_status = false,
+	path = 3,
+	shorting_target = 40,
 }
 
 local fileformat = {

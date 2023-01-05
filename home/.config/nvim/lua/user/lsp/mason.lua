@@ -3,7 +3,7 @@ local servers = {
 	"gopls",
 	-- "cssls",
 	-- "html",
-	-- "tsserver",
+	"tsserver",
 	"pyright",
 	-- "bashls",
 	"jsonls",
