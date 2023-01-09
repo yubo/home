@@ -74,7 +74,7 @@ nvim_tree.setup {
 		ignore_dirs = {},
 	},
 	view = {
-		width = 30,
+		-- width = 30,
 		side = "left",
 		mappings = {
 			list = {
