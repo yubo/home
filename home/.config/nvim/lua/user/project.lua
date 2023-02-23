@@ -32,12 +32,15 @@ project.setup({
 	-- When set to false, you will get a message when project.nvim changes your directory.
 	silent_chdir = true,
 
+	-- global, tab, win
+	scope_chdir = 'win'
+
 	---@usage list of lsp client names to ignore when using **lsp** detection. eg: { "efm", ... }
 	ignore_lsp = {},
 
 	---@type string
 	---@usage path to store the project history for use in telescope
-  datapath = vim.fn.stdpath("data"),
+	datapath = vim.fn.stdpath("data"),
 })
 
 local tele_status_ok, telescope = pcall(require, "telescope")

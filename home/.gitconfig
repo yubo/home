@@ -2,7 +2,7 @@
 	name = yubo
 	email = yubo@yubo.org
 [diff]
-	tool = vimdiff
+	tool = nvimdiff
 [difftool]
 	prompt = No
 [core]
@@ -26,13 +26,14 @@
 	sbu = submodule update
 	sbp = submodule foreach git pull
 	sbc = submodule foreach git co master
+	# ignore change
+	ic = update-index --assume-unchanged
+	nic = update-index --no-assume-unchanged
 [push]
 	default = tracking
 [color]
 	ui = auto
 [credential]
 	helper = cache --timeout 2592000
-#[url "https://github.com.cnpmjs.org/"]
-#	insteadOf = https://github.com/
 [pull]
 	rebase = false

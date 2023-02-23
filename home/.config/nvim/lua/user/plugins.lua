@@ -4,13 +4,13 @@ local fn = vim.fn
 local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
 if fn.empty(fn.glob(install_path)) > 0 then
 	PACKER_BOOTSTRAP = fn.system({
-			"git",
-			"clone",
-			"--depth",
-			"1",
-			"https://github.com/wbthomason/packer.nvim",
-			install_path,
-		})
+		"git",
+		"clone",
+		"--depth",
+		"1",
+		"https://github.com/wbthomason/packer.nvim",
+		install_path,
+	})
 	print("Installing packer close and reopen Neovim...")
 	vim.cmd([[packadd packer.nvim]])
 end
@@ -18,8 +18,8 @@ end
 -- Autocommand that reloads neovim whenever you save the plugins.lua file
 vim.cmd([[
   augroup packer_user_config
-    autocmd!
-    autocmd BufWritePost plugins.lua source <afile> | PackerSync
+  autocmd!
+  autocmd BufWritePost plugins.lua source <afile> | PackerSync
   augroup end
 ]])
 
@@ -31,12 +31,12 @@ end
 
 -- Have packer use a popup window
 packer.init({
-		display = {
-			open_fn = function()
-				return require("packer.util").float({ border = "rounded" })
-			end,
-		},
-	})
+	display = {
+		open_fn = function()
+			return require("packer.util").float({ border = "rounded" })
+		end,
+	},
+})
 
 -- Install your plugins here
 return packer.startup(function(use)
@@ -62,15 +62,12 @@ return packer.startup(function(use)
 			require'hop'.setup { keys = 'etovxqpdygfblzhckisuran' }
 		end
 	}
-	use { "NvChad/nvim-colorizer.lua", 
-		config = function() require'colorizer'.setup()
-		end
-	}
 	use { "farmergreg/vim-lastplace" }
 	use { "zivyangll/git-blame.vim" }
 
 	-- Colorschemes
 	use "rebelot/kanagawa.nvim"
+	-- use { "NvChad/nvim-colorizer.lua" }
 
 	-- Cmp 
 	use { "hrsh7th/nvim-cmp" } -- The completion plugin
