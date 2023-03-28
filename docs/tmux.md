@@ -31,58 +31,20 @@ tmux new -As <session_name>
 
 map    | desc
 --     | --
-bind $ | 修改当前会话名称(session name)
-bind d | 退出当前会话
+c-a $ | 修改当前会话名称(session name)
+c-a d | 退出当前会话
 
 
 ### window
 
-map    | desc
---     | --
-bind , | 修改tmux window name
-bind c | create window
-bind n | next window
-bind p | pre window
-bind N | swap next window
-bind P | swap pre window
-bind - | split window
-bind | | vsplit window
-bind z | zoom window
-
-
-
-#### build from source
-```
-mkdir -p -m 0700 ~/.tmux.tmp
-cd ~/.tmux.tmp
-
-wget https://github.com/libevent/libevent/releases/download/release-2.0.22-stable/libevent-2.0.22-stable.tar.gz
-wget https://ftp.gnu.org/gnu/ncurses/ncurses-6.0.tar.gz
-wget https://github.com/tmux/tmux/releases/download/2.0/tmux-2.0.tar.gz
-
-tar -xzf libevent-2.0.22-stable.tar.gz
-cd ~/.tmux.tmp/libevent-2.0.22-stable
-
-./configure --prefix="$HOME/local"
-make
-make install
-
-tar -xzf ncurses-6.0.tar.gz
-cd ~/.tmux.tmp/ncurses-6.0
-
-./configure --prefix="$HOME/local"
-make
-make install
-
-export CFLAGS="-I$HOME/local/include -I$HOME/local/include/ncurses"
-export LDFLAGS="-L$HOME/local/lib"
-
-tar -xzf tmux-2.0.tar.gz
-cd ~/.tmux.tmp/tmux-2.0
-
-./configure --prefix="$HOME/local"
-make
-make install
-
-cd ~/local/bin
-```
+map   | desc
+--    | --
+c-a , | 修改tmux window name
+c-a c | create window
+c-a n | next window
+c-a p | pre window
+c-a N | swap next window
+c-a P | swap pre window
+c-a - | split window
+c-a | | vsplit window
+c-a z | zoom window
