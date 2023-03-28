@@ -37,3 +37,7 @@
 	helper = cache --timeout 2592000
 [pull]
 	rebase = false
+[includeIf "gitdir:~/didi/"]
+	path = ~/.gitconfig.didi
+[url "https://steveyubo:ZszKuEac3yYPtbBiCrXE@git.xiaojukeji.com"]
+	insteadOf = https://git.xiaojukeji.com

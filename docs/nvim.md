@@ -1,19 +1,8 @@
-# vim
+# nvim
 
 ## install plugin
 ```
-:BundleInstall
-```
-
-## install ycm plugin
-```shell
-echo "Bundle 'Valloric/YouCompleteMe'" >> ~/.vim_local
-
-#open a vim and reinstall BundleInstall 
-:BundleInstall
-
-cd ~/.vim/bundle/YouCompleteMe
-./install.sh --clang-completer --go-completer
+:PlugInstall
 ```
 
 ## vim tips
@@ -28,6 +17,7 @@ map           | desc
 `<l-space>`   | 打开/关闭NERD_tree
 `<C-h/l>`     | tab间切换
 `<l-h/j/k/l>` | wincmd 方向
+`<c-w><t/b/p>`| wincmd top/bottom/previous
 `<l-u>`       | update diff
 
 ##### 块选择
@@ -53,7 +43,6 @@ map    | desc
 map    | desc
 --     | --
 `<l-e>`| rename
-
 
 ##### EasyMotion
 
