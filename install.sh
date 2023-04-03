@@ -20,6 +20,10 @@ function install_file {
 		mv $dst "${bak_dir}/"
 	fi
 	ln -s $src $dst
+
+	if [[ -n $2 ]]; then
+		chmod $2 ${src}
+	fi
 }
 
 if [[ -d "$bak_dir" ]]; then
@@ -42,7 +46,7 @@ install_file .gdbinit
 install_file .gvimrc
 install_file .globalrc
 install_file .gitconfig
-install_file .ssh/config
+install_file .ssh/config 0600
 install_file .tmux.conf
 install_file .vimrc
 install_file .curlrc
