@@ -31,7 +31,6 @@ fi
 install_dir $bak_dir
 install_dir ~/.ssh 0700
 install_dir ~/.ssh/conf.d
-install_dir ~/.vim_local
 install_dir ~/.config
 install_dir ~/gopath
 
