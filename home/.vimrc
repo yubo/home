@@ -9,7 +9,7 @@ set dir=$HOME/.vim/tmp/swap
 if !isdirectory(&dir) | call mkdir(&dir, 'p', 0700) | endif
 
 "关闭数字栏中符号显示"
-set signcolumn=no
+""set signcolumn=no
 
 " tab替换为4空格 %retab! 
 "set ts=8

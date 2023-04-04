@@ -26,6 +26,9 @@
 	sbu = submodule update
 	sbp = submodule foreach git pull
 	sbc = submodule foreach git co master
+	# ignore change
+	ic = update-index --assume-unchanged
+	nic = update-index --no-assume-unchanged
 [push]
 	default = tracking
 [color]
