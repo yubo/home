@@ -4,6 +4,17 @@
 bak_dir="$HOME/.home_bak"
 pwd_dir=$(pwd)
 
+
+function install_dir {
+	if [[ ! -d $1 ]]; then
+		mkdir -p $1
+	fi
+	if [[ -n $2 ]]; then
+		chmod $2 $1
+	fi
+}
+
+
 function install_file {
 	src="${pwd_dir}/home/$1"
 	dst="$HOME/$1"
@@ -13,26 +24,27 @@ function install_file {
 	ln -s $src $dst
 }
 
-if [[ ! -d ~/.ssh ]]; then
-	mkdir ~/.ssh
-	chmod 0700 ~/.ssh
-fi
+function ignore_file {
+	src="${pwd_dir}/home/$1"
+	if [[ -e $src ]]; then
+		git update-index --assume-unchanged $src
+	fi
+}
 
-if [[ ! -d ~/.ssh/conf.d ]]; then
-	mkdir -p ~/.ssh/conf.d
-fi
-
-if [[ ! -e ~/.vim_local ]]; then
-	touch ~/.vim_local
-	chmod 0644 ~/.vim_local
-fi
 
 if [[ -d "$bak_dir" ]]; then
 	tmp_dir=$(mktemp -d -t home-XXXXXXXXXX)
 	mv $bak_dir $tmp_dir
 	echo "move last bak to $tmp_dir"
 fi
-mkdir -p $bak_dir
+
+
+install_dir $bak_dir
+install_dir ~/.ssh 0700
+install_dir ~/.ssh/conf.d
+install_dir ~/.config
+install_dir ~/gopath
+
 
 install_file bin
 install_file .bash_profile
@@ -42,13 +54,11 @@ install_file .gdbinit
 install_file .gvimrc
 install_file .globalrc
 install_file .gitconfig
-install_file .ssh/config
+install_file .ssh/config 0600
 install_file .tmux.conf
 install_file .vimrc
+install_file .curlrc
 install_file .vim
-install_file .config
-#install_file .kermrc 
 
-if [[ ! -e $HOME/gopath ]]; then
-    mkdir -p $HOME/gopath
-fi
+ignore_file .gitconfig
+ignore_file .ssh/config
