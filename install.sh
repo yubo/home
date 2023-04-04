@@ -26,6 +26,13 @@ function install_file {
 	fi
 }
 
+function ignore_file {
+        src="${pwd_dir}/home/$1"
+        if [[ -e $src ]]; then
+                git update-index --assume-unchanged $src
+        fi
+}
+
 if [[ -d "$bak_dir" ]]; then
 	tmp_dir=$(mktemp -d -t home_XXXXXXXXXX)
 	mv $bak_dir $tmp_dir
@@ -52,3 +59,6 @@ install_file .vimrc
 install_file .curlrc
 install_file .vim
 install_file .config/nvim
+
+ignore_file .gitconfig
+ignore_file .ssh/config
