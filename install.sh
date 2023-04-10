@@ -20,6 +20,17 @@ function install_file {
 		mv $dst "${bak_dir}/"
 	fi
 	ln -s $src $dst
+
+	if [[ -n $2 ]]; then
+		chmod $2 ${src}
+	fi
+}
+
+function ignore_file {
+        src="${pwd_dir}/home/$1"
+        if [[ -e $src ]]; then
+                git update-index --assume-unchanged $src
+        fi
 }
 
 if [[ -d "$bak_dir" ]]; then
@@ -31,7 +42,6 @@ fi
 install_dir $bak_dir
 install_dir ~/.ssh 0700
 install_dir ~/.ssh/conf.d
-install_dir ~/.vim_local
 install_dir ~/.config
 install_dir ~/gopath
 
@@ -43,9 +53,12 @@ install_file .gdbinit
 install_file .gvimrc
 install_file .globalrc
 install_file .gitconfig
-install_file .ssh/config
+install_file .ssh/config 0600
 install_file .tmux.conf
 install_file .vimrc
 install_file .curlrc
 install_file .vim
 install_file .config/nvim
+
+ignore_file .gitconfig
+ignore_file .ssh/config
