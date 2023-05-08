@@ -6,7 +6,7 @@ sudo apt install tmux indent ctags
 
 #### dev
 ```shell
-sudo apt install git-core build-essential libssl-dev libncurses5-dev unzip cmake global python2.7-dev
+sudo apt install git-core build-essential libssl-dev libncurses5-dev unzip cmake global python2.7-dev gettext golang
 ```
 
 #### kernel dev
