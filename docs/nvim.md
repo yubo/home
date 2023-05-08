@@ -1,8 +1,18 @@
 # nvim
 
+## install ubuntu
+
+```sh
+sudo apt install cmake gettext npm golang
+git clone https://github.com/neovim/neovim.git
+cd neovim
+make CMAKE_BUILD_TYPE=Release
+sudo make install
+```
+
 ## install plugin
 ```
-:PlugInstall
+:PackerSync
 ```
 
 ## vim tips
