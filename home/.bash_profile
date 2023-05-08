@@ -28,17 +28,16 @@ function _source {
 	done
 }
 
-export PATH="/bin:/usr/bin"
+export PATH="/bin"
 
 add_path					\
 	/sbin					\
+	/usr/bin				\
 	/usr/sbin				\
 	/usr/local/bin				\
 	/usr/local/sbin				\
 	${HOME}/.rvm/bin			\
 	$HOME/bin
-
-
 
 _source						\
 	/etc/profile				\
