@@ -28,7 +28,17 @@ function _source {
 	done
 }
 
-export PATH="/bin:/usr/bin:/usr/local/bin"
+export PATH="/bin:/usr/bin"
+
+add_path					\
+	/sbin					\
+	/usr/sbin				\
+	/usr/local/bin				\
+	/usr/local/sbin				\
+	${HOME}/.rvm/bin			\
+	$HOME/bin
+
+
 
 _source						\
 	/etc/profile				\
@@ -39,13 +49,6 @@ _source						\
 	${HOME}/.cargo/env			\
 	$HOME/.rvm/scripts/rvm			\
 	${HOME}/.bashrc
-
-add_path					\
-	/sbin					\
-	/usr/sbin				\
-	/usr/local/sbin				\
-	${HOME}/.rvm/bin			\
-	$HOME/bin
 
 
 alias ff='find . -type f| xargs grep -n --color'
