@@ -5,8 +5,8 @@ My working development environment configuration, including bash, tmux, vim, git
 ```shell
 git clone git@github.com:yubo/home.git ~/.yubo
 cd ~/.yubo && sh install.sh
-vim
-:PlugInstall
+nvim
+:PackerSync
 :q
 ```
 
