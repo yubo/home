@@ -1,8 +1,8 @@
 local servers = {
 	"gopls",
-	"tsserver",
-	"pyright",
-	"jsonls",
+	-- "tsserver",
+	-- "pyright",
+	-- "jsonls",
 	-- "cssls",
 	-- "html",
 	-- "bashls",

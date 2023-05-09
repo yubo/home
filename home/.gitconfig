@@ -6,7 +6,7 @@
 [difftool]
 	prompt = No
 [core]
-	editor = vim
+	editor = vi
 	whitespace = tab-in-indent,trailing-space
 	trustctime = false
 [alias]
