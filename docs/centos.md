@@ -23,3 +23,22 @@ sudo yum install net-tools bc openssl bison gettext
 git clone https://github.com/sstephenson/rbenv.git ~/.rbenv
 git clone https://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
 ```
+
+
+#### gcc-12.3.0.tar.xz
+
+```
+cd gcc-12.3.0
+sudo yum install libmpc-devel gmp
+./configure --enable-checking=release --enable-languages=c,c++ --disable-multilib
+sudo make install
+```
+
+#### cmake-3.26.3.tar.gz
+
+```
+cd cmake-3.26.3
+./configure
+make
+sudo make install
+```
