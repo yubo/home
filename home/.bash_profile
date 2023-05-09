@@ -149,8 +149,3 @@ if [ -d ${HOME}/src/dpdk ]; then
 	export RTE_SDK=${HOME}/src/dpdk
 	export RTE_TARGET=x86_64-native-linuxapp-gcc
 fi
-
-# Setting PATH for Python 2.7
-# The original version is saved in .bash_profile.pysave
-PATH="/Library/Frameworks/Python.framework/Versions/2.7/bin:${PATH}"
-export PATH
