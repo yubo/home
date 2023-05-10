@@ -1,7 +1,7 @@
 #!/bin/bash
 
 export LANG='en_US.UTF-8'
-export TERM=xterm-color
+#export TERM=xterm-256color
 export PS1='[\u@\h:\w]\$'
 
 function add_path {
@@ -28,7 +28,16 @@ function _source {
 	done
 }
 
-export PATH="/bin:/usr/bin:/usr/local/bin"
+export PATH="/bin"
+
+add_path					\
+	/sbin					\
+	/usr/bin				\
+	/usr/sbin				\
+	/usr/local/bin				\
+	/usr/local/sbin				\
+	${HOME}/.rvm/bin			\
+	$HOME/bin
 
 _source						\
 	/etc/profile				\
@@ -40,15 +49,7 @@ _source						\
 	$HOME/.rvm/scripts/rvm			\
 	${HOME}/.bashrc
 
-add_path					\
-	/sbin					\
-	/usr/sbin				\
-	/usr/local/sbin				\
-	${HOME}/.rvm/bin			\
-	$HOME/bin
 
-
-alias vi='vim'
 alias ff='find . -type f| xargs grep -n --color'
 alias ffh='find . -name \*.h -type f| xargs grep -n --color'
 alias ffc='find . -name \*.c -o -name \*.cpp -type f| xargs grep -n --color'
@@ -63,6 +64,10 @@ alias shs='python -m SimpleHTTPServer'
 alias dstat='dstat -cdlmnpsy'
 alias mm='make 2>&1 | more'
 alias ccd='cd $(pwd -P)'
+
+command -v vim >/dev/null 2>&1 && {
+	alias vi='vim'
+}
 
 if [ "x"$TERM == "xxterm" ]; then
 	alias sshx='ssh -X'
