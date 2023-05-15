@@ -1,12 +1,14 @@
 [user]
 	name = yubo
 	email = yubo@yubo.org
-[diff]
-	tool = nvimdiff
 [difftool]
-	prompt = No
+        prompt = No
+[diff]
+        tool = nvimdiff
+[difftool "nvimdiff"]
+        cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
 [core]
-	editor = vi
+	editor = nvim
 	whitespace = tab-in-indent,trailing-space
 	trustctime = false
 [alias]
@@ -35,9 +37,3 @@
 	ui = auto
 [credential]
 	helper = cache --timeout 2592000
-[pull]
-	rebase = false
-[includeIf "gitdir:~/didi/"]
-	path = ~/.gitconfig.didi
-[url "https://steveyubo:ZszKuEac3yYPtbBiCrXE@git.xiaojukeji.com"]
-	insteadOf = https://git.xiaojukeji.com
