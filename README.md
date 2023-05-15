@@ -2,25 +2,47 @@
 My working development environment configuration, including bash, tmux, vim, git, ssh, etc.
 
 ## install
-```shell
-git clone git@github.com:yubo/home.git ~/.yubo
-cd ~/.yubo && sh install.sh
+
+```sh
+# download
+git clone git@github.com:yubo/home.git ~/.home
+cd ~/.home && sh install.sh
+
+# open nvim && install plugins
 nvim
 :PackerSync
 :q
 ```
 
 ## local config
-- bash `~/.bashrc`
-- ssh config `~/.ssh/conf.d/*`
-	```
-	Host {aliasname}
-	  HostName {ip/hostname}
-	  Port 8222
-	  User {user}
-	  IdentityFile ~/.ssh/id_rsa.example.com
-	```
-- git config
+
+customize local config
+
+#### bash
+
+```sh
+# ~/.bashrc
+
+# Source global definitions
+if [ -f /etc/bashrc ]; then
+        . /etc/bashrc
+fi
+
+# User specific aliases and functions
+alias rm='rm -i'
+#...
+```
+
+#### ssh config
+
+```conf
+#~/.ssh/conf.d/*
+Host {aliasname}
+  HostName {ip/hostname}
+  Port 8222
+  User {user}
+  IdentityFile ~/.ssh/id_rsa.example.com
+```
 
 ## bash
 
