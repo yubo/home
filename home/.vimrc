@@ -163,6 +163,8 @@ nnoremap <leader>z                :setl fdm=indent fdc=1 fdn=1<CR>
 nnoremap <leader>;                :noh<CR>
 nnoremap <leader>p                :set paste<CR>
 nnoremap <leader>pp               :set nopaste<CR>
+nnoremap <leader>m                :set mouse=a<CR>
+nnoremap <leader>mm               :set mouse=<CR>
 nnoremap <silent><leader><space>  :NERDTreeToggle<CR>
 nnoremap <silent><leader>n        :set number<CR>
 nnoremap <silent><leader>nn       :set nonumber<CR>
