@@ -4,7 +4,7 @@ export LANG='en_US.UTF-8'
 #export TERM=xterm-256color
 export PS1='[\u@\h:\w]\$'
 
-function add_path {
+add_path() {
 	for v in $*; do
 		if [[ -e $v && ! ":${PATH}:" =~ ":${v}:" ]]; then
 			export PATH=$v:$PATH
@@ -12,7 +12,7 @@ function add_path {
 	done
 }
 
-function add_classpath {
+add_classpath() {
 	for v in $*; do
 		if [[ -e $v  && ! ":${CLASSPATH}:" =~ ":${v}:" ]]; then
 			export CLASSPATH=$v:$CLASSPATH
@@ -20,7 +20,7 @@ function add_classpath {
 	done
 }
 
-function _source {
+_source() {
 	for v in $*; do
 		if [ -e $v ]; then
 			source $v
@@ -133,7 +133,7 @@ command -v systemctl >/dev/null 2>&1 && {
 	alias slog="sudo journalctl -u"
 }
 
-function color_my_prompt {
+color_my_prompt() {
     local __user_and_host="\[\033[01;32m\]\u@\h"
     local __cur_location="\[\033[01;34m\]\w"
     local __git_branch_color="\[\033[31m\]"

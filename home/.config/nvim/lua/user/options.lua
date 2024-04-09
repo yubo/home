@@ -7,7 +7,7 @@ local options = {
 	fileencoding = "utf-8",                  -- the encoding written to a file
 	hlsearch = true,                         -- highlight all matches on previous search pattern
 	ignorecase = true,                       -- ignore case in search patterns
-	mouse = "a",                              -- allow the mouse to be used in neovim
+	mouse = "",                              -- allow the mouse to be used in neovim
 	pumheight = 10,                          -- pop up menu height
 	showmode = false,                        -- we don't need to see things like -- INSERT -- anymore
 	showtabline = 2,                         -- always show tabs
@@ -37,6 +37,7 @@ local options = {
 	sidescrolloff = 8,                       -- minimal number of screen columns either side of cursor if wrap is `false`
 	guifont = "monospace:h17",               -- the font used in graphical neovim applications
 	whichwrap = "bs<>[]hl",                  -- which "horizontal" keys are allowed to travel to prev/next line
+	foldmethod = "marker",                   -- 代码折叠 za zM zR 
 }
 
 for k, v in pairs(options) do
