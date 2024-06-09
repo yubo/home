@@ -37,6 +37,8 @@ add_path					\
 	/usr/local/bin				\
 	/usr/local/sbin				\
 	${HOME}/.rvm/bin			\
+	${HOME}/go/bin				\
+	${HOME}/gopath/bin			\
 	$HOME/bin
 
 _source						\
@@ -60,7 +62,7 @@ alias cp='cp -i'
 alias mv='mv -i'
 alias tmux='tmux -2'
 alias ta='tmux -2 new -As'
-alias shs='python -m SimpleHTTPServer'
+alias shs='python3 -m http.server'
 alias dstat='dstat -cdlmnpsy'
 alias mm='make 2>&1 | more'
 alias ccd='cd $(pwd -P)'

@@ -18,35 +18,34 @@ require("luasnip/loaders/from_vscode").lazy_load()
 --   return col == 0 or vim.fn.getline("."):sub(col, col):match "%s"
 -- end
 
---   פּ ﯟ   some other good icons
+-- find more here: https://www.nerdfonts.com/cheat-sheet
 local kind_icons = {
-  Text = "",
-  Method = "m",
-  Function = "",
-  Constructor = "",
-  Field = "",
-  Variable = "",
-  Class = "",
+  Text = "󰉿",
+  Method = "󰆧",
+  Function = "󰊕",
+  Constructor = "",
+  Field = "󰜢",
+  Variable = "󰀫",
+  Class = "󰠱",
   Interface = "",
   Module = "",
-  Property = "",
-  Unit = "",
-  Value = "",
+  Property = "󰜢",
+  Unit = "󰑭",
+  Value = "󰎠",
   Enum = "",
-  Keyword = "",
-  Snippet = "",
-  Color = "",
-  File = "",
-  Reference = "",
-  Folder = "",
+  Keyword = "󰌋",
+  Snippet = "",
+  Color = "󰏘",
+  File = "󰈙",
+  Reference = "󰈇",
+  Folder = "󰉋",
   EnumMember = "",
-  Constant = "",
-  Struct = "",
+  Constant = "󰏿",
+  Struct = "󰙅",
   Event = "",
-  Operator = "",
-  TypeParameter = "",
+  Operator = "󰆕",
+  TypeParameter = "",
 }
--- find more here: https://www.nerdfonts.com/cheat-sheet
 
 cmp.setup({
   snippet = {

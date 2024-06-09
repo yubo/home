@@ -37,3 +37,5 @@
 	ui = auto
 [credential]
 	helper = cache --timeout 2592000
+[include]
+	path = $HOME/.gitconfig.local
