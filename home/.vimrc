@@ -145,6 +145,8 @@ nnoremap <c-n>                    :cn<CR>
 nnoremap <c-p>                    :cp<CR>
 nnoremap <c-j>                    7<C-e>
 nnoremap <c-k>                    7<C-y>
+nnoremap <c-e>                    :m+1<CR>
+nnoremap <c-y>                    :m-2<CR>
 nnoremap <leader>c                :cclose<CR>
 nnoremap <leader>o                :copen<CR>
 nnoremap <leader>x                : %!xxd<CR>
@@ -152,8 +154,8 @@ nnoremap <leader>xx               : %!xxd -r<CR>
 nnoremap <leader>b                : BufExplorer<CR>
 nnoremap <leader>h                <c-w>h
 nnoremap <leader>j                <c-w>j
-nnoremap <leader>k                <c-w>k
 nnoremap <leader>l                <c-w>l
+nnoremap <leader>k                <c-w>k
 nnoremap <leader>s                :<C-u>call gitblame#echo()<CR>
 nnoremap <leader>ss               :so $MYVIMRC<CR>
 nnoremap <leader>t                :TagbarToggle<CR>
