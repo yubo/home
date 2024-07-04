@@ -3,7 +3,6 @@
 *.pyc
 
 tmp/
-home/.config/
 home/.vim/bundle
 home/.vim/.netrwhist
 home/bin

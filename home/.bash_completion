@@ -1,0 +1,18 @@
+BASH_COMPLETION=~/.bash_completion
+
+_source_once						\
+	/usr/share/bash-completion/bash_completion	\
+	/opt/homebrew/etc/bash_completion		\
+	/usr/local/Homebrew/etc/bash_completion
+
+
+
+_BASH_COMPLETION_DIR=~/.config/bash_completion.d
+
+if [[ -d ${_BASH_COMPLETION_DIR} && -r $_BASH_COMPLETION_DIR && -x $_BASH_COMPLETION_DIR ]]; then
+    for i in $(LC_ALL=C command ls "$_BASH_COMPLETION_DIR"); do
+        i=$_BASH_COMPLETION_DIR/$i
+        [[ ${i##*/} != @(*~|*.bak|*.swp|\#*\#|*.dpkg*|*.rpm@(orig|new|save)|Makefile*) \
+            && -f $i && -r $i ]] && . "$i"
+    done
+fi

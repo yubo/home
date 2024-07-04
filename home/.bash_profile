@@ -28,28 +28,41 @@ _source() {
 	done
 }
 
-export PATH="/bin"
+_source_once() {
+	for v in $*; do
+		if [ -e $v  ]; then
+			source $v
+			break
+		fi
+	done
+}
 
-add_path					\
-	/sbin					\
-	/usr/bin				\
-	/usr/sbin				\
-	/usr/local/bin				\
-	/usr/local/sbin				\
-	${HOME}/.rvm/bin			\
-	${HOME}/go/bin				\
-	${HOME}/gopath/bin			\
-	$HOME/bin
 
-_source						\
-	/etc/profile				\
-	/etc/profile.d/bash_completion.sh	\
-	/usr/local/etc/bash_completion		\
-	${HOME}/.config/git-completion.bash	\
-	${HOME}/.config/docker.bash		\
-	${HOME}/.cargo/env			\
-	$HOME/.rvm/scripts/rvm			\
-	${HOME}/.bashrc
+add_path				\
+	/bin				\
+	/sbin				\
+	/usr/bin			\
+	/usr/sbin			\
+	/usr/local/bin			\
+	/usr/local/sbin			\
+	/opt/homebrew/bin		\
+	/usr/local/Homebrew/bin		\
+	${HOME}/.local/bin		\
+	${HOME}/bin			\
+	${HOME}/.rvm/bin		\
+	${HOME}/go/bin			\
+	${HOME}/gopath/bin
+
+command -v brew >/dev/null 2>&1 && {
+	eval "$(brew shellenv)"
+}
+
+
+_source					\
+	${HOME}/.bashrc			\
+	${HOME}/.cargo/env		\
+	${HOME}/.rvm/scripts/rvm	\
+	${HOME}/.bash_completion
 
 
 alias ff='find . -type f| xargs grep -n --color'

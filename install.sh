@@ -47,6 +47,7 @@ install_dir ~/gopath
 
 install_file bin
 install_file .bash_profile
+install_file .bash_completion
 install_file .dircolors
 install_file .fonts
 install_file .gdbinit
@@ -59,6 +60,4 @@ install_file .vimrc
 install_file .curlrc
 install_file .vim
 install_file .config/nvim
-
-ignore_file .gitconfig
-ignore_file .ssh/config
+install_file .config/bash_completion.d
