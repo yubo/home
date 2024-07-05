@@ -1,4 +1,4 @@
-#!/bin/bash
+# .bash_profile
 
 export LANG='en_US.UTF-8'
 #export TERM=xterm-256color
@@ -62,7 +62,7 @@ _source					\
 	${HOME}/.bashrc			\
 	${HOME}/.cargo/env		\
 	${HOME}/.rvm/scripts/rvm	\
-	${HOME}/.bash_completion
+	${HOME}/.config/bash_completion.sh
 
 
 alias ff='find . -type f| xargs grep -n --color'
