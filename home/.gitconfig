@@ -39,3 +39,5 @@
 	helper = cache --timeout 2592000
 [include]
 	path = $HOME/.gitconfig.local
+[pull]
+	rebase = false
