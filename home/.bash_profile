@@ -37,9 +37,9 @@ _source_once() {
 	done
 }
 
+PATH=/bin
 
 add_path				\
-	/bin				\
 	/sbin				\
 	/usr/bin			\
 	/usr/sbin			\
