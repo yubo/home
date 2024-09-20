@@ -1,6 +1,7 @@
 local servers = {
 	"gopls",
 	"pyright",
+	"clangd",
 	-- "pylsp",
 	-- "tsserver",
 	-- "jsonls",
