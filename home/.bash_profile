@@ -57,16 +57,19 @@ add_path				\
 	/usr/local/bin			\
 	/usr/local/sbin			\
 	/opt/homebrew/bin		\
-	/usr/local/Homebrew/bin		\
+	/usr/local/Homebrew/bin
+
+command -v brew >/dev/null 2>&1 && {
+	eval "$(brew shellenv)"
+}
+
+add_path				\
 	${HOME}/.local/bin		\
 	${HOME}/bin			\
 	${HOME}/.rvm/bin		\
 	${HOME}/go/bin			\
 	${HOME}/gopath/bin
 
-command -v brew >/dev/null 2>&1 && {
-	eval "$(brew shellenv)"
-}
 
 
 _source					\
