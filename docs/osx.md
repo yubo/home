@@ -7,3 +7,11 @@ sudo brew install vim tmux git cmake global git-lfs
 
 git lfs install
 ```
+
+```
+# neovim
+brew install neovim fd ripgrep watch wget tmux
+
+# dev
+brew install grpc go jq cmake llvm bear cscope ctags node
+```

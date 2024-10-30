@@ -2,6 +2,7 @@ local status_ok, project = pcall(require, "project_nvim")
 if not status_ok then
 	return
 end
+
 project.setup({
 	---@usage set to false to disable project.nvim.
 	--- This is on by default since it's currently the expected behavior.
@@ -33,7 +34,7 @@ project.setup({
 	silent_chdir = true,
 
 	-- global, tab, win
-	scope_chdir = 'win'
+	scope_chdir = 'win',
 
 	---@usage list of lsp client names to ignore when using **lsp** detection. eg: { "efm", ... }
 	ignore_lsp = {},

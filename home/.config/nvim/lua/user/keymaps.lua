@@ -20,7 +20,6 @@ vim.g.maplocalleader = ","
 
 
 -- Custome --
-
 function _G.ReloadConfig()
 	require("plenary.reload").reload_module("user")
 	dofile(vim.env.MYVIMRC)
@@ -55,10 +54,13 @@ keymap("n", "<leader>m",       ":set mouse=a<CR>", opts)
 keymap("n", "<leader>mm",      ":set mouse=<CR>", opts)
 keymap("n", "<leader>n",       ":set number<CR>", opts)
 keymap("n", "<leader>nn",      ":set nonumber<CR>", opts)
+
+-- telescope
 keymap("n", "<leader>f",       ":Telescope find_files<CR>", opts)
 keymap("n", "<leader>g",       ":Telescope live_grep<CR>", opts)
 keymap("n", "<leader>b",       ":Telescope buffers<CR>", opts)
 keymap("n", "<leader>fh",      ":Telescope help_tags<CR>", opts)
+
 keymap("n", "<leader>t",       ":TagbarToggle <CR>", opts)
 keymap("n", "<leader><Space>", ":NvimTreeFindFileToggle<CR>", opts)
 keymap("i", "<c-a>",           "<home>", opts)

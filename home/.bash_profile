@@ -1,5 +1,7 @@
 # .bash_profile
 
+export _BASH_PROFILE=1
+
 export LANG='en_US.UTF-8'
 export LC_CTYPE='en_US.UTF-8'
 export LC_ALL='en_US.UTF-8'

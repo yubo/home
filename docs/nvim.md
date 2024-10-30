@@ -58,18 +58,3 @@ map     | desc
 --      | --
 `<C-f>` | forward
 `<C-b>` | backward
-
-##### 注释 The-NERD-Commenter
-
-comment current line or text selected in visual mode
-
-map    |  line    | block
---     | --       | --
-add    | `<l-cc>` | `<l-cm>`
-remove | `<l-ci>` | `<l-cu>`
-
-##### tablify
-  - `<l-tt>`
-
-##### ZoomWin
-  - `C-w o`
