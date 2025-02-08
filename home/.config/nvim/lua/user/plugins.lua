@@ -64,7 +64,7 @@ return packer.startup(function(use)
     use "nvim-telescope/telescope.nvim" -- Telescope
     use { "nvim-telescope/telescope-fzf-native.nvim", run = "make" }
 
-
+    use "github/copilot.vim"
 
     -- Cmp 
     use "hrsh7th/nvim-cmp"          -- The completion plugin
