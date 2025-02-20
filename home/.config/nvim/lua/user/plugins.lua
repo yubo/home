@@ -64,8 +64,6 @@ return packer.startup(function(use)
     use "nvim-telescope/telescope.nvim" -- Telescope
     use { "nvim-telescope/telescope-fzf-native.nvim", run = "make" }
 
-    use "github/copilot.vim"
-
     -- Cmp 
     use "hrsh7th/nvim-cmp"          -- The completion plugin
     use "hrsh7th/cmp-buffer"        -- buffer completions
@@ -123,6 +121,31 @@ return packer.startup(function(use)
     use { "phaazon/hop.nvim", branch = 'v2', config = function() require'hop'.setup { keys = 'etovxqpdygfblzhckisuran' } end }
 
     use { "junegunn/fzf", run = function() vim.fn['fzf#install']() end }
+
+    -- github copilot
+    use "github/copilot.vim"
+
+    -- avante, a Neovim plugin designed to emulate the behaviour of the Cursor AI IDE
+    -- https://github.com/yetone/avante.nvim?tab=readme-ov-file#installation
+    use {
+      'yetone/avante.nvim',
+      branch = 'main',
+      run = 'make',
+      requires = {
+         -- Required plugins
+        'stevearc/dressing.nvim',
+        'nvim-lua/plenary.nvim',
+        'MunifTanjim/nui.nvim',
+        'MeanderingProgrammer/render-markdown.nvim',
+         -- Optional dependencies
+        'hrsh7th/nvim-cmp',
+        'nvim-tree/nvim-web-devicons',
+        'HakonHarnes/img-clip.nvim',
+        'zbirenbaum/copilot.lua',
+      },
+    }
+
+
 
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins
