@@ -61,3 +61,4 @@ install_file .vim
 install_file .config/nvim
 install_file .config/bash_completion.sh
 install_file .config/bash_completion.d
+install_file .config/proxy.pac
