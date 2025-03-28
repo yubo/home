@@ -185,4 +185,3 @@ if [ -d ${HOME}/src/dpdk ]; then
 	export RTE_SDK=${HOME}/src/dpdk
 	export RTE_TARGET=x86_64-native-linuxapp-gcc
 fi
-. "$HOME/.cargo/env"
