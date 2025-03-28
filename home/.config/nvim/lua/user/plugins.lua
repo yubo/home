@@ -44,14 +44,9 @@ return packer.startup(function(use)
     use "nvim-lua/plenary.nvim"  -- Useful lua functions used by lots of plugins
     use "windwp/nvim-autopairs"  -- Autopairs, integrates with both cmp and treesitter
     use "numToStr/Comment.nvim" 
-    use "JoosepAlviste/nvim-ts-context-commentstring"
-    use "kyazdani42/nvim-web-devicons"
-    use "kyazdani42/nvim-tree.lua"
     use "akinsho/bufferline.nvim"
     use "moll/vim-bbye"
     use "nvim-lualine/lualine.nvim"
-    use "akinsho/toggleterm.nvim"
-    use "ahmedkhalf/project.nvim"
     use "lewis6991/impatient.nvim"
     use "yubo/vim-log-highlighting"
     use "goolord/alpha-nvim"
@@ -63,6 +58,13 @@ return packer.startup(function(use)
 
     use "nvim-telescope/telescope.nvim" -- Telescope
     use { "nvim-telescope/telescope-fzf-native.nvim", run = "make" }
+
+    use {
+        'nvim-tree/nvim-tree.lua',
+        requires = {
+            'nvim-tree/nvim-web-devicons', -- optional
+        },
+    }
 
     -- Cmp 
     use "hrsh7th/nvim-cmp"          -- The completion plugin
@@ -122,29 +124,50 @@ return packer.startup(function(use)
 
     use { "junegunn/fzf", run = function() vim.fn['fzf#install']() end }
 
+    -- render-markdown
+    -- use({
+    --     'MeanderingProgrammer/render-markdown.nvim',
+    --     after = { 'nvim-treesitter' },
+    --     requires = { 'echasnovski/mini.nvim', opt = true }, -- if you use the mini.nvim suite
+    --     -- requires = { 'echasnovski/mini.icons', opt = true }, -- if you use standalone mini plugins
+    --     -- requires = { 'nvim-tree/nvim-web-devicons', opt = true }, -- if you prefer nvim-web-devicons
+    --     config = function()
+    --         require('render-markdown').setup({})
+    --     end,
+    -- })
+
     -- github copilot
     use "github/copilot.vim"
 
     -- avante, a Neovim plugin designed to emulate the behaviour of the Cursor AI IDE
     -- https://github.com/yetone/avante.nvim?tab=readme-ov-file#installation
     use {
-      'yetone/avante.nvim',
-      branch = 'main',
-      run = 'make',
-      requires = {
-         -- Required plugins
-        'stevearc/dressing.nvim',
-        'nvim-lua/plenary.nvim',
-        'MunifTanjim/nui.nvim',
-        'MeanderingProgrammer/render-markdown.nvim',
-         -- Optional dependencies
-        'hrsh7th/nvim-cmp',
-        'nvim-tree/nvim-web-devicons',
-        'HakonHarnes/img-clip.nvim',
-        'zbirenbaum/copilot.lua',
-      },
+        'yetone/avante.nvim',
+        branch = 'main',
+        run = 'make',
+        requires = {
+            -- Required plugins
+            'stevearc/dressing.nvim',
+            'nvim-lua/plenary.nvim',
+            'MunifTanjim/nui.nvim',
+            'MeanderingProgrammer/render-markdown.nvim',
+            -- Optional dependencies
+            'hrsh7th/nvim-cmp',
+            'nvim-tree/nvim-web-devicons',
+            'HakonHarnes/img-clip.nvim',
+            'zbirenbaum/copilot.lua',
+        },
     }
 
+
+    -- 添加 todo-comments.nvim 插件
+    use {
+        'folke/todo-comments.nvim',
+        requires = 'nvim-lua/plenary.nvim',
+        config = function()
+            require('todo-comments').setup()
+        end
+    }
 
 
     -- Automatically set up your configuration after cloning packer.nvim

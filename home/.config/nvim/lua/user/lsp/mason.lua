@@ -1,8 +1,8 @@
 local servers = {
 	"gopls",
-	"pyright",
-	"clangd",
-	"rust_analyzer",
+	--"pyright",
+	--"clangd",
+	--"rust_analyzer",
 	-- "pylsp",
 	-- "tsserver",
 	-- "jsonls",
