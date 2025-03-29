@@ -1,8 +1,8 @@
 local servers = {
 	"gopls",
-	--"pyright",
-	--"clangd",
-	--"rust_analyzer",
+	-- "pyright",
+	-- "clangd",
+	-- "rust_analyzer",
 	-- "pylsp",
 	-- "tsserver",
 	-- "jsonls",
@@ -40,13 +40,13 @@ local opts = {}
 
 for _, server in pairs(servers) do
 	opts = {
-		on_attach = require("user.lsp.handlers").on_attach,
-		capabilities = require("user.lsp.handlers").capabilities,
+		on_attach = require("configs.lsp.handlers").on_attach,
+		capabilities = require("configs.lsp.handlers").capabilities,
 	}
 
 	server = vim.split(server, "@")[1]
 
-	local require_ok, conf_opts = pcall(require, "user.lsp.settings." .. server)
+	local require_ok, conf_opts = pcall(require, "configs.lsp.langs." .. server)
 	if require_ok then
 		opts = vim.tbl_deep_extend("force", conf_opts, opts)
 	end
