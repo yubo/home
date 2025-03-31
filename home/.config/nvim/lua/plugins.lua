@@ -21,7 +21,7 @@ vim.cmd([[
   augroup end
 ]])
 
--- Use a protected call so we don't error out on first use
+-- Use a protected call so we don"t error out on first use
 local status_ok, packer = pcall(require, "packer")
 if not status_ok then
     return
@@ -41,7 +41,7 @@ return packer.startup(function(use)
     use "wbthomason/packer.nvim" -- Have packer manage itself
     use "nvim-lua/plenary.nvim"  -- Useful lua functions used by lots of plugins
     use "windwp/nvim-autopairs"  -- Autopairs, integrates with both cmp and treesitter
-    use "numToStr/Comment.nvim" 
+    use "numToStr/Comment.nvim"
     use "akinsho/bufferline.nvim"
     use "moll/vim-bbye"
     use "nvim-lualine/lualine.nvim"
@@ -54,24 +54,11 @@ return packer.startup(function(use)
     use "nvim-treesitter/nvim-treesitter" -- Treesitter
 
     -- ui
-    use {
-        -- Colorschemes
-        'rebelot/kanagawa.nvim',
-        config = function()
-            require("kanagawa").setup()
-            vim.cmd("colorscheme kanagawa")
-        end,
-    }
-
-    use "nvim-telescope/telescope.nvim" -- Telescope
+    use "rebelot/kanagawa.nvim" -- colorscheme
+    use {"nvim-telescope/telescope.nvim", requires = {"nvim-lua/plenary.nvim", "nvim-telescope/telescope-ui-select.nvim"}}
     use { "nvim-telescope/telescope-fzf-native.nvim", run = "make" }
-
-    use {
-        'nvim-tree/nvim-tree.lua',
-        requires = {
-            'nvim-tree/nvim-web-devicons', -- optional
-        },
-    }
+    use { "nvim-tree/nvim-tree.lua", requires = {"nvim-tree/nvim-web-devicons"} }
+    use { "ahmedkhalf/project.nvim", requires = {"nvim-telescope/telescope.nvim"} }
 
     -- Cmp 
     use "hrsh7th/nvim-cmp"          -- The completion plugin
@@ -83,15 +70,20 @@ return packer.startup(function(use)
     use "hrsh7th/cmp-nvim-lsp"
     use "hrsh7th/cmp-nvim-lua"
 
-    -- LSP
+    -- {{{ LSP
     use "neovim/nvim-lspconfig" -- enable LSP
     use "williamboman/mason.nvim" -- simple to use language server installer
     use "williamboman/mason-lspconfig.nvim"
     use "jose-elias-alvarez/null-ls.nvim" -- for formatters and linters
     use "RRethy/vim-illuminate"
-    use "fatih/vim-go"
+    --use "fatih/vim-go"
 
-    -- debug
+    -- lsp ui 增强 
+    use "nvimdev/lspsaga.nvim"
+    use { "folke/trouble.nvim", requires = "kyazdani42/nvim-web-devicons" }
+    -- }}}
+
+    -- {{{ debug, test
     use "mfussenegger/nvim-dap"
     use "rcarriga/nvim-dap-ui"
     use "leoluz/nvim-dap-go" -- golang
@@ -101,47 +93,26 @@ return packer.startup(function(use)
 
     use {
         "nvim-neotest/neotest",
-        cmd = { "Neotest" },
-        config = function()
-            require("neotest").setup({
-                consumers = {
-                    overseer = require("neotest.consumers.overseer"),
-                },
-                overseer = {
-                    enabled = true,
-                    -- When this is true (the default), it will replace all neotest.run.* commands
-                    force_default = false,
-                },
-            })
-        end,
         requires = {
-            "nvim-neotest/nvim-nio",
-            "nvim-lua/plenary.nvim",
             "antoinemadec/FixCursorHold.nvim",
-            "nvim-treesitter/nvim-treesitter"
+            "nvim-treesitter/nvim-treesitter",
+            "nvim-neotest/nvim-nio",
+            "nvim-neotest/neotest-go", -- golang
+            "nvim-lua/plenary.nvim", -- lua
         }
     }
+    -- }}}
 
+    -- quickfix
+    use { "kevinhwang91/nvim-bqf", ft = "qf" }
 
-    use { "kevinhwang91/nvim-bqf", ft = 'qf', config = function() require("bqf").setup() end } -- quickfix
-    use { "stevearc/overseer.nvim", config = function() require('overseer').setup() end }
+    -- 任务管理
+    -- use { "stevearc/overseer.nvim", config = function() require("overseer").setup() end }
 
-    -- you can configure Hop the way you like here; see :h hop-config
-    use { "phaazon/hop.nvim", branch = 'v2', config = function() require'hop'.setup { keys = 'etovxqpdygfblzhckisuran' } end }
+    -- find/search
+    use { "folke/flash.nvim", event = "BufEnter" }
 
-    use { "junegunn/fzf", run = function() vim.fn['fzf#install']() end }
-
-    -- render-markdown
-    -- use({
-    --     'MeanderingProgrammer/render-markdown.nvim',
-    --     after = { 'nvim-treesitter' },
-    --     requires = { 'echasnovski/mini.nvim', opt = true }, -- if you use the mini.nvim suite
-    --     -- requires = { 'echasnovski/mini.icons', opt = true }, -- if you use standalone mini plugins
-    --     -- requires = { 'nvim-tree/nvim-web-devicons', opt = true }, -- if you prefer nvim-web-devicons
-    --     config = function()
-    --         require('render-markdown').setup({})
-    --     end,
-    -- })
+    use { "folke/which-key.nvim", requires = { "echasnovski/mini.nvim" }, event = "BufEnter" }
 
     -- github copilot
     use "github/copilot.vim"
@@ -149,32 +120,24 @@ return packer.startup(function(use)
     -- avante, a Neovim plugin designed to emulate the behaviour of the Cursor AI IDE
     -- https://github.com/yetone/avante.nvim?tab=readme-ov-file#installation
     use {
-        'yetone/avante.nvim',
-        branch = 'main',
-        run = 'make',
+        "yetone/avante.nvim",
+        branch = "main",
+        run = "make",
         requires = {
             -- Required plugins
-            'stevearc/dressing.nvim',
-            'nvim-lua/plenary.nvim',
-            'MunifTanjim/nui.nvim',
-            'MeanderingProgrammer/render-markdown.nvim',
+            "stevearc/dressing.nvim",
+            "nvim-lua/plenary.nvim",
+            "MunifTanjim/nui.nvim",
+            "MeanderingProgrammer/render-markdown.nvim",
             -- Optional dependencies
-            'hrsh7th/nvim-cmp',
-            'nvim-tree/nvim-web-devicons',
-            'HakonHarnes/img-clip.nvim',
-            'zbirenbaum/copilot.lua',
+            "hrsh7th/nvim-cmp",
+            "nvim-tree/nvim-web-devicons",
+            "HakonHarnes/img-clip.nvim",
+            "zbirenbaum/copilot.lua",
         },
     }
 
-
-    -- 添加 todo-comments.nvim 插件
-    use {
-        'folke/todo-comments.nvim',
-        requires = 'nvim-lua/plenary.nvim',
-        config = function()
-            require('todo-comments').setup()
-        end
-    }
+    use { "folke/todo-comments.nvim", requires = "nvim-lua/plenary.nvim" }
 
 
     -- Automatically set up your configuration after cloning packer.nvim

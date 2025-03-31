@@ -48,21 +48,21 @@ vim.opt.termguicolors = true                    -- enable 24-bit RGB color in th
 
 
 vim.cmd([[
-	au BufRead,BufNewFile go.mod             setfiletype gomod
-	au BufRead,BufNewFile *.go               setfiletype go
-	au BufRead,BufNewFile *.txt              setfiletype text
-	au BufRead,BufNewFile *.jsonnet          setfiletype jsonnet
-	au BufRead,BufNewFile *.ts,*.tsx         setfiletype typescript
-	au BufRead,BufNewFile *.js,*.jsx         setfiletype javascript
-	au BufRead,BufNewFile *.yaml,*.yml       setfiletype yaml
-	au BufRead,BufNewFile *.wxml,*.vue       setfiletype html
-	au BufRead,BufNewFile *.wxs,*.css,*.less setfiletype css
+    au BufRead,BufNewFile go.mod             setfiletype gomod
+    au BufRead,BufNewFile *.go               setfiletype go
+    au BufRead,BufNewFile *.txt              setfiletype text
+    au BufRead,BufNewFile *.jsonnet          setfiletype jsonnet
+    au BufRead,BufNewFile *.ts,*.tsx         setfiletype typescript
+    au BufRead,BufNewFile *.js,*.jsx         setfiletype javascript
+    au BufRead,BufNewFile *.yaml,*.yml       setfiletype yaml
+    au BufRead,BufNewFile *.wxml,*.vue       setfiletype html
+    au BufRead,BufNewFile *.wxs,*.css,*.less setfiletype css
 
-	au FileType html       setlocal et sta sw=4 sts=4
-	au FileType css        setlocal et sta sw=2 sts=2
-	au FileType json       setlocal et sta sw=4 sts=4
-	au FileType javascript setlocal et sta sw=2 sts=2
-	au FileType typescript setlocal et sta sw=2 sts=2
-	au FileType yaml       setlocal et sta sw=2 sts=2
-	au FileType xml        setlocal et sta sw=4 sts=4
+    au FileType html       setlocal et sta sw=4 sts=4
+    au FileType css        setlocal et sta sw=2 sts=2
+    au FileType json       setlocal et sta sw=4 sts=4
+    au FileType javascript setlocal et sta sw=2 sts=2
+    au FileType typescript setlocal et sta sw=2 sts=2
+    au FileType yaml       setlocal et sta sw=2 sts=2
+    au FileType xml        setlocal et sta sw=4 sts=4
 ]])
