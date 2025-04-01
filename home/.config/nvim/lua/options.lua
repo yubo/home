@@ -26,8 +26,8 @@ vim.opt.expandtab = false                       -- convert tabs to spaces
 vim.opt.cursorline = true                       -- highlight the current line
 vim.opt.cursorcolumn = true                     -- highlight the current column
 vim.opt.number = true                           -- set numbered lines
-vim.opt.relativenumber = true                   -- set relative numbered lines
-vim.opt.numberwidth = 4                         -- set number column width to 2 {default 4}
+vim.opt.relativenumber = false                  -- set relative numbered lines
+vim.opt.numberwidth = 3                         -- set number column width to 2 {default 4}
 
 vim.opt.signcolumn = "yes"                      -- always show the sign column otherwise it would shift the text each time
 vim.opt.wrap = true                             -- display lines as one long line
