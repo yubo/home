@@ -76,7 +76,7 @@ return packer.startup(function(use)
     use "williamboman/mason-lspconfig.nvim"
     use "jose-elias-alvarez/null-ls.nvim" -- for formatters and linters
     use "RRethy/vim-illuminate"
-    --use "fatih/vim-go"
+    use "fatih/vim-go"
 
     -- lsp ui 增强 
     use "nvimdev/lspsaga.nvim"

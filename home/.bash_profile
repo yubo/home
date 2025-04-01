@@ -1,5 +1,4 @@
 # .bash_profile
-
 export _BASH_PROFILE=1
 
 export LANG='en_US.UTF-8'

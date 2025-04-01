@@ -479,10 +479,10 @@ if nvim_tree_ok then
             enable = false,
             show_on_dirs = true,
             icons = {
-                hint = "",
-                info = "",
-                warning = "",
-                error = "",
+                hint = "",
+                info = "",
+                warning = "",
+                error = "",
             },
         },
         filters = {
