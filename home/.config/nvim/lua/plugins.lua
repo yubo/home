@@ -49,9 +49,13 @@ return packer.startup(function(use)
     use "yubo/vim-log-highlighting"
     use "goolord/alpha-nvim"
     use "farmergreg/vim-lastplace"
-    use "zivyangll/git-blame.vim"
     use "majutsushi/tagbar"
     use "nvim-treesitter/nvim-treesitter" -- Treesitter
+
+    -- git
+    use 'tpope/vim-fugitive'
+    use { 'lewis6991/gitsigns.nvim', config = function() require('gitsigns').setup() end }
+    use { 'sindrets/diffview.nvim', requires = 'nvim-lua/plenary.nvim' }
 
     -- ui
     use "rebelot/kanagawa.nvim" -- colorscheme

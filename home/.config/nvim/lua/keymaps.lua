@@ -97,11 +97,27 @@ keymap({"n", "x", "o"}, "S", function() require("flash").treesitter() end, opts(
 --keymap("n", "<leader>cs", "<cmd>Trouble symbols toggle focus=false<cr>", opts("Symbols (Trouble)"))
 --keymap("n", "<leader>cl", "<cmd>Trouble lsp toggle focus=false win.position=right<cr>", opts("LSP Definitions / references / ... (Trouble)"))
 keymap("n", "<leader>cx", "<cmd>Trouble diagnostics toggle<cr>", opts("Diagnostics (Trouble)"))
-keymap("n", "<leader>cb", "<cmd><c-u>call gitblame#echo()<cr>", opts("Git blame"))
+keymap("n", "<leader>cb", ":<C-u>call gitblame#echo()<cr>", opts("Git blame"))
 keymap("n", "<leader>cr", "<cmd>lua ReloadConfig()<cr>", opts("Reload config (nvim)"))
 keymap("n", "<leader>cm", "<cmd>set mouse=a<cr>", opts("Mouse on"))
 keymap("n", "<leader>cM", "<cmd>set mouse=<cr>", opts("Mouse off"))
 keymap("n", "<leader>ct", "<cmd>TagbarToggle <cr>", opts("Tagbar"))
+
+-- g: git
+keymap("n", "<leader>gs", "<cmd>Git<cr>", opts("Git status"))
+keymap("n", "<leader>gb", "<cmd>Git blame<cr>", opts("Git blame"))
+keymap("n", "<leader>gd", ":Gvdiffsplit<CR>", opts("Git diff"))
+keymap("n", "<leader>gh", ":DiffviewFileHistory %<CR>", opts("Git file history"))
+keymap("n", "<leader>gH", ":DiffviewFileHistory<CR>", opts("Git branch history"))
+keymap("n", "<leader>gv", function()
+    -- 检查 Diffview 是否已经打开
+    local view = require('diffview.lib').get_current_view()
+    if view then
+        vim.cmd('DiffviewClose')
+    else
+        vim.cmd('DiffviewOpen')
+    end
+end, opts("Toggle Diffview"))
 
 -- f: file/find
 keymap("n", "<leader>fp", "<cmd>Telescope projects<cr>", opts("Find projects"))
@@ -154,3 +170,5 @@ keymap("n", "<space>;", "<cmd>noh<cr>", opts("clear search"))
 keymap("n", "<space>f", "<cmd>Telescope find_files<cr>", opts("find files"))
 keymap("n", "<space>g", "<cmd>Telescope live_grep<cr>", opts("live grep"))
 keymap("n", "<space>b", "<cmd>Telescope buffers<cr>", opts("buffers"))
+keymap("n", "]c", "<cmd>Gitsigns next_hunk<CR>", opts("git: Next hunk") )
+keymap("n", "[c", "<cmd>Gitsigns prev_hunk<CR>", opts("git: Pre hunk"))

@@ -1250,6 +1250,7 @@ if which_key_ok then
     which_key.add({
         { "<leader>?", function() require("which-key").show({ global = false }) end, desc = "Buffer Local Keymaps (which-key)" },
         { "<leader>f", group = "file/find" },
+        { "<leader>g", group = "git" },
         { "<leader>c", group = "code/config" },
         { "<leader>d", group = "debug" },
         { "<leader>a", group = "avante" },
