@@ -140,14 +140,15 @@ keymap("n", "<cs-f5>",    function() require('dap').restart() end, opts("Debug r
 
 -- other
 -- windows
-keymap("n", "<space>h", "<c-w>h", opts("left window"))
-keymap("n", "<space>j", "<c-w>j", opts("down window"))
-keymap("n", "<space>k", "<c-w>k", opts("up window"))
-keymap("n", "<space>l", "<c-w>l", opts("right window"))
-keymap("n", "<space>l", "<c-w>t", opts("top window"))
+keymap("n", "<space>h", "<c-w>h", opts("Go to the left window"))
+keymap("n", "<space>j", "<c-w>j", opts("Go to the down window"))
+keymap("n", "<space>k", "<c-w>k", opts("Go to the up window"))
+keymap("n", "<space>l", "<c-w>l", opts("Go to the right window"))
+keymap("n", "<space>l", "<c-w>t", opts("Go to the top window"))
 keymap("n", "<space>-", "<cmd>split<cr>", opts("split"))
 keymap("n", "<space>|", "<cmd>vsplit<cr>", opts("vsplit"))
 keymap("n", "<space>=", "gg=G", opts("format"))
+keymap("n", "<space>e", vim.lsp.buf.rename, opts("lsp: Rename"))
 keymap("n", "<space>q", "<cmd>bprevious<cr>:bdelete #<cr>", opts("delete buffer"))
 keymap("n", "<space>;", "<cmd>noh<cr>", opts("clear search"))
 keymap("n", "<space>f", "<cmd>Telescope find_files<cr>", opts("find files"))
