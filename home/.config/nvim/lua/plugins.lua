@@ -54,6 +54,7 @@ return packer.startup(function(use)
 
     -- git
     use 'tpope/vim-fugitive'
+    use 'zivyangll/git-blame.vim'
     use { 'lewis6991/gitsigns.nvim', config = function() require('gitsigns').setup() end }
     use { 'sindrets/diffview.nvim', requires = 'nvim-lua/plenary.nvim' }
 
@@ -76,9 +77,9 @@ return packer.startup(function(use)
 
     -- {{{ LSP
     use "neovim/nvim-lspconfig" -- enable LSP
-    use "williamboman/mason.nvim" -- simple to use language server installer
-    use "williamboman/mason-lspconfig.nvim"
-    use "jose-elias-alvarez/null-ls.nvim" -- for formatters and linters
+    use "mason-org/mason.nvim" -- simple to use language server installer
+    use "mason-org/mason-lspconfig.nvim"
+    ---use "jose-elias-alvarez/null-ls.nvim" -- for formatters and linters
     use "RRethy/vim-illuminate"
     use "fatih/vim-go"
 
@@ -116,7 +117,7 @@ return packer.startup(function(use)
     -- find/search
     use { "folke/flash.nvim", event = "BufEnter" }
 
-    use { "folke/which-key.nvim", requires = { "echasnovski/mini.nvim" }, event = "BufEnter" }
+    use { "folke/which-key.nvim", event = "BufEnter" }
 
     -- github copilot
     use "github/copilot.vim"

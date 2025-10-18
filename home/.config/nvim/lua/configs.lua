@@ -927,7 +927,7 @@ if avante_ok then
     avante.setup({
         provider = "copilot",
         show_hints = false,
-        vendors = {
+        providers = {
             deepseek = {
                 __inherited_from = "openai",
                 api_key_name = "DEEPSEEK_API_KEY",
@@ -939,7 +939,7 @@ if avante_ok then
 end
 -- }}}
 
---  williamboman/mason.nvim -- mason {{{
+--  mason-org/mason.nvim -- mason {{{
 local mason_ok, mason = pcall(require, "mason")
 if mason_ok then
     mason.setup({
@@ -960,7 +960,7 @@ if mason_ok then
 end
 -- }}}
 
--- williamboman/mason-lspconfig.nvim -- mason-lspconfig {{{
+-- mason-org/mason-lspconfig.nvim -- mason-lspconfig {{{
 local mason_lspconfig_ok, mason_lspconfig = pcall(require, "mason-lspconfig")
 if mason_lspconfig_ok then
     mason_lspconfig.setup({
@@ -988,24 +988,6 @@ if lspconfig_ok then
         capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
     end
 
-    local function lsp_keymaps(bufnr)
-        vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
-
-        local function opts(desc)
-            return { desc = "lsp: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
-        end
-
-        vim.keymap.set("n", "<leader>ce", vim.lsp.buf.rename, opts("Rename"))
-        vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts("Code Action"))
-        vim.keymap.set("n", "<leader>=", "vim.lsp.buf.formatting", opts("Format"))
-        vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts("Go to Definition"))
-        vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts("Go to Implementation"))
-        vim.keymap.set("n", "gr", vim.lsp.buf.references, opts("References"))
-        vim.keymap.set("n", "K", vim.lsp.buf.hover, opts("Hover Documentation"))
-    end
-
-
-
     local on_attach = function(client, bufnr)
         if client.name == "tsserver" then
             client.server_capabilities.documentFormattingProvider = false
@@ -1015,7 +997,7 @@ if lspconfig_ok then
             client.server_capabilities.documentFormattingProvider = false
         end
 
-        lsp_keymaps(bufnr)
+        vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
         local status_ok, illuminate = pcall(require, "illuminate")
         if not status_ok then
             return
@@ -1237,6 +1219,15 @@ if which_key_ok then
             },
         },
         show_help = true, -- 显示帮助信息
+        presets = {
+            operators = false,     -- 禁用操作符（如 `d`、`y`、`c` 等）的提示
+            motions = false,      -- 禁用移动（如 `hjkl`、`w`、`b` 等）的提示
+            text_objects = false, -- 禁用文本对象（如 `aw`、`as`、`ap` 等）的提示
+            windows = false,      -- 禁用窗口管理（如 `<C-w>`）的提示
+            nav = false,          -- 禁用导航（如 `]]`、`[m` 等）的提示
+            z = false,           -- 禁用 `z` 开头的折叠相关提示
+            g = false,           -- 禁用 `g` 开头的提示
+        },
     })
     --which_key.add({
     --    -- { "<leader>?", function() require("which-key").show({ global = false }) end, desc = "Buffer Local Keymaps (which-key)" },
@@ -1250,11 +1241,21 @@ if which_key_ok then
     which_key.add({
         { "<leader>?", function() require("which-key").show({ global = false }) end, desc = "Buffer Local Keymaps (which-key)" },
         { "<leader>f", group = "file/find" },
-        { "<leader>g", group = "git" },
+        { "<leader>g", group = "git/goto" },
         { "<leader>c", group = "code/config" },
         { "<leader>d", group = "debug" },
         { "<leader>a", group = "avante" },
         { "<leader>t", group = "test" },
     })
 end
+-- }}}
+
+-- echasnovski/mini.nvim {{{
+local minimap_ok, minimap_key = pcall(require, "mini.map")
+if minimap_ok then
+    minimap_key.setup({
+        integrations = nil,
+    })
+end
+
 -- }}}
