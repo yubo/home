@@ -76,10 +76,8 @@ return packer.startup(function(use)
     use "hrsh7th/cmp-nvim-lua"
 
     -- {{{ LSP
-    use "neovim/nvim-lspconfig" -- enable LSP
     use "mason-org/mason.nvim" -- simple to use language server installer
     use "mason-org/mason-lspconfig.nvim"
-    ---use "jose-elias-alvarez/null-ls.nvim" -- for formatters and linters
     use "RRethy/vim-illuminate"
     use "fatih/vim-go"
 

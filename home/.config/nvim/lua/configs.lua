@@ -980,8 +980,7 @@ end
 -- }}}
 
 -- neovim/nvim-lspconfig -- lspconfig {{{
-local lspconfig_ok, lspconfig = pcall(require, "lspconfig")
-if lspconfig_ok then
+if true then
     local capabilities = vim.lsp.protocol.make_client_capabilities()
     capabilities.textDocument.completion.completionItem.snippetSupport = true
     if cmp_nvim_lsp_ok then
@@ -1019,7 +1018,8 @@ if lspconfig_ok then
             opts = vim.tbl_deep_extend("force", conf_opts, opts)
         end
 
-        lspconfig[server].setup(opts)
+        vim.lsp.config(server, opts)
+        vim.lsp.enable(server)
     end
 
     -- handlers.setup
