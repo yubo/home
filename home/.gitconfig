@@ -41,3 +41,5 @@
 	path = $HOME/.gitconfig.local
 [pull]
 	rebase = false
+[http]
+	sslVerify = false

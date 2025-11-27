@@ -1,9 +1,9 @@
 local lspconfig_ensure_installed = {
     "gopls",
-    "rust_analyzer",
     "pyright",
     "lua_ls",
     "bashls",
+    -- "rust_analyzer",
     -- "clangd",
     -- "pylsp",
     -- "tsserver",
@@ -980,7 +980,8 @@ end
 -- }}}
 
 -- neovim/nvim-lspconfig -- lspconfig {{{
-if true then
+local lspconfig_ok, lspconfig = pcall(require, "lspconfig")
+if lspconfig_ok then
     local capabilities = vim.lsp.protocol.make_client_capabilities()
     capabilities.textDocument.completion.completionItem.snippetSupport = true
     if cmp_nvim_lsp_ok then
@@ -1004,40 +1005,132 @@ if true then
         illuminate.on_attach(client)
     end
 
-    local opts = {
-        on_attach = on_attach,
-        capabilities = capabilities,
+      -- 服务器配置映射表
+    local server_configs = {
+        -- TypeScript/JavaScript
+        tsserver = {
+            cmd = {"typescript-language-server", "--stdio"},
+            filetypes = {"javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx"},
+            root_dir = lspconfig.util.root_pattern("package.json", "tsconfig.json", "jsconfig.json", ".git"),
+        },
+        
+        -- Lua (注意：sumneko_lua 已更名为 lua_ls)
+        lua_ls = {
+            cmd = {"lua-language-server"},
+            filetypes = {"lua"},
+            root_dir = lspconfig.util.root_pattern(".luarc.json", ".luarc.jsonc", ".luacheckrc", ".stylua.toml", "stylua.toml", "selene.toml", "selene.yml", ".git"),
+            settings = {
+                Lua = {
+                    runtime = {version = 'LuaJIT'},
+                    diagnostics = {globals = {'vim'}},
+                    workspace = {library = vim.api.nvim_get_runtime_file("", true)},
+                    telemetry = {enable = false}
+                }
+            }
+        },
+        
+        -- 可以根据需要添加更多服务器配置
+        pyright = {
+            cmd = {"pyright-langserver", "--stdio"},
+            filetypes = {"python"},
+            root_dir = lspconfig.util.root_pattern("pyproject.toml", "setup.py", "setup.cfg", "requirements.txt", "Pipfile", "pyrightconfig.json", ".git"),
+        },
+        
+        clangd = {
+            cmd = {"clangd"},
+            filetypes = {"c", "cpp", "objc", "objcpp"},
+            root_dir = lspconfig.util.root_pattern("compile_commands.json", "compile_flags.txt", ".git"),
+            single_file_support = true,
+        },
+
+        rust_analyzer = {
+            cmd = {"rust-analyzer"},
+            filetypes = {"rust"},
+            root_dir = lspconfig.util.root_pattern("Cargo.toml", "rust-project.json", ".git"),
+            settings = {
+                ["rust-analyzer"] = {
+                    cargo = {
+                        allFeatures = true,
+                    },
+                    checkOnSave = {
+                        command = "clippy",
+                    },
+                },
+            },
+        },
+
+        gopls = {
+            cmd = {"gopls"},
+            filetypes = {"go", "gomod", "gowork", "gotmpl"},
+            root_dir = lspconfig.util.root_pattern("go.work", "go.mod", ".git"),
+            settings = {
+                gopls = {
+                    analyses = {
+                        unusedparams = true,
+                    },
+                    staticcheck = true,
+                },
+            },
+        },
+
+        bashls = {
+            cmd = { "bash-language-server", "start" },
+            filetypes = { "sh", "bash" },
+            root_dir = require('lspconfig.util').root_pattern(".git"),
+        },
+
+        -- 添加更多服务器配置...
     }
 
-
+        -- 启动所有配置的服务器（使用自动命令按需启动）
     for _, server in pairs(lspconfig_ensure_installed) do
         server = vim.split(server, "@")[1]
 
-        local require_ok, conf_opts = pcall(require, "langs." .. server)
-        if require_ok then
-            opts = vim.tbl_deep_extend("force", conf_opts, opts)
+        local base_config = {
+            on_attach = on_attach,
+            capabilities = capabilities,
+        }
+
+        -- 如果有预定义的服务器配置，合并它们
+        local server_config = server_configs[server] or {}
+        local final_config = vim.tbl_deep_extend("force", base_config, server_config)
+
+        -- 为每个服务器创建文件类型自动命令
+        local filetypes = final_config.filetypes or {}
+        if #filetypes > 0 then
+            vim.api.nvim_create_autocmd("FileType", {
+                pattern = filetypes,
+                callback = function(args)
+                    -- 检查是否已经有客户端附加到这个缓冲区
+                    local clients = vim.lsp.get_clients({ bufnr = args.buf })
+                    local has_client = false
+                    for _, client in ipairs(clients) do
+                        if client.name == server then
+                            has_client = true
+                            break
+                        end
+                    end
+                    
+                    if not has_client then
+                        vim.lsp.start(final_config)
+                    end
+                end
+            })
+        else
+            -- 如果没有指定文件类型，直接启动
+            vim.lsp.start(final_config)
         end
-
-        vim.lsp.config(server, opts)
-        vim.lsp.enable(server)
-    end
-
-    -- handlers.setup
-    local signs = {
-        { name = "DiagnosticSignError", text = "" },
-        { name = "DiagnosticSignWarn", text = "" },
-        { name = "DiagnosticSignHint", text = "" },
-        { name = "DiagnosticSignInfo", text = "" },
-    }
-
-    for _, sign in ipairs(signs) do
-        vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
     end
 
     local config = {
         virtual_text = false, -- disable virtual text
         signs = {
-            active = signs, -- show signs
+            text = {
+                [vim.diagnostic.severity.ERROR] = "",
+                [vim.diagnostic.severity.WARN] = "",
+                [vim.diagnostic.severity.INFO] = "",
+                [vim.diagnostic.severity.HINT] = "",
+            }
         },
         update_in_insert = true,
         underline = true,
@@ -1053,15 +1146,6 @@ if true then
     }
 
     vim.diagnostic.config(config)
-
-    vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-        border = "rounded",
-    })
-
-    vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-        border = "rounded",
-    })
-
 end
 -- }}}
 
