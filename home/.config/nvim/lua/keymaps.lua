@@ -27,8 +27,6 @@ function _G.ReloadConfig()
     dofile(vim.env.MYVIMRC)
 end
 
---keymap("", "<c-f>", "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = false })<cr>", {})
---keymap("", "<c-b>", "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = false })<cr>", {})
 keymap("n", "#", "<cmd>let @/=printf('\\<%s\\>\\C', expand('<cword>'))<cr>", opts("search word"))
 
 keymap("n", "<c-l>", "<cmd>bn<cr>", opts("next buffer"))
@@ -87,7 +85,7 @@ keymap("x", "<c-p>", "<cmd>move '<-2<cr>gv-gv", opts("move up"))
 keymap("x", "<c-n>", "<cmd>move '>+1<cr>gv-gv", opts("move down"))
 
 
--- flash
+-- search/flash
 keymap({"n", "x", "o"}, "s", function() require("flash").jump({search={mode="search"}}) end, opts("flash jump"))
 keymap({"n", "x", "o"}, "S", function() require("flash").treesitter() end, opts("Flash Treesitter"))
 

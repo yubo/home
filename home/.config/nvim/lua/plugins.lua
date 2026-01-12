@@ -63,7 +63,7 @@ return packer.startup(function(use)
     use {"nvim-telescope/telescope.nvim", requires = {"nvim-lua/plenary.nvim", "nvim-telescope/telescope-ui-select.nvim"}}
     use { "nvim-telescope/telescope-fzf-native.nvim", run = "make" }
     use { "nvim-tree/nvim-tree.lua", requires = {"nvim-tree/nvim-web-devicons"} }
-    use { "ahmedkhalf/project.nvim", requires = {"nvim-telescope/telescope.nvim"} }
+    -- use { "ahmedkhalf/project.nvim", tag = 'v1.0.0' requires = {"nvim-telescope/telescope.nvim"} }
 
     -- Cmp 
     use "hrsh7th/nvim-cmp"          -- The completion plugin
