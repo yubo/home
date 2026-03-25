@@ -1,26 +1,9 @@
-local lspconfig_ensure_installed = {
-    "gopls",
-    "pyright",
-    "lua_ls",
-    "bashls",
-    -- "rust_analyzer",
-    -- "clangd",
-    -- "pylsp",
-    -- "tsserver",
-    -- "jsonls",
-    -- "cssls",
-    -- "html",
-    -- "bashls",
-    -- "yamlls",
-}
-
-
 -- kevinhwang91/nvim-bqf - bqf {{{
 -- The goal of nvim-bqf is to make Neovim's quickfix window better.
 local bqf_ok, bqf = pcall(require, "bqf")
 if bqf_ok then
     bqf.setup({
-        --auto_enable = true,
+        auto_enable = true,
         --auto_resize_height = true, -- highly recommended
         --preview = {
         --    win_height = 12,
@@ -43,21 +26,25 @@ end
 -- nvim-neotest/neotest - neotest {{{
 local neotest_ok, neotest = pcall(require, "neotest")
 if neotest_ok then
+    local adapters = {}
+    local neotest_go_ok, neotest_go = pcall(require, "neotest-go")
+    if neotest_go_ok then
+        adapters = {
+            neotest_go({
+                experimental = { test_table = true },
+                args = { "-count=1", "-timeout=60s" },
+            }),
+        }
+    end
+
     neotest.setup({
         overseer = {
             enabled = true,
             -- When this is true (the default), it will replace all neotest.run.* commands
             force_default = false,
         },
-        adapters = {
-            require("neotest-go")({
-                -- You can provide optional configuration here, like:
-                experimental = {
-                    test_table = true,
-                },
-                args = { "-count=1", "-timeout=60s" },
-            }),
-        },
+        --adapters = adapters,
+        adapters = adapters,
         output = {
             open_on_run = "short",
             -- max_height = 15,
@@ -166,7 +153,7 @@ end
 local telescope_ok, telescope = pcall(require, "telescope")
 if telescope_ok then
     local actions = require "telescope.actions"
-    telescope.setup ({
+    telescope.setup({
         defaults = {
             prompt_prefix = " ",
             selection_caret = " ",
@@ -334,7 +321,14 @@ if project_nvim_ok then
 
 
         ---@usage patterns used to detect root dir, when **"pattern"** is in detection_methods
-        patterns = { ".git", "package.json", "Makefile" },
+        patterns = {
+            ".git",
+            "go.mod",
+            "package.json",
+            "Makefile",
+            "Cargo.toml",
+            "pyproject.toml",
+        },
 
         ---@ Show hidden files in telescope when searching for files in a project
         show_hidden = false,
@@ -349,7 +343,18 @@ if project_nvim_ok then
         ---@usage list of lsp client names to ignore when using **lsp** detection. eg: { "efm", ... }
         ignore_lsp = { "null-ls" },
 
-        exclude_dirs = { "~/.cargo/*" },
+        exclude_dirs = {
+            "**/.cargo/**",
+            "**/staging/**",
+            "**/node_modules/**", -- Node.js 依赖
+            "**/.cache/**",       -- 缓存目录
+            "**/build/**",        -- 构建目录
+            "**/dist/**",         -- 分发目录
+            "**/tmp/**",          -- 临时目录
+            "**/vendor/**",       -- Go vendor 目录
+            "**/target/**",       -- Rust 构建目录
+            "**/__pycache__/**",  -- Python 缓存
+        },
 
         ---@type string
         ---@usage path to store the project history for use in telescope
@@ -357,7 +362,7 @@ if project_nvim_ok then
     })
 
     if telescope_ok then
-        telescope.load_extension("projects")
+        pcall(telescope.load_extension, "projects")
     end
 
 end
@@ -414,7 +419,7 @@ end
 
 -- }}}
 
--- ui
+-- {{{ ui
 
 -- nvim-tree/nvim-tree.lua - nvim-tree {{{
 local nvim_tree_ok, nvim_tree = pcall(require, "nvim-tree")
@@ -769,6 +774,92 @@ end
 
 
 -- }}}
+-- }}}
+
+-- cmp, lsp
+-- {{{ init lspconfig_ensure_installed
+local function has_any_file(markers)
+    local cwd = vim.fn.getcwd()
+    if vim.fs and vim.fs.find then
+        local found = vim.fs.find(markers, {
+            upward = true,
+            path = cwd,
+            stop = vim.loop.os_homedir(),
+        })
+        return #found > 0
+    end
+
+    for _, marker in ipairs(markers) do
+        local matches = vim.fn.globpath(cwd, marker, true, true)
+        if matches and #matches > 0 then
+            return true
+        end
+    end
+    return false
+end
+
+local function build_lsp_ensure_installed()
+    local list = {}
+    local seen = {}
+
+    local function add(items)
+        for _, item in ipairs(items) do
+            if not seen[item] then
+                table.insert(list, item)
+                seen[item] = true
+            end
+        end
+    end
+
+    -- 基础 LSP（始终启用）
+    add({ "lua_ls" })
+
+    -- 根据项目标记自动启用
+    local rules = {
+        { markers = { "go.mod", "go.work" }, servers = { "gopls" } },
+        { markers = { "pyproject.toml", "setup.py", "setup.cfg", "requirements.txt", "Pipfile", "pyrightconfig.json" }, servers = { "pyright" } },
+        { markers = { "package.json", "tsconfig.json", "jsconfig.json" }, servers = { "tsserver", "jsonls" } },
+        { markers = { "Cargo.toml", "rust-project.json" }, servers = { "rust_analyzer" } },
+        { markers = { "compile_commands.json", "compile_flags.txt" }, servers = { "clangd" } },
+        { markers = { ".bashrc", ".bash_profile", ".zshrc" }, servers = { "bashls" } },
+    }
+
+    for _, rule in ipairs(rules) do
+        if has_any_file(rule.markers) then
+            add(rule.servers)
+        end
+    end
+
+    return list
+end
+
+local lspconfig_ensure_installed = build_lsp_ensure_installed()
+
+-- 可选 LSP（按语言分组，已支持按项目标记自动启用）
+-- Go:
+--   "gopls",
+-- Lua:
+--   "lua_ls",
+-- Python:
+--   "pyright",
+-- Rust:
+--   "rust_analyzer",
+-- C/C++:
+--   "clangd",
+-- JavaScript/TypeScript:
+--   "tsserver",
+-- Web:
+--   "html",
+--   "cssls",
+-- JSON:
+--   "jsonls",
+-- YAML:
+--   "yamlls",
+-- Shell:
+--   "bashls",
+-- 其他:
+--   "pylsp",
+-- }}}
 
 -- nvimdev/lspsaga.nvim - lspsaga {{{
 local lspsaga_ok, lspsaga = pcall(require, "lspsaga")
@@ -786,8 +877,6 @@ if lspsaga_ok then
 end
 -- }}}
 
-
--- cmp, lsp
 -- L3MON4D3/LuaSnip - luasnip {{{
 local luasnip_ok, luasnip = pcall(require, "luasnip")
 if luasnip_ok then
@@ -911,31 +1000,36 @@ if img_clip_ok then
 end
 -- }}}
 
--- zbirenbaum/copilot.lua {{{
-local copilot_ok, copilot = pcall(require, "copilot")
-if copilot_ok then
-    copilot.setup({
-        -- use recommended settings from above
+-- yetone/avante.nvim - avante {{{
+local avante_ok, avante = pcall(require, "avante")
+if avante_ok then
+    --require("avante_lib").load()
+    avante.setup({
+        provider = "copilot",
+        -- show_hints = false,
+        -- providers = {
+        --     deepseek = {
+        --         __inherited_from = "openai",
+        --         api_key_name = "DEEPSEEK_API_KEY",
+        --         endpoint = "https://api.deepseek.com",
+        --         model = "deepseek-coder",
+        --     },
+        -- },
     })
 end
 -- }}}
 
--- yetone/avante.nvim - avante {{{
-local avante_ok, avante = pcall(require, "avante")
-if avante_ok then
-    require("avante_lib").load()
-    avante.setup({
-        provider = "copilot",
-        show_hints = false,
-        providers = {
-            deepseek = {
-                __inherited_from = "openai",
-                api_key_name = "DEEPSEEK_API_KEY",
-                endpoint = "https://api.deepseek.com",
-                model = "deepseek-coder",
-            },
-        },
-    })
+-- github.com/copilot.vim - copilot.vim {{{
+local copilot_ok, _ = pcall(require, "configs.copilot")
+if copilot_ok then
+    -- 禁用 LSP 模式
+    vim.g.copilot_disable_lsp = 2
+    -- 启用 Tab 补全
+    vim.g.copilot_no_tab_map = false
+    -- 文件类型
+    vim.g.copilot_filetypes = {
+        ["*"] = true,
+    }
 end
 -- }}}
 
@@ -997,7 +1091,8 @@ if lspconfig_ok then
             client.server_capabilities.documentFormattingProvider = false
         end
 
-        vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
+        -- vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
+        vim.bo[bufnr].omnifunc = "v:lua.vim.lsp.omnifunc"
         local status_ok, illuminate = pcall(require, "illuminate")
         if not status_ok then
             return
@@ -1013,7 +1108,6 @@ if lspconfig_ok then
             filetypes = {"javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx"},
             root_dir = lspconfig.util.root_pattern("package.json", "tsconfig.json", "jsconfig.json", ".git"),
         },
-        
         -- Lua (注意：sumneko_lua 已更名为 lua_ls)
         lua_ls = {
             cmd = {"lua-language-server"},
@@ -1028,14 +1122,12 @@ if lspconfig_ok then
                 }
             }
         },
-        
         -- 可以根据需要添加更多服务器配置
         pyright = {
             cmd = {"pyright-langserver", "--stdio"},
             filetypes = {"python"},
             root_dir = lspconfig.util.root_pattern("pyproject.toml", "setup.py", "setup.cfg", "requirements.txt", "Pipfile", "pyrightconfig.json", ".git"),
         },
-        
         clangd = {
             cmd = {"clangd"},
             filetypes = {"c", "cpp", "objc", "objcpp"},
@@ -1110,7 +1202,6 @@ if lspconfig_ok then
                             break
                         end
                     end
-                    
                     if not has_client then
                         vim.lsp.start(final_config)
                     end
@@ -1170,6 +1261,7 @@ if null_ls_ok then
 end
 
 -- }}}
+
 
 -- debug, test
 -- mfussenegger/nvim-dap -- dap {{{
@@ -1332,14 +1424,4 @@ if which_key_ok then
         { "<leader>t", group = "test" },
     })
 end
--- }}}
-
--- echasnovski/mini.nvim {{{
-local minimap_ok, minimap_key = pcall(require, "mini.map")
-if minimap_ok then
-    minimap_key.setup({
-        integrations = nil,
-    })
-end
-
 -- }}}

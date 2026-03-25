@@ -56,14 +56,14 @@ return packer.startup(function(use)
     use 'tpope/vim-fugitive'
     use 'zivyangll/git-blame.vim'
     use { 'lewis6991/gitsigns.nvim', config = function() require('gitsigns').setup() end }
-    use { 'sindrets/diffview.nvim', requires = 'nvim-lua/plenary.nvim' }
+    use { 'sindrets/diffview.nvim'}
 
     -- ui
     use "rebelot/kanagawa.nvim" -- colorscheme
-    use {"nvim-telescope/telescope.nvim", requires = {"nvim-lua/plenary.nvim", "nvim-telescope/telescope-ui-select.nvim"}}
+    use {"nvim-telescope/telescope.nvim", requires = {"nvim-telescope/telescope-ui-select.nvim"}}
     use { "nvim-telescope/telescope-fzf-native.nvim", run = "make" }
     use { "nvim-tree/nvim-tree.lua", requires = {"nvim-tree/nvim-web-devicons"} }
-    -- use { "ahmedkhalf/project.nvim", tag = 'v1.0.0' requires = {"nvim-telescope/telescope.nvim"} }
+    use { "ahmedkhalf/project.nvim" }
 
     -- Cmp 
     use "hrsh7th/nvim-cmp"          -- The completion plugin
@@ -89,30 +89,26 @@ return packer.startup(function(use)
     -- }}}
 
     -- {{{ debug, test
-    use "mfussenegger/nvim-dap"
-    use "rcarriga/nvim-dap-ui"
-    use "leoluz/nvim-dap-go" -- golang
-    use "nvim-neotest/nvim-nio"
-    use "theHamsta/nvim-dap-virtual-text"
-    use "nvim-telescope/telescope-dap.nvim"
+    -- use "mfussenegger/nvim-dap"
+    -- use "rcarriga/nvim-dap-ui"
+    -- use "leoluz/nvim-dap-go" -- golang
+    -- use "nvim-neotest/nvim-nio"
+    -- use "theHamsta/nvim-dap-virtual-text"
+    -- use "nvim-telescope/telescope-dap.nvim"
 
-    use {
-        "nvim-neotest/neotest",
-        requires = {
-            "antoinemadec/FixCursorHold.nvim",
-            "nvim-treesitter/nvim-treesitter",
-            "nvim-neotest/nvim-nio",
-            "nvim-neotest/neotest-go", -- golang
-            "nvim-lua/plenary.nvim", -- lua
-        }
-    }
+    -- use {
+    --     "nvim-neotest/neotest",
+    --     requires = {
+    --         "antoinemadec/FixCursorHold.nvim",
+    --         "nvim-treesitter/nvim-treesitter",
+    --         "nvim-neotest/nvim-nio",
+    --         "nvim-neotest/neotest-go", -- golang
+    --     }
+    -- }
     -- }}}
 
     -- quickfix
     use { "kevinhwang91/nvim-bqf", ft = "qf" }
-
-    -- 任务管理
-    -- use { "stevearc/overseer.nvim", config = function() require("overseer").setup() end }
 
     -- find/search
     use { "folke/flash.nvim", event = "BufEnter" }
@@ -120,29 +116,21 @@ return packer.startup(function(use)
     use { "folke/which-key.nvim", event = "BufEnter" }
 
     -- github copilot
-    use "github/copilot.vim"
+    use { "github/copilot.vim" }
 
     -- avante, a Neovim plugin designed to emulate the behaviour of the Cursor AI IDE
     -- https://github.com/yetone/avante.nvim?tab=readme-ov-file#installation
-    use {
-        "yetone/avante.nvim",
-        branch = "main",
-        run = "make",
-        requires = {
-            -- Required plugins
-            "stevearc/dressing.nvim",
-            "nvim-lua/plenary.nvim",
-            "MunifTanjim/nui.nvim",
-            "MeanderingProgrammer/render-markdown.nvim",
-            -- Optional dependencies
-            "hrsh7th/nvim-cmp",
-            "nvim-tree/nvim-web-devicons",
-            "HakonHarnes/img-clip.nvim",
-            "zbirenbaum/copilot.lua",
-        },
-    }
+    --use {
+    --    "yetone/avante.nvim",
+    --    branch = "main",
+    --    run = "make",
+    --    requires = {
+    --        "MunifTanjim/nui.nvim",
+    --        "MeanderingProgrammer/render-markdown.nvim",
+    --    },
+    --}
 
-    use { "folke/todo-comments.nvim", requires = "nvim-lua/plenary.nvim" }
+    use { "folke/todo-comments.nvim" }
 
 
     -- Automatically set up your configuration after cloning packer.nvim
