@@ -6,9 +6,9 @@ vim.opt.conceallevel = 0                        -- so that `` is visible in mark
 vim.opt.fileencoding = "utf-8"                  -- the encoding written to a file
 vim.opt.hlsearch = true                         -- highlight all matches on previous search pattern
 vim.opt.ignorecase = true                       -- ignore case in search patterns
-vim.opt.mouse = ""                              -- allow the mouse to be used in neovim
+vim.opt.mouse = ""                              -- disable mouse support
 vim.opt.pumheight = 10                          -- pop up menu height
-vim.opt.showmode = true                         -- we don't need to see things like -- INSERT -- anymore
+vim.opt.showmode = true                         -- show current mode (e.g. -- INSERT --)
 vim.opt.showtabline = 2                         -- always show tabs
 vim.opt.smartcase = true                        -- smart case
 vim.opt.smartindent = true                      -- make indenting smarter again
@@ -44,7 +44,6 @@ vim.opt.shortmess:append "c"                           -- don't give |ins-comple
 vim.opt.iskeyword:append "-"                           -- hyphenated words recognized by searches
 vim.opt.formatoptions:remove({ "c", "r", "o" })        -- don't insert the current comment leader automatically for auto-wrapping comments using 'textwidth', hitting <Enter> in insert mode, or hitting 'o' or 'O' in normal mode.
 vim.opt.runtimepath:remove("/usr/share/vim/vimfiles")  -- separate vim plugins from neovim in case vim still in use
-vim.opt.termguicolors = true                    -- enable 24-bit RGB color in the TUI
 
 
 vim.cmd([[
