@@ -77,7 +77,7 @@ if kanagawa_ok then
 end
 -- }}}
 
--- folke/trouble.nvim - trouble {{{
+-- ui folke/trouble.nvim - trouble {{{
 local trouble_ok, trouble = pcall(require, "trouble")
 if trouble_ok then
     trouble.setup({
@@ -93,7 +93,7 @@ if trouble_ok then
 end
 -- }}}
 
--- folke/todo-comments.nvim - todo-comments {{{
+-- ui folke/todo-comments.nvim - todo-comments {{{
 local todo_comments_ok, todo_comments = pcall(require, "todo-comments")
 if todo_comments_ok then
     todo_comments.setup()
@@ -419,7 +419,7 @@ end
 
 -- }}}
 
--- {{{ ui
+-- ui {{{
 
 -- nvim-tree/nvim-tree.lua - nvim-tree {{{
 local nvim_tree_ok, nvim_tree = pcall(require, "nvim-tree")
@@ -771,110 +771,8 @@ if render_markdown_ok then
         file_types = { "markdown", "Avante" },
     })
 end
-
-
--- }}}
 -- }}}
 
--- cmp, lsp
--- {{{ init lspconfig_ensure_installed
-local function has_any_file(markers)
-    local cwd = vim.fn.getcwd()
-    if vim.fs and vim.fs.find then
-        local found = vim.fs.find(markers, {
-            upward = true,
-            path = cwd,
-            stop = vim.loop.os_homedir(),
-        })
-        return #found > 0
-    end
-
-    for _, marker in ipairs(markers) do
-        local matches = vim.fn.globpath(cwd, marker, true, true)
-        if matches and #matches > 0 then
-            return true
-        end
-    end
-    return false
-end
-
-local function build_lsp_ensure_installed()
-    local list = {}
-    local seen = {}
-
-    local function add(items)
-        for _, item in ipairs(items) do
-            if not seen[item] then
-                table.insert(list, item)
-                seen[item] = true
-            end
-        end
-    end
-
-    -- 基础 LSP（始终启用）
-    add({ "lua_ls" })
-
-    -- 根据项目标记自动启用
-    local rules = {
-        { markers = { "go.mod", "go.work" }, servers = { "gopls" } },
-        { markers = { "pyproject.toml", "setup.py", "setup.cfg", "requirements.txt", "Pipfile", "pyrightconfig.json" }, servers = { "pyright" } },
-        { markers = { "package.json", "tsconfig.json", "jsconfig.json" }, servers = { "tsserver", "jsonls" } },
-        { markers = { "Cargo.toml", "rust-project.json" }, servers = { "rust_analyzer" } },
-        { markers = { "compile_commands.json", "compile_flags.txt" }, servers = { "clangd" } },
-        { markers = { ".bashrc", ".bash_profile", ".zshrc" }, servers = { "bashls" } },
-    }
-
-    for _, rule in ipairs(rules) do
-        if has_any_file(rule.markers) then
-            add(rule.servers)
-        end
-    end
-
-    return list
-end
-
-local lspconfig_ensure_installed = build_lsp_ensure_installed()
-
--- 可选 LSP（按语言分组，已支持按项目标记自动启用）
--- Go:
---   "gopls",
--- Lua:
---   "lua_ls",
--- Python:
---   "pyright",
--- Rust:
---   "rust_analyzer",
--- C/C++:
---   "clangd",
--- JavaScript/TypeScript:
---   "tsserver",
--- Web:
---   "html",
---   "cssls",
--- JSON:
---   "jsonls",
--- YAML:
---   "yamlls",
--- Shell:
---   "bashls",
--- 其他:
---   "pylsp",
--- }}}
-
--- nvimdev/lspsaga.nvim - lspsaga {{{
-local lspsaga_ok, lspsaga = pcall(require, "lspsaga")
-if lspsaga_ok then
-    lspsaga.setup({
-        lightbulb = {
-            enable = false,
-        },
-        -- symbol_in_winbar = {
-        --     enable = true,
-        --     separator = "  ",
-        --     hide_keyword = false,
-        -- },
-    })
-end
 -- }}}
 
 -- L3MON4D3/LuaSnip - luasnip {{{
@@ -888,98 +786,6 @@ if luasnip_ok then
     -- end
 end
 
--- }}}
-
--- hrsh7th/nvim-cmp - cmp {{{
-local cmp_ok, cmp = pcall(require, "cmp")
-if cmp_ok then
-    -- find more here: https://www.nerdfonts.com/cheat-sheet
-    local kind_icons = {
-        Text = "󰉿",
-        Method = "󰆧",
-        Function = "󰊕",
-        Constructor = "",
-        Field = "󰜢",
-        Variable = "󰀫",
-        Class = "󰠱",
-        Interface = "",
-        Module = "",
-        Property = "󰜢",
-        Unit = "󰑭",
-        Value = "󰎠",
-        Enum = "",
-        Keyword = "󰌋",
-        Snippet = "",
-        Color = "󰏘",
-        File = "󰈙",
-        Reference = "󰈇",
-        Folder = "󰉋",
-        EnumMember = "",
-        Constant = "󰏿",
-        Struct = "󰙅",
-        Event = "",
-        Operator = "󰆕",
-        TypeParameter = "",
-    }
-
-    cmp.setup({
-        snippet = {
-            expand = function(args)
-                if not luasnip_ok then
-                    return
-                end
-                luasnip.lsp_expand(args.body) -- For `luasnip` users.
-            end,
-        },
-        mapping = {
-            ["<c-p>"] = cmp.mapping.select_prev_item(),
-            ["<c-n>"] = cmp.mapping.select_next_item(),
-            ["<c-b>"] = cmp.mapping.scroll_docs(-4),
-            ["<c-f>"] = cmp.mapping.scroll_docs(4),
-            ["<c-l>"] = cmp.mapping.complete(),
-            ["<c-y>"] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
-            ["<c-e>"] = cmp.mapping.abort(),
-            -- Set `select` to `false` to only confirm explicitly selected items.
-            -- Accept currently selected item. If none selected, `select` first item.
-            ["<CR>"] = cmp.mapping.confirm ({ select = true }),
-        },
-        formatting = {
-            fields = { "kind", "abbr", "menu" },
-            format = function(entry, vim_item)
-                -- Kind icons
-                vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
-                -- vim_item.kind = string.format("%s %s", kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
-                vim_item.menu = ({
-                    nvim_lsp = "[LSP]",
-                    luasnip = "[Snippet]",
-                    buffer = "[Buffer]",
-                    path = "[Path]",
-                })[entry.source.name]
-                return vim_item
-            end,
-        },
-        sources = {
-            { name = "nvim_lsp" },
-            { name = "luasnip" },
-            { name = "buffer" },
-            { name = "path" },
-        },
-        confirm_opts = {
-            behavior = cmp.ConfirmBehavior.Replace,
-            select = false,
-        },
-        window = {
-            documentation = {
-                border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
-            },
-        },
-        experimental = {
-            ghost_text = false,
-            native_menu = false,
-        },
-    })
-
-end
 -- }}}
 
 -- HakonHarnes/img-clip.nvim - img_clip {{{
@@ -1034,234 +840,25 @@ end
 -- }}}
 
 --  mason-org/mason.nvim -- mason {{{
-local mason_ok, mason = pcall(require, "mason")
-if mason_ok then
-    mason.setup({
-        ui = {
-            border = "none",
-            icons = {
-                package_installed = "✓",
-                package_pending = "➜",
-                package_uninstalled = "✗"
-                -- package_installed = "◍",
-                -- package_pending = "◍",
-                -- package_uninstalled = "◍",
-            },
-            log_level = vim.log.levels.INFO,
-            max_concurrent_installers = 4,
-        },
-    })
-end
+-- local mason_ok, mason = pcall(require, "mason")
+-- if mason_ok then
+--     mason.setup({
+--         ui = {
+--             border = "none",
+--             icons = {
+--                 package_installed = "✓",
+--                 package_pending = "➜",
+--                 package_uninstalled = "✗"
+--                 -- package_installed = "◍",
+--                 -- package_pending = "◍",
+--                 -- package_uninstalled = "◍",
+--             },
+--             log_level = vim.log.levels.INFO,
+--             max_concurrent_installers = 4,
+--         },
+--     })
+-- end
 -- }}}
-
--- mason-org/mason-lspconfig.nvim -- mason-lspconfig {{{
-local mason_lspconfig_ok, mason_lspconfig = pcall(require, "mason-lspconfig")
-if mason_lspconfig_ok then
-    mason_lspconfig.setup({
-        ensure_installed = lspconfig_ensure_installed,
-        automatic_installation = true,
-    })
-end
--- }}}
-
--- hrsh7th/cmp-nvim-lsp -- cmp-nvim-lsp {{{
-local cmp_nvim_lsp_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
-if cmp_nvim_lsp_ok then
-    cmp_nvim_lsp.setup({
-        capabilities = cmp_nvim_lsp.default_capabilities(),
-    })
-end
--- }}}
-
--- neovim/nvim-lspconfig -- lspconfig {{{
-local lspconfig_ok, lspconfig = pcall(require, "lspconfig")
-if lspconfig_ok then
-    local capabilities = vim.lsp.protocol.make_client_capabilities()
-    capabilities.textDocument.completion.completionItem.snippetSupport = true
-    if cmp_nvim_lsp_ok then
-        capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
-    end
-
-    local on_attach = function(client, bufnr)
-        if client.name == "tsserver" then
-            client.server_capabilities.documentFormattingProvider = false
-        end
-
-        if client.name == "sumneko_lua" then
-            client.server_capabilities.documentFormattingProvider = false
-        end
-
-        -- vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
-        vim.bo[bufnr].omnifunc = "v:lua.vim.lsp.omnifunc"
-        local status_ok, illuminate = pcall(require, "illuminate")
-        if not status_ok then
-            return
-        end
-        illuminate.on_attach(client)
-    end
-
-      -- 服务器配置映射表
-    local server_configs = {
-        -- TypeScript/JavaScript
-        tsserver = {
-            cmd = {"typescript-language-server", "--stdio"},
-            filetypes = {"javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx"},
-            root_dir = lspconfig.util.root_pattern("package.json", "tsconfig.json", "jsconfig.json", ".git"),
-        },
-        -- Lua (注意：sumneko_lua 已更名为 lua_ls)
-        lua_ls = {
-            cmd = {"lua-language-server"},
-            filetypes = {"lua"},
-            root_dir = lspconfig.util.root_pattern(".luarc.json", ".luarc.jsonc", ".luacheckrc", ".stylua.toml", "stylua.toml", "selene.toml", "selene.yml", ".git"),
-            settings = {
-                Lua = {
-                    runtime = {version = 'LuaJIT'},
-                    diagnostics = {globals = {'vim'}},
-                    workspace = {library = vim.api.nvim_get_runtime_file("", true)},
-                    telemetry = {enable = false}
-                }
-            }
-        },
-        -- 可以根据需要添加更多服务器配置
-        pyright = {
-            cmd = {"pyright-langserver", "--stdio"},
-            filetypes = {"python"},
-            root_dir = lspconfig.util.root_pattern("pyproject.toml", "setup.py", "setup.cfg", "requirements.txt", "Pipfile", "pyrightconfig.json", ".git"),
-        },
-        clangd = {
-            cmd = {"clangd"},
-            filetypes = {"c", "cpp", "objc", "objcpp"},
-            root_dir = lspconfig.util.root_pattern("compile_commands.json", "compile_flags.txt", ".git"),
-            single_file_support = true,
-        },
-
-        rust_analyzer = {
-            cmd = {"rust-analyzer"},
-            filetypes = {"rust"},
-            root_dir = lspconfig.util.root_pattern("Cargo.toml", "rust-project.json", ".git"),
-            settings = {
-                ["rust-analyzer"] = {
-                    cargo = {
-                        allFeatures = true,
-                    },
-                    checkOnSave = {
-                        command = "clippy",
-                    },
-                },
-            },
-        },
-
-        gopls = {
-            cmd = {"gopls"},
-            filetypes = {"go", "gomod", "gowork", "gotmpl"},
-            root_dir = lspconfig.util.root_pattern("go.work", "go.mod", ".git"),
-            settings = {
-                gopls = {
-                    analyses = {
-                        unusedparams = true,
-                    },
-                    staticcheck = true,
-                },
-            },
-        },
-
-        bashls = {
-            cmd = { "bash-language-server", "start" },
-            filetypes = { "sh", "bash" },
-            root_dir = require('lspconfig.util').root_pattern(".git"),
-        },
-
-        -- 添加更多服务器配置...
-    }
-
-        -- 启动所有配置的服务器（使用自动命令按需启动）
-    for _, server in pairs(lspconfig_ensure_installed) do
-        server = vim.split(server, "@")[1]
-
-        local base_config = {
-            on_attach = on_attach,
-            capabilities = capabilities,
-        }
-
-        -- 如果有预定义的服务器配置，合并它们
-        local server_config = server_configs[server] or {}
-        local final_config = vim.tbl_deep_extend("force", base_config, server_config)
-
-        -- 为每个服务器创建文件类型自动命令
-        local filetypes = final_config.filetypes or {}
-        if #filetypes > 0 then
-            vim.api.nvim_create_autocmd("FileType", {
-                pattern = filetypes,
-                callback = function(args)
-                    -- 检查是否已经有客户端附加到这个缓冲区
-                    local clients = vim.lsp.get_clients({ bufnr = args.buf })
-                    local has_client = false
-                    for _, client in ipairs(clients) do
-                        if client.name == server then
-                            has_client = true
-                            break
-                        end
-                    end
-                    if not has_client then
-                        vim.lsp.start(final_config)
-                    end
-                end
-            })
-        else
-            -- 如果没有指定文件类型，直接启动
-            vim.lsp.start(final_config)
-        end
-    end
-
-    local config = {
-        virtual_text = false, -- disable virtual text
-        signs = {
-            text = {
-                [vim.diagnostic.severity.ERROR] = "",
-                [vim.diagnostic.severity.WARN] = "",
-                [vim.diagnostic.severity.INFO] = "",
-                [vim.diagnostic.severity.HINT] = "",
-            }
-        },
-        update_in_insert = true,
-        underline = true,
-        severity_sort = true,
-        float = {
-            focusable = true,
-            style = "minimal",
-            border = "rounded",
-            source = "always",
-            header = "",
-            prefix = "",
-        },
-    }
-
-    vim.diagnostic.config(config)
-end
--- }}}
-
--- jose-elias-alvarez/null-ls.nvim -- null-ls {{{
-local null_ls_ok, null_ls = pcall(require, "null-ls")
-if null_ls_ok then
-
-    -- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/formatting
-    local formatting = null_ls.builtins.formatting
-    -- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/diagnostics
-    -- local diagnostics = null_ls.builtins.diagnostics
-
-    null_ls.setup({
-        debug = false,
-        sources = {
-            formatting.prettier.with({ extra_args = { "--no-semi", "--single-quote", "--jsx-single-quote" } }),
-            formatting.black.with({ extra_args = { "--fast" } }),
-            formatting.stylua,
-            -- diagnostics.flake8
-        },
-    })
-end
-
--- }}}
-
 
 -- debug, test
 -- mfussenegger/nvim-dap -- dap {{{

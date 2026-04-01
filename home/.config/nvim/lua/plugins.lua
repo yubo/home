@@ -60,10 +60,10 @@ return packer.startup(function(use)
 
     -- ui
     use "rebelot/kanagawa.nvim" -- colorscheme
-    use {"nvim-telescope/telescope.nvim", requires = {"nvim-telescope/telescope-ui-select.nvim"}}
+    use { "nvim-telescope/telescope.nvim", requires = {"nvim-telescope/telescope-ui-select.nvim"}}
     use { "nvim-telescope/telescope-fzf-native.nvim", run = "make" }
     use { "nvim-tree/nvim-tree.lua", requires = {"nvim-tree/nvim-web-devicons"} }
-    use { "ahmedkhalf/project.nvim" }
+    use "ahmedkhalf/project.nvim"
 
     -- Cmp 
     use "hrsh7th/nvim-cmp"          -- The completion plugin
@@ -72,20 +72,20 @@ return packer.startup(function(use)
     use "hrsh7th/cmp-cmdline"       -- cmdline completions
     use "saadparwaiz1/cmp_luasnip"  -- snippet completions
     use "L3MON4D3/LuaSnip"          -- snippet engine
-    use "hrsh7th/cmp-nvim-lsp"
     use "hrsh7th/cmp-nvim-lua"
 
     -- {{{ LSP
-    use "neovim/nvim-lspconfig" -- enable LSP
     use "mason-org/mason.nvim" -- simple to use language server installer
     use "mason-org/mason-lspconfig.nvim"
-    ---use "jose-elias-alvarez/null-ls.nvim" -- for formatters and linters
+    use "neovim/nvim-lspconfig" -- enable LSP
+    use "hrsh7th/cmp-nvim-lsp"
+    -- use "nvimtools/none-ls.nvim"
     use "RRethy/vim-illuminate"
-    use "fatih/vim-go"
+    use "nvimdev/lspsaga.nvim"
 
     -- lsp ui 增强 
-    use "nvimdev/lspsaga.nvim"
     use { "folke/trouble.nvim", requires = "kyazdani42/nvim-web-devicons" }
+    use "fatih/vim-go"
     -- }}}
 
     -- {{{ debug, test
@@ -118,17 +118,6 @@ return packer.startup(function(use)
     -- github copilot
     use { "github/copilot.vim" }
 
-    -- avante, a Neovim plugin designed to emulate the behaviour of the Cursor AI IDE
-    -- https://github.com/yetone/avante.nvim?tab=readme-ov-file#installation
-    --use {
-    --    "yetone/avante.nvim",
-    --    branch = "main",
-    --    run = "make",
-    --    requires = {
-    --        "MunifTanjim/nui.nvim",
-    --        "MeanderingProgrammer/render-markdown.nvim",
-    --    },
-    --}
 
     use { "folke/todo-comments.nvim" }
 
