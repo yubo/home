@@ -29,8 +29,10 @@
 	sbp = submodule foreach git pull
 	sbc = submodule foreach git co master
 	# ignore change
-	ignore = update-index --assume-unchanged
-	noignore = update-index --no-assume-unchanged
+	ignore = update-index --skip-worktree
+	noignore = update-index --no-skip-worktree
+	ls = ls-files -v
+
 [push]
 	default = tracking
 [color]
