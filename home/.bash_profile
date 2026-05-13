@@ -8,7 +8,7 @@ export LC_ALL='en_US.UTF-8'
 export PS1='[\u@\h:\w]\$'
 
 add_path() {
-	for v in $*; do
+	for v in "$@"; do
 		if [[ -e $v && ! ":${PATH}:" =~ ":${v}:" ]]; then
 			export PATH=$v:$PATH
 		fi
@@ -16,7 +16,7 @@ add_path() {
 }
 
 add_classpath() {
-	for v in $*; do
+	for v in "$@"; do
 		if [[ -e $v  && ! ":${CLASSPATH}:" =~ ":${v}:" ]]; then
 			export CLASSPATH=$v:$CLASSPATH
 		fi
@@ -24,7 +24,7 @@ add_classpath() {
 }
 
 _source() {
-	for v in $*; do
+	for v in "$@"; do
 		if [ -e $v ]; then
 			source $v
 		fi
@@ -32,7 +32,7 @@ _source() {
 }
 
 _source_once() {
-	for v in $*; do
+	for v in "$@"; do
 		if [ -e $v  ]; then
 			source $v
 			break
@@ -107,7 +107,7 @@ command -v nvim >/dev/null 2>&1 && {
 	alias vi='nvim'
 }
 
-if [ "x"$TERM == "xxterm" ]; then
+if [[ "$TERM" == "xterm" ]]; then
 	alias sshx='ssh -X'
 fi
 
@@ -128,13 +128,11 @@ fi
 if [ -e $HOME/go ]; then
 	export GOROOT=$HOME/go
 	export GOPATH=$HOME/gopath
-	add_path $GOROOT/bin
-	add_path $GOPATH/bin
 fi
 
 # kubectl
 command -v kubectl >/dev/null 2>&1 && {
-	export KUBE_EDITOR="vim"
+	export KUBE_EDITOR="nvim"
 	source <(kubectl completion bash)
 	alias k='kubectl'
 	complete -F __start_kubectl k
