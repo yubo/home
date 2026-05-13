@@ -129,11 +129,11 @@ local on_attach = function(client, bufnr)
     end
 
     -- 原生 LSP 补全（Neovim 0.11+），自动触发
-    if client.supports_method("textDocument/completion") then
+    if client:supports_method("textDocument/completion") then
         vim.lsp.completion.enable(true, client.id, bufnr, { autotrigger = true })
     end
 
-    if client.supports_method("textDocument/documentHighlight") then
+    if client:supports_method("textDocument/documentHighlight") then
         vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
             buffer = bufnr,
             callback = vim.lsp.buf.document_highlight,
