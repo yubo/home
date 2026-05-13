@@ -23,7 +23,6 @@ vim.g.maplocalleader = ","                      -- set local leader to space
 
 -- Custome --
 function _G.ReloadConfig()
-    require("plenary.reload").reload_module("user")
     dofile(vim.env.MYVIMRC)
 end
 
@@ -46,6 +45,8 @@ keymap("i", "<c-f>", "<right>", opts("right"))
 keymap("i", "<c-j>", "<down>", opts("down"))
 keymap("i", "<c-k>", "<up>", opts("up"))
 keymap("i", "<c-d>", "<del>", opts("delete"))
+keymap("i", "<c-l>", "<c-x><c-o>", opts("complete"))
+keymap("i", "<c-f>", "<c-x><c-f>", opts("file path complete"))
 keymap("c", "<c-a>", "<home>", opts("beginning of line"))
 keymap("c", "<c-e>", "<end>", opts("end of line"))
 keymap("c", "<c-b>", "<left>", opts("left"))

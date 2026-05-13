@@ -1,130 +1,97 @@
--- Automatically install packer
-local install_path = vim.fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
-if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
-    PACKER_BOOTSTRAP = vim.fn.system({
-        "git",
-        "clone",
-        "--depth",
-        "1",
-        "https://github.com/wbthomason/packer.nvim",
-        install_path,
-    })
-    print("Installing packer close and reopen Neovim...")
-    vim.cmd([[packadd packer.nvim]])
-end
-
--- Autocommand that reloads neovim whenever you save the plugins.lua file
-vim.cmd([[
-  augroup packer_user_config
-  autocmd!
-  autocmd BufWritePost plugins.lua source <afile> | PackerSync
-  augroup end
-]])
-
--- Use a protected call so we don"t error out on first use
-local status_ok, packer = pcall(require, "packer")
-if not status_ok then
-    return
-end
-
--- Have packer use a popup window
-packer.init({
-    display = {
-        open_fn = function()
-            return require("packer.util").float({ border = "rounded" })
+return {
+    "nvim-lua/plenary.nvim",
+    "windwp/nvim-autopairs",
+    "numToStr/Comment.nvim",
+    "akinsho/bufferline.nvim",
+    "nvim-lualine/lualine.nvim",
+    "yubo/vim-log-highlighting",
+    "goolord/alpha-nvim",
+    "farmergreg/vim-lastplace",
+    "majutsushi/tagbar",
+    {
+        "romus204/tree-sitter-manager.nvim",
+        config = function()
+            require("tree-sitter-manager").setup({
+                ensure_installed = {
+                    "go", "lua", "python", "bash", "c", "javascript", "json",
+                    "typescript", "tsx", "rust", "yaml", "markdown", "markdown_inline",
+                },
+            })
         end,
     },
-})
-
--- Install your plugins here
-return packer.startup(function(use)
-    use "wbthomason/packer.nvim" -- Have packer manage itself
-    use "nvim-lua/plenary.nvim"  -- Useful lua functions used by lots of plugins
-    use "windwp/nvim-autopairs"  -- Autopairs, integrates with both cmp and treesitter
-    use "numToStr/Comment.nvim"
-    use "akinsho/bufferline.nvim"
-    use "moll/vim-bbye"
-    use "nvim-lualine/lualine.nvim"
-    use "lewis6991/impatient.nvim"
-    use "yubo/vim-log-highlighting"
-    use "goolord/alpha-nvim"
-    use "farmergreg/vim-lastplace"
-    use "majutsushi/tagbar"
-    use "nvim-treesitter/nvim-treesitter" -- Treesitter
 
     -- git
-    use 'tpope/vim-fugitive'
-    use 'zivyangll/git-blame.vim'
-    use { 'lewis6991/gitsigns.nvim', config = function() require('gitsigns').setup() end }
-    use { 'sindrets/diffview.nvim'}
+    "tpope/vim-fugitive",
+    "zivyangll/git-blame.vim",
+    { "lewis6991/gitsigns.nvim", config = function() require("gitsigns").setup() end },
+    "sindrets/diffview.nvim",
 
     -- ui
-    use "rebelot/kanagawa.nvim" -- colorscheme
-    use { "nvim-telescope/telescope.nvim", requires = {"nvim-telescope/telescope-ui-select.nvim"}}
-    use { "nvim-telescope/telescope-fzf-native.nvim", run = "make" }
-    use { "nvim-tree/nvim-tree.lua", requires = {"nvim-tree/nvim-web-devicons"} }
-    use "ahmedkhalf/project.nvim"
+    "rebelot/kanagawa.nvim",
+    { "nvim-telescope/telescope.nvim", dependencies = { "nvim-telescope/telescope-ui-select.nvim" } },
+    { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+    { "nvim-tree/nvim-tree.lua", dependencies = { "nvim-tree/nvim-web-devicons" } },
+    "ahmedkhalf/project.nvim",
 
-    -- Cmp 
-    use "hrsh7th/nvim-cmp"          -- The completion plugin
-    use "hrsh7th/cmp-buffer"        -- buffer completions
-    use "hrsh7th/cmp-path"          -- path completions
-    use "hrsh7th/cmp-cmdline"       -- cmdline completions
-    use "saadparwaiz1/cmp_luasnip"  -- snippet completions
-    use "L3MON4D3/LuaSnip"          -- snippet engine
-    use "hrsh7th/cmp-nvim-lua"
+    -- LSP
+    "mason-org/mason.nvim",
+    "mason-org/mason-lspconfig.nvim",
+    "neovim/nvim-lspconfig",
+    "RRethy/vim-illuminate",
+    { "folke/trouble.nvim", dependencies = "nvim-tree/nvim-web-devicons" },
+    {
+        "fatih/vim-go",
+        ft = { "go" },
+        init = function()
+            vim.g.go_fmt_autosave = 0          -- gopls handles formatting
+            vim.g.go_imports_autosave = 0       -- gopls handles imports
+            vim.g.go_def_mapping_enabled = 0    -- use LSP gd instead
+            vim.g.go_doc_keywordprg_enabled = 0 -- use LSP K instead
+            vim.g.go_code_completion_enabled = 0 -- use nvim-cmp instead
+        end,
+    },
 
-    -- {{{ LSP
-    use "mason-org/mason.nvim" -- simple to use language server installer
-    use "mason-org/mason-lspconfig.nvim"
-    use "neovim/nvim-lspconfig" -- enable LSP
-    use "hrsh7th/cmp-nvim-lsp"
-    -- use "nvimtools/none-ls.nvim"
-    use "RRethy/vim-illuminate"
-    use "nvimdev/lspsaga.nvim"
-
-    -- lsp ui 增强 
-    use { "folke/trouble.nvim", requires = "kyazdani42/nvim-web-devicons" }
-    use "fatih/vim-go"
-    -- }}}
-
-    -- {{{ debug, test
-    -- use "mfussenegger/nvim-dap"
-    -- use "rcarriga/nvim-dap-ui"
-    -- use "leoluz/nvim-dap-go" -- golang
-    -- use "nvim-neotest/nvim-nio"
-    -- use "theHamsta/nvim-dap-virtual-text"
-    -- use "nvim-telescope/telescope-dap.nvim"
-
-    -- use {
+    -- debug, test (uncomment to enable)
+    -- "mfussenegger/nvim-dap",
+    -- "rcarriga/nvim-dap-ui",
+    -- "leoluz/nvim-dap-go",
+    -- "nvim-neotest/nvim-nio",
+    -- "theHamsta/nvim-dap-virtual-text",
+    -- "nvim-telescope/telescope-dap.nvim",
+    -- {
     --     "nvim-neotest/neotest",
-    --     requires = {
+    --     dependencies = {
     --         "antoinemadec/FixCursorHold.nvim",
     --         "nvim-treesitter/nvim-treesitter",
     --         "nvim-neotest/nvim-nio",
-    --         "nvim-neotest/neotest-go", -- golang
-    --     }
-    -- }
-    -- }}}
+    --         "nvim-neotest/neotest-go",
+    --     },
+    -- },
 
     -- quickfix
-    use { "kevinhwang91/nvim-bqf", ft = "qf" }
+    { "kevinhwang91/nvim-bqf", ft = "qf" },
 
     -- find/search
-    use { "folke/flash.nvim", event = "BufEnter" }
-
-    use { "folke/which-key.nvim", event = "BufEnter" }
+    { "folke/flash.nvim", event = "BufEnter" },
+    { "folke/which-key.nvim", event = "BufEnter" },
 
     -- github copilot
-    use { "github/copilot.vim" }
+    "github/copilot.vim",
 
+    "folke/todo-comments.nvim",
 
-    use { "folke/todo-comments.nvim" }
+    -- markdown
+    { "MeanderingProgrammer/render-markdown.nvim", ft = { "markdown", "Avante" } },
 
-
-    -- Automatically set up your configuration after cloning packer.nvim
-    -- Put this at the end after all plugins
-    if PACKER_BOOTSTRAP then
-        require("packer").sync()
-    end
-end)
+    -- ai
+    -- {
+    --     "yetone/avante.nvim",
+    --     build = "make",
+    --     dependencies = {
+    --         "nvim-lua/plenary.nvim",
+    --         "MunifTanjim/nui.nvim",
+    --         "HakonHarnes/img-clip.nvim",
+    --     },
+    -- },
+    "HakonHarnes/img-clip.nvim",
+}

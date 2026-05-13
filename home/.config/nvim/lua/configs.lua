@@ -118,33 +118,7 @@ end
 -- numToStr/Comment.nvim - comment {{{
 local comment_ok, comment = pcall(require, "Comment")
 if comment_ok then
-    comment.setup {
-        pre_hook = function(ctx)
-            local U = require "Comment.utils"
-
-            local status_utils_ok, utils = pcall(require, "ts_context_commentstring.utils")
-            if not status_utils_ok then
-                return
-            end
-
-            local location = nil
-            if ctx.ctype == U.ctype.block then
-                location = utils.get_cursor_location()
-            elseif ctx.cmotion == U.cmotion.v or ctx.cmotion == U.cmotion.V then
-                location = utils.get_visual_start_location()
-            end
-
-            local status_internals_ok, internals = pcall(require, "ts_context_commentstring.internals")
-            if not status_internals_ok then
-                return
-            end
-
-            return internals.calculate_commentstring {
-                key = ctx.ctype == U.ctype.line and "__default" or "__multiline",
-                location = location,
-            }
-        end,
-    }
+    comment.setup()
 end
 -- }}}
 
@@ -244,24 +218,6 @@ if telescope_ok then
 end
 -- }}}
 
--- nvim-treesitter/nvim-treesitter - nvim_treesitter_configs {{{
-local treesitter_configs_ok, treesitter_configs = pcall(require, "nvim-treesitter.configs")
-if treesitter_configs_ok then
-    treesitter_configs.setup({
-        ensure_installed = { "bash", "c", "javascript", "json", "lua", "python", "typescript", "tsx", "css", "rust", "yaml", "markdown", "markdown_inline", "go" }, -- one of "all" or a list of languages
-        ignore_install = { "phpdoc" }, -- List of parsers to ignore installing
-        highlight = {
-            enable = true, -- false will disable the whole extension
-            disable = { "css" }, -- list of language that will be disabled
-        },
-        autopairs = {
-            enable = true,
-        },
-        indent = { enable = true, disable = { "python", "css" } },
-    })
-end
-
--- }}}
 
 -- windwp/nvim-autopairs - nvim-autopairs {{{
 local autopairs_ok, autopairs = pcall(require, "nvim-autopairs")
@@ -287,11 +243,6 @@ if autopairs_ok then
         },
     }
 
-    local cmp_autopairs = require "nvim-autopairs.completion.cmp"
-    local cmp_status_ok, cmp = pcall(require, "cmp")
-    if cmp_status_ok then
-        cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done { map_char = { tex = "" } })
-    end
 end
 
 -- }}}
@@ -341,7 +292,7 @@ if project_nvim_ok then
         scope_chdir = "win",
 
         ---@usage list of lsp client names to ignore when using **lsp** detection. eg: { "efm", ... }
-        ignore_lsp = { "null-ls" },
+        ignore_lsp = {},
 
         exclude_dirs = {
             "**/.cargo/**",
@@ -362,18 +313,13 @@ if project_nvim_ok then
     })
 
     if telescope_ok then
+        pcall(telescope.load_extension, "fzf")
         pcall(telescope.load_extension, "projects")
     end
 
 end
 -- }}}
 
--- lewis6991/impatient.nvim -- impatient {{{
-local impatient_ok, impatient = pcall(require, "impatient")
-if impatient_ok then
-    impatient.enable_profile()
-end
--- }}}
 
 -- goolord/alpha-nvim -- alpha {{{
 local alpha_ok, alpha = pcall(require, "alpha")
@@ -775,18 +721,6 @@ end
 
 -- }}}
 
--- L3MON4D3/LuaSnip - luasnip {{{
-local luasnip_ok, luasnip = pcall(require, "luasnip")
-if luasnip_ok then
-    require("luasnip/loaders/from_vscode").lazy_load()
-
-    -- local check_backspace = function()
-    --   local col = vim.fn.col "." - 1
-    --   return col == 0 or vim.fn.getline("."):sub(col, col):match "%s"
-    -- end
-end
-
--- }}}
 
 -- HakonHarnes/img-clip.nvim - img_clip {{{
 local img_clip_ok, img_clip = pcall(require, "img-clip")
@@ -806,37 +740,10 @@ if img_clip_ok then
 end
 -- }}}
 
--- yetone/avante.nvim - avante {{{
-local avante_ok, avante = pcall(require, "avante")
-if avante_ok then
-    --require("avante_lib").load()
-    avante.setup({
-        provider = "copilot",
-        -- show_hints = false,
-        -- providers = {
-        --     deepseek = {
-        --         __inherited_from = "openai",
-        --         api_key_name = "DEEPSEEK_API_KEY",
-        --         endpoint = "https://api.deepseek.com",
-        --         model = "deepseek-coder",
-        --     },
-        -- },
-    })
-end
--- }}}
 
 -- github.com/copilot.vim - copilot.vim {{{
-local copilot_ok, _ = pcall(require, "configs.copilot")
-if copilot_ok then
-    -- 禁用 LSP 模式
-    vim.g.copilot_disable_lsp = 2
-    -- 启用 Tab 补全
-    vim.g.copilot_no_tab_map = false
-    -- 文件类型
-    vim.g.copilot_filetypes = {
-        ["*"] = true,
-    }
-end
+vim.g.copilot_no_tab_map = false
+vim.g.copilot_filetypes = { ["*"] = true }
 -- }}}
 
 --  mason-org/mason.nvim -- mason {{{
@@ -1017,8 +924,8 @@ if which_key_ok then
         { "<leader>g", group = "git/goto" },
         { "<leader>c", group = "code/config" },
         { "<leader>d", group = "debug" },
-        { "<leader>a", group = "avante" },
         { "<leader>t", group = "test" },
     })
 end
 -- }}}
+

@@ -85,6 +85,7 @@ alias ffh='find . -name \*.h -type f| xargs grep -n --color'
 alias ffc='find . -name \*.c -o -name \*.cpp -type f| xargs grep -n --color'
 alias ffgo='find . -name \*.go -type f| xargs grep -n --color'
 alias grep='grep --color'
+alias grepc='grep --color=always'
 alias rm='rm -i'
 alias cp='cp -i'
 alias mv='mv -i'
@@ -94,6 +95,10 @@ alias shs='python3 -m http.server'
 alias dstat='dstat -cdlmnpsy'
 alias mm='make 2>&1 | more'
 alias ccd='cd $(pwd -P)'
+alias ls='ls -F --color '
+alias la='ls -Fa --color '
+alias ll='ls -Fl --color '
+alias mygit="git config user.name yubo; git config user.email yubo@yubo.org"
 
 command -v vim >/dev/null 2>&1 && {
 	alias vi='vim'
@@ -108,17 +113,12 @@ fi
 
 # mac os
 if [ `uname` == 'Darwin' ]; then
-	alias ls='ls -GF --color'
-	alias la='ls -GFa --color'
-	alias ll='ls -lGF --color'
 	export BASH_SILENCE_DEPRECATION_WARNING=1
+	export HOMEBREW_NO_ENV_HINTS=1
 	alias canary="/Applications/Google\ Chrome\ Canary.app/Contents/MacOS/Google\ Chrome\ Canary"
 	alias cgdb="canary --remote-debugging-port=9222 http://localhost:9222 http://chromium.org"
-else
-	alias ls='ls -F --color '
-	alias la='ls -Fa --color '
-	alias ll='ls -Fl --color '
 fi
+
 
 if [ -f $HOME/.rbenv/bin/rbenv ]; then
 	add_path $HOME/.rbenv/bin
@@ -183,7 +183,7 @@ color_my_prompt() {
 	#
 	local __prompt_tail="\[\033[35m\]$"
 	local __last_color="\[\033[00m\]"
-	export PS1="$__env_tail$__user_and_host $__cur_location $__git_branch_color$__git_branch$__env_color$__env_name$__prompt_tail$__last_color "
+	export PS1="$__user_and_host $__cur_location $__git_branch_color$__git_branch$__env_color$__env_name$__prompt_tail$__last_color "
 }
 color_my_prompt
 

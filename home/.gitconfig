@@ -1,6 +1,6 @@
 [user]
-	name = yubo
-	email = yubo@yubo.org
+	name = steveyubo
+	email = steveyubo@didiglobal.com
 [difftool]
         prompt = No
 [diff]
@@ -34,7 +34,7 @@
 	ls = ls-files -v
 
 [push]
-	default = tracking
+	default = upstream
 [color]
 	ui = auto
 [credential]
