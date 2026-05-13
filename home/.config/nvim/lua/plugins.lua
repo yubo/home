@@ -1,12 +1,10 @@
 return {
     "nvim-lua/plenary.nvim",
     "windwp/nvim-autopairs",
-    "numToStr/Comment.nvim",
     "akinsho/bufferline.nvim",
     "nvim-lualine/lualine.nvim",
     "yubo/vim-log-highlighting",
     "goolord/alpha-nvim",
-    "farmergreg/vim-lastplace",
     "majutsushi/tagbar",
     {
         "romus204/tree-sitter-manager.nvim",
@@ -37,19 +35,7 @@ return {
     "mason-org/mason.nvim",
     "mason-org/mason-lspconfig.nvim",
     "neovim/nvim-lspconfig",
-    "RRethy/vim-illuminate",
-    { "folke/trouble.nvim", dependencies = "nvim-tree/nvim-web-devicons" },
-    {
-        "fatih/vim-go",
-        ft = { "go" },
-        init = function()
-            vim.g.go_fmt_autosave = 0          -- gopls handles formatting
-            vim.g.go_imports_autosave = 0       -- gopls handles imports
-            vim.g.go_def_mapping_enabled = 0    -- use LSP gd instead
-            vim.g.go_doc_keywordprg_enabled = 0 -- use LSP K instead
-            vim.g.go_code_completion_enabled = 0 -- use nvim-cmp instead
-        end,
-    },
+{ "folke/trouble.nvim", dependencies = "nvim-tree/nvim-web-devicons" },
 
     -- debug, test (uncomment to enable)
     -- "mfussenegger/nvim-dap",

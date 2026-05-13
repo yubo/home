@@ -1,71 +1,7 @@
 -- kevinhwang91/nvim-bqf - bqf {{{
--- The goal of nvim-bqf is to make Neovim's quickfix window better.
 local bqf_ok, bqf = pcall(require, "bqf")
 if bqf_ok then
-    bqf.setup({
-        auto_enable = true,
-        --auto_resize_height = true, -- highly recommended
-        --preview = {
-        --    win_height = 12,
-        --    delay_syntax = 80,
-        --    win_vheight = 15,
-        --    auto_preview = false,
-        --    use_diagnostic_information = true,
-        --},
-        --func_map = {
-        --    drop = "o",
-        --    openc = "O",
-        --    split = "<c-s>",
-        --    tabdrop = "<c-t>",
-        --    stoggleup = "p",
-        --},
-    })
-end
--- }}}
-
--- nvim-neotest/neotest - neotest {{{
-local neotest_ok, neotest = pcall(require, "neotest")
-if neotest_ok then
-    local adapters = {}
-    local neotest_go_ok, neotest_go = pcall(require, "neotest-go")
-    if neotest_go_ok then
-        adapters = {
-            neotest_go({
-                experimental = { test_table = true },
-                args = { "-count=1", "-timeout=60s" },
-            }),
-        }
-    end
-
-    neotest.setup({
-        overseer = {
-            enabled = true,
-            -- When this is true (the default), it will replace all neotest.run.* commands
-            force_default = false,
-        },
-        --adapters = adapters,
-        adapters = adapters,
-        output = {
-            open_on_run = "short",
-            -- max_height = 15,
-            -- max_width = 80,
-        },
-        output_panel = {
-            enabled = true,
-            open = "botright split | resize 15",
-        },
-        quickfix = {
-            open = function()
-                vim.cmd("copen") -- 自动打开 quickfix 窗口
-            end,
-            -- 只显示失败的测试
-            filter = function(positions)
-                return vim.tbl_filter(function(pos)
-                    return pos.status == "failed"
-                end, positions)
-            end,
-        },
-    })
+    bqf.setup({ auto_enable = true })
 end
 -- }}}
 
@@ -115,12 +51,6 @@ if flash_ok then
 end
 -- }}}
 
--- numToStr/Comment.nvim - comment {{{
-local comment_ok, comment = pcall(require, "Comment")
-if comment_ok then
-    comment.setup()
-end
--- }}}
 
 -- telescope
 -- nvim-telescope/telescope.nvim - telescope {{{
@@ -135,9 +65,6 @@ if telescope_ok then
 
             mappings = {
                 i = {
-                    -- ["<C-n>"] = actions.cycle_history_next,
-                    -- ["<C-p>"] = actions.cycle_history_prev,
-
                     ["<CR>"] = actions.select_default,
                     ["<C-q>"] = actions.send_to_qflist + actions.open_qflist,
                     ["<C-n>"] = actions.move_selection_next,
@@ -198,22 +125,8 @@ if telescope_ok then
                 },
             },
         },
-        pickers = {
-            -- Default configuration for builtin pickers goes here:
-            -- picker_name = {
-            --   picker_config_key = value,
-            --   ...
-            -- }
-            -- Now the picker_config_key will be applied every time you call this
-            -- builtin picker
-        },
-        extensions = {
-            -- Your extension configuration goes here:
-            -- extension_name = {
-            --   extension_config_key = value,
-            -- }
-            -- please take a look at the readme of the extension you want to configure
-        },
+        pickers = {},
+        extensions = {},
     })
 end
 -- }}}
@@ -251,27 +164,10 @@ end
 local project_nvim_ok, project_nvim = pcall(require, "project_nvim")
 if project_nvim_ok then
     project_nvim.setup({
-        ---@usage set to false to disable project.nvim.
-        --- This is on by default since it"s currently the expected behavior.
         active = true,
-
         on_config_done = nil,
-
-        ---@usage set to true to disable setting the current-woriking directory
-        --- Manual mode doesn"t automatically change your root directory, so you have
-        --- the option to manually do so using `:ProjectRoot` command.
         manual_mode = false,
-
-        ---@usage Methods of detecting the root directory
-        --- Allowed values: **"lsp"** uses the native neovim lsp
-        --- **"pattern"** uses vim-rooter like glob pattern matching. Here
-        --- order matters: if one is not detected, the other is used as fallback. You
-        --- can also delete or rearangne the detection methods.
-        -- detection_methods = { "lsp", "pattern" }, -- NOTE: lsp detection will get annoying with multiple langs in one project
         detection_methods = { "pattern", "lsp" },
-
-
-        ---@usage patterns used to detect root dir, when **"pattern"** is in detection_methods
         patterns = {
             ".git",
             "go.mod",
@@ -280,20 +176,10 @@ if project_nvim_ok then
             "Cargo.toml",
             "pyproject.toml",
         },
-
-        ---@ Show hidden files in telescope when searching for files in a project
         show_hidden = false,
-
-        ---@usage When set to false, you will get a message when project.nvim changes your directory.
-        -- When set to false, you will get a message when project.nvim changes your directory.
         silent_chdir = true,
-
-        -- global, tab, win
         scope_chdir = "win",
-
-        ---@usage list of lsp client names to ignore when using **lsp** detection. eg: { "efm", ... }
         ignore_lsp = {},
-
         exclude_dirs = {
             "**/.cargo/**",
             "**/staging/**",
@@ -306,9 +192,6 @@ if project_nvim_ok then
             "**/target/**",       -- Rust 构建目录
             "**/__pycache__/**",  -- Python 缓存
         },
-
-        ---@type string
-        ---@usage path to store the project history for use in telescope
         datapath = vim.fn.stdpath("data"),
     })
 
@@ -343,23 +226,13 @@ if alpha_ok then
         dashboard.button("q", "  Quit Neovim", ":qa<CR>"),
     }
 
-    local function footer()
-        -- NOTE: requires the fortune-mod package to work
-        -- local handle = io.popen("fortune")
-        -- local fortune = handle:read("*a")
-        -- handle:close()
-        -- return fortune
-        return "chrisatmachine.com"
-    end
-
-    dashboard.section.footer.val = footer()
+    dashboard.section.footer.val = "yubo@yubo.org"
 
     dashboard.section.footer.opts.hl = "Type"
     dashboard.section.header.opts.hl = "Include"
     dashboard.section.buttons.opts.hl = "Keyword"
 
     dashboard.opts.opts.noautocmd = true
-    -- vim.cmd([[autocmd User AlphaReady echo "ready"]])
     alpha.setup(dashboard.opts)
 end
 
@@ -458,73 +331,22 @@ local bufferline_ok, bufferline = pcall(require, "bufferline")
 if bufferline_ok then
     bufferline.setup({
         options = {
-            numbers = "none", -- | "ordinal" | "buffer_id" | "both" | function({ ordinal, id, lower, raise }): string,
-            -- close_command = "Bdelete! %d", -- can be a string | function, see "Mouse actions"
-            -- right_mouse_command = "Bdelete! %d", -- can be a string | function, see "Mouse actions"
-            -- left_mouse_command = "buffer %d", -- can be a string | function, see "Mouse actions"
-            -- middle_mouse_command = nil, -- can be a string | function, see "Mouse actions"
-            -- NOTE: this plugin is designed with this icon in mind,
-            -- and so changing this is NOT recommended, this is intended
-            -- as an escape hatch for people who cannot bear it for whatever reason
-            -- indicator_icon = nil,
+            numbers = "none",
             indicator = { style = "none" },
-            -- buffer_close_icon = "",
-            -- buffer_close_icon = "",
-            -- modified_icon = "●",
-            -- close_icon = "",
-            -- close_icon = "",
-            -- left_trunc_marker = "",
-            -- right_trunc_marker = "",
-            --- name_formatter can be used to change the buffer"s label in the bufferline.
-            --- Please note some names can/will break the
-            --- bufferline so use this at your discretion knowing that it has
-            --- some limitations that will *NOT* be fixed.
-            -- name_formatter = function(buf)  -- buf contains a "name", "path" and "bufnr"
-            --   -- remove extension from markdown files for example
-            --   if buf.name:match("%.md") then
-            --     return vim.fn.fnamemodify(buf.name, ":t:r")
-            --   end
-            -- end,
             max_name_length = 30,
-            max_prefix_length = 30, -- prefix used when a buffer is de-duplicated
+            max_prefix_length = 30,
             tab_size = 0,
-            diagnostics = false, -- | "nvim_lsp" | "coc",
+            diagnostics = false,
             diagnostics_update_in_insert = false,
-            -- diagnostics_indicator = function(count, level, diagnostics_dict, context)
-            --   return "("..count..")"
-            -- end,
-            -- NOTE: this will be called a lot so don"t do any heavy processing here
-            -- custom_filter = function(buf_number)
-            --   -- filter out filetypes you don"t want to see
-            --   if vim.bo[buf_number].filetype ~= "<i-dont-want-to-see-this>" then
-            --     return true
-            --   end
-            --   -- filter out by buffer name
-            --   if vim.fn.bufname(buf_number) ~= "<buffer-name-I-dont-want>" then
-            --     return true
-            --   end
-            --   -- filter out based on arbitrary rules
-            --   -- e.g. filter out vim wiki buffer from tabline in your work repo
-            --   if vim.fn.getcwd() == "<work-repo>" and vim.bo[buf_number].filetype ~= "wiki" then
-            --     return true
-            --   end
-            -- end,
-            -- offsets = { { filetype = "NvimTree", text = "", padding = 1 } },
             show_buffer_icons = false,
             show_buffer_close_icons = false,
             show_close_icon = false,
             show_tab_indicators = false,
-            show_duplicate_prefix = false, -- whether to show duplicate buffer prefix
-            persist_buffer_sort = false, -- whether or not custom sorted buffers should persist
-            -- can also be a table containing 2 custom separators
-            -- [focused and unfocused]. eg: { "|", "|" }
-            separator_style = {}, -- | "thick" | "thin" | { "any", "any" },
+            show_duplicate_prefix = false,
+            persist_buffer_sort = false,
+            separator_style = {},
             enforce_regular_tabs = false,
             always_show_bufferline = true,
-            -- sort_by = "id" | "extension" | "relative_directory" | "directory" | "tabs" | function(buffer_a, buffer_b)
-            --   -- add custom logic
-            --   return buffer_a.modified > buffer_b.modified
-            -- end
         },
         highlights = {
             fill = {
@@ -610,27 +432,6 @@ end
 -- nvim-lualine/lualine.nvim - lualine {{{
 local lualine_ok, lualine = pcall(require, "lualine")
 if lualine_ok then
-    -- local hide_in_width = function()
-    --     return vim.fn.winwidth(0) > 80
-    -- end
-
-    -- local diagnostics = {
-    --     "diagnostics",
-    --     sources = { "nvim_diagnostic" },
-    --     sections = { "error", "warn" },
-    --     symbols = { error = " ", warn = " " },
-    --     colored = false,
-    --     update_in_insert = false,
-    --     always_visible = true,
-    -- }
-
-    -- local diff = {
-    --     "diff",
-    --     colored = false,
-    --     symbols = { added = " ", modified = " ", removed = " " }, -- changes diff symbols
-    --     cond = hide_in_width
-    -- }
-
     local filetype = {
         "filetype",
         icons_enabled = false,
@@ -647,20 +448,8 @@ if lualine_ok then
         "location",
     }
 
-    -- cool function for progress
-    -- local progress = function()
-    --     local current_line = vim.fn.line(".")
-    --     local total_lines = vim.fn.line("$")
-    --     local chars = { "__", "▁▁", "▂▂", "▃▃", "▄▄", "▅▅", "▆▆", "▇▇", "██" }
-    --     local line_ratio = current_line / total_lines
-    --     local index = math.ceil(line_ratio * #chars)
-    --     return chars[index]
-    -- end
-
     local filename = {
         "filename",
-        -- file_status = false,
-        -- newfile_status = false,
         path = 3,
         shorting_target = 40,
     }
@@ -713,7 +502,6 @@ end
 local render_markdown_ok, render_markdown = pcall(require, "render-markdown")
 if render_markdown_ok then
     render_markdown.setup({
-        -- use recommended settings from above
         file_types = { "markdown", "Avante" },
     })
 end
@@ -725,15 +513,13 @@ end
 -- HakonHarnes/img-clip.nvim - img_clip {{{
 local img_clip_ok, img_clip = pcall(require, "img-clip")
 if img_clip_ok then
-    img_clip.setup ({
-        -- use recommended settings from above
+    img_clip.setup({
         default = {
             embed_image_as_base64 = false,
             prompt_for_file_name = false,
             drag_and_drop = {
                 insert_mode = true,
             },
-            -- required for Windows users
             use_absolute_path = true,
         },
     })
@@ -744,145 +530,6 @@ end
 -- github.com/copilot.vim - copilot.vim {{{
 vim.g.copilot_no_tab_map = false
 vim.g.copilot_filetypes = { ["*"] = true }
--- }}}
-
---  mason-org/mason.nvim -- mason {{{
--- local mason_ok, mason = pcall(require, "mason")
--- if mason_ok then
---     mason.setup({
---         ui = {
---             border = "none",
---             icons = {
---                 package_installed = "✓",
---                 package_pending = "➜",
---                 package_uninstalled = "✗"
---                 -- package_installed = "◍",
---                 -- package_pending = "◍",
---                 -- package_uninstalled = "◍",
---             },
---             log_level = vim.log.levels.INFO,
---             max_concurrent_installers = 4,
---         },
---     })
--- end
--- }}}
-
--- debug, test
--- mfussenegger/nvim-dap -- dap {{{
-local dap_ok, dap = pcall(require, "dap")
-if dap_ok then
-    -- dap {{{
-    local dapui = require("dapui")
-    local dapgo = require("dap-go")
-
-    require("dap.ext.vscode").load_launchjs()
-
-
-    dap.listeners.before.attach.dapui_config = function()
-        vim.opt.mouse = "a"
-        dapui.open()
-    end
-    dap.listeners.before.launch.dapui_config = function()
-        vim.opt.mouse = "a"
-        dapui.open()
-    end
-    dap.listeners.before.event_terminated.dapui_config = function()
-        vim.opt.mouse = ""
-        dapui.close()
-    end
-    dap.listeners.before.event_exited.dapui_config = function()
-        vim.opt.mouse = ""
-        dapui.close()
-    end
-    dap.defaults.fallback.terminal_win_cmd = "50vsplit new"
-
-
-    dapui.setup({
-        layouts = {
-            {
-                elements = {
-                    { id = "scopes", size = 0.33 },
-                    { id = "breakpoints", size = 0.17 },
-                    { id = "stacks", size = 0.25 },
-                    { id = "watches", size = 0.25 },
-                },
-                position = "left",
-                size = 40
-            },
-            {
-                elements = {
-                    { id = "repl", size = 0.45 },
-                    { id = "console", size = 0.55 },
-                },
-                size = 20,
-                position = "bottom",
-            },
-        },
-        floating = {
-            max_height = 0.9,
-            max_width = 0.5, -- Floats will be treated as percentage of your screen.
-            border = vim.g.border_chars, -- Border style. Can be "single", "double" or "rounded"
-            mappings = {
-                close = { "q", "<Esc>" },
-            },
-        },
-    })
-
-
-
-    -- https://github.com/theHamsta/nvim-dap-virtual-text
-    require("nvim-dap-virtual-text").setup({
-        enabled = true,                        -- enable this plugin (the default)
-        enabled_commands = true,               -- create commands DapVirtualTextEnable, DapVirtualTextDisable, DapVirtualTextToggle, (DapVirtualTextForceRefresh for refreshing when debug adapter did not notify its termination)
-        highlight_changed_variables = true,    -- highlight changed values with NvimDapVirtualTextChanged, else always NvimDapVirtualText
-        highlight_new_as_changed = true,      -- highlight new variables in the same way as changed variables (if highlight_changed_variables)
-        show_stop_reason = true,               -- show stop reason when stopped for exceptions
-        commented = false,                     -- prefix virtual text with comment string
-        only_first_definition = true,          -- only show virtual text at first definition (if there are multiple)
-        all_references = false,                -- show virtual text on all all references of the variable (not only definitions)
-        clear_on_continue = false,             -- clear virtual text on "continue" (might cause flickering when stepping)
-        display_callback = function(variable, buf, stackframe, node, options)
-            -- by default, strip out new line characters
-            if options.virt_text_pos == "inline" then
-                return " = " .. variable.value:gsub("%s+", " ")
-            else
-                return variable.name .. " = " .. variable.value:gsub("%s+", " ")
-            end
-        end,
-        -- position of virtual text, see `:h nvim_buf_set_extmark()`, default tries to inline the virtual text. Use "eol" to set to end of line
-        virt_text_pos = vim.fn.has "nvim-0.10" == 1 and "inline" or "eol",
-
-        -- experimental features:
-        all_frames = false,                    -- show virtual text for all stack frames not only current. Only works for debugpy on my machine.
-        virt_lines = false,                    -- show virtual lines instead of virtual text (will flicker!)
-        virt_text_win_col = 80                 -- position the virtual text at a fixed window column (starting from the first text column) ,
-        -- e.g. 80 to position at column 80, see `:h nvim_buf_set_extmark()`
-    })
-    -- }}}
-
-    -- go {{{
-    dap.adapters.go = {
-        type = "server",
-        port = "${port}",
-        executable = {
-            command = "dlv",
-            args = { "dap", "-l", "127.0.0.1:${port}" },
-        },
-    }
-
-
-    dapgo.setup({
-        dap_configurations = {
-            {
-                type = "go",
-                name = "Attach remote",
-                mode = "remote",
-                request = "attach",
-            },
-        },
-    })
-    -- }}}
-end
 -- }}}
 
 -- folke/which-key.nvim -- which-key {{{
@@ -909,22 +556,11 @@ if which_key_ok then
             g = false,           -- 禁用 `g` 开头的提示
         },
     })
-    --which_key.add({
-    --    -- { "<leader>?", function() require("which-key").show({ global = false }) end, desc = "Buffer Local Keymaps (which-key)" },
-    --    { "<leader>f", group = "file" }, -- group
-    ----        ["<leader>d"] = {
-    ----  name = "文档",
-    ----  k = { function() require("which-key").show(" ", "n") end, "显示所有键位" },
-    ----  g = { function() require("which-key").generate() end, "生成键位文档" },
-    ----}
-    --})
     which_key.add({
         { "<leader>?", function() require("which-key").show({ global = false }) end, desc = "Buffer Local Keymaps (which-key)" },
         { "<leader>f", group = "file/find" },
         { "<leader>g", group = "git/goto" },
         { "<leader>c", group = "code/config" },
-        { "<leader>d", group = "debug" },
-        { "<leader>t", group = "test" },
     })
 end
 -- }}}

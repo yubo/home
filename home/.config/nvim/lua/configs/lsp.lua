@@ -133,9 +133,15 @@ local on_attach = function(client, bufnr)
         vim.lsp.completion.enable(true, client.id, bufnr, { autotrigger = true })
     end
 
-    local ok_illuminate, illuminate = pcall(require, "illuminate")
-    if ok_illuminate then
-        illuminate.on_attach(client)
+    if client.supports_method("textDocument/documentHighlight") then
+        vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
+            buffer = bufnr,
+            callback = vim.lsp.buf.document_highlight,
+        })
+        vim.api.nvim_create_autocmd("CursorMoved", {
+            buffer = bufnr,
+            callback = vim.lsp.buf.clear_references,
+        })
     end
 end
 
@@ -289,7 +295,7 @@ vim.lsp.config("gopls", {
             analyses = {
                 unusedparams = true,
             },
-                -- 避免处理临时文件
+            -- 避免处理临时文件
             directoryFilters = { "-/private/var/folders/**" },
             staticcheck = true,
             gofumpt = true,

@@ -194,16 +194,13 @@ space-x 表示先按空格，再按 x
 | `mason-org/mason.nvim` | LSP 服务器安装管理 |
 | `mason-org/mason-lspconfig.nvim` | Mason 与 lspconfig 桥接 |
 | `neovim/nvim-lspconfig` | LSP 配置 |
-| `RRethy/vim-illuminate` | 高亮相同符号 |
 | `folke/trouble.nvim` | 诊断信息面板 |
-| `fatih/vim-go` | Go 工具（`:GoTest` `:GoRun` `:GoBuild`） |
 | `romus204/tree-sitter-manager.nvim` | Treesitter parser 管理与语法高亮 |
 
 ### 编辑辅助
 | 插件 | 说明 |
 |------|------|
 | `windwp/nvim-autopairs` | 括号自动补全 |
-| `numToStr/Comment.nvim` | 快捷注释 |
 | `kevinhwang91/nvim-bqf` | 增强 quickfix 窗口 |
 | `folke/todo-comments.nvim` | TODO/FIXME 高亮 |
 | `yubo/vim-log-highlighting` | 日志语法高亮 |
