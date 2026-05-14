@@ -54,6 +54,7 @@ install_file .gdbinit
 install_file .gvimrc
 install_file .globalrc
 install_file .gitconfig
+install_file .gitconfig.local
 install_file .ssh/config 0600
 install_file .tmux.conf
 install_file .vimrc
