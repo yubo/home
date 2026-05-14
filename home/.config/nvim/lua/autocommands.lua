@@ -36,6 +36,23 @@ vim.cmd [[
   augroup end
 ]]
 
+-- 保存前自动 organize imports（Go 等语言）
+vim.api.nvim_create_autocmd("BufWritePre", {
+    pattern = "*.go",
+    callback = function()
+        local params = vim.lsp.util.make_range_params()
+        params.context = { only = { "source.organizeImports" } }
+        local result = vim.lsp.buf_request_sync(0, "textDocument/codeAction", params, 1000)
+        for _, res in pairs(result or {}) do
+            for _, r in pairs(res.result or {}) do
+                if r.edit then
+                    vim.lsp.util.apply_workspace_edit(r.edit, "utf-16")
+                end
+            end
+        end
+    end,
+})
+
 -- 保存前 LSP 格式化
 vim.api.nvim_create_autocmd("BufWritePre", {
     callback = function()
