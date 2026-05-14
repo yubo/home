@@ -21,7 +21,13 @@ vim.g.maplocalleader = ","                      -- set local leader to space
 
 -- Custome --
 function _G.ReloadConfig()
+    for name, _ in pairs(package.loaded) do
+        if name:match("^options") or name:match("^keymaps") or name:match("^configs") or name:match("^autocommands") then
+            package.loaded[name] = nil
+        end
+    end
     dofile(vim.env.MYVIMRC)
+    vim.notify("Config reloaded", vim.log.levels.INFO)
 end
 
 keymap("n", "#", "<cmd>let @/=printf('\\<%s\\>\\C', expand('<cword>'))<cr>", opts("search word"))
@@ -140,7 +146,11 @@ keymap("n", "<space>l",        "<c-w>l", opts("Go to the right window"))
 keymap("n", "<space>T",        "<c-w>t", opts("Go to the top window"))
 keymap("n", "<space>-",        "<cmd>split<cr>", opts("split"))
 keymap("n", "<space>|",        "<cmd>vsplit<cr>", opts("vsplit"))
-keymap("n", "<space>=",        "gg=G", opts("format"))
+keymap("n", "<space>=", function()
+    local pos = vim.api.nvim_win_get_cursor(0)
+    vim.cmd("normal! gg=G")
+    vim.api.nvim_win_set_cursor(0, pos)
+end, opts("format"))
 keymap("n", "<space>;",        "<cmd>noh<cr>", opts("clear search"))
 keymap("n", "<space>f",        "<cmd>Telescope find_files<cr>", opts("find files"))
 keymap("n", "<space>g",        "<cmd>Telescope live_grep<cr>", opts("live grep"))
@@ -149,6 +159,9 @@ keymap("n", "<space>t",        "<cmd>TagbarToggle <cr>", opts("Tagbar"))
 keymap("n", "<space>m",        "<cmd>set mouse=a<cr>", opts("Mouse on"))
 keymap("n", "<space>M",        "<cmd>set mouse=<cr>", opts("Mouse off"))
 keymap("n", "<leader><Space>", "<cmd>NvimTreeFindFileToggle<cr>", opts("nvim tree"))
+keymap("n", "]d", vim.diagnostic.goto_next,  opts("Next diagnostic"))
+keymap("n", "[d", vim.diagnostic.goto_prev,  opts("Prev diagnostic"))
+keymap("n", "<leader>e", vim.diagnostic.open_float, opts("Show diagnostic"))
 keymap("n", "]c",              "<cmd>Gitsigns next_hunk<CR>", opts("git: Next hunk") )
 keymap("n", "[c",              "<cmd>Gitsigns prev_hunk<CR>", opts("git: Pre hunk"))
 keymap('n', '<space>q',        function()

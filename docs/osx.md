@@ -14,4 +14,7 @@ brew install neovim fd ripgrep watch wget tmux
 
 # dev
 brew install grpc go jq cmake llvm bear cscope ctags node
+
+# nerd font (for nvim icons)
+brew install --cask font-caskaydia-cove-nerd-font
 ```

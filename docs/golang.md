@@ -1,11 +1,26 @@
-## golang install
+## Go 安装
 
+### macOS
+
+```sh
+brew install go
 ```
-mkdir -p ~/src && cd ~/src && \
-wget https://storage.googleapis.com/golang/go1.4-bootstrap-20170531.tar.gz && \
-tar xzvf ./go1.4-bootstrap-20170531.tar.gz && \
-cd go/src && CGO_ENABLED=0 bash make.bash && \
-cd && git clone https://github.com/golang/go && \
-cd go && git checkout -b go1.17.7 go1.17.7 && \
-cd src && GOROOT_BOOTSTRAP=~/src/go ./all.bash 
+
+### Linux / 手动安装
+
+从 [golang.org/dl](https://golang.org/dl) 下载对应平台的压缩包：
+
+```sh
+# 以 go1.23 linux/amd64 为例
+wget https://go.dev/dl/go1.23.0.linux-amd64.tar.gz
+sudo rm -rf /usr/local/go
+sudo tar -C /usr/local -xzf go1.23.0.linux-amd64.tar.gz
+```
+
+然后在 `~/.bash_profile` 中设置：
+
+```sh
+export GOROOT=/usr/local/go
+export GOPATH=$HOME/gopath
+export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 ```

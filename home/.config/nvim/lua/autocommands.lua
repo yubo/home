@@ -36,6 +36,13 @@ vim.cmd [[
   augroup end
 ]]
 
+-- 保存前 LSP 格式化
+vim.api.nvim_create_autocmd("BufWritePre", {
+    callback = function()
+        vim.lsp.buf.format({ async = false })
+    end,
+})
+
 -- 恢复上次光标位置（替代 vim-lastplace）
 vim.api.nvim_create_autocmd("BufReadPost", {
     callback = function()

@@ -62,8 +62,8 @@ space-x 表示先按空格，再按 x
 | `<C-b>` / `<C-f>` | 左移/右移一字符 |
 | `<C-j>` / `<C-k>` | 上/下移动 |
 | `<C-d>` | 删除右侧字符 |
-| `<C-l>` | LSP omnifunc 补全（手动触发） |
-| `<C-f>` | 文件路径补全 |
+| `<C-n>` | omnifunc 补全（手动触发） |
+| `<C-l>` | 文件路径补全 |
 
 ### LSP 补全（自动触发）
 
@@ -81,6 +81,8 @@ space-x 表示先按空格，再按 x
 | `gi` | 跳转到实现 |
 | `gr` | 查看引用 |
 | `K` | 悬浮文档 |
+| `]d` / `[d` | 下/上一个诊断 |
+| `<leader>e` | 显示当前行诊断详情 |
 | `<space>e` | 重命名符号 |
 | `<leader>ca` | 代码操作 |
 | `<leader>=` | 格式化当前文件 |
@@ -124,15 +126,6 @@ space-x 表示先按空格，再按 x
 |--------|------|
 | `s` | Flash 跳转（模糊搜索） |
 | `S` | Flash Treesitter 跳转 |
-
-### 注释（Comment.nvim）
-
-| 快捷键 | 说明 |
-|--------|------|
-| `gcc` | 注释/取消注释当前行 |
-| `gc` + 移动 | 注释一段（如 `gc3j`） |
-| `gc`（visual） | 注释选中区域 |
-| `gbc` | 块注释当前行 |
 
 ### Markdown
 
@@ -178,7 +171,6 @@ space-x 表示先按空格，再按 x
 | `telescope-fzf-native.nvim` | fzf 加速引擎 |
 | `folke/flash.nvim` | 快速跳转 |
 | `ahmedkhalf/project.nvim` | 项目管理 |
-| `farmergreg/vim-lastplace` | 记住上次光标位置 |
 
 ### Git
 | 插件 | 说明 |
