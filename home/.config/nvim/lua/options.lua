@@ -20,6 +20,7 @@ vim.opt.timeoutlen = 300                        -- time to wait for a mapped seq
 vim.opt.undofile = true                         -- enable persistent undo
 vim.opt.updatetime = 300                        -- faster completion (4000ms default)
 vim.opt.writebackup = false                     -- if a file is being edited by another program (or was written to file while editing with another program) it is not allowed to be edited
+vim.opt.autoread = true                         -- 外部修改后自动重新加载文件
 vim.opt.expandtab = false                       -- convert tabs to spaces
 --vim.opt.shiftwidth = 8                        -- the number of spaces inserted for each indentation
 --vim.opt.tabstop = 2                           -- insert 2 spaces for a tab

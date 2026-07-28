@@ -39,25 +39,41 @@ vim.cmd [[
 -- 保存前自动 organize imports（Go 等语言）
 vim.api.nvim_create_autocmd("BufWritePre", {
     pattern = "*.go",
-    callback = function()
-        local params = vim.lsp.util.make_range_params()
+    callback = function(ev)
+        local clients = vim.lsp.get_clients({ bufnr = ev.buf, name = "gopls" })
+        if #clients == 0 then return end
+        local client = clients[1]
+        local params = vim.lsp.util.make_range_params(0, client.offset_encoding)
         params.context = { only = { "source.organizeImports" } }
-        local result = vim.lsp.buf_request_sync(0, "textDocument/codeAction", params, 1000)
+        local result = vim.lsp.buf_request_sync(ev.buf, "textDocument/codeAction", params, 3000)
         for _, res in pairs(result or {}) do
             for _, r in pairs(res.result or {}) do
                 if r.edit then
-                    vim.lsp.util.apply_workspace_edit(r.edit, "utf-16")
+                    vim.lsp.util.apply_workspace_edit(r.edit, client.offset_encoding)
+                elseif r.command then
+                    vim.lsp.buf.execute_command(r.command)
                 end
             end
         end
     end,
 })
 
--- 保存前 LSP 格式化
+-- 保存前 LSP 格式化（仅当存在支持格式化的 client，避免 pyright 等无格式化能力时报错）
 vim.api.nvim_create_autocmd("BufWritePre", {
-    callback = function()
-        vim.lsp.buf.format({ async = false })
+    callback = function(ev)
+        local clients = vim.lsp.get_clients({ bufnr = ev.buf })
+        for _, client in ipairs(clients) do
+            if client:supports_method("textDocument/formatting") then
+                vim.lsp.buf.format({ async = false, bufnr = ev.buf })
+                return
+            end
+        end
     end,
+})
+
+-- 切回 nvim 时检测文件是否被外部修改
+vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter" }, {
+    command = "checktime",
 })
 
 -- 恢复上次光标位置（替代 vim-lastplace）

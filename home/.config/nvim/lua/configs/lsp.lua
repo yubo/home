@@ -45,7 +45,7 @@ local function build_lsp_ensure_installed()
                 "Pipfile",
                 "pyrightconfig.json",
             },
-            servers = { "pyright" },
+            servers = { "pyright", "ruff" },
         },
         {
             markers = { "package.json", "tsconfig.json", "jsconfig.json" },
@@ -200,6 +200,39 @@ vim.lsp.config("pyright", {
             "requirements.txt",
             "Pipfile",
             "pyrightconfig.json",
+            ".git",
+        })
+        on_dir(root)
+    end,
+    single_file_support = true,
+    before_init = function(_, config)
+        local venv = config.root_dir and (config.root_dir .. "/.venv/bin/python")
+        if venv and vim.uv.fs_stat(venv) then
+            config.settings = config.settings or {}
+            config.settings.python = config.settings.python or {}
+            config.settings.python.pythonPath = venv
+        end
+    end,
+})
+
+vim.lsp.config("ruff", {
+    capabilities = capabilities,
+    -- hover 交给 pyright，避免与 ruff 重复弹窗
+    on_attach = function(client, bufnr)
+        client.server_capabilities.hoverProvider = false
+        on_attach(client, bufnr)
+    end,
+    cmd = { "ruff", "server" },
+    filetypes = { "python" },
+    root_dir = function(bufnr, on_dir)
+        local root = vim.fs.root(bufnr, {
+            "pyproject.toml",
+            "ruff.toml",
+            ".ruff.toml",
+            "setup.py",
+            "setup.cfg",
+            "requirements.txt",
+            "Pipfile",
             ".git",
         })
         on_dir(root)

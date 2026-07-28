@@ -21,21 +21,20 @@ return {
     -- git
     "tpope/vim-fugitive",
     "zivyangll/git-blame.vim",
-    { "lewis6991/gitsigns.nvim", config = function() require("gitsigns").setup() end },
-    "sindrets/diffview.nvim",
+    { "lewis6991/gitsigns.nvim",                  config = function() require("gitsigns").setup() end },
 
     -- ui
     "rebelot/kanagawa.nvim",
-    { "nvim-telescope/telescope.nvim", dependencies = { "nvim-telescope/telescope-ui-select.nvim" } },
+    { "nvim-telescope/telescope.nvim",            dependencies = { "nvim-telescope/telescope-ui-select.nvim" } },
     { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
-    { "nvim-tree/nvim-tree.lua", dependencies = { "nvim-tree/nvim-web-devicons" } },
+    { "nvim-tree/nvim-tree.lua",                  dependencies = { "nvim-tree/nvim-web-devicons" } },
     "ahmedkhalf/project.nvim",
 
     -- LSP
     "mason-org/mason.nvim",
     "mason-org/mason-lspconfig.nvim",
     "neovim/nvim-lspconfig",
-{ "folke/trouble.nvim", dependencies = "nvim-tree/nvim-web-devicons" },
+    { "folke/trouble.nvim",       dependencies = "nvim-tree/nvim-web-devicons" },
 
     -- debug, test (uncomment to enable)
     -- "mfussenegger/nvim-dap",
@@ -55,11 +54,17 @@ return {
     -- },
 
     -- quickfix
-    { "kevinhwang91/nvim-bqf", ft = "qf" },
+    { "kevinhwang91/nvim-bqf",    ft = "qf" },
 
     -- find/search
-    { "folke/flash.nvim", event = "BufEnter" },
-    { "folke/which-key.nvim", event = "BufEnter" },
+    { "folke/flash.nvim",         event = "BufEnter" },
+    { "folke/which-key.nvim",     event = "BufEnter" },
+
+    {
+        "esmuellert/codediff.nvim",
+        cmd = "CodeDiff",
+        dependencies = { "nvim-treesitter/nvim-treesitter" },
+    },
 
     -- github copilot
     "github/copilot.vim",

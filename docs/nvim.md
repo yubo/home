@@ -213,12 +213,16 @@ space-x 表示先按空格，再按 x
 | 语言 | 检测文件 | LSP |
 |------|---------|-----|
 | Go | `go.mod`, `go.work` | gopls |
-| Python | `pyproject.toml`, `requirements.txt` 等 | pyright |
+| Python | `pyproject.toml`, `requirements.txt` 等 | pyright（自动探测项目根 `.venv`）+ ruff |
 | JS/TS | `package.json`, `tsconfig.json` | ts_ls, jsonls |
 | Rust | `Cargo.toml` | rust_analyzer |
 | C/C++ | `compile_commands.json` | clangd |
 | Shell | `.bashrc`, `.bash_profile` 等 | bashls |
 | Lua | `.luarc.json` 等 | lua_ls |
+
+**Python 虚拟环境**：打开 Python 项目时，若项目根目录存在 `.venv/bin/python`，pyright 会自动将其设为解释器（`python.pythonPath`），无需手动激活 venv 或编写 `pyrightconfig.json`。
+
+**Python 双 LSP 分工**：pyright 负责类型检查、补全、跳转；ruff 负责 lint、格式化、import 整理。为避免重复弹窗，ruff 的 hover 已关闭（统一由 pyright 提供）。保存时若 ruff 在线即自动格式化。
 
 ## Treesitter 语法高亮
 
