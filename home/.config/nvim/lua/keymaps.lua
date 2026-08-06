@@ -104,9 +104,16 @@ keymap("n", "<leader>cr", "<cmd>lua ReloadConfig()<cr>", opts("Reload config (nv
 keymap("n", "<leader>gs", "<cmd>Git<cr>", opts("Git status"))
 keymap("n", "<leader>gb", "<cmd>Git blame<cr>", opts("Git blame"))
 keymap("n", "<leader>gd", ":Gvdiffsplit<CR>", opts("Git diff"))
-keymap("n", "<leader>gh", "<cmd>CodeDiff history %<cr>", opts("Git file history"))
-keymap("n", "<leader>gH", "<cmd>CodeDiff history<cr>", opts("Git repository history"))
-keymap("n", "<leader>gv", "<cmd>CodeDiff<cr>", opts("Git changes"))
+keymap("n", "<leader>gh", "<cmd>DiffviewFileHistory %<cr>", opts("Git file history"))
+keymap("n", "<leader>gH", "<cmd>DiffviewFileHistory<cr>", opts("Git branch history"))
+keymap("n", "<leader>gv", function()
+    local view = require("diffview.lib").get_current_view()
+    if view then
+        vim.cmd("DiffviewClose")
+    else
+        vim.cmd("DiffviewOpen")
+    end
+end, opts("Toggle Diffview"))
 
 -- f: file/find
 keymap("n", "<leader>fp", "<cmd>Telescope projects<cr>", opts("Find projects"))

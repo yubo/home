@@ -22,6 +22,7 @@ return {
     "tpope/vim-fugitive",
     "zivyangll/git-blame.vim",
     { "lewis6991/gitsigns.nvim",                  config = function() require("gitsigns").setup() end },
+    "sindrets/diffview.nvim",
 
     -- ui
     "rebelot/kanagawa.nvim",
@@ -59,12 +60,6 @@ return {
     -- find/search
     { "folke/flash.nvim",         event = "BufEnter" },
     { "folke/which-key.nvim",     event = "BufEnter" },
-
-    {
-        "esmuellert/codediff.nvim",
-        cmd = "CodeDiff",
-        dependencies = { "nvim-treesitter/nvim-treesitter" },
-    },
 
     -- github copilot
     "github/copilot.vim",

@@ -2,15 +2,16 @@
 	name = yubo
 	email = yubo@yubo.org
 [difftool]
-        prompt = No
+	prompt = false
 [diff]
-        tool = nvimdiff
+	tool = nvimdiff
 [difftool "nvimdiff"]
         cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
 [core]
 	editor = nvim
 	whitespace = tab-in-indent,trailing-space
 	trustctime = false
+	hooksPath = /Users/yubo/.ccm/git-hooks
 [alias]
 	s = show --color --pretty=format:%b
 	d = difftool
@@ -28,9 +29,9 @@
 	sbu = submodule update
 	sbp = submodule foreach git pull
 	sbc = submodule foreach git co master
-	# ignore change
-	ignore = update-index --skip-worktree
-	noignore = update-index --no-skip-worktree
+	# skip worktree
+	k = update-index --skip-worktree
+	nk = update-index --no-skip-worktree
 	ls = ls-files -v
 
 [push]
@@ -40,6 +41,6 @@
 [credential]
 	helper = cache --timeout 2592000
 [include]
-	path = $HOME/.gitconfig.local
+	#path = ~/.gitconfig.local
 [pull]
 	rebase = false

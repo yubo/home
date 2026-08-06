@@ -85,3 +85,19 @@ vim.api.nvim_create_autocmd("BufReadPost", {
         end
     end,
 })
+
+-- 文件补全会为目录追加 "/"；若光标右侧原本已有 "/"，删除重复的一个。
+vim.api.nvim_create_autocmd("CompleteDone", {
+    callback = function()
+        local completed_word = vim.v.completed_item.word or ""
+        if completed_word:sub(-1) ~= "/" then
+            return
+        end
+
+        local line = vim.api.nvim_get_current_line()
+        local col = vim.api.nvim_win_get_cursor(0)[2]
+        if line:sub(col, col + 1) == "//" then
+            vim.api.nvim_set_current_line(line:sub(1, col) .. line:sub(col + 2))
+        end
+    end,
+})
