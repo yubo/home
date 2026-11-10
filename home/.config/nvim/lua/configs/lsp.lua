@@ -65,7 +65,11 @@ local function build_lsp_ensure_installed()
     return list
 end
 
-local servers_to_enable = build_lsp_ensure_installed()
+local servers_to_install = build_lsp_ensure_installed()
+local supported_servers = {
+    "lua_ls", "gopls", "pyright", "ruff", "ts_ls", "jsonls",
+    "rust_analyzer", "clangd", "bashls",
+}
 
 -- =========================================================
 -- Mason
@@ -73,14 +77,6 @@ local servers_to_enable = build_lsp_ensure_installed()
 local ok_mason, mason = pcall(require, "mason")
 if ok_mason then
     mason.setup()
-end
-
-local ok_mason_lspconfig, mason_lspconfig = pcall(require, "mason-lspconfig")
-if ok_mason_lspconfig then
-    mason_lspconfig.setup({
-        ensure_installed = servers_to_enable,
-        automatic_installation = true,
-    })
 end
 
 -- =========================================================
@@ -349,9 +345,12 @@ vim.lsp.config("bashls", {
 })
 
 -- =========================================================
--- Enable only selected servers
+-- 所有配置定义完成后，由 Mason 自动启用已安装且明确支持的服务器。
 -- =========================================================
-for _, server in ipairs(servers_to_enable) do
-    local name = vim.split(server, "@")[1]
-    vim.lsp.enable(name)
+local ok_mason_lspconfig, mason_lspconfig = pcall(require, "mason-lspconfig")
+if ok_mason_lspconfig then
+    mason_lspconfig.setup({
+        ensure_installed = servers_to_install,
+        automatic_enable = supported_servers,
+    })
 end

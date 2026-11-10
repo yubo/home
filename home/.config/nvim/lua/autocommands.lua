@@ -36,8 +36,12 @@ vim.cmd [[
   augroup end
 ]]
 
+-- 重载配置时替换 Lua 自动命令，避免重复执行。
+local group = vim.api.nvim_create_augroup("UserAutocommands", { clear = true })
+
 -- 保存前自动 organize imports（Go 等语言）
 vim.api.nvim_create_autocmd("BufWritePre", {
+    group = group,
     pattern = "*.go",
     callback = function(ev)
         local clients = vim.lsp.get_clients({ bufnr = ev.buf, name = "gopls" })
@@ -58,26 +62,26 @@ vim.api.nvim_create_autocmd("BufWritePre", {
     end,
 })
 
--- 保存前 LSP 格式化（仅当存在支持格式化的 client，避免 pyright 等无格式化能力时报错）
+-- 保存前统一格式化，注册在 Go imports 整理之后，确保执行顺序。
 vim.api.nvim_create_autocmd("BufWritePre", {
+    group = group,
     callback = function(ev)
-        local clients = vim.lsp.get_clients({ bufnr = ev.buf })
-        for _, client in ipairs(clients) do
-            if client:supports_method("textDocument/formatting") then
-                vim.lsp.buf.format({ async = false, bufnr = ev.buf })
-                return
-            end
+        if vim.bo[ev.buf].buftype ~= "" then
+            return
         end
+        require("conform").format({ async = false, bufnr = ev.buf })
     end,
 })
 
 -- 切回 nvim 时检测文件是否被外部修改
 vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter" }, {
+    group = group,
     command = "checktime",
 })
 
 -- 恢复上次光标位置（替代 vim-lastplace）
 vim.api.nvim_create_autocmd("BufReadPost", {
+    group = group,
     callback = function()
         local mark = vim.api.nvim_buf_get_mark(0, '"')
         if mark[1] > 1 and mark[1] <= vim.api.nvim_buf_line_count(0) then
@@ -88,6 +92,7 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 
 -- 文件补全会为目录追加 "/"；若光标右侧原本已有 "/"，删除重复的一个。
 vim.api.nvim_create_autocmd("CompleteDone", {
+    group = group,
     callback = function()
         local completed_word = vim.v.completed_item.word or ""
         if completed_word:sub(-1) ~= "/" then

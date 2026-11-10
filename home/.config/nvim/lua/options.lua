@@ -52,8 +52,6 @@ vim.cmd([[
     au BufRead,BufNewFile *.go               setfiletype go
     au BufRead,BufNewFile *.txt              setfiletype text
     au BufRead,BufNewFile *.jsonnet          setfiletype jsonnet
-    au BufRead,BufNewFile *.ts,*.tsx         setfiletype typescript
-    au BufRead,BufNewFile *.js,*.jsx         setfiletype javascript
     au BufRead,BufNewFile *.yaml,*.yml       setfiletype yaml
     au BufRead,BufNewFile *.wxml,*.vue       setfiletype html
     au BufRead,BufNewFile *.wxs,*.css,*.less setfiletype css

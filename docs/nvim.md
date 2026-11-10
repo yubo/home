@@ -92,7 +92,9 @@ space-x 表示先按空格，再按 x
 
 | 快捷键 | 说明 |
 |--------|------|
-| `<leader>b` | 当前行 git blame（inline） |
+| `<leader>b` | 当前行 git blame（Gitsigns 浮窗） |
+| `<leader>hp` | 预览当前 Git 变更块 |
+| `<leader>hs` | 暂存当前变更块；无未暂存变更时取消该块的暂存 |
 | `<leader>gs` | git status（fugitive） |
 | `<leader>gb` | git blame（全文） |
 | `<leader>gd` | git diff（垂直分割） |
@@ -117,7 +119,7 @@ space-x 表示先按空格，再按 x
 | 快捷键 | 说明 |
 |--------|------|
 | `<leader><space>` | 打开/关闭 nvim-tree |
-| `<space>t` | 打开/关闭 Tagbar |
+| `<space>t` | 打开/关闭 Aerial 代码大纲 |
 | `<leader>cr` | 重新加载 nvim 配置 |
 
 ### 跳转（Flash）
@@ -161,7 +163,7 @@ space-x 表示先按空格，再按 x
 | `akinsho/bufferline.nvim` | buffer 标签栏 |
 | `goolord/alpha-nvim` | 启动页 |
 | `nvim-tree/nvim-tree.lua` | 文件树 |
-| `majutsushi/tagbar` | 代码符号侧边栏 |
+| `stevearc/aerial.nvim` | 代码符号侧边栏，优先使用 LSP，其次 Treesitter |
 | `folke/which-key.nvim` | 快捷键提示 |
 
 ### 搜索/导航
@@ -178,7 +180,6 @@ space-x 表示先按空格，再按 x
 | `tpope/vim-fugitive` | Git 操作 |
 | `lewis6991/gitsigns.nvim` | 行内 git 变更标记 |
 | `sindrets/diffview.nvim` | diff/history 视图 |
-| `zivyangll/git-blame.vim` | 行 blame |
 
 ### LSP / 代码
 | 插件 | 说明 |
@@ -223,6 +224,19 @@ space-x 表示先按空格，再按 x
 **Python 虚拟环境**：打开 Python 项目时，若项目根目录存在 `.venv/bin/python`，pyright 会自动将其设为解释器（`python.pythonPath`），无需手动激活 venv 或编写 `pyrightconfig.json`。
 
 **Python 双 LSP 分工**：pyright 负责类型检查、补全、跳转；ruff 负责 lint、格式化、import 整理。为避免重复弹窗，ruff 的 hover 已关闭（统一由 pyright 提供）。保存时若 ruff 在线即自动格式化。
+
+## 格式化（Conform）
+
+保存时和 `<leader>=` 使用同一套规则，可用 `:ConformInfo` 查看工具状态：
+
+- Go：先整理 imports，再通过 gopls 格式化。
+- Python：通过 ruff LSP 格式化。
+- Lua：StyLua，不可用时回退到 LSP。
+- JS/TS（含 JSX/TSX）、JSON/JSONC：项目有 Biome 配置且工具可用时使用 Biome，否则使用 Prettier；优先使用项目 `node_modules` 中的工具。
+- YAML：Prettier。
+- 其他文件：回退到支持格式化的 LSP。
+
+外部工具安装：`:MasonInstall stylua prettier`。Biome 由使用它的项目安装。
 
 ## Treesitter 语法高亮
 
