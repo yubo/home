@@ -3,6 +3,7 @@
 	email = yubo@yubo.org
 [difftool]
 	prompt = false
+	trustExitCode = true
 [diff]
 	tool = nvimdiff
 [difftool "nvimdiff"]
