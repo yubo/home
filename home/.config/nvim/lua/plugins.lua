@@ -33,10 +33,9 @@ return {
         "romus204/tree-sitter-manager.nvim",
         config = function()
             require("tree-sitter-manager").setup({
-                ensure_installed = {
-                    "go", "lua", "python", "bash", "c", "javascript", "json",
-                    "typescript", "tsx", "rust", "yaml", "markdown", "markdown_inline",
-                },
+                highlight = false,
+                auto_install = false,
+                ensure_installed = {},
             })
         end,
     },
@@ -69,7 +68,7 @@ return {
     { "nvim-telescope/telescope.nvim",            dependencies = { "nvim-telescope/telescope-ui-select.nvim" } },
     { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
     { "nvim-tree/nvim-tree.lua",                  dependencies = { "nvim-tree/nvim-web-devicons" } },
-    "ahmedkhalf/project.nvim",
+    "DrKJeff16/project.nvim",
 
     -- LSP
     "mason-org/mason.nvim",
@@ -154,7 +153,10 @@ return {
     {
         "MeanderingProgrammer/render-markdown.nvim",
         ft = { "markdown", "Avante" },
-        opts = { file_types = { "markdown", "Avante" } },
+        opts = {
+            file_types = { "markdown", "Avante" },
+            restart_highlighter = false,
+        },
     },
 
     -- ai

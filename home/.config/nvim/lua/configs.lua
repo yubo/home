@@ -52,6 +52,7 @@ if telescope_ok then
     local actions = require "telescope.actions"
     telescope.setup({
         defaults = {
+            preview = { treesitter = { enable = false } },
             prompt_prefix = " ",
             selection_caret = " ",
             path_display = { "smart" },
@@ -153,14 +154,27 @@ end
 
 -- }}}
 
--- ahmedkhalf/project.nvim - project_nvim {{{
-local project_nvim_ok, project_nvim = pcall(require, "project_nvim")
+-- DrKJeff16/project.nvim {{{
+local project_nvim_ok, project_nvim = pcall(require, "project")
 if project_nvim_ok then
+    -- 新插件使用 JSON 历史。首次加载时导入旧记录，保留原文件和已有的新历史。
+    local history_dir = vim.fn.stdpath("data") .. "/project_nvim"
+    local old_history = history_dir .. "/project_history"
+    local new_history = history_dir .. "/project_history.json"
+    if vim.fn.filereadable(old_history) == 1 and not vim.uv.fs_stat(new_history) then
+        local projects = {}
+        for _, path in ipairs(vim.fn.readfile(old_history)) do
+            if path ~= "" then
+                projects[#projects + 1] = { path = path }
+            end
+        end
+        vim.fn.writefile({ vim.json.encode(projects) }, new_history)
+    end
+
     project_nvim.setup({
-        active = true,
-        on_config_done = nil,
         manual_mode = false,
-        detection_methods = { "pattern", "lsp" },
+        use_git = false,
+        lsp = { enabled = true },
         patterns = {
             ".git",
             "go.mod",
@@ -172,7 +186,6 @@ if project_nvim_ok then
         show_hidden = false,
         silent_chdir = true,
         scope_chdir = "win",
-        ignore_lsp = {},
         exclude_dirs = {
             "**/.cargo/**",
             "**/staging/**",
@@ -185,7 +198,7 @@ if project_nvim_ok then
             "**/target/**",       -- Rust 构建目录
             "**/__pycache__/**",  -- Python 缓存
         },
-        datapath = vim.fn.stdpath("data"),
+        remove_missing_dirs = false,
     })
 
     if telescope_ok then

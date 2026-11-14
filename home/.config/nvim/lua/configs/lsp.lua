@@ -321,6 +321,7 @@ vim.lsp.config("gopls", {
     end,
     settings = {
         gopls = {
+            semanticTokens = true,
             analyses = {
                 unusedparams = true,
             },
