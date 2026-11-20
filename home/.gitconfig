@@ -15,11 +15,8 @@
 	hooksPath = /Users/yubo/.ccm/git-hooks
 [alias]
 	s = show --color --pretty=format:%b
-	d = difftool
-	dl = difftool HEAD^ HEAD
-	dc = difftool --cached
+	d = "!f() { if [ \"$#\" -eq 1 ]; then case \"$1\" in c) git difftool --cached ;; h) git difftool HEAD^ HEAD ;; -*) git difftool \"$@\" ;; *) git difftool \"$1^\" \"$1\" ;; esac; else git difftool \"$@\"; fi; }; f"
 	df = "!f() { git diff --name-status \"$1^\" \"$1\"; }; f"
-	dd = "!f() { git difftool \"$1^\" \"$1\"; }; f"
 	co = checkout
 	cm = commit
 	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --
